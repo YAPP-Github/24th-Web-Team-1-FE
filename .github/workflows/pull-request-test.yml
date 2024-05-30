@@ -1,0 +1,26 @@
+name: pull-request-test
+
+on:
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '19'
+
+      - name: Install package manager
+        run: pnpm install
+
+      - name: Run Jest Test
+        run: pnpm test
+          
