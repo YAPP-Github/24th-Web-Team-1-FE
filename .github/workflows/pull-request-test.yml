@@ -2,7 +2,7 @@ name: pull-request-test
 
 on:
   pull_request:
-    branches: [ "main" ]
+    branches: ['main']
   workflow_dispatch:
 
 jobs:
@@ -10,7 +10,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-steps:
       - name: Checkout Code
         uses: actions/checkout@v3
 
@@ -42,7 +41,5 @@ steps:
         if: steps.cache.outputs.cache-hit != 'true'
         run: pnpm install
 
-
       - name: Run Jest Test
         run: pnpm test
-          
