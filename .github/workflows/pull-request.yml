@@ -36,8 +36,6 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: pnpm install
       - name: Build storybook
-        run: |
-          pnpm run build-storybook
-          mv ./storybook-static ./build/storybook
+        run: pnpm run build-storybook
       - name: Run Jest Test
         run: pnpm test
