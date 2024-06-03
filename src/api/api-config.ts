@@ -1,6 +1,6 @@
-import axios from 'axios';
+import axios from "axios";
 
-type Method = 'get' | 'post' | 'put' | 'delete' | 'patch';
+type Method = "get" | "post" | "put" | "delete" | "patch";
 
 export interface ApiMeta {
   code: number;

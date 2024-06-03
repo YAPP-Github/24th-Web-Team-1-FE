@@ -1,11 +1,8 @@
-import React from 'react';
+import React from "react";
 
-import { Button } from '@/components/ui/button';
-import useIsMounted from '@/hooks/useIsMounted';
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
-  const mouted = useIsMounted();
-
   return (
     <div>
       <p>home</p>
