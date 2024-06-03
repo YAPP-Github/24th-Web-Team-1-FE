@@ -10,7 +10,8 @@
     "plugin:react/recommended",
     "next",
     "next/core-web-vitals",
-    "prettier"
+    "prettier",
+    "plugin:storybook/recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -35,19 +36,48 @@
       "warn",
       {
         "groups": [
-          ["^next", "^next(.*)$"],
-          ["^react", "^react(.*)$"],
-          ["^@tanstack(.*)$"],
-          ["^[a-zA-Z/-]+$"],
-          ["^@api/(.*)$"],
-          ["^@components/(.*)$"],
-          ["^@hooks/(.*)$"],
-          ["^@constants/(.*)$"],
-          ["^@styles/(.*)$"],
-          ["^@lib/(.*)$"],
-          ["^@utils/(.*)$"],
-          ["^@types/(.*)$"],
-          ["^[./]", ".*"]
+          [
+            "^next",
+            "^next(.*)$"
+          ],
+          [
+            "^react",
+            "^react(.*)$"
+          ],
+          [
+            "^@tanstack(.*)$"
+          ],
+          [
+            "^[a-zA-Z/-]+$"
+          ],
+          [
+            "^@api/(.*)$"
+          ],
+          [
+            "^@components/(.*)$"
+          ],
+          [
+            "^@hooks/(.*)$"
+          ],
+          [
+            "^@constants/(.*)$"
+          ],
+          [
+            "^@styles/(.*)$"
+          ],
+          [
+            "^@lib/(.*)$"
+          ],
+          [
+            "^@utils/(.*)$"
+          ],
+          [
+            "^@types/(.*)$"
+          ],
+          [
+            "^[./]",
+            ".*"
+          ]
         ]
       }
     ]
