@@ -49,7 +49,7 @@ export default function RootLayout({
         <body
           className={cn(
             'scrollbar-hide" relative mx-auto flex',
-            "min-h-[100dvh] w-full max-w-[375px] overscroll-y-none",
+            "min-h-[100dvh] w-full max-w-[480px] overscroll-y-none",
           )}
         >
           <Suspense>{children}</Suspense>
