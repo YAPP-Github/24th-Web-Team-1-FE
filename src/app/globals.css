@@ -74,3 +74,53 @@
     @apply bg-background text-foreground;
   }
 }
+@layer utilities {
+  .h1-bold {
+    @apply font-pretendard text-[28px]/[42px] font-bold;
+  }
+  .h2-bold {
+    @apply font-pretendard text-[24px]/[33.6px] font-bold;
+  }
+  .h3-bold {
+    @apply font-pretendard text-[18px]/[27px] font-bold;
+  }
+
+  .body1-medium {
+    @apply font-pretendard text-[17px]/[28.05px] font-medium;
+  }
+  .body1-regular {
+    @apply font-pretendard text-[17px]/[28.05px] font-normal;
+  }
+
+  .body2-medium {
+    @apply font-pretendard text-[15px]/[24.75px] font-medium;
+  }
+  .body2-regular {
+    @apply font-pretendard text-[15px]/[24.75px] font-normal;
+  }
+
+  .body3-medium {
+    @apply font-pretendard text-[14px]/[21px] font-medium;
+  }
+
+  .sub1-bold {
+    @apply font-pretendard text-[20px]/[28px] font-bold;
+  }
+  .sub1-semibold {
+    @apply font-pretendard text-[20px]/[28px] font-semibold;
+  }
+  .sub2-bold {
+    @apply font-pretendard text-[16px]/[25.44px] font-bold;
+  }
+  .sub2-medium {
+    @apply font-pretendard text-[16px]/[25.44px] font-medium;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    ::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
