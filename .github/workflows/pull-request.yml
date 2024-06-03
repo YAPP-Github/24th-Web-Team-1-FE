@@ -35,6 +35,7 @@ jobs:
       - name: Install dependencies
         if: steps.cache.outputs.cache-hit != 'true'
         run: pnpm install
-
+      - name: Build storybook
+        run: pnpm run build-storybook
       - name: Run Jest Test
         run: pnpm test
