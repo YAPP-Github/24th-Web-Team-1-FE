@@ -4,8 +4,8 @@ import localFont from "next/font/local";
 import { Suspense } from "react";
 
 import "./globals.css";
-import QueryClientProviders from "@/components/common/queryClientProvider";
-import { cn } from "@/lib/utils";
+import QueryClientProviders from "@shared/components/queryClientProvider";
+import { cn } from "@shared/utils/cn";
 export const metadata: Metadata = {
   title: "FEW",
   description: "매일 아침마다 경제 아티클과 문제를 보내드려요!",
