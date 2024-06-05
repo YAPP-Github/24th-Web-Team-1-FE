@@ -24,7 +24,8 @@
       "@workbook/*": ["src/workbook/*"],
       "@article/*": ["src/article/*"],
       "@quiz/*": ["src/quiz/*"],
-      "@main/*": ["src/main/*"]
+      "@main/*": ["src/main/*"],
+      "@common/*": ["src/common/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
