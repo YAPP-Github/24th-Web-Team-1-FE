@@ -1,5 +1,6 @@
 import InstargramIcon from "public/assets/icon24/instagram_24.svg";
-export default function Home() {
+
+export default function MainPage() {
   return (
     <main className="flex h-[100dvh] w-full flex-col items-center overflow-hidden">
       <InstargramIcon />
