@@ -1,5 +1,5 @@
 import React from "react";
 
-export default function TagList() {
-  return <div></div>;
+export default function ArticlePopup() {
+  return <div>ㅎㅎ</div>;
 }
