@@ -2,7 +2,7 @@
 import { ChangeEvent, useEffect, useState } from "react";
 
 import SubscribePopup from "@main/components/SubscribePopup";
-import { EMAIL_PLACEHOLDER, SUBSCRIBE_ACCEPT, SUBSCRIBE_ANNOUNCE_1, SUBSCRIBE_ANNOUNCE_2, SUBSCRIBE_ANNOUNCE_3, SUBSCRIBE_ANNOUNCE_4, SUBSCRIBE_REJECT, SUBSCRIBE_TITLE_1, SUBSCRIBE_TITLE_2 } from "@main/constants/main";
+import { EMAIL_PLACEHOLDER, SUBSCRIBE_ACCEPT, SUBSCRIBE_ANNOUCE, SUBSCRIBE_REJECT, SUBSCRIBE_SUCCESS, SUBSCRIBE_TITLE_1, SUBSCRIBE_TITLE_2 } from "@main/constants/main";
 import { Input } from "@shared/components/ui/input";
 import {
   Form,
@@ -13,12 +13,12 @@ import {
   FormLabel,
   FormMessage,
 } from "@shared/components/ui/form"
-import SubscribeButton from "@main/components/SubscribeButton";
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod";
 import { emailSubscribeSchema } from "@main/schemas";
 import { useToast } from "@shared/components/ui/use-toast";
+import { Button } from "@shared/components/ui/button";
 
 const SUBSCRIBE_POPUP_TITLE = (
   <div className="text-black font-bold text-lg leading-[27px]">
@@ -58,7 +58,7 @@ export default function MainPage() {
       setIsOpen(false)
 
       toast({
-        title: "구독 신청이 완료되었어요!",
+        title: SUBSCRIBE_SUCCESS,
       })
     } catch (error) {
       if (error instanceof z.ZodError) {
@@ -92,14 +92,14 @@ export default function MainPage() {
                         </FormControl>
                         <FormMessage />
                         <span className="text-[12px] font-semibold text-text-gray2 mt-[11px]">
-                          {SUBSCRIBE_ANNOUNCE_1} <a className="text-[12px] font-semibold underline">{SUBSCRIBE_ANNOUNCE_2}</a>과 <a className="text-[12px] font-semibold underline">{SUBSCRIBE_ANNOUNCE_3}</a>에 {SUBSCRIBE_ANNOUNCE_4}
+                          {SUBSCRIBE_ANNOUCE.SUBSCRIBE_ANNOUNCE_1} <a className="text-[12px] font-semibold underline">{SUBSCRIBE_ANNOUCE.SUBSCRIBE_ANNOUNCE_2}</a>과 <a className="text-[12px] font-semibold underline">{SUBSCRIBE_ANNOUCE.SUBSCRIBE_ANNOUNCE_3}</a>에 {SUBSCRIBE_ANNOUCE.SUBSCRIBE_ANNOUNCE_4}
                         </span>
                       </FormItem>
                     )}
                   />
                   <div className="flex flex-row w-full space-x-[8px]">
-                    <SubscribeButton label={SUBSCRIBE_REJECT} handleClick={() => setIsOpen(false)} variant={"outline"} className={"bg-white text-black font-medium text-[14px] w-1/2"} />
-                    <SubscribeButton type="submit" label={SUBSCRIBE_ACCEPT} variant={"outline"} className={"bg-black text-white font-medium text-[14px] w-1/2"} />
+                    <Button onClick={() => setIsOpen(false)} variant={"outline"} className={"bg-white text-black font-medium text-[14px] w-1/2"}>{SUBSCRIBE_REJECT}</Button>
+                    <Button type="submit" variant={"outline"} className={"bg-black text-white font-medium text-[14px] w-1/2"}>{SUBSCRIBE_ACCEPT}</Button>
                   </div>
                 </form>
               </Form>
