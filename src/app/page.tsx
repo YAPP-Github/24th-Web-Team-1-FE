@@ -7,10 +7,8 @@ import { Input } from "@shared/components/ui/input";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@shared/components/ui/form"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -19,6 +17,7 @@ import { z } from "zod";
 import { emailSubscribeSchema } from "@main/schemas";
 import { useToast } from "@shared/components/ui/use-toast";
 import { Button } from "@shared/components/ui/button";
+import { EmailSubscribeFormData } from "@main/types";
 
 const SUBSCRIBE_POPUP_TITLE = (
   <div className="text-black font-bold text-lg leading-[27px]">
@@ -38,14 +37,14 @@ export default function MainPage() {
     setIsClient(true);
   }, []);
 
-  const form = useForm<z.infer<typeof emailSubscribeSchema>>({
+  const form = useForm<EmailSubscribeFormData>({
     resolver: zodResolver(emailSubscribeSchema),
     defaultValues: {
       email: "",
     },
   })
 
-  const onSubmit = (values: z.infer<typeof emailSubscribeSchema>) => {
+  const onSubmit = (values: EmailSubscribeFormData) => {
     try {
       emailSubscribeSchema.safeParse(values);
       console.log(values);
@@ -84,7 +83,7 @@ export default function MainPage() {
                     render={({ field }) => (
                       <FormItem>
                         <FormControl>
-                          <Input placeholder="이메일을 입력해주세요" {...field} className={`rounded-[10px] ${form.formState.errors.email ? 'border-error' : ''}`} />
+                          <Input placeholder={EMAIL_PLACEHOLDER} {...field} className={`rounded-[10px] ${form.formState.errors.email ? 'border-error' : ''}`} />
                         </FormControl>
                         <FormMessage />
                         <span className="text-[12px] font-semibold text-text-gray2 mt-[11px]">
@@ -94,8 +93,8 @@ export default function MainPage() {
                     )}
                   />
                   <div className="flex flex-row w-full space-x-[8px]">
-                    <Button onClick={() => setIsOpen(false)} variant={"outline"} className={"bg-white text-black font-medium text-[14px] w-1/2"}>{SUBSCRIBE_REJECT}</Button>
-                    <Button type="submit" variant={"outline"} className={"bg-black text-white font-medium text-[14px] w-1/2"}>{SUBSCRIBE_ACCEPT}</Button>
+                    <Button onClick={() => setIsOpen(false)} variant={"outline"} className={"bg-white text-black font-medium text-[14px] w-1/2 rounded-none"}>{SUBSCRIBE_REJECT}</Button>
+                    <Button type="submit" variant={"outline"} className={"bg-black text-white font-medium text-[14px] w-1/2 rounded-none"}>{SUBSCRIBE_ACCEPT}</Button>
                   </div>
                 </form>
               </Form>

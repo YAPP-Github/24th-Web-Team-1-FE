@@ -1,5 +1,6 @@
-//type
+import { emailSubscribeSchema } from '@main/schemas';
 import React from 'react';
+import { z } from 'zod';
 export interface SubscribePopupProps {
     isOpen: boolean
     setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
@@ -29,3 +30,5 @@ export interface SubscribeButtonProps extends React.ButtonHTMLAttributes<HTMLBut
     */
     className: string
 }
+
+export type EmailSubscribeFormData = z.infer<typeof emailSubscribeSchema>;
