@@ -1,7 +1,7 @@
 "use client"
 import { ChangeEvent, useEffect, useState } from "react";
 
-import SubscribePopup from "@main/components/SubscribePopup";
+import SubscribePopup from "src/common/components/ExternalControlOpenDialog";
 import { EMAIL_PLACEHOLDER, SUBSCRIBE_ACCEPT, SUBSCRIBE_ANNOUCE, SUBSCRIBE_REJECT, SUBSCRIBE_SUCCESS, SUBSCRIBE_TITLE_1, SUBSCRIBE_TITLE_2 } from "@main/constants/main";
 import { Input } from "@shared/components/ui/input";
 import {

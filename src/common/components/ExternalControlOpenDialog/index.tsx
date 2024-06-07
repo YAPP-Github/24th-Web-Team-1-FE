@@ -8,9 +8,16 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@shared/components/ui/dialog"
-import { SubscribePopupProps } from "@main/types";
+export interface ExternalControlOpenDialogProps {
+  isOpen: boolean
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
+  title: React.ReactNode
+  content: React.ReactNode
+  footer?: React.ReactNode
+  description?: string
+}
 
-export default function SubscribePopup({ isOpen, setIsOpen,  title, content, footer, description }: SubscribePopupProps) {
+export default function ExternalControlOpenDialog({ isOpen, setIsOpen,  title, content, footer, description }: ExternalControlOpenDialogProps) {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogContent className="max-w-[380px] w-full rounded">
