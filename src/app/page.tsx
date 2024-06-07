@@ -20,7 +20,7 @@ import { Button } from "@shared/components/ui/button";
 import { EmailSubscribeFormData } from "@main/types";
 
 const SUBSCRIBE_POPUP_TITLE = (
-  <div className="text-black font-bold text-lg leading-[27px]">
+  <div className="text-black h3-bold text-lg">
     <div>{SUBSCRIBE_TITLE_1}</div>
     <div>{SUBSCRIBE_TITLE_2}</div>
   </div>
