@@ -13,7 +13,7 @@ import { SubscribePopupProps } from "@main/types";
 export default function SubscribePopup({ isOpen, setIsOpen,  title, content, footer, description }: SubscribePopupProps) {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogContent className="max-w-[344px] rounded">
+      <DialogContent className="max-w-[380px] w-full rounded">
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
           {

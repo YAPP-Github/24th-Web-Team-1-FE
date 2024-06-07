@@ -9,7 +9,9 @@ export interface SubscribePopupProps {
     description?: string
 }
 
-export interface SubscribeButtonProps {
+export type variantType = "default" | "destructive" | "outline" | "secondary" | "ghost" | "link"
+
+export interface SubscribeButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     /**
     * button content
     */
@@ -17,11 +19,11 @@ export interface SubscribeButtonProps {
     /**
     * click event
     */
-    handleClick: () => void
+    handleClick?: () => void
     /**
     * button variant : "default" | "destructive" | "outline" | "secondary" | "ghost" | "link"
     */
-    variant: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link"
+    variant: variantType
     /**
     * for styling
     */

@@ -6,6 +6,9 @@ import { Suspense } from "react";
 import "./globals.css";
 import QueryClientProviders from "@shared/components/queryClientProvider";
 import { cn } from "@shared/utils/cn";
+
+import { Toaster } from "@shared/components/ui/toaster"
+
 export const metadata: Metadata = {
   title: "FEW",
   description: "매일 아침마다 경제 아티클과 문제를 보내드려요!",
@@ -53,6 +56,7 @@ export default function RootLayout({
           )}
         >
           <Suspense>{children}</Suspense>
+          <Toaster />
         </body>
       </html>
     </QueryClientProviders>

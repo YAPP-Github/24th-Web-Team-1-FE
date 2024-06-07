@@ -6,7 +6,7 @@ export default function SubscribeButton ({label, handleClick, variant, className
     return (
         <Button
             variant={variant}
-            onClick={handleClick}
+            onClick={handleClick && handleClick}
             className={`${className} rounded-none`}
         >
             {label}
