@@ -34,13 +34,9 @@ export default function MainPage() {
 
   const { toast } = useToast()
 
-  useEffect(() => {
+  useEffect(function detectClient() {
     setIsClient(true);
   }, []);
-
-  const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setEmail(event.target.value)
-  }
 
   const form = useForm<z.infer<typeof emailSubscribeSchema>>({
     resolver: zodResolver(emailSubscribeSchema),
@@ -92,7 +88,7 @@ export default function MainPage() {
                         </FormControl>
                         <FormMessage />
                         <span className="text-[12px] font-semibold text-text-gray2 mt-[11px]">
-                          {SUBSCRIBE_ANNOUCE.SUBSCRIBE_ANNOUNCE_1} <a className="text-[12px] font-semibold underline">{SUBSCRIBE_ANNOUCE.SUBSCRIBE_ANNOUNCE_2}</a>과 <a className="text-[12px] font-semibold underline">{SUBSCRIBE_ANNOUCE.SUBSCRIBE_ANNOUNCE_3}</a>에 {SUBSCRIBE_ANNOUCE.SUBSCRIBE_ANNOUNCE_4}
+                          {SUBSCRIBE_ANNOUCE.SUBSCRIBE_CONSEQUENCE} <a className="text-[12px] font-semibold underline">{SUBSCRIBE_ANNOUCE.PRIVACY_COLLECTION_NOTICE}</a>과 <a className="text-[12px] font-semibold underline">{SUBSCRIBE_ANNOUCE.PROMOTIONAL_CONSENT_NOTICE}</a>에 {SUBSCRIBE_ANNOUCE.AGREEMENT_NOTICE}
                         </span>
                       </FormItem>
                     )}
