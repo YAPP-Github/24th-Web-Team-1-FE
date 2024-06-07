@@ -37,5 +37,5 @@ jobs:
         run: pnpm install
       - name: Build storybook
         run: pnpm run build-storybook
-      - name: Run Jest Test
+      - name: Run vitest
         run: pnpm test
