@@ -2,7 +2,7 @@
 
 import { createContext, useState } from "react";
 
-import { QuizContextInfo } from "@quiz/types";
+import { QuizContextInfo } from "@quiz/types/quizContextInfo";
 
 const QuizContext = createContext<QuizContextInfo>({
   states: { answer: "", isSubmit: false },
