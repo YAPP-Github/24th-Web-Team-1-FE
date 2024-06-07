@@ -1,0 +1,12 @@
+export const SUBSCRIBE_TITLE_1 = "매일 아침마다"
+export const SUBSCRIBE_TITLE_2 = "경제 아티클과 문제를 보내드려요!"
+export const EMAIL_PLACEHOLDER = "이메일을 입력해주세요"
+export const SUBSCRIBE_REJECT = "좀 더 둘러볼래요"
+export const SUBSCRIBE_ACCEPT = "구독할게요"
+export const SUBSCRIBE_ANNOUCE = {
+    SUBSCRIBE_CONSEQUENCE: "구독할 경우",
+    PRIVACY_COLLECTION_NOTICE: "개인정보 수집",
+    PROMOTIONAL_CONSENT_NOTICE: "광고성 정보 수신",
+    AGREEMENT_NOTICE: "동의하게 됩니다.",
+}
+export const SUBSCRIBE_SUCCESS = "구독 신청이 완료되었어요!"
