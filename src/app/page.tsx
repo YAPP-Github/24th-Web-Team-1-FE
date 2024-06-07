@@ -83,7 +83,7 @@ export default function MainPage() {
                     render={({ field }) => (
                       <FormItem>
                         <FormControl>
-                          <Input placeholder={EMAIL_PLACEHOLDER} {...field} className={`rounded-[10px] ${form.formState.errors.email ? 'border-error' : ''}`} />
+                          <Input placeholder={EMAIL_PLACEHOLDER} {...field} className={`rounded-[10px] focus-visible:ring-transparent ${form.formState.errors.email ? 'border-error' : ''}`} />
                         </FormControl>
                         <FormMessage />
                         <span className="text-[12px] font-semibold text-text-gray2 mt-[11px]">
