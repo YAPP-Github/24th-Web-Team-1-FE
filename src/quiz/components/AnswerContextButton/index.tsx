@@ -4,6 +4,7 @@ import React, { useContext } from "react";
 
 import { Button } from "@shared/components/ui/button";
 
+import { BUTTON_INFO } from "@quiz/constants/answerButtonInfo";
 import QuizContext from "@quiz/context/quizContext";
 
 export default function AnswerContextButton() {
@@ -11,11 +12,13 @@ export default function AnswerContextButton() {
     states: { answer, isSubmit },
   } = useContext(QuizContext);
 
-  const result = isSubmit ? "다음 문제 풀기" : "정답 제출하기";
+  const result = isSubmit
+    ? BUTTON_INFO.POST_SUBMIT.title
+    : BUTTON_INFO.PRE_ANSWER_SELECT.title;
   const style =
-    (!answer && !isSubmit && "bg-text-gray3 text-text-gray2") ||
-    (answer && !isSubmit && "bg-main") ||
-    "bg-text-black";
+    (!answer && !isSubmit && BUTTON_INFO.PRE_ANSWER_SELECT.className) ||
+    (answer && !isSubmit && BUTTON_INFO.POST_ANSWER_PRE_SUBMIT.className) ||
+    BUTTON_INFO.POST_SUBMIT.className;
 
   return <Button className={style}>{result}</Button>;
 }
