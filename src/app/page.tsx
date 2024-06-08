@@ -1,8 +1,8 @@
 "use client"
-import { ChangeEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import SubscribePopup from "src/common/components/ExternalControlOpenDialog";
-import { EMAIL_PLACEHOLDER, SUBSCRIBE_ACCEPT, SUBSCRIBE_ANNOUCE, SUBSCRIBE_REJECT, SUBSCRIBE_SUCCESS, SUBSCRIBE_TITLE_1, SUBSCRIBE_TITLE_2 } from "@main/constants/main";
+import { EMAIL_PLACEHOLDER, SUBSCRIBE_ACCEPT, SUBSCRIBE_ANNOUCE, SUBSCRIBE_REJECT, SUBSCRIBE_TITLE_1, SUBSCRIBE_TITLE_2 } from "@main/constants/main";
 import { Input } from "@shared/components/ui/input";
 import {
   Form,
@@ -11,13 +11,10 @@ import {
   FormItem,
   FormMessage,
 } from "@shared/components/ui/form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { z } from "zod";
-import { emailSubscribeSchema } from "@main/schemas";
 import { useToast } from "@shared/components/ui/use-toast";
 import { Button } from "@shared/components/ui/button";
-import { EmailSubscribeFormData } from "@main/types";
+import { useSubscribeForm } from "@main/hooks/useSubscribeForm";
+import SubscribeBottomBar from "@main/components/SubscribeBottomBar";
 
 const SUBSCRIBE_POPUP_TITLE = (
   <div className="text-black h3-bold text-lg">
@@ -30,40 +27,13 @@ export default function MainPage() {
   const [isOpen, setIsOpen] = useState<boolean>(true)
   const [isClient, setIsClient] = useState<boolean>(false);
   const [email, setEmail] = useState<string>("")
+  const { form, onSubmit } = useSubscribeForm();
 
   const { toast } = useToast()
 
   useEffect(function detectClient() {
     setIsClient(true);
   }, []);
-
-  const form = useForm<EmailSubscribeFormData>({
-    resolver: zodResolver(emailSubscribeSchema),
-    defaultValues: {
-      email: "",
-    },
-  })
-
-  const onSubmit = (values: EmailSubscribeFormData) => {
-    try {
-      emailSubscribeSchema.safeParse(values);
-      console.log(values);
-      // 폼 제출 성공 로직 추가
-
-      setIsOpen(false)
-
-      toast({
-        title: SUBSCRIBE_SUCCESS,
-      })
-    } catch (error) {
-      if (error instanceof z.ZodError) {
-        error.errors.forEach((err) => {
-          console.error(err.message);
-          // 오류 메시지를 UI에 표시하는 로직 추가
-        });
-      }
-    }
-  }
 
 
   return (
@@ -93,8 +63,8 @@ export default function MainPage() {
                     )}
                   />
                   <div className="flex flex-row w-full space-x-[8px]">
-                    <Button onClick={() => setIsOpen(false)} variant={"outline"} className={"bg-white text-black font-medium text-[14px] w-1/2 rounded-none"}>{SUBSCRIBE_REJECT}</Button>
-                    <Button type="submit" variant={"outline"} className={"bg-black text-white font-medium text-[14px] w-1/2 rounded-none"}>{SUBSCRIBE_ACCEPT}</Button>
+                    <Button onClick={() => setIsOpen(false)} type="button" variant={"outline"} className={"bg-white text-black font-medium text-[14px] w-1/2 rounded-none"}>{SUBSCRIBE_REJECT}</Button>
+                    <Button onClick={() => setIsOpen(false)} type="submit" variant={"outline"} className={"bg-black text-white font-medium text-[14px] w-1/2 rounded-none"}>{SUBSCRIBE_ACCEPT}</Button>
                   </div>
                 </form>
               </Form>
@@ -102,6 +72,7 @@ export default function MainPage() {
           />
         )
       }
+      <SubscribeBottomBar />
     </main>
   );
 }
