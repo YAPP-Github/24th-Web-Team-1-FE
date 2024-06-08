@@ -10,3 +10,5 @@ export const SUBSCRIBE_ANNOUCE = {
     AGREEMENT_NOTICE: "동의하게 됩니다.",
 }
 export const SUBSCRIBE_SUCCESS = "구독 신청이 완료되었어요!"
+export const SUBSCRIBE_TITLE_FEW = "FEW는 매일 경제 아티클과 문제를 보내드려요!"
+export const SUBSCRIBE_CONFIRM =  "매일 경제 문제 받기"
