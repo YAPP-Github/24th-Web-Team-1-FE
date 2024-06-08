@@ -20,7 +20,7 @@ export interface ExternalControlOpenDialogProps {
 export default function ExternalControlOpenDialog({ isOpen, setIsOpen,  title, content, footer, description }: ExternalControlOpenDialogProps) {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogContent className="max-w-[380px] w-full rounded">
+      <DialogContent className="max-w-[380px] w-full rounded z-50">
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
           {

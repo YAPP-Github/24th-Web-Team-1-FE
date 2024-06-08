@@ -16,7 +16,7 @@ export default function SubscribeBottomBar() {
     const { form, onSubmit } = useSubscribeForm();
 
     return (
-        <div className="max-w-[480px] w-full fixed bottom-0 left-0 right-0 flex items-center justify-center bg-background1 p-[16px]">
+        <div className="w-full flex items-center justify-center bg-background1 p-[16px]">
             <div className="bg-transparent w-full">
                 <h3 className="text-[17px] h3-bold mb-4">{SUBSCRIBE_TITLE_FEW}</h3>
                 <Form {...form}>
