@@ -14,20 +14,21 @@ import {
 
 export default function SubscribeBottomBar() {
     const { form, onSubmit } = useSubscribeForm();
+    const { handleSubmit, control, formState } = form
 
     return (
         <div className="w-full flex items-center justify-center bg-background1 p-[16px]">
             <div className="bg-transparent w-full">
                 <h3 className="text-[17px] h3-bold mb-4">{SUBSCRIBE_TITLE_FEW}</h3>
                 <Form {...form}>
-                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-[20px]">
+                    <form onSubmit={handleSubmit(onSubmit)} className="space-y-[20px]">
                         <FormField
-                            control={form.control}
+                            control={control}
                             name="email"
                             render={({ field }) => (
                                 <FormItem>
                                     <FormControl>
-                                        <Input placeholder={EMAIL_PLACEHOLDER} {...field} className={`rounded-[10px] focus-visible:ring-transparent text-[16px] ${form.formState.errors.email ? 'border-error' : ''}`} />
+                                        <Input placeholder={EMAIL_PLACEHOLDER} {...field} className={`rounded-[10px] focus-visible:ring-transparent text-[16px] ${formState.errors.email ? 'border-error' : ''}`} />
                                     </FormControl>
                                     <FormMessage />
                                     <span className="text-[12px] font-semibold text-text-gray2 mt-[11px]">
