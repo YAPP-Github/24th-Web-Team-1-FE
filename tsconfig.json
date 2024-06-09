@@ -25,7 +25,8 @@
       "@article/*": ["src/article/*"],
       "@quiz/*": ["src/quiz/*"],
       "@main/*": ["src/main/*"],
-      "@common/*": ["src/common/*"]
+      "@common/*": ["src/common/*"],
+      "@mocks/*": ["src/mocks/*"]
     }
   },
   "include": [
