@@ -1,8 +1,9 @@
+import { EMAIL_CONTROL } from "@main/constants/main"
 import { z } from "zod"
 
 export const emailSubscribeSchema = z.object({
     email: z
     .string()
-    .min(1, { message: "올바른 이메일 형식이 아니에요." })
-    .email("올바른 이메일 형식이 아니에요.")
+    .min(1, { message: EMAIL_CONTROL.INVALID_EMAIL })
+    .email(EMAIL_CONTROL.INVALID_EMAIL)
 })
