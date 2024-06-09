@@ -1,4 +1,5 @@
 export const apiRoutes = {
-  quiz: "/quiz",
-  tags: "/tags",
+  quiz: "/api/quiz",
+  tags: "/api/tags",
+  quizAnswer: "/api/quizAnswer",
 };
