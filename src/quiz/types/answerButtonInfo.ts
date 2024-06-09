@@ -1,5 +1,8 @@
 import { BUTTON_STATE } from "@quiz/constants/answerButtonInfo";
 
-export type ButtonInfo = {
-  [key in (typeof BUTTON_STATE)[number]]: React.ButtonHTMLAttributes<HTMLButtonElement>;
-};
+import { ConstKeyObject } from "@common/types/constKeyObject";
+
+export type ButtonInfo = ConstKeyObject<
+  (typeof BUTTON_STATE)[number],
+  React.ButtonHTMLAttributes<HTMLButtonElement>
+>;
