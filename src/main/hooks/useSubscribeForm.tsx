@@ -4,7 +4,7 @@ import { z } from 'zod';
 import { emailSubscribeSchema } from '@main/schemas';
 import { useToast } from '@shared/components/ui/use-toast';
 import { EmailSubscribeFormData } from '@main/types';
-import { SUBSCRIBE_SUCCESS } from '@main/constants/main';
+import { SUBSCRIBE_USER_ACTIONS } from '@main/constants/main';
 
 export const useSubscribeForm = () => {
   const { toast } = useToast();
@@ -23,7 +23,7 @@ export const useSubscribeForm = () => {
       // 폼 제출 성공 로직 추가
       form.reset()
       toast({
-        title: SUBSCRIBE_SUCCESS,
+        title: SUBSCRIBE_USER_ACTIONS.SUBSCRIBE_SUCCESS,
       });
     } catch (error) {
       if (error instanceof z.ZodError) {

@@ -1,6 +1,6 @@
 "use client";
 
-import { EMAIL_PLACEHOLDER, SUBSCRIBE_ANNOUCE, SUBSCRIBE_CONFIRM, SUBSCRIBE_TITLE_FEW } from "@main/constants/main";
+import { EMAIL_CONTROL, SUBSCRIBE_ANNOUCE, SUBSCRIBE_USER_ACTIONS, SUBSCRIBE_TITLES } from "@main/constants/main";
 import { useSubscribeForm } from "@main/hooks/useSubscribeForm";
 import { Button } from "@shared/components/ui/button";
 import { Input } from "@shared/components/ui/input";
@@ -19,7 +19,7 @@ export default function SubscribeBottomBar() {
     return (
         <div className="w-full flex items-center justify-center bg-background1 p-[16px]">
             <div className="bg-transparent w-full">
-                <h3 className="text-[17px] h3-bold mb-4">{SUBSCRIBE_TITLE_FEW}</h3>
+                <h3 className="text-[17px] h3-bold mb-4">{SUBSCRIBE_TITLES.SUBSCRIBE_TITLE_FEW}</h3>
                 <Form {...form}>
                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-[20px]">
                         <FormField
@@ -28,7 +28,7 @@ export default function SubscribeBottomBar() {
                             render={({ field }) => (
                                 <FormItem>
                                     <FormControl>
-                                        <Input placeholder={EMAIL_PLACEHOLDER} {...field} className={`rounded-[10px] focus-visible:ring-transparent text-[16px] ${formState.errors.email ? 'border-error' : ''}`} />
+                                        <Input placeholder={EMAIL_CONTROL.EMAIL_PLACEHOLDER} {...field} className={`rounded-[10px] focus-visible:ring-transparent text-[16px] ${formState.errors.email ? 'border-error' : ''}`} />
                                     </FormControl>
                                     <FormMessage />
                                     <span className="text-[12px] font-semibold text-text-gray2 mt-[11px]">
@@ -39,7 +39,7 @@ export default function SubscribeBottomBar() {
                         />
                         <div className="flex flex-row w-full space-x-[8px]">
                             <Button type="submit" className="w-full bg-main text-white rounded-none py-6">
-                                {SUBSCRIBE_CONFIRM}
+                                {SUBSCRIBE_USER_ACTIONS.SUBSCRIBE_CONFIRM}
                             </Button>
                         </div>
                     </form>

@@ -1,7 +1,7 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 import SubscribeBottomBar from '.';
-import { EMAIL_PLACEHOLDER, SUBSCRIBE_CONFIRM, SUBSCRIBE_ANNOUCE, SUBSCRIBE_TITLE_FEW, INVALID_EMAIL, SUBSCRIBE_SUCCESS } from '@main/constants/main';
+import { EMAIL_CONTROL, SUBSCRIBE_USER_ACTIONS, SUBSCRIBE_ANNOUCE, SUBSCRIBE_TITLES } from '@main/constants/main';
 import { useSubscribeForm } from '@main/hooks/useSubscribeForm';
 import { useForm, Controller, Control, FieldValues, FormProvider } from 'react-hook-form';
 import * as useToastModule from '@shared/components/ui/use-toast';  // import as module
@@ -19,7 +19,7 @@ vi.mock('@main/hooks/useSubscribeForm', () => ({
         if (data.email && !data.email.includes('@')) {
           errors.email = {
             type: 'manual',
-            message: INVALID_EMAIL,
+            message: EMAIL_CONTROL.INVALID_EMAIL,
           };
         }
         return {
@@ -70,34 +70,34 @@ describe('구독 유도 바텀 바 테스트', () => {
   it('renders correctly', () => {
     render(<SubscribeBottomBar />);
 
-    expect(screen.getByText(SUBSCRIBE_TITLE_FEW)).toBeInTheDocument();
-    expect(screen.getByPlaceholderText(EMAIL_PLACEHOLDER)).toBeInTheDocument();
-    expect(screen.getByText(SUBSCRIBE_CONFIRM)).toBeInTheDocument();
+    expect(screen.getByText(SUBSCRIBE_TITLES.SUBSCRIBE_TITLE_FEW)).toBeInTheDocument();
+    expect(screen.getByPlaceholderText(EMAIL_CONTROL.EMAIL_PLACEHOLDER)).toBeInTheDocument();
+    expect(screen.getByText(SUBSCRIBE_USER_ACTIONS.SUBSCRIBE_CONFIRM)).toBeInTheDocument();
     expect(screen.getByText((content) => content.includes(SUBSCRIBE_ANNOUCE.SUBSCRIBE_CONSEQUENCE))).toBeInTheDocument();
   });
 
   it('유효하지 않은 이메일을 사용했을 때 에러 띄우기', async () => {
     render(<SubscribeBottomBar />);
 
-    const input = screen.getByPlaceholderText(EMAIL_PLACEHOLDER) as HTMLInputElement;
-    const submitButton = screen.getByText(SUBSCRIBE_CONFIRM);
+    const input = screen.getByPlaceholderText(EMAIL_CONTROL.EMAIL_PLACEHOLDER) as HTMLInputElement;
+    const submitButton = screen.getByText(SUBSCRIBE_USER_ACTIONS.SUBSCRIBE_CONFIRM);
 
     fireEvent.change(input, { target: { value: 'invalid-email' } });
     fireEvent.click(submitButton);
 
-    expect(screen.queryByText(INVALID_EMAIL)).toBeDefined() // 값이 정의되어 있는 경우?
+    expect(screen.queryByText(EMAIL_CONTROL.INVALID_EMAIL)).toBeDefined() // 값이 정의되어 있는 경우?
   });
 
   it('유효한 이메일을 입력했을 때 toast 메시지를 표시', async () => {
   
     render(<SubscribeBottomBar />);
 
-    const input = screen.getByPlaceholderText(EMAIL_PLACEHOLDER) as HTMLInputElement;
-    const submitButton = screen.getByText(SUBSCRIBE_CONFIRM);
+    const input = screen.getByPlaceholderText(EMAIL_CONTROL.EMAIL_PLACEHOLDER) as HTMLInputElement;
+    const submitButton = screen.getByText(SUBSCRIBE_USER_ACTIONS.SUBSCRIBE_CONFIRM);
 
     fireEvent.change(input, { target: { value: 'test@example.com' } });
     fireEvent.click(submitButton);
 
-    expect(screen.queryByText(SUBSCRIBE_SUCCESS)).toBeDefined()
+    expect(screen.queryByText(SUBSCRIBE_USER_ACTIONS.SUBSCRIBE_SUCCESS)).toBeDefined()
   });
 });

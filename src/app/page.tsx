@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 
 import SubscribePopup from "src/common/components/ExternalControlOpenDialog";
-import { EMAIL_PLACEHOLDER, SUBSCRIBE_ACCEPT, SUBSCRIBE_ANNOUCE, SUBSCRIBE_REJECT, SUBSCRIBE_TITLE_1, SUBSCRIBE_TITLE_2 } from "@main/constants/main";
+import { EMAIL_CONTROL, SUBSCRIBE_ANNOUCE, SUBSCRIBE_USER_ACTIONS, SUBSCRIBE_TITLES} from "@main/constants/main";
 import { Input } from "@shared/components/ui/input";
 import {
   Form,
@@ -18,8 +18,8 @@ import SubscribeBottomBar from "@main/components/SubscribeBottomBar";
 
 const SUBSCRIBE_POPUP_TITLE = (
   <div className="text-black h3-bold text-lg">
-    <div>{SUBSCRIBE_TITLE_1}</div>
-    <div>{SUBSCRIBE_TITLE_2}</div>
+    <div>{SUBSCRIBE_TITLES.SUBSCRIBE_TITLE_1}</div>
+    <div>{SUBSCRIBE_TITLES.SUBSCRIBE_TITLE_2}</div>
   </div>
 );
 
