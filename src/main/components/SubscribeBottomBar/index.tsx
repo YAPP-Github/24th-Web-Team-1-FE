@@ -1,9 +1,6 @@
 "use client";
 
-import { EMAIL_CONTROL, SUBSCRIBE_ANNOUCE, SUBSCRIBE_USER_ACTIONS, SUBSCRIBE_TITLES } from "@main/constants/main";
-import { useSubscribeForm } from "@main/hooks/useSubscribeForm";
 import { Button } from "@shared/components/ui/button";
-import { Input } from "@shared/components/ui/input";
 import {
     Form,
     FormControl,
@@ -11,6 +8,10 @@ import {
     FormItem,
     FormMessage,
 } from "@shared/components/ui/form"
+import { Input } from "@shared/components/ui/input";
+
+import { EMAIL_CONTROL, SUBSCRIBE_ANNOUCE, SUBSCRIBE_TITLES,SUBSCRIBE_USER_ACTIONS } from "@main/constants/main";
+import { useSubscribeForm } from "@main/hooks/useSubscribeForm";
 
 export default function SubscribeBottomBar() {
     const { form, onSubmit } = useSubscribeForm();

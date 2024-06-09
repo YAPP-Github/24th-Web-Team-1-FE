@@ -1,12 +1,12 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import { describe, it, expect, vi } from 'vitest';
+import { Control,useForm } from 'react-hook-form';
+
+import { describe, expect, it, vi } from 'vitest';
+
+// import as module
+import { EMAIL_CONTROL, SUBSCRIBE_ANNOUCE, SUBSCRIBE_TITLES,SUBSCRIBE_USER_ACTIONS } from '@main/constants/main';
+
 import SubscribeBottomBar from '.';
-import { EMAIL_CONTROL, SUBSCRIBE_USER_ACTIONS, SUBSCRIBE_ANNOUCE, SUBSCRIBE_TITLES } from '@main/constants/main';
-import { useSubscribeForm } from '@main/hooks/useSubscribeForm';
-import { useForm, Controller, Control, FieldValues, FormProvider } from 'react-hook-form';
-import * as useToastModule from '@shared/components/ui/use-toast';  // import as module
-import { useToast } from '@shared/components/ui/use-toast';
-import { EmailSubscribeFormData } from '@main/types';
+import { fireEvent, render, screen } from '@testing-library/react';
 
 // Mock the useSubscribeForm hook
 const mockOnSubmit = vi.fn();

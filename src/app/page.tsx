@@ -1,20 +1,11 @@
 "use client"
 import { useEffect, useState } from "react";
 
-import SubscribePopup from "src/common/components/ExternalControlOpenDialog";
-import { EMAIL_CONTROL, SUBSCRIBE_ANNOUCE, SUBSCRIBE_USER_ACTIONS, SUBSCRIBE_TITLES} from "@main/constants/main";
-import { Input } from "@shared/components/ui/input";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "@shared/components/ui/form"
 import { useToast } from "@shared/components/ui/use-toast";
-import { Button } from "@shared/components/ui/button";
-import { useSubscribeForm } from "@main/hooks/useSubscribeForm";
+
 import SubscribeBottomBar from "@main/components/SubscribeBottomBar";
+import { SUBSCRIBE_TITLES} from "@main/constants/main";
+import { useSubscribeForm } from "@main/hooks/useSubscribeForm";
 
 const SUBSCRIBE_POPUP_TITLE = (
   <div className="text-black h3-bold text-lg">

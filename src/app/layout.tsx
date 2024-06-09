@@ -3,11 +3,11 @@ import localFont from "next/font/local";
 
 import { Suspense } from "react";
 
-import "./globals.css";
 import QueryClientProviders from "@shared/components/queryClientProvider";
+import { Toaster } from "@shared/components/ui/toaster"
 import { cn } from "@shared/utils/cn";
 
-import { Toaster } from "@shared/components/ui/toaster"
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "FEW",

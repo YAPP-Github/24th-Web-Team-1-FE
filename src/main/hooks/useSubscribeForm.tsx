@@ -1,10 +1,14 @@
 import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
+
 import { z } from 'zod';
-import { emailSubscribeSchema } from '@main/schemas';
+
 import { useToast } from '@shared/components/ui/use-toast';
-import { EmailSubscribeFormData } from '@main/types';
+
 import { SUBSCRIBE_USER_ACTIONS } from '@main/constants/main';
+import { emailSubscribeSchema } from '@main/schemas';
+import { EmailSubscribeFormData } from '@main/types';
+
+import { zodResolver } from '@hookform/resolvers/zod';
 
 export const useSubscribeForm = () => {
   const { toast } = useToast();

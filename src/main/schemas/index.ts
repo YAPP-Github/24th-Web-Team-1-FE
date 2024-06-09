@@ -1,5 +1,6 @@
-import { EMAIL_CONTROL } from "@main/constants/main"
 import { z } from "zod"
+
+import { EMAIL_CONTROL } from "@main/constants/main"
 
 export const emailSubscribeSchema = z.object({
     email: z
