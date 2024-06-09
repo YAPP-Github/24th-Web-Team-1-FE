@@ -7,6 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import { QUIZ_TITLE_INFO } from "@quiz/constants/quizTitle";
 import QuizContext from "@quiz/context/quizContext";
 import { getQuizAnswerQueryOptions } from "@quiz/remotes/getQuizAnswerOption";
+import { getQuizInfoQueryOptions } from "@quiz/remotes/getQuizInfoQueryOptions";
 
 export default function QuizTitle() {
   const {
@@ -15,6 +16,9 @@ export default function QuizTitle() {
 
   const { data: quizAnswer, isSuccess } = useQuery({
     ...getQuizAnswerQueryOptions(),
+  });
+  const { data: quizInfo } = useQuery({
+    ...getQuizInfoQueryOptions(),
   });
 
   if (!isSuccess && !quizAnswer) return <div></div>;
@@ -30,6 +34,7 @@ export default function QuizTitle() {
   return (
     <header className="mt-[26px] flex flex-col gap-[7px]">
       <h3 className={subTitleInfo.className}>{subTitleInfo.title}</h3>
+      <h2 className="h2-bold">{quizInfo?.question}</h2>
     </header>
   );
 }

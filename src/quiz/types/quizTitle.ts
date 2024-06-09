@@ -10,3 +10,8 @@ export type QuizTitleInfo = ConstKeyObject<
 export type QuizAnswer = {
   answer: string;
 };
+
+export type QuizInfo = {
+  question: string;
+  answer: string[];
+};
