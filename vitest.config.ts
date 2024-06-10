@@ -22,6 +22,8 @@ export default defineConfig({
       "@quiz": resolve("src/quiz"),
       "@article": resolve("src/article"),
       "@main": resolve("src/main"),
+      "@mocks": resolve("src/mocks"),
+      "@common": resolve("src/common"),
     },
   },
 });
