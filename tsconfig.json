@@ -23,10 +23,10 @@
       "@shared/*": ["src/shared/*"],
       "@workbook/*": ["src/workbook/*"],
       "@article/*": ["src/article/*"],
-      "@quiz/*": ["src/quiz/*"],
       "@main/*": ["src/main/*"],
       "@common/*": ["src/common/*"],
-      "@mocks/*": ["src/mocks/*"]
+      "@mocks/*": ["src/mocks/*"],
+      "@problem/*": ["src/problem/*"]
     }
   },
   "include": [
