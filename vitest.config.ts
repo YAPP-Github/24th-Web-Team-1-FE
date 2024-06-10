@@ -15,13 +15,14 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      "@": resolve("/src"),
+      "@": resolve("src"),
       "@api": resolve("src/api"),
       "@shared": resolve("src/shared"),
       "@workbook": resolve("src/workbook"),
-      "@quiz": resolve("/src/quiz"),
+      "@quiz": resolve("src/quiz"),
       "@article": resolve("src/article"),
       "@main": resolve("src/main"),
+      "@mocks": resolve("src/mocks"),
       "@common": resolve("src/common"),
     },
   },

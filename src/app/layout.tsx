@@ -7,6 +7,8 @@ import QueryClientProviders from "@shared/components/queryClientProvider";
 import { cn } from "@shared/utils/cn";
 
 import "./globals.css";
+import MSWProviders from "@mocks/MSWProviders";
+
 export const metadata: Metadata = {
   title: "FEW",
   description: "매일 아침마다 경제 아티클과 문제를 보내드려요!",
@@ -37,7 +39,6 @@ const pretendard = localFont({
   ],
   variable: "--font-pretendard",
 });
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 export default function RootLayout({
   children,
@@ -47,15 +48,21 @@ export default function RootLayout({
   return (
     <QueryClientProviders>
       <html lang="en" className={`${pretendard.variable}`}>
-        <head></head>
+        <head>
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"
+          />
+        </head>
         <body
           className={cn(
             'scrollbar-hide" relative mx-auto flex',
             "min-h-[100dvh] w-full max-w-[480px] overscroll-y-none",
           )}
         >
-          <Suspense>{children}</Suspense>
-          <ReactQueryDevtools initialIsOpen={false} />
+          <MSWProviders>
+            <Suspense>{children}</Suspense>
+          </MSWProviders>
         </body>
       </html>
     </QueryClientProviders>
