@@ -1,12 +1,10 @@
 import axios from "axios";
 
 type Method = "get" | "post" | "put" | "delete" | "patch";
-type Response<DataType> = {
+
+export interface ApiResponse<DataType> {
   message: string;
   data: DataType;
-};
-export interface ApiResponse<DataType> {
-  data: Response<DataType>;
   error?: {
     code: number;
     detail: string;
