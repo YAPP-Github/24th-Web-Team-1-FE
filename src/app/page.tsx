@@ -7,6 +7,7 @@ import SubscribeBottomBar from "@main/components/SubscribeBottomBar";
 import { SUBSCRIBE_TITLES} from "@main/constants/main";
 import { useSubscribeForm } from "@main/hooks/useSubscribeForm";
 import Image from "next/image";
+import TitleSection from "@workbook/components/TitleSection";
 
 const SUBSCRIBE_POPUP_TITLE = (
   <div className="text-black h3-bold text-lg">
@@ -30,7 +31,7 @@ export default function MainPage() {
 
   return (
     <main className="flex w-full h-[100vh] flex-col items-center">
-      <div className="flex flex-col h-full">
+      <div className="flex flex-col h-full space-y-[24px]">
         <Image 
           src={"/main_img.png"} 
           alt={"Workbook landing image"} 
@@ -38,7 +39,7 @@ export default function MainPage() {
           height={0}
           style={{ maxWidth: '480px', height: 'auto' }} 
         />
-        
+        <TitleSection category={"경제"} title={"재태크, 투자 필수 용어 모음집"} editors={["안나포", "퓨퓨", "프레소"]} />
       </div>
       <SubscribeBottomBar />
     </main>
