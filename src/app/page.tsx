@@ -8,6 +8,7 @@ import { SUBSCRIBE_TITLES} from "@main/constants/main";
 import { useSubscribeForm } from "@main/hooks/useSubscribeForm";
 import Image from "next/image";
 import TitleSection from "@workbook/components/TitleSection";
+import OverviewSection from "@workbook/components/OverviewSection";
 
 const SUBSCRIBE_POPUP_TITLE = (
   <div className="text-black h3-bold text-lg">
@@ -40,6 +41,7 @@ export default function MainPage() {
           style={{ maxWidth: '480px', height: 'auto' }} 
         />
         <TitleSection category={"경제"} title={"재태크, 투자 필수 용어 모음집"} editors={["안나포", "퓨퓨", "프레소"]} />
+        <OverviewSection overview={"사회 초년생부터, 직장인, 은퇴자까지 모두가 알아야 할 기본적인 재태크, 투자 필수 용어 모음집 입니다."} />
       </div>
       <SubscribeBottomBar />
     </main>
