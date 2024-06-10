@@ -4,11 +4,7 @@ import localFont from "next/font/local";
 import { Suspense } from "react";
 
 import QueryClientProviders from "@shared/components/queryClientProvider";
-import { Toaster } from "@shared/components/ui/toaster"
 import { cn } from "@shared/utils/cn";
-
-import "./globals.css";
-
 export const metadata: Metadata = {
   title: "FEW",
   description: "매일 아침마다 경제 아티클과 문제를 보내드려요!",
@@ -49,7 +45,10 @@ export default function RootLayout({
     <QueryClientProviders>
       <html lang="en" className={`${pretendard.variable}`}>
         <head>
-          <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"
+          />
         </head>
         <body
           className={cn(
@@ -58,7 +57,6 @@ export default function RootLayout({
           )}
         >
           <Suspense>{children}</Suspense>
-          <Toaster />
         </body>
       </html>
     </QueryClientProviders>

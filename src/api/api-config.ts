@@ -21,6 +21,28 @@ export const axiosInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
 });
 
+axiosInstance.interceptors.request.use(
+  function (config) {
+    if (!config.headers) {
+      return config;
+    }
+
+    return config;
+  },
+  function (error) {
+    return Promise.reject(error);
+  },
+);
+
+axiosInstance.interceptors.response.use(
+  function (response) {
+    return response;
+  },
+  async function (error) {
+    const { config, response } = error;
+    return axios(config);
+  },
+);
 export const axiosRequest = async <T>(
   method: Method,
   url: string,
