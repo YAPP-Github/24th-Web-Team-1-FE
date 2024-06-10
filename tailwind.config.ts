@@ -55,7 +55,7 @@ const config = {
           foreground: "hsl(var(--card-foreground))",
         },
         success: "#0166B3",
-        error: "##B00020",
+        error: "#B00020",
         main: "#264932",
         background1: "#F5F5F5",
         text: {
