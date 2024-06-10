@@ -6,6 +6,7 @@ import { useToast } from "@shared/components/ui/use-toast";
 import SubscribeBottomBar from "@main/components/SubscribeBottomBar";
 import { SUBSCRIBE_TITLES} from "@main/constants/main";
 import { useSubscribeForm } from "@main/hooks/useSubscribeForm";
+import Image from "next/image";
 
 const SUBSCRIBE_POPUP_TITLE = (
   <div className="text-black h3-bold text-lg">
@@ -29,8 +30,15 @@ export default function MainPage() {
 
   return (
     <main className="flex w-full h-[100vh] flex-col items-center">
-      <div className="flex h-full">
-        <div>Main</div>
+      <div className="flex flex-col h-full">
+        <Image 
+          src={"/main_img.png"} 
+          alt={"Workbook landing image"} 
+          width={480}
+          height={0}
+          style={{ maxWidth: '480px', height: 'auto' }} 
+        />
+        
       </div>
       <SubscribeBottomBar />
     </main>
