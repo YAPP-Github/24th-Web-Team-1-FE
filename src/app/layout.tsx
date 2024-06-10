@@ -7,6 +7,8 @@ import QueryClientProviders from "@shared/components/queryClientProvider";
 import { cn } from "@shared/utils/cn";
 
 import "./globals.css";
+import MSWProviders from "@mocks/MSWProviders";
+
 export const metadata: Metadata = {
   title: "FEW",
   description: "매일 아침마다 경제 아티클과 문제를 보내드려요!",
@@ -58,7 +60,9 @@ export default function RootLayout({
             "min-h-[100dvh] w-full max-w-[480px] overscroll-y-none",
           )}
         >
-          <Suspense>{children}</Suspense>
+          <MSWProviders>
+            <Suspense>{children}</Suspense>
+          </MSWProviders>
         </body>
       </html>
     </QueryClientProviders>
