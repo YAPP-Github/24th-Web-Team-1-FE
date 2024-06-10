@@ -1,14 +1,12 @@
 import axios from "axios";
 
 type Method = "get" | "post" | "put" | "delete" | "patch";
-
-export interface ApiMeta {
-  code: number;
+type Response<DataType> = {
   message: string;
-}
-export interface ApiResponse<T> {
-  data: T;
-  meta: ApiMeta | null;
+  data: DataType;
+};
+export interface ApiResponse<DataType> {
+  data: Response<DataType>;
   error?: {
     code: number;
     detail: string;
