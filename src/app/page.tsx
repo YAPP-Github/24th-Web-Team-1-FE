@@ -40,18 +40,16 @@ export default function MainPage() {
     });
   }
 
-  console.log(JSON.stringify(jsonArray, null, 2));
-
-
   return (
-    <main className="flex w-full h-[100vh] flex-col items-center">
-      <div className="flex flex-col h-full space-y-[24px] overflow-y-scroll px-[20px]">
+    <main className="flex w-full h-[100vh] flex-col items-center overflow-x-hidden">
+      <div className="flex flex-col h-full space-y-[24px] overflow-y-scroll w-full max-w-screen-sm">
         <Image
           src={"/main_img.png"}
           alt={"Workbook landing image"}
-          width={480}
+          width={0}
           height={0}
-          style={{ maxWidth: '480px', height: 'auto' }}
+          sizes="100vw"
+          style={{ width: "100%", height: 'auto' }}
         />
         <TitleSection category={"경제"} title={"재태크, 투자 필수 용어 모음집"} editors={["안나포", "퓨퓨", "프레소"]} />
         <OverviewSection overview={"사회 초년생부터, 직장인, 은퇴자까지 모두가 알아야 할 기본적인 재태크, 투자 필수 용어 모음집 입니다."} />

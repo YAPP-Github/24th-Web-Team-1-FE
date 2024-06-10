@@ -9,7 +9,7 @@ interface TitleSectionProps {
 
 export default function TitleSection ({ category, title, editors }: TitleSectionProps) {
     return (
-        <div className="flex flex-col">
+        <div className="flex flex-col px-[20px]">
             <div></div>
             <div className="flex flex-row">
                 <div className="">
@@ -28,9 +28,9 @@ export default function TitleSection ({ category, title, editors }: TitleSection
                         editors.map((editor, idx) => {
                             return (
                                 (idx === editors.length - 1) ? (
-                                    <span className="text-text-gray1 sub2-bold">{editor}</span>
+                                    <span key={idx} className="text-text-gray1 sub2-bold">{editor}</span>
                                 ) : (
-                                    <div>
+                                    <div key={idx + `${editor}`}>
                                         <span className="text-text-gray1 sub2-bold">{editor}</span>
                                         <span className="text-text-gray1 sub2-bold"> · </span>
                                     </div>

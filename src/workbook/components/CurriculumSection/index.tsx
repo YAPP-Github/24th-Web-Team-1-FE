@@ -7,7 +7,7 @@ interface CurriculumSectionProps {
 
 export default function CurriculumSection({ curriculumItems }: CurriculumSectionProps) {
     return (
-        <div className="flex flex-col space-y-[8px] w-full">
+        <div className="flex flex-col space-y-[8px] w-full px-[20px]">
             <span className="body2-regular text-black">커리큘럼</span>
             <div>
                 {
