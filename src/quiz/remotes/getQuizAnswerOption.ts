@@ -4,7 +4,7 @@ import { ApiResponse, axiosRequest } from "@api/api-config";
 
 import { apiRoutes } from "@shared/constants/apiRoutes";
 
-import { QuizAnswer } from "@quiz/types/quizTitle";
+import { QuizAnswer } from "@quiz/types/quizInfo";
 
 export const getQuizAnswer = (): Promise<ApiResponse<QuizAnswer>> => {
   return axiosRequest("get", apiRoutes.quizAnswer);

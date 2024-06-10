@@ -4,7 +4,7 @@ import { describe, expect, it } from "vitest";
 
 import QueryClientProviders from "@shared/components/queryClientProvider";
 
-import { QUIZ_TITLE_INFO } from "@quiz/constants/quizTitle";
+import { QUIZ_TITLE_INFO } from "@quiz/constants/quizInfo";
 import QuizContext from "@quiz/context/quizContext";
 import { getQuizAnswerQueryOptions } from "@quiz/remotes/getQuizAnswerOption";
 import { getQuizInfoQueryOptions } from "@quiz/remotes/getQuizInfoQueryOptions";

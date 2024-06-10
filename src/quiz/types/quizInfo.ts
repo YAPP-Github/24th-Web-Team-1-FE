@@ -1,4 +1,7 @@
-import { QUIZ_ANSWER_TYPE } from "@quiz/constants/quizTitle";
+import {
+  ANSWER_CHOICHE_TYPE,
+  QUIZ_ANSWER_TYPE,
+} from "@quiz/constants/quizInfo";
 
 import { ConstKeyObject } from "@common/types/constKeyObject";
 
@@ -13,5 +16,10 @@ export type QuizAnswer = {
 
 export type QuizInfo = {
   question: string;
-  answer: string[];
+  answers: string[];
 };
+
+export type AnswerChoiceButtonInfo = ConstKeyObject<
+  (typeof ANSWER_CHOICHE_TYPE)[number],
+  React.HTMLAttributes<HTMLButtonElement>
+>;
