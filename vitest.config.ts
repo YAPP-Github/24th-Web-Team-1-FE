@@ -3,9 +3,10 @@ import { defineConfig } from "vitest/config";
 import react from "@vitejs/plugin-react";
 import { resolve as pathResolve } from "node:path";
 const resolve = (path: string) => pathResolve(__dirname, path);
+import svgr from 'vite-plugin-svgr';
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), svgr()],
   test: {
     globals: true,
     environment: "jsdom",
@@ -24,6 +25,7 @@ export default defineConfig({
       "@main": resolve("src/main"),
       "@mocks": resolve("src/mocks"),
       "@common": resolve("src/common"),
+      'public': resolve("public")
     },
   },
 });

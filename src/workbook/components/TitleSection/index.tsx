@@ -1,9 +1,10 @@
-import ShareIcon  from "public/assets/icon36/share_36.svg"
+import { Writer } from "@workbook/types"
+import ShareIcon from 'public/assets/icon36/share_36.svg';
 
 interface TitleSectionProps {
     category: string
     title: string
-    editors: string[]
+    editors: Writer[]
 }
 
 
@@ -28,10 +29,10 @@ export default function TitleSection ({ category, title, editors }: TitleSection
                         editors.map((editor, idx) => {
                             return (
                                 (idx === editors.length - 1) ? (
-                                    <span key={idx} className="text-text-gray1 sub2-bold">{editor}</span>
+                                    <span key={idx} className="text-text-gray1 sub2-bold">{editor.name}</span>
                                 ) : (
                                     <div key={idx + `${editor}`}>
-                                        <span className="text-text-gray1 sub2-bold">{editor}</span>
+                                        <span className="text-text-gray1 sub2-bold">{editor.name}</span>
                                         <span className="text-text-gray1 sub2-bold"> · </span>
                                     </div>
                                 )
