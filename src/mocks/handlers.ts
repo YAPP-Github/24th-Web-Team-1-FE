@@ -22,8 +22,8 @@ export const problemsHandler = http.get(apiRoutes.problems, ({ request }) => {
   return HttpResponse.json(response[apiRoutes.problems]);
 });
 
-export const workbookHandler = http.get(apiRoutes.workbook, ({ request }) => {
-  const workbookId = getWorkbookId(request.url);
+export const workbookHandler = http.get(apiRoutes.workbook, ({ request, params }) => {
+  const workbookId = params
 
   if (!workbookId) {
     return new HttpResponse(null, { status: 404 });
