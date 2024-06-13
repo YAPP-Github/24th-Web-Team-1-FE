@@ -15,14 +15,15 @@ import { getWorkbookQueryOptions } from "@workbook/remotes/getWorkbookQueryOptio
 import { getWorkbookId } from "@workbook/utils";
 
 import SubscribeBottomBar from "@main/components/SubscribeBottomBar";
-import { SUBSCRIBE_TITLES } from "@main/constants/main";
+// import { SUBSCRIBE_TITLES } from "@main/constants/main";
 
-const SUBSCRIBE_POPUP_TITLE = (
-  <div className="h3-bold text-lg text-black">
-    <div>{SUBSCRIBE_TITLES.SUBSCRIBE_TITLE_1}</div>
-    <div>{SUBSCRIBE_TITLES.SUBSCRIBE_TITLE_2}</div>
-  </div>
-);
+/** 팝업 들어오면 주석 풀 예정 */
+// const SUBSCRIBE_POPUP_TITLE = (
+//   <div className="h3-bold text-lg text-black">
+//     <div>{SUBSCRIBE_TITLES.SUBSCRIBE_TITLE_1}</div>
+//     <div>{SUBSCRIBE_TITLES.SUBSCRIBE_TITLE_2}</div>
+//   </div>
+// );
 
 export default function WorkbookPage() {
   /** 팝업 추가 시 다시 살릴 변수들 */
@@ -40,7 +41,6 @@ export default function WorkbookPage() {
     ...getWorkbookQueryOptions(Number(workbookId)),
   });
 
-  console.log(workbookInfo);
   const { toast } = useToast();
 
   useEffect(function detectClient() {
