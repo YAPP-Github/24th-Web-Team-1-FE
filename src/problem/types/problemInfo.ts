@@ -9,17 +9,10 @@ export type ProblemTitleInfo = ConstKeyObject<
   React.HTMLAttributes<HTMLHeadElement>
 >;
 
-export type ProblemAnswer = {
-  answer: string;
-};
 export type PromblemInfo = {
   id: number;
   title: string;
   contents: AnswerChoiceInfo[];
-};
-export type ProblemsInfo = {
-  day: string;
-  problems: PromblemInfo[];
 };
 export type AnswerChoiceInfo = {
   number: number;
@@ -30,3 +23,9 @@ export type AnswerChoiceButtonInfo = ConstKeyObject<
   (typeof ANSWER_CHOICHE_TYPE)[number],
   React.HTMLAttributes<HTMLButtonElement>
 >;
+
+export type AnswerCheckInfo = {
+  explanation: string;
+  isSolved: boolean;
+  answer: string;
+};
