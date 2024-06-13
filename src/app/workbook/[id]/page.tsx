@@ -37,7 +37,11 @@ export default function WorkbookPage() {
   const pathname = usePathname();
   const workbookId = getWorkbookId(pathname);
 
-  const { data: workbookInfo, isLoading, isError } = useQuery({
+  const {
+    data: workbookInfo,
+    isLoading,
+    isError,
+  } = useQuery({
     ...getWorkbookQueryOptions(Number(workbookId)),
   });
 
@@ -52,17 +56,19 @@ export default function WorkbookPage() {
 
   return (
     <main className="flex h-[100vh] w-full flex-col items-center overflow-x-hidden">
-      <div className="flex h-full w-full max-w-screen-sm flex-col space-y-[24px] overflow-y-scroll">
+      <article className="flex h-full w-full max-w-screen-sm flex-col space-y-[24px] overflow-y-scroll">
         {workbookInfo && (
           <>
-            <Image
-              src={workbookInfo.mainImageUrl}
-              alt={"Workbook landing image"}
-              width={0}
-              height={0}
-              sizes="100vw"
-              style={{ width: "100%", height: "auto" }}
-            />
+            <figure>
+              <Image
+                src={workbookInfo.mainImageUrl}
+                alt={"Workbook landing image"}
+                width={0}
+                height={0}
+                sizes="100vw"
+                style={{ width: "100%", height: "auto" }}
+              />
+            </figure>
             <TitleSection
               category={workbookInfo.category}
               title={workbookInfo.title}
@@ -72,7 +78,7 @@ export default function WorkbookPage() {
             <CurriculumSection curriculumItems={workbookInfo.articles} />
           </>
         )}
-      </div>
+      </article>
       <SubscribeBottomBar />
     </main>
   );
