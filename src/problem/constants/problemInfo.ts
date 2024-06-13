@@ -32,7 +32,7 @@ export const ANSWER_CHOICHE_TYPE = [
 ] as const;
 export const ANSWER_CHOICHE_BUTTON_INFO: AnswerChoiceButtonInfo = {
   INIT_CHOICE_ANSWER: {
-    className: "bg-transparent text-black",
+    className: "bg-transparent text-black hover:bg-transparent",
   },
   CURRENT_CHOICE_ANSWER: {
     className: "text-white bg-main hover:bg-main",
