@@ -6,7 +6,7 @@ import ProblemTitle from "@problem/components/ProblemTitle";
 import TagList from "@problem/components/TagList";
 import { ProblemProvider } from "@problem/context/problemContext";
 
-export default function QuizPage() {
+export default function ProblemPage() {
   return (
     <ProblemProvider>
       <>
