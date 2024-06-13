@@ -6,7 +6,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { EMAIL_CONTROL, SUBSCRIBE_ANNOUCE, SUBSCRIBE_TITLES,SUBSCRIBE_USER_ACTIONS } from '@main/constants/main';
 
 import SubscribeBottomBar from '.';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 
 // Mock the useSubscribeForm hook
 const mockOnSubmit = vi.fn();
@@ -85,7 +85,9 @@ describe('구독 유도 바텀 바 테스트', () => {
     fireEvent.change(input, { target: { value: 'invalid-email' } });
     fireEvent.click(submitButton);
 
-    expect(screen.queryByText(EMAIL_CONTROL.INVALID_EMAIL)).toBeDefined() // 값이 정의되어 있는 경우?
+    await waitFor(() => {
+      expect(screen.queryByText(EMAIL_CONTROL.INVALID_EMAIL)).toBeDefined() // 값이 정의되어 있는 경우?
+    })
   });
 
   it('유효한 이메일을 입력했을 때 toast 메시지를 표시', async () => {
@@ -98,6 +100,8 @@ describe('구독 유도 바텀 바 테스트', () => {
     fireEvent.change(input, { target: { value: 'test@example.com' } });
     fireEvent.click(submitButton);
 
-    expect(screen.queryByText(SUBSCRIBE_USER_ACTIONS.SUBSCRIBE_SUCCESS)).toBeDefined()
+    await waitFor(() => {
+      expect(screen.queryByText(SUBSCRIBE_USER_ACTIONS.SUBSCRIBE_SUCCESS)).toBeDefined()
+    })
   });
 });
