@@ -36,7 +36,7 @@ export default function WorkbookPage() {
   const pathname = usePathname();
   const workbookId = getWorkbookId(pathname);
 
-  const { data: workbookInfo, isError } = useQuery({
+  const { data: workbookInfo, isLoading, isError } = useQuery({
     ...getWorkbookQueryOptions(Number(workbookId)),
   });
 
@@ -46,6 +46,9 @@ export default function WorkbookPage() {
   useEffect(function detectClient() {
     setIsClient(true);
   }, []);
+
+  if (isLoading) return <div>Loading...</div>;
+  if (isError) return <div>Error loading workbook</div>;
 
   return (
     <main className="flex h-[100vh] w-full flex-col items-center overflow-x-hidden">

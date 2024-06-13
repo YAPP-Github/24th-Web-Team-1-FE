@@ -1,4 +1,4 @@
-import { UseQueryOptions } from "@tanstack/react-query";
+import { UseQueryOptions, useQuery } from "@tanstack/react-query";
 
 import { ApiResponse, axiosRequest } from "@api/api-config";
 
@@ -27,3 +27,15 @@ export const getWorkbookQueryOptions = (
     select: (data) => data.data,
   };
 };
+
+export const useWorkbook = (workbookId: number) => {
+  return useQuery({
+    queryKey: ['workbook', workbookId],
+    queryFn: async () => {
+      console.log('Fetching workbook data...');
+      const response = await axiosRequest<ApiResponse<WorkbookInfo>>("get", apiRoutes.workbook.replace(':workbookId', workbookId.toString()));
+      console.log('Fetched data:', response.data);
+      return response.data;
+    },
+  });
+};;

@@ -6,7 +6,17 @@ const resolve = (path: string) => pathResolve(__dirname, path);
 import svgr from 'vite-plugin-svgr';
 
 export default defineConfig({
-  plugins: [react(), svgr()],
+  plugins: [
+    react(),
+    svgr({
+      svgrOptions: {
+        ref: true,
+        svgo: false,
+        titleProp: true,
+      },
+      include: "**/*.svg",
+    }),
+  ],
   test: {
     globals: true,
     environment: "jsdom",
