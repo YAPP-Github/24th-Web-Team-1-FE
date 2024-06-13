@@ -1,30 +1,26 @@
 {
   "message": "String",
   "data": {
-    "problems": [
+    "id": 1,
+    "title": "ETF(상장지수펀드)의 특징이 아닌것은?",
+    "contents": [
       {
-        "id": 1,
-        "title": "ETF(상장지수펀드)의 특징이 아닌것은?",
-        "contents": [
-          {
-            "number": 1,
-            "content": "분산투자"
-          },
-          {
-            "number": 2,
-            "content": "높은 운용 비용"
-          },
-          {
-            "number": 3,
-            "content": "유동성"
-          },
-          {
-            "number": 4,
-            "content": "투명성"
-          }
-        ],
-        "creatorId": 1
+        "number": 1,
+        "content": "분산투자"
+      },
+      {
+        "number": 2,
+        "content": "높은 운용 비용"
+      },
+      {
+        "number": 3,
+        "content": "유동성"
+      },
+      {
+        "number": 4,
+        "content": "투명성"
       }
-    ]
+    ],
+    "creatorId": 1
   }
 }
