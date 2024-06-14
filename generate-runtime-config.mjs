@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 
 // 환경 변수를 읽어들임
-const runtime = process.env.NODE_ENV === 'production' ? 'edge' : 'node';
+const runtime = process.env.NODE_ENV === 'production' ? 'edge' : 'nodejs';
 
 const configContent = `export const runtime = '${runtime}';\n`;
 
