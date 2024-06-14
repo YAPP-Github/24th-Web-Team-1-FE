@@ -1,7 +1,7 @@
 import React from "react";
 
 import AnswerChoiceList from "@problem/components/AnswerChoiceList";
-import AnswerContextButton from "@problem/components/AnswerContextButton";
+import AnswerSubmitButton from "@problem/components/AnswerSubmitButton";
 import ProblemTitle from "@problem/components/ProblemTitle";
 import TagList from "@problem/components/TagList";
 import { ProblemProvider } from "@problem/context/problemContext";
@@ -15,7 +15,7 @@ export default function ProblemPage() {
           <ProblemTitle />
           <AnswerChoiceList />
         </div>
-        <AnswerContextButton />
+        <AnswerSubmitButton />
       </>
     </ProblemProvider>
   );
