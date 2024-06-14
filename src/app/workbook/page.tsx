@@ -1,9 +1,7 @@
-import React from "react";
+"use client"
 
-export default function WorkBookPage() {
+export default function WorkbookBasicPage() {
   return (
-    <div>
-      <p>WorkBookPage</p>
-    </div>
+    <></>
   );
 }
