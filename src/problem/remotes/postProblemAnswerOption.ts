@@ -3,12 +3,12 @@ import { UseMutationOptions } from "@tanstack/react-query";
 import { ApiResponse, axiosRequest } from "@api/api-config";
 
 import { PROBLEM_API_ROUTES } from "./api";
-import { ProblemAnswer } from "@problem/types/problemInfo";
+import { AnswerCheckInfo } from "@problem/types/problemInfo";
 
 export const postProblemAnswer = (
   params: ProblemAnswerParams,
   body: ProblemAnswerBody,
-): Promise<ApiResponse<ProblemAnswer>> => {
+): Promise<ApiResponse<AnswerCheckInfo>> => {
   return axiosRequest(
     "post",
     PROBLEM_API_ROUTES.submitAnswer(params.problemId),
@@ -17,9 +17,13 @@ export const postProblemAnswer = (
 };
 export const postProblemAnswerMutationOptions = (
   params: ProblemAnswerParams,
-): UseMutationOptions<ApiResponse<ProblemAnswer>, Error, ProblemAnswerBody> => {
+): UseMutationOptions<
+  ApiResponse<AnswerCheckInfo>,
+  Error,
+  ProblemAnswerBody
+> => {
   return {
-    mutationKey: ["get-answer"],
+    mutationKey: ["get-problem-answer", params.problemId],
     mutationFn: (body) => postProblemAnswer(params, body),
   };
 };
@@ -29,5 +33,5 @@ type ProblemAnswerParams = {
 };
 
 type ProblemAnswerBody = {
-  choiceAns: number;
+  choiceAns: string;
 };
