@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 import { ClassAttributes, ImgHTMLAttributes, JSX, ReactNode } from 'react';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
