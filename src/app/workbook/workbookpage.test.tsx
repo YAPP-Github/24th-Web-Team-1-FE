@@ -1,13 +1,13 @@
-import { render, screen, waitFor, renderHook } from '@testing-library/react';
-import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
-import { HttpResponse, http } from 'msw';
-import { apiRoutes } from '@shared/constants/apiRoutes';
-import { expect, vi, describe, it, beforeAll, afterEach, afterAll, beforeEach } from 'vitest';
-import { server } from '@mocks/server';
+import { ClassAttributes, ImgHTMLAttributes, JSX, ReactNode } from 'react';
+
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+import {describe, expect, it, vi } from 'vitest';
+
+import { useWorkbook } from '@workbook/remotes/getWorkbookQueryOptions';
+
 import WorkbookPage from './[id]/page';
-import { JSX, ClassAttributes, ImgHTMLAttributes, ReactNode } from 'react';
-import response from '@mocks/response';
-import { getWorkbookQueryOptions, useWorkbook } from '@workbook/remotes/getWorkbookQueryOptions';
+import { render, renderHook,screen, waitFor } from '@testing-library/react';
 
 export const createQueryProviderWrapper = () => {
   const queryClient = new QueryClient();

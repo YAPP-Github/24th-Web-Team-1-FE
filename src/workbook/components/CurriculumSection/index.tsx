@@ -1,4 +1,5 @@
 import { ICurriculumItem } from "@workbook/types";
+
 import CurriculumItem from "../CurriculumItem";
 
 interface CurriculumSectionProps {

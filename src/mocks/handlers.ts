@@ -2,8 +2,6 @@ import { http, HttpResponse } from "msw";
 
 import { apiRoutes } from "@shared/constants/apiRoutes";
 
-import { getWorkbookId } from "@workbook/utils";
-
 import response from "./response";
 
 export const quizHandler = http.get(apiRoutes.quiz, () =>
