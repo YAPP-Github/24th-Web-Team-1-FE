@@ -12,6 +12,7 @@ export type ProblemTitleInfo = ConstKeyObject<
 export type PromblemInfo = {
   id: number;
   title: string;
+  day: string;
   contents: AnswerChoiceInfo[];
 };
 export type AnswerChoiceInfo = {
