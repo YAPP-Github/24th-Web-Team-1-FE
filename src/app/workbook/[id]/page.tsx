@@ -1,5 +1,4 @@
 "use client";
-export const runtime = 'edge';
 
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -13,6 +12,7 @@ import { useToast } from "@shared/components/ui/use-toast";
 import CurriculumSection from "@workbook/components/CurriculumSection";
 import OverviewSection from "@workbook/components/OverviewSection";
 import TitleSection from "@workbook/components/TitleSection";
+import WorkbookSkeleton from "@workbook/components/WorkbookSkeleton";
 import { getWorkbookQueryOptions } from "@workbook/remotes/getWorkbookQueryOptions";
 import { getWorkbookId } from "@workbook/utils";
 
@@ -53,7 +53,7 @@ export default function WorkbookPage() {
     setIsClient(true);
   }, []);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <WorkbookSkeleton />;
   if (isError) return <div>Error loading workbook</div>;
 
   return (
@@ -68,7 +68,7 @@ export default function WorkbookPage() {
                 width={0}
                 height={0}
                 sizes="100vw"
-                style={{ width: "100%", height: "auto" }}
+                style={{ width: "100%", height: "338px" }}
               />
             </figure>
             <TitleSection
