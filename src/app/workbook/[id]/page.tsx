@@ -1,10 +1,5 @@
 "use client";
 
-import { runtime } from '../../../config/runtime';
-
-// 정적 분석 가능하게 export
-export { runtime };
-
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 

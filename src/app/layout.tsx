@@ -14,6 +14,8 @@ export const metadata: Metadata = {
   description: "매일 아침마다 경제 아티클과 문제를 보내드려요!",
 };
 
+export const runtime = 'edge';
+
 const pretendard = localFont({
   src: [
     {
