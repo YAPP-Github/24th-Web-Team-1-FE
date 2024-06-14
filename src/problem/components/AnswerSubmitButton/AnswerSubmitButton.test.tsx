@@ -1,0 +1,100 @@
+import { describe, expect, it, vi } from "vitest";
+
+import QueryClientProviders from "@shared/components/queryClientProvider";
+
+import AnswerSubmitButton from ".";
+import { BUTTON_INFO } from "@problem/constants/answerButtonInfo";
+import ProblemContext, {
+  defaultActions,
+  defaultStates,
+} from "@problem/context/problemContext";
+import { ProblemContextInfo } from "@problem/types/problemContextInfo";
+import { render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+
+vi.mock("next/navigation", () => {
+  return {
+    __esModule: true,
+    useRouter: () => ({
+      push: vi.fn(),
+      replace: vi.fn(),
+      prefetch: vi.fn(),
+    }),
+    useParams: () => ({
+      get: () => {},
+      query: {
+        problemId: "1",
+      },
+    }),
+  };
+});
+
+const renderWithContext = (contextValue: ProblemContextInfo) => {
+  return render(
+    <QueryClientProviders>
+      <ProblemContext.Provider value={contextValue}>
+        <AnswerSubmitButton />
+      </ProblemContext.Provider>
+    </QueryClientProviders>,
+  );
+};
+describe("퀴즈 푸는 하단 버튼, 정답 선택에 따른 테스트", () => {
+  it("정답 선택 전 상태", () => {
+    renderWithContext({
+      ...defaultStates,
+      ...defaultActions,
+    });
+    if (BUTTON_INFO.PRE_ANSWER_SELECT.title)
+      expect(
+        screen.getByText(BUTTON_INFO.PRE_ANSWER_SELECT.title),
+      ).toBeInTheDocument();
+
+    if (BUTTON_INFO.PRE_ANSWER_SELECT.className)
+      expect(screen.getByRole("button")).toHaveClass(
+        BUTTON_INFO.PRE_ANSWER_SELECT.className,
+      );
+  });
+  it("정답 선택 후 제출 전 상태", async () => {
+    renderWithContext({
+      states: {
+        ...defaultStates.states,
+        choiceAnswer: "높은 운용 비용",
+      },
+      ...defaultActions,
+    });
+
+    if (BUTTON_INFO.POST_ANSWER_PRE_SUBMIT.title)
+      expect(
+        screen.getByText(BUTTON_INFO.POST_ANSWER_PRE_SUBMIT.title),
+      ).toBeInTheDocument();
+
+    if (BUTTON_INFO.POST_ANSWER_PRE_SUBMIT.className)
+      expect(screen.getByRole("button")).toHaveClass(
+        BUTTON_INFO.POST_ANSWER_PRE_SUBMIT.className,
+      );
+  });
+
+  it("정답 선택 후 제출 완료 상태", async () => {
+    renderWithContext({
+      states: {
+        ...defaultStates.states,
+        choiceAnswer: "높은 운용 비용",
+      },
+      ...defaultActions,
+    });
+    const button = screen.getByRole("button");
+    await userEvent.click(button);
+
+    await waitFor(() => {
+      if (BUTTON_INFO.POST_SUBMIT.title)
+        expect(
+          screen.getByText(BUTTON_INFO.POST_SUBMIT.title),
+        ).toBeInTheDocument();
+
+      if (BUTTON_INFO.POST_SUBMIT.className)
+        expect(screen.getByRole("button")).toHaveClass(
+          BUTTON_INFO.POST_SUBMIT.className,
+        );
+    });
+  });
+});
