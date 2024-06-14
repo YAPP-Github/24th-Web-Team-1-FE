@@ -1,10 +1,10 @@
 export type ProblemContextInfo = {
   states: {
+    choiceAnswer: string | null;
     answer: string | null;
-    isSubmit: boolean;
   };
   actions: {
+    updateChoiceAnswer: (choiceAnswer: string) => void;
     updateAnswer: (answer: string) => void;
-    updateSubmit: (isSubmit: boolean) => void;
   };
 };

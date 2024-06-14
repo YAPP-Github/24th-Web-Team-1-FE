@@ -4,23 +4,33 @@ import { createContext, useState } from "react";
 
 import { ProblemContextInfo } from "@problem/types/problemContextInfo";
 
-const ProblemContext = createContext<ProblemContextInfo>({
-  states: { answer: "", isSubmit: false },
-  actions: {
-    updateAnswer: () => {},
-    updateSubmit: () => {},
+const defaultStates = {
+  states: {
+    choiceAnswer: null,
+    answer: null,
   },
+};
+const defaultActions = {
+  actions: {
+    updateChoiceAnswer: () => {},
+    updateAnswer: () => {},
+  },
+};
+const ProblemContext = createContext<ProblemContextInfo>({
+  ...defaultStates,
+  ...defaultActions,
 });
 
 function ProblemProvider({ children }: { children: React.ReactElement }) {
-  const [answer, setAnswer] = useState("");
-  const [isSubmit, setIsSubmit] = useState(false);
+  const [choiceAnswer, setChoiceAnswer] = useState<string | null>(null);
+  const [answer, setAnswer] = useState<string | null>(null);
 
   const value = {
-    states: { answer, isSubmit },
+    states: { choiceAnswer, answer },
     actions: {
+      updateChoiceAnswer: (choiceAnswer: string) =>
+        setChoiceAnswer(choiceAnswer),
       updateAnswer: (answer: string) => setAnswer(answer),
-      updateSubmit: (isSubmit: boolean) => setIsSubmit(isSubmit),
     },
   };
   return (
@@ -29,5 +39,5 @@ function ProblemProvider({ children }: { children: React.ReactElement }) {
 }
 
 const ProblemConsumer = ProblemContext.Consumer;
-export { ProblemConsumer, ProblemProvider };
+export { defaultActions, defaultStates, ProblemConsumer, ProblemProvider };
 export default ProblemContext;
