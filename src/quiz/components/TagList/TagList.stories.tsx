@@ -1,5 +1,5 @@
 import TagList from ".";
-import { tagsHandler } from "@mocks/worker";
+import { tagsHandler } from "@mocks/handlers";
 import { Meta, StoryObj } from "@storybook/react";
 
 const meta = {
