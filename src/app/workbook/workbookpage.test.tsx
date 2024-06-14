@@ -10,7 +10,7 @@ import { useWorkbook } from '@workbook/remotes/getWorkbookQueryOptions';
 import WorkbookPage from './[id]/page';
 import { render, renderHook,screen, waitFor } from '@testing-library/react';
 
-export const createQueryProviderWrapper = () => {
+export function createQueryProviderWrapper () {
   const queryClient = new QueryClient();
   return ({ children }: { children: ReactNode }) => (
     <QueryClientProvider client={queryClient}>
