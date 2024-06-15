@@ -1,9 +1,9 @@
-import { ICurriculumItem } from "@workbook/types";
+import { CurriculumInfo } from "@workbook/types";
 
 import CurriculumItem from "../CurriculumItem";
 
 interface CurriculumSectionProps {
-  curriculumItems: ICurriculumItem[];
+  curriculumItems: CurriculumInfo[];
 }
 
 export default function CurriculumSection({
