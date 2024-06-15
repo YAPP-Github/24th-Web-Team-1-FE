@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { describe, expect, it, vi } from "vitest";
 
 import QueryClientProviders from "@shared/components/queryClientProvider";
+import { createQueryProviderWrapper } from "@shared/constants/createQueryProvider";
 
 import AnswerChoiceList from ".";
 import { getProblemQueryOptions } from "@problem/remotes/getProblemQueryOptions";
@@ -24,9 +25,7 @@ vi.mock("next/navigation", () => {
     }),
   };
 });
-const wrapper = ({ children }: React.PropsWithChildren) => {
-  return <QueryClientProviders>{children}</QueryClientProviders>;
-};
+
 const renderWithQueryClient = () => {
   return render(
     <QueryClientProviders>
@@ -43,7 +42,7 @@ describe("선택지 불러오고, 버튼 클릭으로 버튼 ui 변경", () => {
         useQuery({
           ...getProblemQueryOptions({ problemId: 1 }),
         }),
-      { wrapper },
+      { wrapper: createQueryProviderWrapper() },
     );
     await waitFor(() => result.current.isSuccess);
 
