@@ -2,13 +2,13 @@ import { UseQueryOptions } from "@tanstack/react-query";
 
 import { ApiResponse, axiosRequest } from "@api/api-config";
 
-import { PROBLEM_API_ROUTES } from "./api";
+import { API_ROUTE, QUERY_KEY } from "./api";
 import { PromblemInfo } from "@problem/types/problemInfo";
 
 export const getProblemInfo = ({
   problemId,
 }: ProblemInfoParams): Promise<ApiResponse<PromblemInfo>> => {
-  return axiosRequest("get", PROBLEM_API_ROUTES.problems(problemId));
+  return axiosRequest("get", API_ROUTE.PROBLEM(problemId));
 };
 export const getProblemQueryOptions = ({
   problemId,
@@ -18,7 +18,7 @@ export const getProblemQueryOptions = ({
   PromblemInfo
 > => {
   return {
-    queryKey: ["get-Problems-info"],
+    queryKey: [QUERY_KEY.GET_PROBLEM, problemId],
     queryFn: () => getProblemInfo({ problemId }),
     select: (data) => data.data,
   };
