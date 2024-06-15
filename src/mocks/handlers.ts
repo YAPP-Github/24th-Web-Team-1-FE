@@ -1,8 +1,7 @@
 import { http, HttpResponse } from "msw";
 
 import { apiRoutes } from "@shared/constants/apiRoutes";
-
-import { getWorkbookId } from "@workbook/utils";
+import { _3_SECOND, delay } from "@shared/utils/delay";
 
 import response from "./response";
 
@@ -31,19 +30,24 @@ export const submitAnswerHandler = http.post(
     return HttpResponse.json(response[apiRoutes.submitAnswer]);
   },
 );
-export const workbookHandler = http.get(apiRoutes.workbook, ({ request, params }) => {
+export const workbookHandler = http.get(apiRoutes.workbook, async ({ request, params }) => {
   const workbookId = params
 
-  if (!workbookId) {
-    return new HttpResponse(null, { status: 404 });
-  }
+    if (!workbookId) {
+      return new HttpResponse(null, { status: 404 });
+    }
 
-  console.log(
-    HttpResponse.json(response[apiRoutes.workbook]),
-    apiRoutes.workbook,
-  );
-  return HttpResponse.json(response[apiRoutes.workbook]);
-});
+    console.log(
+      HttpResponse.json(response[apiRoutes.workbook]),
+      apiRoutes.workbook,
+    );
+
+    // 딜레이 적용
+    await delay(_3_SECOND);
+
+    return HttpResponse.json(response[apiRoutes.workbook]);
+  },
+);
 
 export const handlers = [
   tagsHandler,

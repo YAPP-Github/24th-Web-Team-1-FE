@@ -10,11 +10,14 @@ import { cn } from "@shared/utils/cn";
 
 import "./globals.css";
 import MSWProviders from "@mocks/MSWProviders";
+import { Toaster } from "@shared/components/ui/toaster";
 
 export const metadata: Metadata = {
   title: "FEW",
   description: "매일 아침마다 경제 아티클과 문제를 보내드려요!",
 };
+
+// export const runtime = 'edge'; // TBD: 개발환경과 분리
 
 const pretendard = localFont({
   src: [
@@ -64,6 +67,7 @@ export default function RootLayout({
         >
           <MSWProviders>
             <Suspense>{children}</Suspense>
+            <Toaster />
           </MSWProviders>
 
           <ReactQueryDevtools />
