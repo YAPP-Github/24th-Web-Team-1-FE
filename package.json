@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev:local": "dotenv -e .env.local -- next dev",
-    "dev:development": "dotenv -e .env.development -- next dev",
-    "dev:production": "dotenv -e .env.production -- next dev",
+    "dev:local": "dotenv -e environments/.env.local -- next dev",
+    "dev:development": "dotenv -e environments/.env.development -- next dev",
+    "dev:production": "dotenv -e environments/.env.production -- next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
