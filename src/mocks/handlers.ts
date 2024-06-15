@@ -5,26 +5,33 @@ import { _3_SECOND, delay } from "@shared/utils/delay";
 
 import response from "./response";
 
-export const quizHandler = http.get(apiRoutes.quiz, () =>
-  HttpResponse.json(response[apiRoutes.quiz]),
-);
 export const tagsHandler = http.get(apiRoutes.tags, () =>
   HttpResponse.json(response[apiRoutes.tags]),
 );
 
-export const problemsHandler = http.get(apiRoutes.problems, ({ request }) => {
-  const url = new URL(request.url);
-  const articleId = url.searchParams.get("articleId");
+export const problemsHandler = http.get(apiRoutes.problems, ({ params }) => {
+  const articleId = params?.articleId;
   if (!articleId) {
     return new HttpResponse(null, { status: 404 });
   }
   return HttpResponse.json(response[apiRoutes.problems]);
 });
 
-export const workbookHandler = http.get(
-  apiRoutes.workbook,
+export const submitAnswerHandler = http.post(
+  apiRoutes.submitAnswer,
   async ({ request, params }) => {
-    const workbookId = params;
+    const problemId = params?.problemId;
+    const result: any = await request.json();
+    const choiceAns = result?.choiceAns;
+
+    if (!choiceAns && problemId) {
+      return new HttpResponse(null, { status: 404 });
+    }
+    return HttpResponse.json(response[apiRoutes.submitAnswer]);
+  },
+);
+export const workbookHandler = http.get(apiRoutes.workbook, async ({ request, params }) => {
+  const workbookId = params
 
     if (!workbookId) {
       return new HttpResponse(null, { status: 404 });
@@ -43,8 +50,8 @@ export const workbookHandler = http.get(
 );
 
 export const handlers = [
-  quizHandler,
   tagsHandler,
   problemsHandler,
+  submitAnswerHandler,
   workbookHandler,
 ];

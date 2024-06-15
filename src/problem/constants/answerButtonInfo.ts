@@ -1,4 +1,4 @@
-import { ButtonInfo } from "@quiz/types/answerButtonInfo";
+import { ButtonInfo } from "@problem/types/answerButtonInfo";
 
 export const BUTTON_STATE = [
   "PRE_ANSWER_SELECT",

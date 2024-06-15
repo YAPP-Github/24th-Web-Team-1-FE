@@ -4,7 +4,7 @@ import { ApiResponse, axiosRequest } from "@api/api-config";
 
 import { apiRoutes } from "@shared/constants/apiRoutes";
 
-import { TagInfo } from "@quiz/types/tagInfo";
+import { TagInfo } from "@problem/types/tagInfo";
 
 const getTags = (): Promise<ApiResponse<TagInfo>> => {
   return axiosRequest("get", apiRoutes.tags);

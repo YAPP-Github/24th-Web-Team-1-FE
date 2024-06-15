@@ -3,6 +3,8 @@ import localFont from "next/font/local";
 
 import { Suspense } from "react";
 
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+
 import QueryClientProviders from "@shared/components/queryClientProvider";
 import { cn } from "@shared/utils/cn";
 
@@ -67,6 +69,8 @@ export default function RootLayout({
             <Suspense>{children}</Suspense>
             <Toaster />
           </MSWProviders>
+
+          <ReactQueryDevtools />
         </body>
       </html>
     </QueryClientProviders>
