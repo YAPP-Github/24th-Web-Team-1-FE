@@ -6,10 +6,11 @@ import { ApiResponse } from "@api/api-config";
 import queryClient from "@api/query-client";
 
 import Tag from "@common/components/Tag";
+import { QUERY_KEY } from "@problem/remotes/api";
 import { PromblemInfo } from "@problem/types/problemInfo";
 
 export default function TagList() {
-  const problemInfoData = queryClient.getQueryData(["get-Problems-info"]) as
+  const problemInfoData = queryClient.getQueryData([QUERY_KEY.GET_PROBLEM]) as
     | ApiResponse<PromblemInfo>
     | undefined;
 

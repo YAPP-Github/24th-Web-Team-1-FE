@@ -7,6 +7,7 @@ import React from "react";
 import { useMutationState, useQuery } from "@tanstack/react-query";
 
 import { PROBLEM_TITLE_INFO } from "@problem/constants/problemInfo";
+import { QUERY_KEY } from "@problem/remotes/api";
 import { getProblemQueryOptions } from "@problem/remotes/getProblemQueryOptions";
 import { AnswerCheckInfo } from "@problem/types/problemInfo";
 
@@ -18,7 +19,7 @@ export default function ProblemTitle() {
   });
   const problemAnswerInfo = useMutationState({
     filters: {
-      mutationKey: ["get-problem-answer", problemIdNumber],
+      mutationKey: [QUERY_KEY.POST_PROBLEM_ANSWER, problemIdNumber],
     },
     select: (mutation) => mutation.state.data as AnswerCheckInfo,
   });

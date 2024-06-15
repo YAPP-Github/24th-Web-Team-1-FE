@@ -1,10 +1,12 @@
 import React from "react";
 
-interface Props {
+interface ChoiceFillCircleSvgProps {
   fill: string;
 }
 
-export default function ChoiceFillCircleSvg({ fill }: Props) {
+export default function ChoiceFillCircleSvg({
+  fill,
+}: ChoiceFillCircleSvgProps) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

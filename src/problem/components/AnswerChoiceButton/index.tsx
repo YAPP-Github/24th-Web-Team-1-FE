@@ -8,6 +8,7 @@ import { cn } from "@shared/utils/cn";
 import ChoiceFillCircleSvg from "../ChoiceFillCircleSvg";
 import { ANSWER_CHOICHE_BUTTON_INFO } from "@problem/constants/problemInfo";
 import ProblemContext from "@problem/context/problemContext";
+import { QUERY_KEY } from "@problem/remotes/api";
 import { AnswerCheckInfo, AnswerChoiceInfo } from "@problem/types/problemInfo";
 
 interface AnswerChoiceButtonProps extends Pick<AnswerChoiceInfo, "content"> {}
@@ -25,7 +26,7 @@ export default function AnswerChoiceButton({
 
   const problemAnswerInfo = useMutationState({
     filters: {
-      mutationKey: ["get-problem-answer"],
+      mutationKey: [QUERY_KEY.POST_PROBLEM_ANSWER],
     },
     select: (mutation) => mutation.state.data as AnswerCheckInfo,
   });
