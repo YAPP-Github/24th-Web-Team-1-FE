@@ -10,7 +10,7 @@ export default function WorkbookSkeleton() {
       <Skeleton className="h-[338px] w-full" />
 
       {/* Content Skeleton */}
-      <div className="mt-[70px] w-full">
+      <div className="mt-[70px] w-full px-[16px]">
         <ContentSkeleton className="h-[30px]" style={{ width: "60%" }} />
         <ContentSkeleton
           className="h-[30px]"
