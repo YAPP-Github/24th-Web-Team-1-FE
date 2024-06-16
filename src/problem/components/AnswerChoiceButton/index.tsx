@@ -67,8 +67,6 @@ export default function AnswerChoiceButton({
     },
     [choiceAnswer, content, problemAnswerInfo],
   );
-
-  if (!problemAnswerInfo) return <div>정답제출 실패</div>;
   const problemAnswerData = problemAnswerInfo[0];
 
   return (
@@ -91,7 +89,7 @@ export default function AnswerChoiceButton({
             problemAnswerData.isSolved === false &&
             choiceAnswer === content &&
             "#B00020") ||
-          "#A5A5A5"
+          ""
         }
       />
     </Button>
