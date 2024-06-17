@@ -2,12 +2,12 @@ import React, { ReactNode } from "react";
 
 import TopBar from "@common/components/TopBar";
 
-interface QuizLayoutProps {
+interface ProblemLayoutProps {
   children: ReactNode;
 }
-export default function QuizLayout({ children }: QuizLayoutProps) {
+export default function ProblemLayout({ children }: ProblemLayoutProps) {
   return (
-    <section className="mx-[20px] mb-[10px] flex h-auto w-full flex-col justify-between">
+    <section className="relative mx-[20px] mb-[10px] flex h-auto w-full flex-col justify-between">
       <TopBar />
       {children}
     </section>
