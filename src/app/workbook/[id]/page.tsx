@@ -47,13 +47,6 @@ export default function WorkbookPage() {
     setIsClient(true);
   }, []);
 
-  useEffect(function removeAttribute() {
-    const intervalId = setInterval(() => {
-      document.body.removeAttribute('data-scroll-locked');
-    }, 100);
-    return () => clearInterval(intervalId);
-  } , []);
-
   if (isLoading) return <WorkbookSkeleton />;
   // if (isError) return <div>Error loading workbook</div>;
 

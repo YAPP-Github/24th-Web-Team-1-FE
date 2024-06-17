@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import {
   Dialog,
@@ -25,6 +25,14 @@ export default function ExternalControlOpenDialog({
   footer,
   description,
 }: ExternalControlOpenDialogProps) {
+
+  useEffect(function removeAttribute() {
+    const intervalId = setInterval(() => {
+      document.body.removeAttribute('data-scroll-locked');
+    }, 100);
+    return () => clearInterval(intervalId);
+  } , []);
+  
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogContent className="z-50 w-full max-w-[380px] rounded">
