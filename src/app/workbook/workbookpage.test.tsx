@@ -13,15 +13,21 @@ import WorkbookPage from "./[id]/page";
 import { render, renderHook, screen, waitFor } from "@testing-library/react";
 
 // TBD: 필요하면 vitest.setup.ts 에 빼놓기
-vi.mock("next/navigation", () => ({
-  useSearchParams: () => ({
-    get: (key: string) => {
-      if (key === "workbookId") return "1";
-      return null;
-    },
-  }),
-  usePathname: () => "/workbooks/1",
-}));
+vi.mock("next/navigation", async () => {
+  const actual =
+    await vi.importActual<typeof import("next/navigation")>("next/navigation");
+
+  return {
+    ...actual,
+    useSearchParams: () => ({
+      get: (key: string) => {
+        if (key === "workbookId") return "1";
+        return null;
+      },
+    }),
+    usePathname: () => "/workbooks/1",
+  };
+});
 
 vi.mock("next/image", () => ({
   __esModule: true,
