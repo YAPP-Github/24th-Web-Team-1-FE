@@ -11,9 +11,8 @@ import { getProblemQueryOptions } from "@problem/remotes/getProblemQueryOptions"
 
 export default function AnswerChoiceList() {
   const { problemId } = useParams<{ problemId: string }>();
-  const problemIdNumber = Number(problemId);
   const { data: problemInfo } = useQuery({
-    ...getProblemQueryOptions({ problemId: problemIdNumber }),
+    ...getProblemQueryOptions({ problemId }),
   });
 
   if (!problemInfo) return <div>error</div>;
