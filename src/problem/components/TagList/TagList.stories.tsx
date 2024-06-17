@@ -1,5 +1,4 @@
 import TagList from ".";
-import { tagsHandler } from "@mocks/handlers";
 import { Meta, StoryObj } from "@storybook/react";
 
 const meta = {
@@ -10,11 +9,5 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const TagComponent = {
-  parameters: {
-    msw: {
-      handlers: {
-        quiz: tagsHandler,
-      },
-    },
-  },
+  parameters: {},
 } satisfies Story;
