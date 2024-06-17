@@ -2,6 +2,8 @@ import { useForm } from 'react-hook-form';
 
 import { describe, expect, it, vi } from 'vitest';
 
+import { EMAIL_CONTROL, SUBSCRIBE_ANNOUCE, SUBSCRIBE_USER_ACTIONS } from '@main/constants/main';
+
 import SubscribeForm from '.';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -21,24 +23,24 @@ describe('SubscribeForm 컴포넌트 동작 테스트', () => {
   it('폼과 필드들을 올바르게 렌더링 한다.', () => {
     render(<SubscribeForm setIsOpen={mockSetIsOpen} />);
 
-    expect(screen.getByPlaceholderText('이메일을 입력해주세요')).toBeInTheDocument();
-    expect(screen.getByText('개인정보 수집')).toBeInTheDocument();
-    expect(screen.getByText('광고성 정보 수신')).toBeInTheDocument();
-    expect(screen.getByText('좀 더 둘러볼래요')).toBeInTheDocument();
-    expect(screen.getByText('구독할게요')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText(EMAIL_CONTROL.EMAIL_PLACEHOLDER)).toBeInTheDocument();
+    expect(screen.getByText(SUBSCRIBE_ANNOUCE.PRIVACY_COLLECTION_NOTICE)).toBeInTheDocument();
+    expect(screen.getByText(SUBSCRIBE_ANNOUCE.PROMOTIONAL_CONSENT_NOTICE)).toBeInTheDocument();
+    expect(screen.getByText(SUBSCRIBE_USER_ACTIONS.SUBSCRIBE_REJECT)).toBeInTheDocument();
+    expect(screen.getByText(SUBSCRIBE_USER_ACTIONS.SUBSCRIBE_ACCEPT)).toBeInTheDocument();
   });
 
   it('올바르지 않은 이메일 형식을 검사한다.', async () => {
     render(<SubscribeForm setIsOpen={mockSetIsOpen} />);
 
     const user = userEvent.setup();
-    const emailInput = screen.getByPlaceholderText('이메일을 입력해주세요');
-    const submitButton = screen.getByText('구독할게요');
+    const emailInput = screen.getByPlaceholderText(EMAIL_CONTROL.EMAIL_PLACEHOLDER);
+    const submitButton = screen.getByText(SUBSCRIBE_USER_ACTIONS.SUBSCRIBE_ACCEPT);
 
     await user.click(submitButton);
 
     await waitFor(() => {
-      expect(screen.findByText('올바른 이메일 형식이 아니에요.')).toBeTruthy();
+      expect(screen.findByText(EMAIL_CONTROL.INVALID_EMAIL)).toBeTruthy();
     })
 
     // Enter an invalid email
@@ -46,7 +48,7 @@ describe('SubscribeForm 컴포넌트 동작 테스트', () => {
     await user.click(submitButton);
 
     await waitFor(() => {
-      expect(screen.findByText('올바른 이메일 형식이 아니에요')).toBeTruthy();
+      expect(screen.findByText(EMAIL_CONTROL.INVALID_EMAIL)).toBeTruthy();
     })
   });
 
@@ -54,8 +56,8 @@ describe('SubscribeForm 컴포넌트 동작 테스트', () => {
     render(<SubscribeForm setIsOpen={mockSetIsOpen} />);
 
     const user = userEvent.setup();
-    const emailInput = screen.getByPlaceholderText('이메일을 입력해주세요');
-    const submitButton = screen.getByText('구독할게요');
+    const emailInput = screen.getByPlaceholderText(EMAIL_CONTROL.EMAIL_PLACEHOLDER);
+    const submitButton = screen.getByText(SUBSCRIBE_USER_ACTIONS.SUBSCRIBE_ACCEPT);
 
     await user.type(emailInput, 'test@example.com');
     await user.click(submitButton);
@@ -67,7 +69,7 @@ describe('SubscribeForm 컴포넌트 동작 테스트', () => {
     render(<SubscribeForm setIsOpen={mockSetIsOpen} />);
 
     const user = userEvent.setup();
-    const rejectButton = screen.getByText('좀 더 둘러볼래요');
+    const rejectButton = screen.getByText(SUBSCRIBE_USER_ACTIONS.SUBSCRIBE_REJECT);
     await user.click(rejectButton);
 
     expect(mockSetIsOpen).toHaveBeenCalledWith(false);
