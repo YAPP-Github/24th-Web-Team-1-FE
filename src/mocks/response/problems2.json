@@ -1,24 +1,24 @@
 {
   "message": "String",
   "data": {
-    "id": 1,
-    "title": "ETF(상장지수펀드)의 특징이 아닌것은?",
+    "id": 2,
+    "title": "FEW 놀러가고 싶은곳",
     "contents": [
       {
         "number": 1,
-        "content": "분산투자"
+        "content": "고척 야구장"
       },
       {
         "number": 2,
-        "content": "높은 운용 비용"
+        "content": "바다바다바다!!!"
       },
       {
         "number": 3,
-        "content": "유동성"
+        "content": "물멍때리기?"
       },
       {
         "number": 4,
-        "content": "투명성"
+        "content": "날씨좋은날 한강...ㅎㅎ"
       }
     ],
     "creatorId": 1
