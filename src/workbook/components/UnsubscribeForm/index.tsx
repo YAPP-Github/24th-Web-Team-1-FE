@@ -29,6 +29,7 @@ export default function UnsubscribeForm() {
                   placeholder={UNSUBSCRIBE_FORM.PLACEHOLDER}
                   {...field}
                   value={field.value || ""}
+                  maxLength={255}
                   className={`rounded-[10px] text-[16px] focus-visible:ring-transparent ${form.formState.errors.reason ? "border-error" : ""}`}
                 />
               </FormControl>
