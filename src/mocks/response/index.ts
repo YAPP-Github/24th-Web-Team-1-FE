@@ -1,15 +1,14 @@
 import { apiRoutes } from "@shared/constants/apiRoutes";
 
 import problems from "./problems.json";
-import quiz from "./quiz.json";
+import problems2 from "./problems2.json";
 import submitAnswer from "./submitAnswer.json";
-import tags from "./tags.json";
 import workbook from "./workbook.json";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
-  [apiRoutes.tags]: tags,
-  [apiRoutes.problems]: problems,
+  [apiRoutes.problems + "get"]: problems,
+  [apiRoutes.problems + "2"]: problems2,
   [apiRoutes.submitAnswer]: submitAnswer,
   [apiRoutes.workbook]: workbook,
 };

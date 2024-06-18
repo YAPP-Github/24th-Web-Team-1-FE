@@ -1,6 +1,5 @@
 export const API_ROUTE = {
-  PROBLEM: (articleId: number) => `/articles/${articleId}/problems`,
-  SUBMIT_ANSWER: (problemId: number) => `/problems/${problemId}`,
+  PROBLEM: (problemId: string) => `/api/v1/problems/${problemId}`,
 };
 
 export const QUERY_KEY = {

@@ -14,6 +14,7 @@ const defaultActions = {
   actions: {
     updateChoiceAnswer: () => {},
     updateAnswer: () => {},
+    initProblemContextInfo: () => {},
   },
 };
 const ProblemContext = createContext<ProblemContextInfo>({
@@ -31,6 +32,10 @@ function ProblemProvider({ children }: { children: React.ReactElement }) {
       updateChoiceAnswer: (choiceAnswer: string) =>
         setChoiceAnswer(choiceAnswer),
       updateAnswer: (answer: string) => setAnswer(answer),
+      initProblemContextInfo: () => {
+        setChoiceAnswer(null);
+        setAnswer(null);
+      },
     },
   };
   return (

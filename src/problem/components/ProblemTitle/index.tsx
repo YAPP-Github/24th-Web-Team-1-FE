@@ -6,6 +6,8 @@ import React from "react";
 
 import { useMutationState, useQuery } from "@tanstack/react-query";
 
+import { ApiResponse } from "@api/api-config";
+
 import { PROBLEM_TITLE_INFO } from "@problem/constants/problemInfo";
 import { QUERY_KEY } from "@problem/remotes/api";
 import { getProblemQueryOptions } from "@problem/remotes/getProblemQueryOptions";
@@ -13,25 +15,21 @@ import { AnswerCheckInfo } from "@problem/types/problemInfo";
 
 export default function ProblemTitle() {
   const { problemId } = useParams<{ problemId: string }>();
-  const problemIdNumber = Number(problemId);
-  const { data: problemInfo } = useQuery({
-    ...getProblemQueryOptions({ problemId: problemIdNumber }),
+  const { data: problemInfo, isError } = useQuery({
+    ...getProblemQueryOptions({ problemId }),
   });
   const problemAnswerInfo = useMutationState({
     filters: {
-      mutationKey: [QUERY_KEY.POST_PROBLEM_ANSWER, problemIdNumber],
+      mutationKey: [QUERY_KEY.POST_PROBLEM_ANSWER, problemId],
     },
-    select: (mutation) => mutation.state.data as AnswerCheckInfo,
+    select: (mutation) => mutation.state.data as ApiResponse<AnswerCheckInfo>,
   });
-
-  if (!problemInfo) return <div>error</div>;
-
-  if (!problemAnswerInfo) return <div>정답제출 실패</div>;
+  if (!problemInfo || isError) return <div>error</div>;
 
   const problemAnswerData = problemAnswerInfo[0];
   const subTitleInfo =
     (problemAnswerData &&
-      (problemAnswerData.isSolved
+      (problemAnswerData.data.isSolved
         ? PROBLEM_TITLE_INFO.ANSWER_CORRECT
         : PROBLEM_TITLE_INFO.ANSWER_FAIL)) ||
     PROBLEM_TITLE_INFO.NO_ANSWER;

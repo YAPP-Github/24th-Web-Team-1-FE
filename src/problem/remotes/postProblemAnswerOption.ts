@@ -9,7 +9,7 @@ export const postProblemAnswer = (
   params: ProblemAnswerParams,
   body: ProblemAnswerBody,
 ): Promise<ApiResponse<AnswerCheckInfo>> => {
-  return axiosRequest("post", API_ROUTE.SUBMIT_ANSWER(params.problemId), body);
+  return axiosRequest("post", API_ROUTE.PROBLEM(params.problemId), body);
 };
 export const postProblemAnswerMutationOptions = (
   params: ProblemAnswerParams,
@@ -25,7 +25,7 @@ export const postProblemAnswerMutationOptions = (
 };
 
 type ProblemAnswerParams = {
-  problemId: number;
+  problemId: string;
 };
 
 type ProblemAnswerBody = {

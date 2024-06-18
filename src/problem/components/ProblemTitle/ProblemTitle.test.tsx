@@ -7,12 +7,6 @@ import { PROBLEM_TITLE_INFO } from "@problem/constants/problemInfo";
 import { render, screen, waitFor } from "@testing-library/react";
 vi.mock("next/navigation", () => {
   return {
-    __esModule: true,
-    useRouter: () => ({
-      push: vi.fn(),
-      replace: vi.fn(),
-      prefetch: vi.fn(),
-    }),
     useParams: () => ({
       get: () => {},
       query: {

@@ -1,6 +1,10 @@
+import { useParams } from "next/navigation";
+
 import React, { useContext, useEffect, useState } from "react";
 
 import { useMutationState } from "@tanstack/react-query";
+
+import { ApiResponse } from "@api/api-config";
 
 import { Button } from "@shared/components/ui/button";
 import { cn } from "@shared/utils/cn";
@@ -16,6 +20,7 @@ interface AnswerChoiceButtonProps extends Pick<AnswerChoiceInfo, "content"> {}
 export default function AnswerChoiceButton({
   content,
 }: AnswerChoiceButtonProps) {
+  const { problemId } = useParams<{ problemId: string }>();
   const [className, setClassName] = useState(
     ANSWER_CHOICHE_BUTTON_INFO.INIT_CHOICE_ANSWER.className,
   );
@@ -26,9 +31,9 @@ export default function AnswerChoiceButton({
 
   const problemAnswerInfo = useMutationState({
     filters: {
-      mutationKey: [QUERY_KEY.POST_PROBLEM_ANSWER],
+      mutationKey: [QUERY_KEY.POST_PROBLEM_ANSWER, problemId],
     },
-    select: (mutation) => mutation.state.data as AnswerCheckInfo,
+    select: (mutation) => mutation.state.data as ApiResponse<AnswerCheckInfo>,
   });
 
   const onClickAnswerChoice = () => {
@@ -50,12 +55,12 @@ export default function AnswerChoiceButton({
       if (problemAnswerInfo.length) {
         const problemAnswerData = problemAnswerInfo[0];
         if (problemAnswerData) {
-          if (problemAnswerData.answer === content)
+          if (problemAnswerData.data.answer === content)
             setClassName(
               ANSWER_CHOICHE_BUTTON_INFO.CHOICE_ANSWER_CORRECT.className,
             );
           if (
-            problemAnswerData.isSolved === false &&
+            problemAnswerData.data.isSolved === false &&
             choiceAnswer === content
           ) {
             setClassName(
@@ -67,8 +72,6 @@ export default function AnswerChoiceButton({
     },
     [choiceAnswer, content, problemAnswerInfo],
   );
-
-  if (!problemAnswerInfo) return <div>정답제출 실패</div>;
   const problemAnswerData = problemAnswerInfo[0];
 
   return (
@@ -85,13 +88,13 @@ export default function AnswerChoiceButton({
           (!problemAnswerData && choiceAnswer === content && "white") ||
           (!problemAnswerData && choiceAnswer !== content && "#A5A5A5") ||
           (problemAnswerData &&
-            problemAnswerData.answer === content &&
+            problemAnswerData.data.answer === content &&
             "#0166B3") ||
           (problemAnswerData &&
-            problemAnswerData.isSolved === false &&
+            problemAnswerData.data.isSolved === false &&
             choiceAnswer === content &&
             "#B00020") ||
-          "#A5A5A5"
+          ""
         }
       />
     </Button>

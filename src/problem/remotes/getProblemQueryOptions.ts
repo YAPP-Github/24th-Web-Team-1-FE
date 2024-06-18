@@ -25,5 +25,5 @@ export const getProblemQueryOptions = ({
 };
 
 type ProblemInfoParams = {
-  problemId: number;
+  problemId: string;
 };
