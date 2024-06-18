@@ -35,7 +35,7 @@ axiosInstance.interceptors.response.use(
     return response;
   },
   async function (error) {
-    const { config, response } = error;
+    const { config } = error;
     return axios(config);
   },
 );
