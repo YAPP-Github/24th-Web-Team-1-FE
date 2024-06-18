@@ -12,20 +12,20 @@ import { ProblemContextInfo } from "@problem/types/problemContextInfo";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-vi.mock("next/navigation", () => {
+vi.mock("next/navigation", async () => {
+  const actual =
+    await vi.importActual<typeof import("next/navigation")>("next/navigation");
   return {
-    __esModule: true,
-    useRouter: () => ({
+    ...actual,
+    useRouter: vi.fn(() => ({
       push: vi.fn(),
-      replace: vi.fn(),
-      prefetch: vi.fn(),
-    }),
-    useParams: () => ({
-      get: () => {},
+    })),
+    useParams: vi.fn(() => ({
+      get: vi.fn(),
       query: {
         problemId: "1",
       },
-    }),
+    })),
   };
 });
 

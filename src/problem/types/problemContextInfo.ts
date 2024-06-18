@@ -6,5 +6,6 @@ export type ProblemContextInfo = {
   actions: {
     updateChoiceAnswer: (choiceAnswer: string) => void;
     updateAnswer: (answer: string) => void;
+    initProblemContextInfo: () => void;
   };
 };

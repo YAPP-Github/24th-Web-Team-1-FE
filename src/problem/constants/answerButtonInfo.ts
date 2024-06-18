@@ -4,6 +4,7 @@ export const BUTTON_STATE = [
   "PRE_ANSWER_SELECT",
   "POST_ANSWER_PRE_SUBMIT",
   "POST_SUBMIT",
+  "LINK_TO_MAIN",
 ] as const;
 
 export const BUTTON_INFO: ButtonInfo = {
@@ -18,5 +19,9 @@ export const BUTTON_INFO: ButtonInfo = {
   POST_SUBMIT: {
     title: "다음 문제 풀기",
     className: "bg-text-black",
+  },
+  LINK_TO_MAIN: {
+    title: "메인으로 가기",
+    className: "",
   },
 };

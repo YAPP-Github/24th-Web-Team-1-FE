@@ -1,24 +1,16 @@
 "use client";
 
-import React from "react";
-
-import { ApiResponse } from "@api/api-config";
-import queryClient from "@api/query-client";
+import React, { useContext } from "react";
 
 import Tag from "@common/components/Tag";
-import { QUERY_KEY } from "@problem/remotes/api";
-import { PromblemInfo } from "@problem/types/problemInfo";
+import ProblemListContext from "@common/context/problemListContext";
 
 export default function TagList() {
-  const problemInfoData = queryClient.getQueryData([QUERY_KEY.GET_PROBLEM]) as
-    | ApiResponse<PromblemInfo>
-    | undefined;
+  const {
+    states: { totalProblem, currentProblemIdx },
+  } = useContext(ProblemListContext);
 
-  if (!problemInfoData) return <div>error</div>;
-
-  const { day } = problemInfoData.data;
-  const tagList = [day];
-
+  const tagList = [`${currentProblemIdx + 1}/${totalProblem}`];
   return (
     <div className="mt-[4px] flex gap-[12px]">
       {tagList.map((tag) => (

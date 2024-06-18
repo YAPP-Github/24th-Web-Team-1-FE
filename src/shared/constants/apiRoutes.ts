@@ -1,6 +1,5 @@
 export const apiRoutes = {
-  tags: "/tags",
-  problems: "/articles/:articleId/problems",
-  submitAnswer: "/problems/:problemId",
+  problems: "/api/v1/problems/:problemId",
+  submitAnswer: "/api/v1/problems/:problemId",
   workbook: "/workbooks/:workbookId",
 };

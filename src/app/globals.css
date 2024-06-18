@@ -92,6 +92,9 @@
     @apply font-pretendard text-[17px]/[28.05px] font-normal;
   }
 
+  .body2-bold {
+    @apply font-pretendard text-[15px]/[24.75px] font-bold;
+  }
   .body2-medium {
     @apply font-pretendard text-[15px]/[24.75px] font-medium;
   }

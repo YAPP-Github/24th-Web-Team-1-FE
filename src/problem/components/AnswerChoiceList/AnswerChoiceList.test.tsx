@@ -40,7 +40,7 @@ describe("선택지 불러오고, 버튼 클릭으로 버튼 ui 변경", () => {
     const { result } = renderHook(
       () =>
         useQuery({
-          ...getProblemQueryOptions({ problemId: 1 }),
+          ...getProblemQueryOptions({ problemId: "1" }),
         }),
       { wrapper: createQueryProviderWrapper() },
     );
