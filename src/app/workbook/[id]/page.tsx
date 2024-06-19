@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { useQuery } from "@tanstack/react-query";
 
@@ -12,13 +12,15 @@ import SubscribePopup from "src/shared/components/ExternalControlOpenDialog";
 import CurriculumSection from "@workbook/components/CurriculumSection";
 import OverviewSection from "@workbook/components/OverviewSection";
 import SubscribeForm from "@workbook/components/SubscribeForm";
-import TitleSection from "@workbook/components/TitleSection";
 import WorkbookSkeleton from "@workbook/components/WorkbookSkeleton";
+import WriterInfo from "@workbook/components/WriterInfo";
 import { getWorkbookQueryOptions } from "@workbook/remotes/getWorkbookQueryOptions";
 import { getWorkbookId } from "@workbook/utils";
 
 import SubscribeBottomBar from "@main/components/SubscribeBottomBar";
 import { SUBSCRIBE_TITLES } from "@main/constants/main";
+
+import TitleSection from "@common/components/TitleSection";
 
 const SUBSCRIBE_POPUP_TITLE = (
   <div className="h3-bold text-lg text-black">
@@ -40,7 +42,7 @@ export default function WorkbookPage() {
     isLoading,
     isError,
   } = useQuery({
-    ...getWorkbookQueryOptions(Number(workbookId)),
+    ...getWorkbookQueryOptions(workbookId),
   });
 
   useEffect(function detectClient() {
@@ -58,9 +60,7 @@ export default function WorkbookPage() {
             isOpen={isOpen}
             setIsOpen={setIsOpen}
             title={SUBSCRIBE_POPUP_TITLE}
-            content={
-              <SubscribeForm setIsOpen={setIsOpen} />
-            }
+            content={<SubscribeForm setIsOpen={setIsOpen} />}
           />
         )}
         {workbookInfo && (
@@ -78,7 +78,7 @@ export default function WorkbookPage() {
             <TitleSection
               category={workbookInfo.category}
               title={workbookInfo.title}
-              editors={workbookInfo.writerIds}
+              editorComponent={<WriterInfo writers={workbookInfo.writers} />}
             />
             <OverviewSection overview={workbookInfo.description} />
             <CurriculumSection curriculumItems={workbookInfo.articles} />
