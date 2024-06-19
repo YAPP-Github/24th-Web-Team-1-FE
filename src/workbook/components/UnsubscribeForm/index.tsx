@@ -9,7 +9,9 @@ import {
   FormMessage,
 } from "@shared/components/ui/form";
 import { Textarea } from "@shared/components/ui/textarea";
+import { cn } from "@shared/utils/cn";
 
+import { buttonStyle } from "@workbook/constants/buttonStyle";
 import { UNSUBSCRIBE_FORM } from "@workbook/constants/unsubscribe";
 import { useUnsubscribeForm } from "@workbook/hooks/useUnsubscribeForm";
 
@@ -43,18 +45,20 @@ export default function UnsubscribeForm() {
           <Button
             type="button"
             variant={"outline"}
-            className={
-              "w-1/2 rounded-none border-text-gray3 bg-white text-[14px] font-medium text-black"
-            }
+            className={cn(
+              "border-text-gray3 text-black",
+              buttonStyle
+            )}
           >
             {UNSUBSCRIBE_FORM.BACK}
           </Button>
           <Button
             type="submit"
             variant={"outline"}
-            className={
-              "w-1/2 rounded-none border-error bg-white text-[14px] font-medium text-error"
-            }
+            className={cn(
+              "border-error text-error",
+              buttonStyle
+            )}
           >
             {UNSUBSCRIBE_FORM.CONFIRM}
           </Button>

@@ -8,6 +8,9 @@ import {
   FormMessage,
 } from "@shared/components/ui/form";
 import { Input } from "@shared/components/ui/input";
+import { cn } from "@shared/utils/cn";
+
+import { buttonStyle } from "@workbook/constants/buttonStyle";
 
 import {
   EMAIL_CONTROL,
@@ -67,18 +70,20 @@ export default function SubscribeForm({ setIsOpen }: SubscribeFormProps) {
             onClick={() => setIsOpen(false)}
             type="button"
             variant={"outline"}
-            className={
-              "w-1/2 rounded-none bg-white text-[14px] font-medium text-black"
-            }
+            className={cn(
+              "text-black",
+              buttonStyle
+            )}
           >
             {SUBSCRIBE_USER_ACTIONS.SUBSCRIBE_REJECT}
           </Button>
           <Button
             type="submit"
             variant={"outline"}
-            className={
-              "w-1/2 rounded-none bg-black text-[14px] font-medium text-white"
-            }
+            className={cn(
+              buttonStyle,
+              "bg-black text-white"
+            )}
           >
             {SUBSCRIBE_USER_ACTIONS.SUBSCRIBE_ACCEPT}
           </Button>

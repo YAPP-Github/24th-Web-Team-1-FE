@@ -1,0 +1,1 @@
+export const buttonStyle = "w-1/2 rounded-none bg-white text-[14px] font-medium"
