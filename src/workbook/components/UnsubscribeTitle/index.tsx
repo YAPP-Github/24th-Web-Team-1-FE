@@ -1,4 +1,4 @@
-import { UNSUBSCRIBE_TITLES } from "@workbook/constants/cancel";
+import { UNSUBSCRIBE_TITLES } from "@workbook/constants/unsubscribe";
 
 export default function UnsubscribeTitle () {
     return (

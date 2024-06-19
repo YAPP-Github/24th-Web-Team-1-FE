@@ -4,7 +4,7 @@ import { z } from "zod";
 
 import { useToast } from "@shared/components/ui/use-toast";
 
-import { UNSUBSCRIBE_CONFIRM } from "@workbook/constants/cancel";
+import { UNSUBSCRIBE_CONFIRM } from "@workbook/constants/unsubscribe";
 import { unSubscribeSchema } from "@workbook/schemas";
 import { UnsubscribeFormData } from "@workbook/types";
 

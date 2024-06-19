@@ -1,6 +1,6 @@
 import { z } from "zod"
 
-import { UNSUBSCRIBE_FORM } from "@workbook/constants/cancel"
+import { UNSUBSCRIBE_FORM } from "@workbook/constants/unsubscribe"
 
 export const unSubscribeSchema = z.object({
     reason: z
