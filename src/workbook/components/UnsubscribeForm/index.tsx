@@ -10,7 +10,7 @@ import {
 } from "@shared/components/ui/form";
 import { Textarea } from "@shared/components/ui/textarea";
 
-import { UNSUBSCRIBE_FORM } from "@workbook/constants/cancel";
+import { UNSUBSCRIBE_FORM } from "@workbook/constants/unsubscribe";
 import { useUnsubscribeForm } from "@workbook/hooks/useUnsubscribeForm";
 
 export default function UnsubscribeForm() {
