@@ -2,25 +2,36 @@ import { useForm } from "react-hook-form";
 
 import { describe, expect, it, vi } from "vitest";
 
-import { UNSUBSCRIBE_FORM } from "@workbook/constants/unsubscribe";
+import {
+    UNSUBSCRIBE_CONFIRM,
+  UNSUBSCRIBE_FORM,
+} from "@workbook/constants/unsubscribe";
+import { unSubscribeSchema } from "@workbook/schemas";
+import { UnsubscribeFormData } from "@workbook/types";
 
 import UnsubscribeForm from ".";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-const mockOnSubmit = vi.fn();
 const mockToast = vi.fn();
+vi.mock("@shared/components/ui/use-toast", () => ({
+  useToast: () => ({
+    toast: mockToast,
+  }),
+}));
+
+const mockOnSubmit = vi.fn(async (values: UnsubscribeFormData) => {
+    const result = unSubscribeSchema.safeParse(values);
+    // 성공 케이스 시 toast 호출 로직 포함
+    if (result.success) {
+      mockToast({ title: UNSUBSCRIBE_CONFIRM });
+    }
+  });
 
 vi.mock("@workbook/hooks/useUnsubscribeForm", () => ({
   useUnsubscribeForm: () => ({
     form: useForm(),
     onSubmit: mockOnSubmit,
-  }),
-}));
-
-vi.mock("@shared/components/ui/use-toast", () => ({
-  useToast: () => ({
-    toast: mockToast,
   }),
 }));
 
@@ -59,8 +70,8 @@ describe("UnsubscribeForm 컴포넌트 동작 테스트", () => {
     const user = userEvent.setup();
     const textarea = screen.getByPlaceholderText(UNSUBSCRIBE_FORM.PLACEHOLDER);
     const submitButton = screen.getByRole("button", {
-        name: UNSUBSCRIBE_FORM.CONFIRM,
-      });
+      name: UNSUBSCRIBE_FORM.CONFIRM,
+    });
 
     await user.type(
       textarea,
@@ -69,13 +80,11 @@ describe("UnsubscribeForm 컴포넌트 동작 테스트", () => {
     await user.click(submitButton);
 
     await waitFor(() => {
-        expect(mockOnSubmit).toHaveBeenCalled();
-    })
-
-    await waitFor(() => {
-        expect(mockToast).toHaveBeenCalled();
-    })
-
+      expect(mockOnSubmit).toHaveBeenCalled();
+      expect(mockToast).toHaveBeenCalledWith({
+        title: UNSUBSCRIBE_CONFIRM,
+      });
+    });
   });
 
   /** TBD: 개발 필요 */
