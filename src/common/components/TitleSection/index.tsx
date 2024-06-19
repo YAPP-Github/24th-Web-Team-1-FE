@@ -2,7 +2,7 @@ import React from "react";
 
 import { Writer } from "@workbook/types";
 
-import ShareIcon from "public/assets/icon36/share_36.svg";
+import ShareIcon from "public/assets/icon/share.svg";
 import NextIcon from "public/assets/icon/next.svg";
 import Tag from "../Tag";
 
@@ -23,7 +23,7 @@ export default function TitleSection({
       <div className="flex items-center">
         <h1 className="h1-bold text-[28px] text-black">{title}</h1>
         <div className="ml-auto">
-          <ShareIcon />
+          <ShareIcon width={16} height={22} />
         </div>
       </div>
       <section className="mt-[2px] flex items-center space-x-[8px]">
