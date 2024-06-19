@@ -3,6 +3,7 @@ import React from "react";
 import { Writer } from "@workbook/types";
 
 import ShareIcon from "public/assets/icon36/share_36.svg";
+import NextIcon from "public/assets/icon/next.svg";
 import Tag from "../Tag";
 
 interface TitleSectionProps {
@@ -27,13 +28,14 @@ export default function TitleSection({
       </div>
       <section className="mt-[2px] flex items-center space-x-[8px]">
         <span className="sub2-bold text-text-gray2">작가</span>
-        <div className="sub2-bold flex items-center text-text-gray1">
+        <div className="sub2-bold flex items-center gap-1 text-text-gray1">
           {editors.map((editor, idx) => (
             <React.Fragment key={idx}>
               <span>{editor.name}</span>
               {idx < editors.length - 1 && <span> · </span>}
             </React.Fragment>
           ))}
+          <NextIcon width={10} height={18} />
         </div>
       </section>
     </header>
