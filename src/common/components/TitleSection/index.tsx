@@ -1,21 +1,20 @@
-import React from "react";
+import React, { ReactElement } from "react";
 
 import { Writer } from "@workbook/types";
 
 import ShareIcon from "public/assets/icon/share.svg";
-import NextIcon from "public/assets/icon/next.svg";
 import Tag from "../Tag";
 
 interface TitleSectionProps {
   category: string;
   title: string;
-  editors: Writer[];
+  editorComponent: ReactElement;
 }
 
 export default function TitleSection({
   category,
   title,
-  editors,
+  editorComponent,
 }: TitleSectionProps) {
   return (
     <header className="flex flex-col gap-[12px]">
@@ -26,18 +25,7 @@ export default function TitleSection({
           <ShareIcon width={16} height={22} />
         </div>
       </div>
-      <section className="mt-[2px] flex items-center space-x-[8px]">
-        <span className="sub2-bold text-text-gray2">작가</span>
-        <div className="sub2-bold flex items-center gap-1 text-text-gray1">
-          {editors.map((editor, idx) => (
-            <React.Fragment key={idx}>
-              <span>{editor.name}</span>
-              {idx < editors.length - 1 && <span> · </span>}
-            </React.Fragment>
-          ))}
-          <NextIcon width={10} height={18} />
-        </div>
-      </section>
+      <section className="mt-[2px]">{editorComponent}</section>
     </header>
   );
 }
