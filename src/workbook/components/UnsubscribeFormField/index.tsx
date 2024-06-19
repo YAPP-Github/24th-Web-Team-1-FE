@@ -11,7 +11,7 @@ const UnsubscribeFormField = () => {
 
   return (
     <Controller
-      name="email"
+      name="reason"
       control={control}
       render={({ field }) => (
         <FormItem>

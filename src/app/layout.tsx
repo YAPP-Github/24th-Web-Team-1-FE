@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   description: "매일 아침마다 경제 아티클과 문제를 보내드려요!",
 };
 
-export const runtime = 'edge' // TBD: 개발환경과 분리
+// export const runtime = 'edge' // TBD: 개발환경과 분리
 
 const pretendard = localFont({
   src: [

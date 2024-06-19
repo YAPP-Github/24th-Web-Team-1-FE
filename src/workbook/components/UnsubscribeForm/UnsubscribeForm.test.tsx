@@ -9,11 +9,18 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 const mockOnSubmit = vi.fn();
+const mockToast = vi.fn();
 
 vi.mock("@workbook/hooks/useUnsubscribeForm", () => ({
   useUnsubscribeForm: () => ({
     form: useForm(),
     onSubmit: mockOnSubmit,
+  }),
+}));
+
+vi.mock("@shared/components/ui/use-toast", () => ({
+  useToast: () => ({
+    toast: mockToast,
   }),
 }));
 
@@ -30,18 +37,20 @@ describe("UnsubscribeForm 컴포넌트 동작 테스트", () => {
     expect(screen.getByText(UNSUBSCRIBE_FORM.CONFIRM)).toBeInTheDocument();
   });
 
-  it('입력 글자 수가 255자를 초과하지 않도록 한다.', async () => {
+  it("입력 글자 수가 255자를 초과하지 않도록 한다.", async () => {
     render(<UnsubscribeForm />);
 
     const user = userEvent.setup();
-    const textarea = screen.getByPlaceholderText(UNSUBSCRIBE_FORM.PLACEHOLDER) as HTMLTextAreaElement;
-    const longText = 'a'.repeat(256);
+    const textarea = screen.getByPlaceholderText(
+      UNSUBSCRIBE_FORM.PLACEHOLDER,
+    ) as HTMLTextAreaElement;
+    const longText = "a".repeat(256);
 
     await user.type(textarea, longText);
 
     await waitFor(() => {
-        expect(textarea.value.length).toBe(255);
-    })
+      expect(textarea.value.length).toBe(255);
+    });
   });
 
   it("취소 사유를 폼에 제출한다.", async () => {
@@ -49,12 +58,24 @@ describe("UnsubscribeForm 컴포넌트 동작 테스트", () => {
 
     const user = userEvent.setup();
     const textarea = screen.getByPlaceholderText(UNSUBSCRIBE_FORM.PLACEHOLDER);
-    const submitButton = screen.getByText(UNSUBSCRIBE_FORM.CONFIRM);
+    const submitButton = screen.getByRole("button", {
+        name: UNSUBSCRIBE_FORM.CONFIRM,
+      });
 
-    await user.type(textarea, "현생이 바빠서 뉴스레터를 읽을 시간이 없어요. 현생이 바빠서 뉴스레터를 읽을 시간이 없어요.현생이 바빠서 뉴스레터를 읽을 시간이 없어요.현생이 바빠서 뉴스레터를 읽을 시간이 없어요.레터를 읽을 시간이 없어요요");
+    await user.type(
+      textarea,
+      "현생이 바빠서 뉴스레터를 읽을 시간이 없어요. 현생이 바빠서 뉴스레터를 읽을 시간이 없어요.현생이 바빠서 뉴스레터를 읽을 시간이 없어요.현생이 바빠서 뉴스레터를 읽을 시간이 없어요.레터를 읽을 시간이 없어요요",
+    );
     await user.click(submitButton);
 
-    expect(mockOnSubmit).toHaveBeenCalled();
+    await waitFor(() => {
+        expect(mockOnSubmit).toHaveBeenCalled();
+    })
+
+    await waitFor(() => {
+        expect(mockToast).toHaveBeenCalled();
+    })
+
   });
 
   /** TBD: 개발 필요 */

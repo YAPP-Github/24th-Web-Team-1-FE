@@ -22,13 +22,15 @@ export const useUnsubscribeForm = () => {
 
   const onSubmit = (values: UnsubscribeFormData) => {
     try {
-      unSubscribeSchema.safeParse(values);
-      console.log(values);
+      const result = unSubscribeSchema.safeParse(values);
+      
       // 폼 제출 성공 로직 추가
-      form.reset();
-      toast({
-        title: UNSUBSCRIBE_CONFIRM,
-      });
+      if (result.success) {
+        form.reset();
+        toast({
+          title: UNSUBSCRIBE_CONFIRM,
+        });
+      }
     } catch (error) {
       if (error instanceof z.ZodError) {
         error.errors.forEach((err) => {
