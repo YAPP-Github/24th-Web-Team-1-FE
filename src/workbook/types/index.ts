@@ -1,3 +1,7 @@
+import { z } from "zod";
+
+import { unSubscribeSchema } from "@workbook/schemas";
+
 export interface CurriculumInfo {
   id: number;
   title: string;
@@ -25,3 +29,5 @@ export interface WorkbookInfo {
   writerIds: Writer[];
   articles: Article[];
 }
+
+export type UnsubscribeFormData = z.infer<typeof unSubscribeSchema>;
