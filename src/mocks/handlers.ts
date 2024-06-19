@@ -29,7 +29,7 @@ export const submitAnswerHandler = http.post(
 );
 export const workbookHandler = http.get(
   apiRoutes.workbook,
-  async ({ request, params }) => {
+  async ({ params }) => {
     const workbookId = params;
 
     if (!workbookId) {
@@ -43,4 +43,25 @@ export const workbookHandler = http.get(
   },
 );
 
-export const handlers = [problemsHandler, submitAnswerHandler, workbookHandler];
+export const articleHandler = http.get(
+  apiRoutes.article,
+  async ({ params }) => {
+    const articleId = params?.articleId;
+
+    if (!articleId) {
+      return new HttpResponse(null, { status: 404 });
+    }
+    switch (articleId) {
+      case "1":
+        return HttpResponse.json(response[apiRoutes.article + "1"]);
+    }
+    return HttpResponse.json(response[apiRoutes.article + "1"]);
+  },
+);
+
+export const handlers = [
+  problemsHandler,
+  submitAnswerHandler,
+  workbookHandler,
+  articleHandler,
+];
