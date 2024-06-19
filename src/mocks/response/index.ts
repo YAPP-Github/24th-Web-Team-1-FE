@@ -1,14 +1,20 @@
 import { apiRoutes } from "@shared/constants/apiRoutes";
 
-import problems from "./problems.json";
+import problems1 from "./problems1.json";
 import problems2 from "./problems2.json";
-import submitAnswer from "./submitAnswer.json";
+import problems3 from "./problems3.json";
+import submitAnswer1 from "./submitAnswer1.json";
+import submitAnswer2 from "./submitAnswer2.json";
+import submitAnswer3 from "./submitAnswer3.json";
 import workbook from "./workbook.json";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
-  [apiRoutes.problems + "get"]: problems,
+  [apiRoutes.problems + "get"]: problems1,
   [apiRoutes.problems + "2"]: problems2,
-  [apiRoutes.submitAnswer]: submitAnswer,
+  [apiRoutes.problems + "3"]: problems3,
+  [apiRoutes.submitAnswer + "1"]: submitAnswer1,
+  [apiRoutes.submitAnswer + "2"]: submitAnswer2,
+  [apiRoutes.submitAnswer + "3"]: submitAnswer3,
   [apiRoutes.workbook]: workbook,
 };

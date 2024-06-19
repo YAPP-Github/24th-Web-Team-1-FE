@@ -1,0 +1,25 @@
+{
+  "message": "String",
+  "data": {
+    "id": 3,
+    "title": "우리팀 유행어는..?",
+    "contents": [
+      {
+        "number": 1,
+        "content": "심리스해"
+      },
+      {
+        "number": 2,
+        "content": "정리를해서...."
+      },
+      {
+        "number": 3,
+        "content": "좋은것같아~"
+      },
+      {
+        "number": 4,
+        "content": "퓨퓨"
+      }
+    ]
+  }
+}

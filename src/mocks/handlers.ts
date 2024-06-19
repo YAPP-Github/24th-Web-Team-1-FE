@@ -10,9 +10,15 @@ export const problemsHandler = http.get(apiRoutes.problems, ({ params }) => {
   if (!problemId) {
     return new HttpResponse(null, { status: 404 });
   }
-  if (problemId === "2")
-    return HttpResponse.json(response[apiRoutes.problems + "2"]);
-  else return HttpResponse.json(response[apiRoutes.problems + "get"]);
+
+  switch (problemId) {
+    case "1":
+      return HttpResponse.json(response[apiRoutes.problems + "1"]);
+    case "2":
+      return HttpResponse.json(response[apiRoutes.problems + "2"]);
+    case "3":
+      return HttpResponse.json(response[apiRoutes.problems + "3"]);
+  }
 });
 
 export const submitAnswerHandler = http.post(
@@ -24,7 +30,15 @@ export const submitAnswerHandler = http.post(
     if (!choiceAns && problemId) {
       return new HttpResponse(null, { status: 404 });
     }
-    return HttpResponse.json(response[apiRoutes.submitAnswer]);
+
+    switch (problemId) {
+      case "1":
+        return HttpResponse.json(response[apiRoutes.submitAnswer + "1"]);
+      case "2":
+        return HttpResponse.json(response[apiRoutes.submitAnswer + "2"]);
+      case "3":
+        return HttpResponse.json(response[apiRoutes.submitAnswer + "3"]);
+    }
   },
 );
 export const workbookHandler = http.get(
