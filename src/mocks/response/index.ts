@@ -7,6 +7,7 @@ import submitAnswer1 from "./submitAnswer1.json";
 import submitAnswer2 from "./submitAnswer2.json";
 import submitAnswer3 from "./submitAnswer3.json";
 import workbook from "./workbook.json";
+import article1 from "./article1.json";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
@@ -17,4 +18,5 @@ export default {
   [apiRoutes.submitAnswer + "2"]: submitAnswer2,
   [apiRoutes.submitAnswer + "3"]: submitAnswer3,
   [apiRoutes.workbook]: workbook,
+  [apiRoutes.article + "1"]: article1,
 };

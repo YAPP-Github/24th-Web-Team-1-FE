@@ -1,0 +1,16 @@
+{
+  "data": {
+    "id": 1,
+    "writer": {
+      "id": 1,
+      "name": "안나포",
+      "url": "http://localhost:8080/api/v1/writers/1"
+    },
+    "title": "재태크, 투자 필수 용어 모음집",
+    "content": "<article class='flex flex-col gap-4'><div><h2 class='sub1-bold'>퓨퓨들 힘내라</h2><div class='body2-regular text-text-gray1'>우리 MVP까지만 힘내고<br/> 언넝놀러가자!!<br/>우리 MVP까지만 힘내고<br/> 언넝놀러가자!!<br/>우리 MVP까지만 힘내고<br/> 언넝놀러가자!!<br/>우리 MVP까지만 힘내고<br/> 언넝놀러가자!!<br/></div></div> <div><h2 class='sub1-bold'>퓨퓨들 힘내라</h2><div class='body2-regular text-text-gray1'>우리 MVP까지만 힘내고<br/> 언넝놀러가자!!<br/>우리 MVP까지만 힘내고<br/> 언넝놀러가자!!<br/>우리 MVP까지만 힘내고<br/> 언넝놀러가자!!<br/>우리 MVP까지만 힘내고<br/> 언넝놀러가자!!<br/></div></div> <div><h2 class='sub1-bold'>퓨퓨들 힘내라</h2><div class='body2-regular text-text-gray1'>우리 MVP까지만 힘내고<br/> 언넝놀러가자!!<br/>우리 MVP까지만 힘내고<br/> 언넝놀러가자!!<br/>우리 MVP까지만 힘내고<br/> 언넝놀러가자!!<br/>우리 MVP까지만 힘내고<br/> 언넝놀러가자!!<br/></div></div> <div><h2 class='sub1-bold'>퓨퓨들 힘내라</h2><div class='body2-regular text-text-gray1'>우리 MVP까지만 힘내고<br/> 언넝놀러가자!!<br/>우리 MVP까지만 힘내고<br/> 언넝놀러가자!!<br/>우리 MVP까지만 힘내고<br/> 언넝놀러가자!!<br/>우리 MVP까지만 힘내고<br/> 언넝놀러가자!!<br/></div></div> <div><h2 class='sub1-bold'>퓨퓨들 힘내라</h2><div class='body2-regular text-text-gray1'>우리 MVP까지만 힘내고<br/> 언넝놀러가자!!<br/>우리 MVP까지만 힘내고<br/> 언넝놀러가자!!<br/>우리 MVP까지만 힘내고<br/> 언넝놀러가자!!<br/>우리 MVP까지만 힘내고<br/> 언넝놀러가자!!<br/></div></div> <div><h2 class='sub1-bold'>퓨퓨들 힘내라</h2><div class='body2-regular text-text-gray1'>우리 MVP까지만 힘내고<br/> 언넝놀러가자!!<br/>우리 MVP까지만 힘내고<br/> 언넝놀러가자!!<br/>우리 MVP까지만 힘내고<br/> 언넝놀러가자!!<br/>우리 MVP까지만 힘내고<br/> 언넝놀러가자!!<br/></div></div> <div><h2 class='sub1-bold'>퓨퓨들 힘내라</h2><div class='body2-regular text-text-gray1'>우리 MVP까지만 힘내고<br/> 언넝놀러가자!!<br/>우리 MVP까지만 힘내고<br/> 언넝놀러가자!!<br/>우리 MVP까지만 힘내고<br/> 언넝놀러가자!!<br/>우리 MVP까지만 힘내고<br/> 언넝놀러가자!!<br/></div></div><div><h2 class='sub1-bold'>퓨퓨들 힘내라</h2><div class='body2-regular text-text-gray1'>우리 MVP까지만 힘내고<br/> 언넝놀러가자!!<br/>우리 MVP까지만 힘내고<br/> 언넝놀러가자!!<br/>우리 MVP까지만 힘내고<br/> 언넝놀러가자!!<br/>우리 MVP까지만 힘내고<br/> 언넝놀러가자!!<br/></div></div></article>",
+    "problemIds": [1, 2, 3],
+    "category": "경제",
+    "createdAt": "2024-06-14T11:27:32.027598"
+  },
+  "message": "성공"
+}

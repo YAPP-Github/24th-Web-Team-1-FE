@@ -6,6 +6,7 @@ export interface CurriculumInfo {
 export interface Writer {
   id: number;
   name: string;
+  url: string;
 }
 
 export interface Article {

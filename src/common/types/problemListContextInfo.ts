@@ -1,6 +1,7 @@
+export type ProblemListInfo = number[];
 export type ProblemListContextInfo = {
   states: {
-    problemList: number[];
+    problemList: ProblemListInfo[];
     totalProblem: number;
     currentProblemIdx: number;
   };
