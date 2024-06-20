@@ -9,7 +9,7 @@ import React, { HTMLAttributes } from "react";
 interface LinkShareContentProps extends HTMLAttributes<HTMLDivElement> {
   href: string;
 }
-export default function LinkShareContent({ href }: LinkShareContentProps) {
+function LinkShareContent({ href }: LinkShareContentProps) {
   const { toast } = useToast();
 
   const onClickLinkCopy = async () => {
@@ -41,3 +41,21 @@ export default function LinkShareContent({ href }: LinkShareContentProps) {
     </section>
   );
 }
+
+interface LinkSharedTitleProps extends HTMLAttributes<HTMLSpanElement> {}
+function LinkSharedTitle({ title }: LinkSharedTitleProps) {
+  return <span className="h3-bold">{title}</span>;
+}
+
+interface LinkSharedDescriptionProps extends HTMLAttributes<HTMLSpanElement> {}
+function LinkSharedDescription({ content }: LinkSharedDescriptionProps) {
+  return <span className="body3-medium pt-[10px]">{content}</span>;
+}
+
+const LinkShare = {
+  Content: LinkShareContent,
+  Title: LinkSharedTitle,
+  Description: LinkSharedDescription,
+};
+
+export default LinkShare;

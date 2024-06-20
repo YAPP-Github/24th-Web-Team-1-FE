@@ -3,6 +3,7 @@ import { describe, expect, it, vi } from "vitest";
 import LinkShareContent from ".";
 import userEvent from "@testing-library/user-event";
 import { COPY_CLIP_URL } from "@common/constants/linkShareContent";
+import LinkShare from ".";
 
 const href = "www.few.article.co.kr";
 
@@ -17,12 +18,12 @@ vi.mock("@shared/components/ui/use-toast", () => {
 
 describe("링크 공유 팝업 내부 컨텐트의 버튼 요소 테스트", () => {
   it("href 텍스트 노출 확인", () => {
-    render(<LinkShareContent href={href} />);
+    render(<LinkShare.Content href={href} />);
     expect(screen.getByDisplayValue(href)).toBeTruthy();
   });
 
   it("버튼 클릭시, 클립보드 복사 및 토스트 노출 확인", async () => {
-    render(<LinkShareContent href={href} />);
+    render(<LinkShare.Content href={href} />);
 
     const linkClipButton = screen.getByRole("button");
     const user = userEvent.setup();

@@ -5,10 +5,9 @@ import ShareIcon from "public/assets/icon/share.svg";
 import Tag from "../Tag";
 import ExternalControlOpenDialog from "@shared/components/ExternalControlOpenDialog";
 import { LINK_SHARE_CONTENT } from "@common/constants/linkShareContent";
-import LinkShareContent from "../LinkShareContent";
 import { usePathname } from "next/navigation";
-import LinkSharedDescription from "../LinkShareDescription";
 import { Button } from "@shared/components/ui/button";
+import LinkShare from "../LinkShare";
 
 interface TitleSectionProps {
   category: string;
@@ -46,14 +45,16 @@ export default function TitleSection({
       <ExternalControlOpenDialog
         isOpen={isOpen}
         setIsOpen={setIsOpen}
-        title={LINK_SHARE_CONTENT.ARTICLE_INFO.TITLE}
+        title={
+          <LinkShare.Title title={LINK_SHARE_CONTENT.ARTICLE_INFO.TITLE} />
+        }
         description={
-          <LinkSharedDescription
+          <LinkShare.Description
             content={LINK_SHARE_CONTENT.ARTICLE_INFO.DESCRIPTION}
           />
         }
         content={
-          <LinkShareContent
+          <LinkShare.Content
             href={`${process.env.NEXT_PUBLIC_FEW_WEB}${pathname}`}
           />
         }
