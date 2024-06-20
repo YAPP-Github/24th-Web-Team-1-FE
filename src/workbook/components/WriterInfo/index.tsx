@@ -1,10 +1,8 @@
 import React from "react";
 
-import { Writer } from "@workbook/types";
+import { WorkbookInfo } from "@workbook/types";
 
-interface WriterInfoProps {
-  writers: Writer[];
-}
+type WriterInfoProps = Pick<WorkbookInfo,'writers'>
 
 export default function WriterInfo({ writers }: WriterInfoProps) {
   return (
