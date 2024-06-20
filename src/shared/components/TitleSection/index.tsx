@@ -2,12 +2,12 @@
 import React, { ReactElement, useState } from "react";
 
 import ShareIcon from "public/assets/icon/share.svg";
-import Tag from "../Tag";
+import Tag from "../../../common/components/Tag";
 import ExternalControlOpenDialog from "@shared/components/ExternalControlOpenDialog";
 import { LINK_SHARE_CONTENT } from "@common/constants/linkShareContent";
 import { usePathname } from "next/navigation";
 import { Button } from "@shared/components/ui/button";
-import LinkShare from "../LinkShare";
+import LinkShare from "../../../common/components/LinkShare";
 
 interface TitleSectionProps {
   category: string;
