@@ -5,11 +5,10 @@ import TitleSection from ".";
 import userEvent from "@testing-library/user-event";
 import { LINK_SHARE_CONTENT } from "@common/constants/linkShareContent";
 
-const mockToast = vi.fn();
-vi.mock("@shared/components/ui/use-toast", () => {
+vi.mock("next/navigation", () => {
   return {
-    useToast: () => ({
-      toast: mockToast,
+    usePathname: () => ({
+      pathname: "",
     }),
   };
 });
