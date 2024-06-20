@@ -1,9 +1,7 @@
 import React, { ReactElement } from "react";
 
-import { Writer } from "@workbook/types";
-
+import Tag from "@common/components/Tag";
 import ShareIcon from "public/assets/icon/share.svg";
-import Tag from "../Tag";
 
 interface TitleSectionProps {
   category: string;

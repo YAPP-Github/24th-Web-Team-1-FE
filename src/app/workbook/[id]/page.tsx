@@ -9,6 +9,8 @@ import { useQuery } from "@tanstack/react-query";
 
 import SubscribePopup from "src/shared/components/ExternalControlOpenDialog";
 
+import TitleSection from "@shared/components/TitleSection";
+
 import CurriculumSection from "@workbook/components/CurriculumSection";
 import OverviewSection from "@workbook/components/OverviewSection";
 import SubscribeForm from "@workbook/components/SubscribeForm";
@@ -19,8 +21,6 @@ import { getWorkbookId } from "@workbook/utils";
 
 import SubscribeBottomBar from "@main/components/SubscribeBottomBar";
 import { SUBSCRIBE_TITLES } from "@main/constants/main";
-
-import TitleSection from "@common/components/TitleSection";
 
 const SUBSCRIBE_POPUP_TITLE = (
   <div className="h3-bold text-lg text-black">
