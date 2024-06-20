@@ -26,7 +26,7 @@ export interface WorkbookInfo {
   description: string;
   category: string;
   createdAt: string;
-  writerIds: Writer[];
+  writers: Writer[];
   articles: Article[];
 }
 

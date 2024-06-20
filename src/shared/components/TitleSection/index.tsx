@@ -9,6 +9,8 @@ import { usePathname } from "next/navigation";
 import { Button } from "@shared/components/ui/button";
 import LinkShare from "../../../common/components/LinkShare";
 
+
+
 interface TitleSectionProps {
   category: string;
   title: string;
@@ -20,6 +22,7 @@ export default function TitleSection({
   title,
   editorComponent,
 }: TitleSectionProps) {
+
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
 

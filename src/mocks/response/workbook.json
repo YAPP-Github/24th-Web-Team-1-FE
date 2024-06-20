@@ -1,36 +1,38 @@
 {
-    "message": "String",
-    "data": {
+  "data": {
+    "id": 1,
+    "mainImageUrl": "/main_img.png",
+    "title": "재태크, 투자 필수 용어 모음집",
+    "description": "사회 초년생부터, 직장인, 은퇴자까지 모두가 알아야 할 기본적인 재태크, 투자 필수 용어 모음집 입니다.",
+    "category": "경제",
+    "createdAt": "2024-06-19T15:00:03.943077",
+    "writers": [
+      {
         "id": 1,
-        "name": 1,
-        "mainImageUrl": "/main_img.png",
-        "title": "재태크, 투자 필수 용어 모음집",
-        "description": "사회 초년생부터, 직장인, 은퇴자까지 모두가 알아야 할 기본적인 재태크, 투자 필수 용어 모음집 입니다.",
-        "category": "경제",
-        "createdAt": "TIMESTAMP",
-        "writerIds": [
-            {
-                "id": 1,
-                "name": "안나포"
-            },
-            {
-                "id": 1,
-                "name": "퓨퓨"
-            },
-            {
-                "id": 1,
-                "name": "프레소"
-            }
-        ],
-        "articles": [
-            {
-                "id": 1,
-                "title": "ISA(개인종합자산관리계좌)란?"
-            },
-            {
-                "id": 2,
-                "title": "ISA(개인종합자산관리계좌)란? ISA(개인종합자산관리계좌)란? ISA(개인종합자산관리계좌)란? ISA(개인종합자산관리계좌)란? ISA(개인종합자산관리계좌)란? ISA(개인종합자산관리계좌)란?"
-            }
-        ]
-    }
+        "name": "안나포",
+        "url": "http://localhost:8080/api/v1/users/1"
+      },
+      {
+        "id": 2,
+        "name": "퓨퓨",
+        "url": "http://localhost:8080/api/v1/users/2"
+      },
+      {
+        "id": 3,
+        "name": "프레소",
+        "url": "http://localhost:8080/api/v1/users/3"
+      }
+    ],
+    "articles": [
+      {
+        "id": 1,
+        "title": "ISA(개인종합자산관리계좌)란?"
+      },
+      {
+        "id": 2,
+        "title": "ISA(개인종합자산관리계좌)란? ISA(개인종합자산관리계좌)란? ISA(개인종합자산관리계좌)란? ISA(개인종합자산관리계좌)란? ISA(개인종합자산관리계좌)란? ISA(개인종합자산관리계좌)란?"
+      }
+    ]
+  },
+  "message": "성공"
 }
