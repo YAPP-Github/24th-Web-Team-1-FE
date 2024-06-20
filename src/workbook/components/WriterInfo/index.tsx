@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 
 import { WorkbookInfo } from "@workbook/types";
 
@@ -8,12 +8,12 @@ export default function WriterInfo({ writers }: WriterInfoProps) {
   return (
     <div className="flex flex-row">
       {writers.map((writer, idx) => (
-        <React.Fragment key={idx}>
+        <Fragment key={idx}>
           <span className="sub2-bold text-text-gray1">{writer.name}</span>
           {idx < writers.length - 1 && (
             <span className="sub2-bold text-text-gray1"> · </span>
           )}
-        </React.Fragment>
+        </Fragment>
       ))}
     </div>
   );
