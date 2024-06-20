@@ -8,6 +8,7 @@ import { LINK_SHARE_CONTENT } from "@common/constants/linkShareContent";
 import LinkShareContent from "../LinkShareContent";
 import { usePathname } from "next/navigation";
 import LinkSharedDescription from "../LinkShareDescription";
+import { Button } from "@shared/components/ui/button";
 
 interface TitleSectionProps {
   category: string;
@@ -31,15 +32,14 @@ export default function TitleSection({
     <>
       <header className="flex flex-col gap-[12px]">
         <Tag title={category} />
-        <div className="flex items-center">
+        <div className="space-between flex items-center">
           <h1 className="h1-bold text-[28px] text-black">{title}</h1>
-          <div className="ml-auto">
-            <ShareIcon
-              width={16}
-              height={22}
-              onClick={onClickControlOpenDialog}
-            />
-          </div>
+          <Button
+            className="bg-transprent hover:bg-transprent"
+            onClick={onClickControlOpenDialog}
+          >
+            <ShareIcon width={16} height={22} />
+          </Button>
         </div>
         <section className="mt-[2px]">{editorComponent}</section>
       </header>
