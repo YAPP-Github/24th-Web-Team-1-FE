@@ -49,7 +49,7 @@ function LinkSharedTitle({ title }: LinkSharedTitleProps) {
 
 interface LinkSharedDescriptionProps extends HTMLAttributes<HTMLSpanElement> {}
 function LinkSharedDescription({ content }: LinkSharedDescriptionProps) {
-  return <span className="body3-medium pt-[10px]">{content}</span>;
+  return <span className="body3-medium">{content}</span>;
 }
 
 const LinkShare = {
