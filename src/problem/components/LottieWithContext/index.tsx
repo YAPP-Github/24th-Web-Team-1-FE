@@ -1,21 +1,19 @@
 "use client";
 import { useParams } from "next/navigation";
 
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import { useMutationState } from "@tanstack/react-query";
 
 import LottieClient from "@common/components/Lottie";
-import ProblemListContext from "@common/context/problemListContext";
 import { QUERY_KEY } from "@problem/remotes/api";
-import { AnswerCheckInfo } from "@problem/types/problemInfo";
 import lottieJson from "public/assets/Problem_Complete.json";
+import useProblemIdsViewModel from "@article/models/useProblemIdsViewModel";
+import { AnswerCheckInfo } from "@problem/types/problemInfo";
 
 export default function LottieWithContext() {
   const { problemId } = useParams<{ problemId: string }>();
-  const {
-    states: { currentProblemIdx, totalProblem },
-  } = useContext(ProblemListContext);
+  const { isExistNextProblem } = useProblemIdsViewModel();
   const problemAnswerInfo = useMutationState({
     filters: {
       mutationKey: [QUERY_KEY.POST_PROBLEM_ANSWER, problemId],
@@ -24,7 +22,7 @@ export default function LottieWithContext() {
   });
 
   const isVisibleLottie =
-    Boolean(problemAnswerInfo[0]) && currentProblemIdx + 1 === totalProblem;
+    Boolean(problemAnswerInfo[0]) && !isExistNextProblem();
 
   return isVisibleLottie && <LottieClient animationData={lottieJson} />;
 }
