@@ -24,6 +24,7 @@ export default function ArticleTitle() {
     ...getArticleQueryOptions({ articleId }),
     staleTime: 2000,
   });
+
   useEffect(
     function setProblemIdsData() {
       if (articleInfo) setProblemIds(articleInfo.problemIds);
