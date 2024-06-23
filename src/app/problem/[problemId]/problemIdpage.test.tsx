@@ -6,11 +6,7 @@ import QueryClientProviders from "@shared/components/queryClientProvider";
 import { createQueryProviderWrapper } from "@shared/constants/createQueryProvider";
 
 import ProblemPage from "./page";
-import ProblemListContext, {
-  defaultProblemListActions,
-  defaultProblemListStates,
-} from "@common/context/problemListContext";
-import { ProblemListContextInfo } from "@common/types/problemListContextInfo";
+
 import ProblemContext, {
   defaultActions,
   defaultStates,
@@ -29,28 +25,21 @@ vi.mock("next/navigation", async () => {
       push: vi.fn(),
     })),
     useParams: vi.fn(() => ({
-      get: vi.fn(),
-      query: {
-        problemId: "1",
-      },
+      problemId: "1",
     })),
   };
 });
 
 const renderWithContext = ({
   problemContextValue,
-  problemListContextValue,
 }: {
   problemContextValue: ProblemContextInfo;
-  problemListContextValue: ProblemListContextInfo;
 }) => {
   return render(
     <QueryClientProviders>
-      <ProblemListContext.Provider value={problemListContextValue}>
-        <ProblemContext.Provider value={problemContextValue}>
-          <ProblemPage />
-        </ProblemContext.Provider>
-      </ProblemListContext.Provider>
+      <ProblemContext.Provider value={problemContextValue}>
+        <ProblemPage />
+      </ProblemContext.Provider>
     </QueryClientProviders>,
   );
 };
@@ -60,10 +49,6 @@ describe("문제풀기 페이지 테스트", () => {
       problemContextValue: {
         ...defaultStates,
         ...defaultActions,
-      },
-      problemListContextValue: {
-        ...defaultProblemListStates,
-        ...defaultProblemListActions,
       },
     });
 
@@ -81,10 +66,6 @@ describe("문제풀기 페이지 테스트", () => {
       problemContextValue: {
         ...defaultStates,
         ...defaultActions,
-      },
-      problemListContextValue: {
-        ...defaultProblemListStates,
-        ...defaultProblemListActions,
       },
     });
 

@@ -21,10 +21,7 @@ vi.mock("next/navigation", async () => {
       push: vi.fn(),
     })),
     useParams: vi.fn(() => ({
-      get: vi.fn(),
-      query: {
-        problemId: "1",
-      },
+      problemId: "1",
     })),
   };
 });

@@ -17,12 +17,9 @@ vi.mock("next/navigation", () => {
       replace: vi.fn(),
       prefetch: vi.fn(),
     }),
-    useParams: () => ({
-      get: () => {},
-      query: {
-        problemId: "1",
-      },
-    }),
+    useParams: vi.fn(() => ({
+      problemId: "1",
+    })),
   };
 });
 

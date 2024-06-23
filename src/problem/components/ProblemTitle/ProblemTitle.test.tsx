@@ -4,15 +4,19 @@ import QueryClientProviders from "@shared/components/queryClientProvider";
 
 import ProblemTitle from ".";
 import { PROBLEM_TITLE_INFO } from "@problem/constants/problemInfo";
-import { render, screen, waitFor } from "@testing-library/react";
-vi.mock("next/navigation", () => {
+import { render, renderHook, screen, waitFor } from "@testing-library/react";
+import { useQuery } from "@tanstack/react-query";
+import { getProblemQueryOptions } from "@problem/remotes/getProblemQueryOptions";
+import { createQueryProviderWrapper } from "@shared/constants/createQueryProvider";
+
+vi.mock("next/navigation", async () => {
+  const actual =
+    await vi.importActual<typeof import("next/navigation")>("next/navigation");
   return {
-    useParams: () => ({
-      get: () => {},
-      query: {
-        problemId: "1",
-      },
-    }),
+    ...actual,
+    useParams: vi.fn(() => ({
+      problemId: "1",
+    })),
   };
 });
 const renderWithQueryClient = () => {
@@ -25,19 +29,26 @@ const renderWithQueryClient = () => {
 
 describe("퀴즈 정보 불러오기 테스트", () => {
   it("퀴즈 불러와서 페이지에 보이는지 확인", async () => {
-    await waitFor(async () => renderWithQueryClient());
+    renderWithQueryClient();
+    const { result } = renderHook(
+      () => useQuery({ ...getProblemQueryOptions({ problemId: "1" }) }),
+      { wrapper: createQueryProviderWrapper() },
+    );
+    await waitFor(() => expect(result.current.isSuccess).toBe(true));
+    await waitFor(
+      () => {
+        const heading = screen.getByRole("heading", { level: 3 });
+        if (PROBLEM_TITLE_INFO.NO_ANSWER.title)
+          expect(heading).toHaveTextContent(PROBLEM_TITLE_INFO.NO_ANSWER.title);
+        if (PROBLEM_TITLE_INFO.NO_ANSWER.className)
+          expect(heading).toHaveClass(PROBLEM_TITLE_INFO.NO_ANSWER.className);
 
-    await waitFor(() => {
-      const heading = screen.getByRole("heading", { level: 3 });
-      if (PROBLEM_TITLE_INFO.NO_ANSWER.title)
-        expect(heading).toHaveTextContent(PROBLEM_TITLE_INFO.NO_ANSWER.title);
-      if (PROBLEM_TITLE_INFO.NO_ANSWER.className)
-        expect(heading).toHaveClass(PROBLEM_TITLE_INFO.NO_ANSWER.className);
-
-      const subHeading = screen.getByRole("heading", { level: 2 });
-      expect(subHeading).toHaveTextContent(
-        "ETF(상장지수펀드)의 특징이 아닌것은?",
-      );
-    });
+        const subHeading = screen.getByRole("heading", { level: 2 });
+        expect(subHeading).toHaveTextContent(
+          "ETF(상장지수펀드)의 특징이 아닌것은?",
+        );
+      },
+      { timeout: 500 },
+    );
   });
 });
