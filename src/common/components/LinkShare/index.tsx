@@ -6,10 +6,13 @@ import { cn } from "@shared/utils/cn";
 import LinkShareIcon from "public/assets/icon/link.svg";
 import React, { HTMLAttributes } from "react";
 
-interface LinkShareContentProps extends HTMLAttributes<HTMLDivElement> {
+interface LinkShareContentProps {
   href: string;
 }
-function LinkShareContent({ href }: LinkShareContentProps) {
+const LinkShareContent = React.forwardRef<
+  HTMLDivElement,
+  LinkShareContentProps
+>(({ href, ...props }, ref) => {
   const { toast } = useToast();
 
   const onClickLinkCopy = async () => {
@@ -21,7 +24,7 @@ function LinkShareContent({ href }: LinkShareContentProps) {
     }
   };
   return (
-    <section className="relative">
+    <section className="relative" ref={ref} {...props}>
       <Input
         className="body3-medium h-[48px] bg-text-gray3 !opacity-100"
         value={href}
@@ -40,17 +43,24 @@ function LinkShareContent({ href }: LinkShareContentProps) {
       </Button>
     </section>
   );
-}
+});
+LinkShareContent.displayName = "LinkShareContent";
 
-interface LinkSharedTitleProps extends HTMLAttributes<HTMLSpanElement> {}
-function LinkSharedTitle({ title }: LinkSharedTitleProps) {
+const LinkSharedTitle = React.forwardRef<
+  HTMLSpanElement,
+  HTMLAttributes<HTMLSpanElement>
+>(({ title, ...props }, ref) => {
   return <span className="h3-bold">{title}</span>;
-}
+});
+LinkSharedTitle.displayName = "LinkSharedTitle";
 
-interface LinkSharedDescriptionProps extends HTMLAttributes<HTMLSpanElement> {}
-function LinkSharedDescription({ content }: LinkSharedDescriptionProps) {
+const LinkSharedDescription = React.forwardRef<
+  HTMLSpanElement,
+  HTMLAttributes<HTMLSpanElement>
+>(({ content, ...props }, ref) => {
   return <span className="body3-medium">{content}</span>;
-}
+});
+LinkSharedDescription.displayName = "LinkSharedDescription";
 
 const LinkShare = {
   Content: LinkShareContent,
