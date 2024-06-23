@@ -10,9 +10,9 @@ export default function ArticleBottomButton({
   title,
 }: ArticleBottomButtonProps) {
   const { push } = useRouter();
-  const { currentProblemId } = useProblemIdsViewModel();
+  const { getCurrentProblemId } = useProblemIdsViewModel();
   const onClickGoProblem = () => {
-    push(`/problem/${currentProblemId}`);
+    push(`/problem/${getCurrentProblemId()}`);
   };
   return (
     <Button className="w-full rounded-none bg-main" onClick={onClickGoProblem}>

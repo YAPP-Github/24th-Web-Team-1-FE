@@ -1,6 +1,9 @@
 import { useProblemModuleStore } from "@common/stores/problemModuleStore";
 
 export default function useProblemIdsViewModel() {
+  const getCurrentProblemId = useProblemModuleStore(
+    (state) => state.getCurrentProblemId,
+  );
   const setProblemIds = useProblemModuleStore((state) => state.setProblemIds);
   const problemIds = useProblemModuleStore((state) => state.problemIds);
   const currentIdx = useProblemModuleStore((state) => state.currentIdx);
@@ -24,12 +27,10 @@ export default function useProblemIdsViewModel() {
     return problemIds[currentIdx + 1];
   };
 
-  const currentProblemId = problemIds[currentIdx];
-
   return {
     setProblemIds,
     clearProblem,
-    currentProblemId,
+    getCurrentProblemId,
     currentIdx,
     prevSetProblemId,
     getTagCurrentProblemText,
