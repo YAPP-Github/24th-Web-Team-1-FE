@@ -14,7 +14,7 @@ export interface ExternalControlOpenDialogProps {
   title: React.ReactNode;
   content: React.ReactNode;
   footer?: React.ReactNode;
-  description?: string;
+  description?: React.ReactNode;
 }
 
 export default function ExternalControlOpenDialog({
@@ -25,14 +25,13 @@ export default function ExternalControlOpenDialog({
   footer,
   description,
 }: ExternalControlOpenDialogProps) {
-
   useEffect(function removeAttribute() {
     const intervalId = setInterval(() => {
-      document.body.removeAttribute('data-scroll-locked');
+      document.body.removeAttribute("data-scroll-locked");
     }, 100);
     return () => clearInterval(intervalId);
-  } , []);
-  
+  }, []);
+
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogContent className="z-50 w-full max-w-[380px] rounded">
