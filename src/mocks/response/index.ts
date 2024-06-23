@@ -11,9 +11,9 @@ import article1 from "./article1.json";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
-  [apiRoutes.problems + "get"]: problems1,
-  [apiRoutes.problems + "2"]: problems2,
-  [apiRoutes.problems + "3"]: problems3,
+  [apiRoutes.problems + "get1"]: problems1,
+  [apiRoutes.problems + "get2"]: problems2,
+  [apiRoutes.problems + "get3"]: problems3,
   [apiRoutes.submitAnswer + "1"]: submitAnswer1,
   [apiRoutes.submitAnswer + "2"]: submitAnswer2,
   [apiRoutes.submitAnswer + "3"]: submitAnswer3,
