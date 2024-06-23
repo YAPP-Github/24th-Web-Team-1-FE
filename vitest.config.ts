@@ -3,7 +3,7 @@ import { defineConfig } from "vitest/config";
 import react from "@vitejs/plugin-react";
 import { resolve as pathResolve } from "node:path";
 const resolve = (path: string) => pathResolve(__dirname, path);
-import svgr from 'vite-plugin-svgr';
+import svgr from "vite-plugin-svgr";
 
 export default defineConfig({
   plugins: [
@@ -23,6 +23,9 @@ export default defineConfig({
     include: ["src/**/**/*.test.{ts,tsx}"],
     exclude: ["/.next"],
     setupFiles: "./vitest.setup.ts",
+    deps: {
+      inline: ["vitest-canvas-mock"],
+    },
   },
   resolve: {
     alias: {
@@ -35,7 +38,7 @@ export default defineConfig({
       "@mocks": resolve("src/mocks"),
       "@common": resolve("src/common"),
       "@problem": resolve("src/problem"),
-      'public': resolve("public")
+      public: resolve("public"),
     },
   },
 });

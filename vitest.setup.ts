@@ -1,5 +1,5 @@
 import { afterAll, afterEach, beforeAll, vi } from "vitest";
-
+import "vitest-canvas-mock";
 import "@testing-library/jest-dom";
 import { server } from "@mocks/server";
 import { cleanup } from "@testing-library/react";
