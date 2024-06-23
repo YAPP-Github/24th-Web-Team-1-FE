@@ -1,6 +1,6 @@
 "use client";
 
-import useProblemIdsViewModel from "@article/models/useProblemIdsViewModel";
+import useProblemIdsViewModel from "@common/models/useProblemIdsViewModel";
 import { Button } from "@shared/components/ui/button";
 import { useRouter } from "next/navigation";
 import React, { HTMLAttributes } from "react";

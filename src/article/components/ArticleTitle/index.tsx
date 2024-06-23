@@ -11,7 +11,7 @@ import TitleSection from "@shared/components/TitleSection";
 import { getArticleQueryOptions } from "@article/remotes/getArticleQueryOptions";
 
 import WriterInfo from "../WriterInfo";
-import useProblemIdsViewModel from "@article/models/useProblemIdsViewModel";
+import useProblemIdsViewModel from "@common/models/useProblemIdsViewModel";
 
 export default function ArticleTitle() {
   const { articleId } = useParams<{ articleId: string }>();

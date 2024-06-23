@@ -12,7 +12,7 @@ import QuizContext from "@problem/context/problemContext";
 import { QUERY_KEY } from "@problem/remotes/api";
 import { postProblemAnswerMutationOptions } from "@problem/remotes/postProblemAnswerOption";
 import { AnswerCheckInfo } from "@problem/types/problemInfo";
-import useProblemIdsViewModel from "@article/models/useProblemIdsViewModel";
+import useProblemIdsViewModel from "@common/models/useProblemIdsViewModel";
 
 export default function AnswerSubmitButton() {
   const { push } = useRouter();
