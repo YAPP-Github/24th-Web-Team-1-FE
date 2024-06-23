@@ -73,9 +73,17 @@ export const articleHandler = http.get(
   },
 );
 
+export const unsubscriptionHandler = http.post(
+  apiRoutes.unsubscribe,
+  async() => {
+    return HttpResponse.json({ message: "post success" })
+  }
+)
+
 export const handlers = [
   problemsHandler,
   submitAnswerHandler,
   workbookHandler,
   articleHandler,
+  unsubscriptionHandler
 ];
