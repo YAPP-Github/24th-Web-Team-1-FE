@@ -1,16 +1,11 @@
 "use client";
 
-import { useParams } from "next/navigation";
-
-import React from "react";
-
-import { useQuery } from "@tanstack/react-query";
-
-import TitleSection from "@shared/components/TitleSection";
-
 import { getArticleQueryOptions } from "@article/remotes/getArticleQueryOptions";
-
+import { useQuery } from "@tanstack/react-query";
+import { useParams } from "next/navigation";
+import React from "react";
 import WriterInfo from "../WriterInfo";
+import TitleSection from "@shared/components/TitleSection";
 
 export default function ArticleTitle() {
   const { articleId } = useParams<{ articleId: string }>();
