@@ -19,7 +19,7 @@ export default function AnswerChoiceList() {
 
   return (
     <section className="mt-[39px] flex flex-col gap-[9px]">
-      {problemInfo.contents.map((answerValue) => (
+      {problemInfo?.contents?.map((answerValue) => (
         <AnswerChoiceButton {...answerValue} key={answerValue.content} />
       ))}
     </section>
