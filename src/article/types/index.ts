@@ -1,4 +1,4 @@
-import { ProblemListInfo } from "@common/types/problemListContextInfo";
+import { ProblemListInfo } from "@problem/types/problemInfo";
 import { Article, WorkbookInfo, Writer } from "@workbook/types";
 
 export type ArticleDetail = {

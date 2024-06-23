@@ -7,12 +7,12 @@ import { useMutation, useMutationState } from "@tanstack/react-query";
 
 import { Button } from "@shared/components/ui/button";
 
-import ProblemListContext from "@common/context/problemListContext";
 import { BUTTON_INFO } from "@problem/constants/answerButtonInfo";
 import QuizContext from "@problem/context/problemContext";
 import { QUERY_KEY } from "@problem/remotes/api";
 import { postProblemAnswerMutationOptions } from "@problem/remotes/postProblemAnswerOption";
 import { AnswerCheckInfo } from "@problem/types/problemInfo";
+import useProblemIdsViewModel from "@common/models/useProblemIdsViewModel";
 
 export default function AnswerSubmitButton() {
   const { push } = useRouter();
@@ -21,17 +21,12 @@ export default function AnswerSubmitButton() {
     states: { choiceAnswer },
     actions: { initProblemContextInfo },
   } = useContext(QuizContext);
-  const {
-    states: { currentProblemIdx, totalProblem, problemList },
-    actions: { nextProblemIdx },
-  } = useContext(ProblemListContext);
+  const { isExistNextProblem, nextSetProblemId, clearProblem } =
+    useProblemIdsViewModel();
 
-  const { mutate: postProblemAnswer, isSuccess: isPostAnswerSuccess } =
-    useMutation({
-      ...postProblemAnswerMutationOptions({ problemId }),
-      onSuccess: (data) => data.data,
-    });
-
+  const { mutate: postProblemAnswer } = useMutation({
+    ...postProblemAnswerMutationOptions({ problemId }),
+  });
   const problemAnswerInfo = useMutationState({
     filters: {
       mutationKey: [QUERY_KEY.POST_PROBLEM_ANSWER, problemId],
@@ -41,18 +36,22 @@ export default function AnswerSubmitButton() {
 
   const onPostProblemAnswer = () => {
     if (choiceAnswer && !problemAnswerInfo[0])
-      postProblemAnswer({ choiceAns: choiceAnswer });
+      postProblemAnswer({ choiceAns: choiceAnswer.toString() });
 
-    if (problemAnswerInfo[0] && currentProblemIdx + 1 < totalProblem) {
+    if (problemAnswerInfo[0] && isExistNextProblem()) {
       initProblemContextInfo();
-      nextProblemIdx();
-      push(`/problem/${problemList[currentProblemIdx + 1]}`);
+      const problemId = nextSetProblemId();
+      push(`/problem/${problemId}`);
     }
-    if (currentProblemIdx === totalProblem) push("/");
+    if (problemAnswerInfo[0] && !isExistNextProblem()) {
+      clearProblem();
+      push("/");
+    }
   };
+  const isPostAnswerSuccess = problemAnswerInfo[0];
   const result =
     (isPostAnswerSuccess &&
-      currentProblemIdx + 1 === totalProblem &&
+      !isExistNextProblem() &&
       BUTTON_INFO.LINK_TO_MAIN.title) ||
     (isPostAnswerSuccess && BUTTON_INFO.POST_SUBMIT.title) ||
     (!isPostAnswerSuccess && BUTTON_INFO.PRE_ANSWER_SELECT.title);
@@ -64,11 +63,10 @@ export default function AnswerSubmitButton() {
     (choiceAnswer &&
       !isPostAnswerSuccess &&
       BUTTON_INFO.POST_ANSWER_PRE_SUBMIT.className) ||
-    (choiceAnswer &&
-      isPostAnswerSuccess &&
-      currentProblemIdx + 1 === totalProblem &&
+    (isPostAnswerSuccess &&
+      !isExistNextProblem() &&
       BUTTON_INFO.LINK_TO_MAIN.className) ||
-    (choiceAnswer && isPostAnswerSuccess && BUTTON_INFO.POST_SUBMIT.className);
+    (isPostAnswerSuccess && BUTTON_INFO.POST_SUBMIT.className);
 
   return (
     <Button className={style || ""} onClick={onPostProblemAnswer}>

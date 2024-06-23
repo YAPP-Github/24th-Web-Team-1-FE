@@ -10,14 +10,13 @@ export const problemsHandler = http.get(apiRoutes.problems, ({ params }) => {
   if (!problemId) {
     return new HttpResponse(null, { status: 404 });
   }
-
   switch (problemId) {
     case "1":
-      return HttpResponse.json(response[apiRoutes.problems + "1"]);
+      return HttpResponse.json(response[apiRoutes.problems + "get1"]);
     case "2":
-      return HttpResponse.json(response[apiRoutes.problems + "2"]);
+      return HttpResponse.json(response[apiRoutes.problems + "get2"]);
     case "3":
-      return HttpResponse.json(response[apiRoutes.problems + "3"]);
+      return HttpResponse.json(response[apiRoutes.problems + "get3"]);
   }
 });
 

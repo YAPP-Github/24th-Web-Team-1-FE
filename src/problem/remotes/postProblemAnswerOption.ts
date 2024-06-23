@@ -3,7 +3,7 @@ import { UseMutationOptions } from "@tanstack/react-query";
 import { ApiResponse, axiosRequest } from "@api/api-config";
 
 import { API_ROUTE, QUERY_KEY } from "./api";
-import { AnswerCheckInfo } from "@problem/types/problemInfo";
+import { AnswerCheckInfo, ProblemAnswerBody } from "@problem/types/problemInfo";
 
 export const postProblemAnswer = (
   params: ProblemAnswerParams,
@@ -26,8 +26,4 @@ export const postProblemAnswerMutationOptions = (
 
 type ProblemAnswerParams = {
   problemId: string;
-};
-
-type ProblemAnswerBody = {
-  choiceAns: string;
 };

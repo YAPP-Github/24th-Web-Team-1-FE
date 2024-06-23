@@ -3,14 +3,12 @@
 import React, { useContext } from "react";
 
 import Tag from "@common/components/Tag";
-import ProblemListContext from "@common/context/problemListContext";
+import useProblemIdsViewModel from "@common/models/useProblemIdsViewModel";
 
 export default function TagList() {
-  const {
-    states: { totalProblem, currentProblemIdx },
-  } = useContext(ProblemListContext);
+  const { getTagCurrentProblemText } = useProblemIdsViewModel();
+  const tagList = [getTagCurrentProblemText()];
 
-  const tagList = [`${currentProblemIdx + 1}/${totalProblem}`];
   return (
     <div className="mt-[4px] flex gap-[12px]">
       {tagList.map((tag) => (
