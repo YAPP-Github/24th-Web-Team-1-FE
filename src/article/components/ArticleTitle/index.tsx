@@ -1,6 +1,9 @@
 "use client";
 
+import { getArticleQueryOptions } from "@article/remotes/getArticleQueryOptions";
+import { useQuery } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
+
 
 import React, { useEffect } from "react";
 
