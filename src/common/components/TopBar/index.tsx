@@ -2,15 +2,22 @@
 
 import { useRouter } from "next/navigation";
 
-import React from "react";
+import React, { HTMLAttributes } from "react";
 
 import IcBack from "public/assets/icon25/back_25.svg";
 
-export default function TopBar() {
+interface TopBarProps extends HTMLAttributes<HTMLDivElement> {}
+export default function TopBar({ onClick }: TopBarProps) {
   const { back } = useRouter();
+
+  const onClickBackIcon = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (onClick) onClick(e);
+    back();
+  };
+
   return (
-    <div className="flex h-[66px] items-center">
-      <IcBack onClick={() => back()} />
+    <div className="flex h-[66px] items-center" onClick={onClickBackIcon}>
+      <IcBack />
     </div>
   );
 }
