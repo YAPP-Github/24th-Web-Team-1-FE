@@ -13,12 +13,18 @@ import ChoiceFillCircleSvg from "../ChoiceFillCircleSvg";
 import { ANSWER_CHOICHE_BUTTON_INFO } from "@problem/constants/problemInfo";
 import ProblemContext from "@problem/context/problemContext";
 import { QUERY_KEY } from "@problem/remotes/api";
-import { AnswerCheckInfo, AnswerChoiceInfo } from "@problem/types/problemInfo";
+import {
+  AnswerCheckInfo,
+  AnswerChoiceClientInfo,
+  ProblemAnswerBody,
+  ProblemAnswerMuationState,
+} from "@problem/types/problemInfo";
 
-interface AnswerChoiceButtonProps extends Pick<AnswerChoiceInfo, "content"> {}
+interface AnswerChoiceButtonProps extends AnswerChoiceClientInfo {}
 
 export default function AnswerChoiceButton({
   content,
+  number,
 }: AnswerChoiceButtonProps) {
   const { problemId } = useParams<{ problemId: string }>();
   const [className, setClassName] = useState(
@@ -29,50 +35,53 @@ export default function AnswerChoiceButton({
     actions: { updateChoiceAnswer },
   } = useContext(ProblemContext);
 
-  const problemAnswerInfo = useMutationState({
+  const problemAnswersInfo = useMutationState<ProblemAnswerMuationState>({
     filters: {
       mutationKey: [QUERY_KEY.POST_PROBLEM_ANSWER, problemId],
     },
-    select: (mutation) => mutation.state.data as ApiResponse<AnswerCheckInfo>,
+    select: (mutation) => {
+      return {
+        data: mutation.state.data as ApiResponse<AnswerCheckInfo>,
+        variables: mutation.state.variables as ProblemAnswerBody,
+      };
+    },
   });
+  const problemAnswerInfo = problemAnswersInfo[0];
 
   const onClickAnswerChoice = () => {
-    if (problemAnswerInfo.length === 0) updateChoiceAnswer(content);
+    if (!problemAnswerInfo) updateChoiceAnswer(number);
   };
+
+  const answerResultInfo = problemAnswerInfo?.data;
+  const postChoiceAnswer = problemAnswerInfo?.variables;
 
   useEffect(
     function setButtonClassName() {
-      if (!problemAnswerInfo.length) {
-        if (choiceAnswer === content)
+      if (!answerResultInfo) {
+        if (choiceAnswer === number)
           setClassName(
             ANSWER_CHOICHE_BUTTON_INFO.CURRENT_CHOICE_ANSWER.className,
           );
 
-        if (choiceAnswer !== content)
+        if (choiceAnswer !== number)
           setClassName(ANSWER_CHOICHE_BUTTON_INFO.INIT_CHOICE_ANSWER.className);
       }
 
-      if (problemAnswerInfo.length) {
-        const problemAnswerData = problemAnswerInfo[0];
-        if (problemAnswerData) {
-          if (problemAnswerData.data.answer === content)
-            setClassName(
-              ANSWER_CHOICHE_BUTTON_INFO.CHOICE_ANSWER_CORRECT.className,
-            );
-          if (
-            problemAnswerData.data.isSolved === false &&
-            choiceAnswer === content
-          ) {
-            setClassName(
-              ANSWER_CHOICHE_BUTTON_INFO.CHOICE_ANSWER_FAIL.className,
-            );
-          }
+      if (answerResultInfo) {
+        if (answerResultInfo.data.answer === number)
+          setClassName(
+            ANSWER_CHOICHE_BUTTON_INFO.CHOICE_ANSWER_CORRECT.className,
+          );
+        if (
+          answerResultInfo.data.isSolved === false &&
+          number === postChoiceAnswer.choiceAns
+        ) {
+          setClassName(ANSWER_CHOICHE_BUTTON_INFO.CHOICE_ANSWER_FAIL.className);
         }
       }
     },
-    [choiceAnswer, content, problemAnswerInfo],
+    [choiceAnswer, number, problemAnswerInfo],
   );
-  const problemAnswerData = problemAnswerInfo[0];
 
   return (
     <Button
@@ -85,14 +94,14 @@ export default function AnswerChoiceButton({
       <span className="sub2-bold">{content}</span>
       <ChoiceFillCircleSvg
         fill={
-          (!problemAnswerData && choiceAnswer === content && "white") ||
-          (!problemAnswerData && choiceAnswer !== content && "#A5A5A5") ||
-          (problemAnswerData &&
-            problemAnswerData.data.answer === content &&
+          (!answerResultInfo && choiceAnswer === number && "white") ||
+          (!answerResultInfo && choiceAnswer !== number && "#A5A5A5") ||
+          (answerResultInfo &&
+            answerResultInfo.data.answer === number &&
             "#0166B3") ||
-          (problemAnswerData &&
-            problemAnswerData.data.isSolved === false &&
-            choiceAnswer === content &&
+          (answerResultInfo &&
+            answerResultInfo.data.isSolved === false &&
+            postChoiceAnswer.choiceAns === number &&
             "#B00020") ||
           ""
         }
