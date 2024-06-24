@@ -7,8 +7,8 @@ const TitleSkeleton = () => {
       <h3 className={PROBLEM_TITLE_INFO.NO_ANSWER.className}>
         {PROBLEM_TITLE_INFO.NO_ANSWER.title}
       </h3>
-      <Skeleton className="h-[30px]" style={{ width: "80%" }} />
-      <Skeleton className="h-[30px]" style={{ width: "60%" }} />
+      <Skeleton className="skeleton h-[30px] w-[80%]" />
+      <Skeleton className="skeleton h-[30px] w-[60%]" />
     </header>
   );
 };
@@ -18,7 +18,7 @@ const AnswerChoiceListSkeleton = () => {
   return (
     <section className="mt-[39px] flex flex-col gap-[9px]">
       {skeletonItems.map((_, index) => (
-        <Skeleton key={index} className="h-[50px] w-full" />
+        <Skeleton key={index} className="skeleton h-[50px] w-full" />
       ))}
     </section>
   );

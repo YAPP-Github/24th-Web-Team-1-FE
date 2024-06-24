@@ -9,10 +9,9 @@ export const problemsHandler = http.get(
   apiRoutes.problems,
   async ({ params }) => {
     const problemId = params?.problemId;
-    if (!problemId) {
+    if (!problemId || problemId === "undefined") {
       return new HttpResponse(null, { status: 404 });
     }
-    await delay(_3_SECOND);
     switch (problemId) {
       case "1":
         return HttpResponse.json(response[apiRoutes.problems + "get1"]);
@@ -21,6 +20,7 @@ export const problemsHandler = http.get(
       case "3":
         return HttpResponse.json(response[apiRoutes.problems + "get3"]);
     }
+    return HttpResponse.json(response[apiRoutes.problems + "get1"]);
   },
 );
 
@@ -64,7 +64,6 @@ export const articleHandler = http.get(
   apiRoutes.article,
   async ({ params }) => {
     const articleId = params?.articleId;
-    await delay(_3_SECOND);
 
     if (!articleId) {
       return new HttpResponse(null, { status: 404 });
