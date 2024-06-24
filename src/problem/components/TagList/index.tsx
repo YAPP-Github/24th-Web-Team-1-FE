@@ -3,7 +3,7 @@
 import React, { useContext } from "react";
 
 import Tag from "@common/components/Tag";
-import useProblemIdsViewModel from "@common/models/useProblemIdsViewModel";
+import { useProblemIdsViewModel } from "@common/models/useProblemIdsViewModel";
 
 export default function TagList() {
   const { getTagCurrentProblemText } = useProblemIdsViewModel();
