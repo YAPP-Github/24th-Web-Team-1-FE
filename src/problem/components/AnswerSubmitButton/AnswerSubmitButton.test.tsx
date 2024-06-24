@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from "vitest";
+import { beforeAll, describe, expect, it, vi } from "vitest";
 
 import QueryClientProviders from "@shared/components/queryClientProvider";
 
@@ -12,19 +12,7 @@ import { ProblemContextInfo } from "@problem/types/problemContextInfo";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-vi.mock("next/navigation", async () => {
-  const actual =
-    await vi.importActual<typeof import("next/navigation")>("next/navigation");
-  return {
-    ...actual,
-    useRouter: vi.fn(() => ({
-      push: vi.fn(),
-    })),
-    useParams: vi.fn(() => ({
-      problemId: "1",
-    })),
-  };
-});
+const isExistNextProblem = vi.fn(() => true);
 
 const renderWithContext = (contextValue: ProblemContextInfo) => {
   return render(
@@ -35,7 +23,45 @@ const renderWithContext = (contextValue: ProblemContextInfo) => {
     </QueryClientProviders>,
   );
 };
+
 describe("퀴즈 푸는 하단 버튼, 정답 선택에 따른 테스트", () => {
+  beforeAll(() => {
+    vi.mock("next/navigation", async () => {
+      const actual =
+        await vi.importActual<typeof import("next/navigation")>(
+          "next/navigation",
+        );
+      return {
+        ...actual,
+        useRouter: vi.fn(() => ({
+          push: vi.fn(),
+        })),
+        useParams: vi.fn(() => ({
+          problemId: "1",
+        })),
+      };
+    });
+
+    vi.mock("@common/models/useProblemIdsViewModel", async () => {
+      const actual = await vi.importActual<
+        typeof import("@common/models/useProblemIdsViewModel")
+      >("@common/models/useProblemIdsViewModel");
+      return {
+        ...actual,
+        useProblemIdsViewModel: vi.fn(() => ({
+          isExistNextProblem,
+          nextSetProblemId: vi.fn(),
+          clearProblem: vi.fn(),
+          setProblemIds: vi.fn(),
+          getCurrentProblemId: vi.fn(),
+          getTagCurrentProblemText: vi.fn(),
+          currentIdx: 0,
+          prevSetProblemId: vi.fn(),
+        })),
+      };
+    });
+  });
+
   it("정답 선택 전 상태", () => {
     renderWithContext({
       ...defaultStates,
