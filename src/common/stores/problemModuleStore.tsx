@@ -15,9 +15,7 @@ interface ProblemAction {
   clearProblem: () => void;
 }
 
-export type ProblemModuleStore = ProblemIdsData &
-  CurrentProblem &
-  ProblemAction;
+type ProblemModuleStore = ProblemIdsData & CurrentProblem & ProblemAction;
 
 export const useProblemModuleStore = create(
   persist<ProblemModuleStore>(

@@ -1,6 +1,6 @@
 import { useProblemModuleStore } from "@common/stores/problemModuleStore";
 
-export const useProblemIdsViewModel = () => {
+export default function useProblemIdsViewModel() {
   const getCurrentProblemId = useProblemModuleStore(
     (state) => state.getCurrentProblemId,
   );
@@ -37,4 +37,4 @@ export const useProblemIdsViewModel = () => {
     nextSetProblemId,
     isExistNextProblem,
   };
-};
+}

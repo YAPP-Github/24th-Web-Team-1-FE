@@ -9,7 +9,7 @@ import TitleSection from "@shared/components/TitleSection";
 import { getArticleQueryOptions } from "@article/remotes/getArticleQueryOptions";
 
 import WriterInfo from "../WriterInfo";
-import { useProblemIdsViewModel } from "@common/models/useProblemIdsViewModel";
+import useProblemIdsViewModel from "@common/models/useProblemIdsViewModel";
 import { useQuery } from "@tanstack/react-query";
 
 export default function ArticleTitle() {

@@ -8,7 +8,7 @@ import { useMutationState } from "@tanstack/react-query";
 import LottieClient from "@common/components/Lottie";
 import { QUERY_KEY } from "@problem/remotes/api";
 import lottieJson from "public/assets/Problem_Complete.json";
-import { useProblemIdsViewModel } from "@common/models/useProblemIdsViewModel";
+import useProblemIdsViewModel from "@common/models/useProblemIdsViewModel";
 import { AnswerCheckInfo } from "@problem/types/problemInfo";
 
 export default function LottieWithContext() {

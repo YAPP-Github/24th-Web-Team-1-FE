@@ -1,5 +1,5 @@
 "use client";
-import { useProblemIdsViewModel } from "@common/models/useProblemIdsViewModel";
+import useProblemIdsViewModel from "@common/models/useProblemIdsViewModel";
 import TopBar from "@common/components/TopBar";
 import React from "react";
 

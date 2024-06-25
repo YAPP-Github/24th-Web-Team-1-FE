@@ -6,15 +6,14 @@ import { useQuery } from "@tanstack/react-query";
 import { getArticleQueryOptions } from "@article/remotes/getArticleQueryOptions";
 import { createQueryProviderWrapper } from "@shared/constants/createQueryProvider";
 
-vi.mock("next/navigation", async () => {
-  const actual =
-    await vi.importActual<typeof import("next/navigation")>("next/navigation");
-
+vi.mock("next/navigation", () => {
   return {
-    ...actual,
-    useParams: vi.fn(() => ({
-      articleId: "1",
-    })),
+    useParams: () => ({
+      get: () => {},
+      query: {
+        articleId: "1",
+      },
+    }),
   };
 });
 
