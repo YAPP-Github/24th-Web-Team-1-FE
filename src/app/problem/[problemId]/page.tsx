@@ -7,6 +7,7 @@ import ProblemExplanation from "@problem/components/ProblemExplanation";
 import ProblemTitle from "@problem/components/ProblemTitle";
 import TagList from "@problem/components/TagList";
 import { ProblemProvider } from "@problem/context/problemContext";
+import ProblemCompleteDialog from "@problem/components/ProblemCompleteDialog";
 export default function ProblemPage() {
   return (
     <ProblemProvider>
@@ -19,6 +20,7 @@ export default function ProblemPage() {
           <ProblemExplanation className="mt-[30px]" />
         </div>
         <AnswerSubmitButton />
+        <ProblemCompleteDialog />
       </>
     </ProblemProvider>
   );
