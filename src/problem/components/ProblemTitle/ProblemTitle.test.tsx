@@ -29,12 +29,17 @@ const renderWithQueryClient = () => {
 
 describe("퀴즈 정보 불러오기 테스트", () => {
   it("퀴즈 불러와서 페이지에 보이는지 확인", async () => {
-    renderWithQueryClient();
+    const { container } = renderWithQueryClient();
     const { result } = renderHook(
       () => useQuery({ ...getProblemQueryOptions({ problemId: "1" }) }),
       { wrapper: createQueryProviderWrapper() },
     );
-    await waitFor(() => expect(result.current.isSuccess).toBe(true));
+    await waitFor(() => expect(result.current.isLoading).toBeTruthy());
+    expect(container.firstChild?.childNodes[1]).toHaveClass("skeleton");
+    expect(container.firstChild?.childNodes[2]).toHaveClass("skeleton");
+
+    await waitFor(() => expect(result.current.isSuccess).toBeTruthy());
+
     await waitFor(
       () => {
         const heading = screen.getByRole("heading", { level: 3 });

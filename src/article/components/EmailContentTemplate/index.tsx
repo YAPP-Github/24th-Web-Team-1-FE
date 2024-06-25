@@ -4,6 +4,7 @@ import { getArticleQueryOptions } from "@article/remotes/getArticleQueryOptions"
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
 import React from "react";
+import ArticleSkeleton from "../ArticleSkeleton";
 
 export default function EmailContentTemplate() {
   const { articleId } = useParams<{ articleId: string }>();
@@ -16,7 +17,8 @@ export default function EmailContentTemplate() {
     staleTime: 2000,
   });
 
-  if (isLoading) return <div>로딩중</div>;
+  if (isLoading || isError)
+    return <ArticleSkeleton.EmailContentTemplateSkeleton />;
   if (isError || !articleInfo) return <div>에러</div>;
 
   const { content } = articleInfo;

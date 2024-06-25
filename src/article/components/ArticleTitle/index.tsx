@@ -11,6 +11,7 @@ import { getArticleQueryOptions } from "@article/remotes/getArticleQueryOptions"
 import WriterInfo from "../WriterInfo";
 import { useProblemIdsViewModel } from "@common/models/useProblemIdsViewModel";
 import { useQuery } from "@tanstack/react-query";
+import ArticleSkeleton from "../ArticleSkeleton";
 
 export default function ArticleTitle() {
   const { articleId } = useParams<{ articleId: string }>();
@@ -31,8 +32,7 @@ export default function ArticleTitle() {
     [articleInfo],
   );
 
-  // TODO : Loading 컴포넌트 제작 필요
-  if (isLoading) return <div>로딩중</div>;
+  if (isLoading || isError) return <ArticleSkeleton.TitleSkeleton />;
   if (isError || !articleInfo) return <div>에러</div>;
 
   const { category, title, writer } = articleInfo;

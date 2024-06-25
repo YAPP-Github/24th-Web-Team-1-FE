@@ -15,7 +15,10 @@ export default function ArticleBottomButton({
     push(`/problem/${getCurrentProblemId()}`);
   };
   return (
-    <Button className="w-full rounded-none bg-main" onClick={onClickGoProblem}>
+    <Button
+      className="h-[50px] w-full rounded-none bg-main"
+      onClick={onClickGoProblem}
+    >
       {title}
     </Button>
   );
