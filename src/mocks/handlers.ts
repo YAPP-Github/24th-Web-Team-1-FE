@@ -5,20 +5,24 @@ import { _3_SECOND, delay } from "@shared/utils/delay";
 
 import response from "./response";
 
-export const problemsHandler = http.get(apiRoutes.problems, ({ params }) => {
-  const problemId = params?.problemId;
-  if (!problemId) {
-    return new HttpResponse(null, { status: 404 });
-  }
-  switch (problemId) {
-    case "1":
-      return HttpResponse.json(response[apiRoutes.problems + "get1"]);
-    case "2":
-      return HttpResponse.json(response[apiRoutes.problems + "get2"]);
-    case "3":
-      return HttpResponse.json(response[apiRoutes.problems + "get3"]);
-  }
-});
+export const problemsHandler = http.get(
+  apiRoutes.problems,
+  async ({ params }) => {
+    const problemId = params?.problemId;
+    if (!problemId || problemId === "undefined") {
+      return new HttpResponse(null, { status: 404 });
+    }
+    switch (problemId) {
+      case "1":
+        return HttpResponse.json(response[apiRoutes.problems + "get1"]);
+      case "2":
+        return HttpResponse.json(response[apiRoutes.problems + "get2"]);
+      case "3":
+        return HttpResponse.json(response[apiRoutes.problems + "get3"]);
+    }
+    return HttpResponse.json(response[apiRoutes.problems + "get1"]);
+  },
+);
 
 export const submitAnswerHandler = http.post(
   apiRoutes.submitAnswer,
