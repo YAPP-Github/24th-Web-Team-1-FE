@@ -91,7 +91,12 @@ export default function AnswerChoiceButton({
       onClick={onClickAnswerChoice}
     >
       <span className="sub2-bold">{content}</span>
+
       <ChoiceFillCircleSvg
+        isChoice={
+          (!answerResultInfo && choiceAnswer === number) ||
+          Boolean(answerResultInfo)
+        }
         fill={
           (!answerResultInfo && choiceAnswer === number && "white") ||
           (!answerResultInfo && choiceAnswer !== number && "#A5A5A5") ||
