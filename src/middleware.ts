@@ -1,24 +1,43 @@
-import type { NextRequest } from 'next/server';
+import type { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 
 const withOutAuthList = [];
 const withAuthList = [];
 
 // NOTE : 인증없이 접근할 수 있는 페이지에 대한 middleware
 const withOutAuth = async (req: NextRequest) => {
-  return req;
+  return NextResponse.next();
 };
 
 // NOTE : 인증기반 접근할 수 있는 페이지에 대한 middleware
-const withAuth = async (req: NextRequest) => {};
+const withAuth = async (req: NextRequest) => {
+  return NextResponse.next();
+};
 
-export default async function middleware(req: NextRequest) {
+export default function middleware(req: NextRequest) {
   const isWithAuth = true;
   const isWithOutAuth = false;
 
+  const nextUrl = req.nextUrl.clone();
+  const email = nextUrl.searchParams.get("user");
+
+  if (email) {
+    nextUrl.searchParams.delete("user");
+    const decodedEmail = decodeURIComponent(email);
+
+    // Store the email in a cookie to pass to the page
+    const response = NextResponse.redirect(nextUrl);
+    response.cookies.set("user-email", decodedEmail);
+
+    return response;
+  }
+
   if (isWithAuth) return withAuth(req);
   if (isWithOutAuth) return withOutAuth(req);
+
+  return NextResponse.next();
 }
 
 export const config = {
-  matcher: [],
+  matcher: ["/unsubscribe/:path*"],
 };

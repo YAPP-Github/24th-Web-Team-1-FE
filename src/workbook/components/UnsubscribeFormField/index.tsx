@@ -11,7 +11,7 @@ const UnsubscribeFormField = () => {
 
   return (
     <Controller
-      name="reason"
+      name="opinion"
       control={control}
       render={({ field }) => (
         <FormItem>
@@ -24,7 +24,7 @@ const UnsubscribeFormField = () => {
               {...field}
               value={field.value || ""}
               maxLength={255}
-              className={`rounded-[10px] text-[16px] focus-visible:ring-transparent ${formState.errors.reason ? "border-error" : ""}`}
+              className={`rounded-[10px] text-[16px] focus-visible:ring-transparent ${formState.errors.opinion ? "border-error" : ""}`}
             />
           </FormControl>
           <FormMessage className="text-gray1">

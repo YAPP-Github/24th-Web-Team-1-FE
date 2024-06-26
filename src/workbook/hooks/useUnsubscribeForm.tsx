@@ -16,7 +16,7 @@ export const useUnsubscribeForm = () => {
   const form = useForm<UnsubscribeFormData>({
     resolver: zodResolver(unSubscribeSchema),
     defaultValues: {
-      reason: "",
+      opinion: "",
     },
   });
 
