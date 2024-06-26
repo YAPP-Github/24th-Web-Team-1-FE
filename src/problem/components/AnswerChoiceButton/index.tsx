@@ -95,7 +95,9 @@ export default function AnswerChoiceButton({
       <ChoiceFillCircleSvg
         isChoice={
           (!answerResultInfo && choiceAnswer === number) ||
-          Boolean(answerResultInfo)
+          (answerResultInfo &&
+            (postChoiceAnswer.sub === number ||
+              answerResultInfo.data.answer === number))
         }
         fill={
           (!answerResultInfo && choiceAnswer === number && "white") ||
@@ -107,6 +109,7 @@ export default function AnswerChoiceButton({
             answerResultInfo.data.isSolved === false &&
             postChoiceAnswer.sub === number &&
             "#B00020") ||
+          (answerResultInfo && postChoiceAnswer.sub !== number && "#A5A5A5") ||
           ""
         }
       />
