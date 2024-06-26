@@ -13,11 +13,12 @@ import TitleSection from "@shared/components/TitleSection";
 
 import CurriculumSection from "@workbook/components/CurriculumSection";
 import OverviewSection from "@workbook/components/OverviewSection";
-import SubscribeForm from "@workbook/components/SubscribeForm";
 import WorkbookSkeleton from "@workbook/components/WorkbookSkeleton";
 import WriterInfo from "@workbook/components/WriterInfo";
 import { getWorkbookQueryOptions } from "@workbook/remotes/getWorkbookQueryOptions";
 import { getWorkbookId } from "@workbook/utils";
+
+import SubscribeForm from "@subscription/components/SubscribeForm";
 
 import SubscribeBottomBar from "@main/components/SubscribeBottomBar";
 import { SUBSCRIBE_TITLES } from "@main/constants/main";
