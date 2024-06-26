@@ -66,7 +66,6 @@ export default function AnswerChoiceButton({
         if (choiceAnswer !== number)
           setClassName(ANSWER_CHOICHE_BUTTON_INFO.INIT_CHOICE_ANSWER.className);
       }
-
       if (answerResultInfo) {
         if (answerResultInfo.data.answer === number)
           setClassName(
@@ -74,7 +73,7 @@ export default function AnswerChoiceButton({
           );
         if (
           answerResultInfo.data.isSolved === false &&
-          number === postChoiceAnswer.choiceAns
+          number === postChoiceAnswer.sub
         ) {
           setClassName(ANSWER_CHOICHE_BUTTON_INFO.CHOICE_ANSWER_FAIL.className);
         }
@@ -101,7 +100,7 @@ export default function AnswerChoiceButton({
             "#0166B3") ||
           (answerResultInfo &&
             answerResultInfo.data.isSolved === false &&
-            postChoiceAnswer.choiceAns === number &&
+            postChoiceAnswer.sub === number &&
             "#B00020") ||
           ""
         }
