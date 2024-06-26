@@ -30,7 +30,11 @@ export default function ProblemCompleteDialog() {
 
   useEffect(
     function updateOpenDialog() {
-      setIsOpen(isPostAnswerSuccess && !isExistNextProblem());
+      if (isPostAnswerSuccess && !isExistNextProblem()) {
+        setTimeout(() => {
+          setIsOpen(isPostAnswerSuccess && !isExistNextProblem());
+        }, 5000);
+      }
     },
     [isPostAnswerSuccess],
   );

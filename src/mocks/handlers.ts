@@ -42,7 +42,7 @@ export const submitAnswerHandler = http.post(
       case "3":
         return HttpResponse.json(response[apiRoutes.submitAnswer + "3"]);
     }
-    return HttpResponse.json(response[apiRoutes.submitAnswer + "1"]);
+    return HttpResponse.json(response[apiRoutes.submitAnswer + "3"]);
   },
 );
 export const workbookHandler = http.get(

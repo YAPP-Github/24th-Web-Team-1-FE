@@ -2,10 +2,12 @@ import React from "react";
 
 interface ChoiceFillCircleSvgProps {
   fill: string;
+  isChoice: boolean;
 }
 
 export default function ChoiceFillCircleSvg({
   fill,
+  isChoice,
 }: ChoiceFillCircleSvgProps) {
   return (
     <svg
@@ -16,7 +18,7 @@ export default function ChoiceFillCircleSvg({
       fill="none"
     >
       <circle cx="8" cy="8" r="7.5" stroke={fill} />
-      <circle cx="8" cy="8" r="3.5" fill={fill} stroke={fill} />
+      {isChoice && <circle cx="8" cy="8" r="3.5" fill={fill} stroke={fill} />}
     </svg>
   );
 }

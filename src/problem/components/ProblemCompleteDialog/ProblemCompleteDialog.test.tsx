@@ -10,12 +10,9 @@ import {
   waitFor,
 } from "@testing-library/react";
 import ProblemCompleteDialog from ".";
-import { useMutation, useMutationState } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { postProblemAnswerMutationOptions } from "@problem/remotes/postProblemAnswerOption";
 import { createQueryProviderWrapper } from "@shared/constants/createQueryProvider";
-import { QUERY_KEY } from "@problem/remotes/api";
-import { ApiResponse } from "@api/api-config";
-import { AnswerCheckInfo } from "@problem/types/problemInfo";
 import { LINK_SHARE_CONTENT } from "@common/constants/linkShareContent";
 
 const isExistNextProblem = vi.fn(() => false);
@@ -39,7 +36,7 @@ describe("마지막 선택지 제출완료시 팝업 노출 테스트", () => {
           prefetch: vi.fn(),
         }),
         useParams: vi.fn(() => ({
-          problemId: "1",
+          problemId: "3",
         })),
       };
     });
@@ -63,11 +60,13 @@ describe("마지막 선택지 제출완료시 팝업 노출 테스트", () => {
     });
   });
   it("정답 mutation 호출시 팝업 노출 확인, 및 닫기 테스트", async () => {
+    vi.useFakeTimers();
+
     renderWithQueryClient();
     const { result } = renderHook(
       () =>
         useMutation({
-          ...postProblemAnswerMutationOptions({ problemId: "1" }),
+          ...postProblemAnswerMutationOptions({ problemId: "3" }),
         }),
       {
         wrapper: createQueryProviderWrapper(),
@@ -79,6 +78,7 @@ describe("마지막 선택지 제출완료시 팝업 노출 테스트", () => {
     });
 
     await waitFor(() => expect(result.current.isSuccess).toBeTruthy());
+    act(() => vi.advanceTimersByTime(6000));
 
     expect(
       screen.getByText(LINK_SHARE_CONTENT.ALL_PROBLEM_SUBMIT.DESCRIPTION),

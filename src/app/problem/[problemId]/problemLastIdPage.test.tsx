@@ -1,6 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
+import {
+  afterEach,
+  beforeAll,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  vi,
+} from "vitest";
 
 import QueryClientProviders from "@shared/components/queryClientProvider";
 import { createQueryProviderWrapper } from "@shared/constants/createQueryProvider";
@@ -13,7 +21,13 @@ import ProblemContext, {
 } from "@problem/context/problemContext";
 import { getProblemQueryOptions } from "@problem/remotes/getProblemQueryOptions";
 import { ProblemContextInfo } from "@problem/types/problemContextInfo";
-import { render, renderHook, screen, waitFor } from "@testing-library/react";
+import {
+  act,
+  render,
+  renderHook,
+  screen,
+  waitFor,
+} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { mockProblemModuleStore } from "@common/stores/mockZustandStore";
 
@@ -93,6 +107,8 @@ describe("마지막 문제 풀이 페이지 테스트", () => {
     });
   });
   it("정답 선택 이후 정답 제출하기 버튼 클릭 시, 해설 컴포넌트 잘 노출되고, 로띠 재생이후 메인으로 넘어가기", async () => {
+    vi.useFakeTimers();
+
     const { result } = renderHook(
       () => useQuery({ ...getProblemQueryOptions({ problemId: "3" }) }),
       { wrapper: createQueryProviderWrapper() },
@@ -108,12 +124,8 @@ describe("마지막 문제 풀이 페이지 테스트", () => {
     const answerSubmitButton = screen.getByRole("button", {
       name: "정답 제출하기",
     });
-    await userEvent.click(answerSubmitButton);
 
-    const problemCompleteDialogCloseButton = screen.getByRole("button", {
-      name: "Close",
-    });
-    await userEvent.click(problemCompleteDialogCloseButton);
+    await userEvent.click(answerSubmitButton);
 
     const problemExplanation = screen.getByRole("article");
     expect(problemExplanation.childElementCount).toBe(2);
@@ -122,6 +134,11 @@ describe("마지막 문제 풀이 페이지 테스트", () => {
     expect(explanationParagraphy.textContent).toBe(
       "이 유행어는 개발자 PM 영모님께서 종준이에게 주로 사용하는 말입니다. ",
     );
+
+    const problemCompleteDialogCloseButton = screen.getByRole("button", {
+      name: "Close",
+    });
+    await userEvent.click(problemCompleteDialogCloseButton);
 
     const nextProblemButton = screen.getByRole("button", {
       name: "메인으로 가기",

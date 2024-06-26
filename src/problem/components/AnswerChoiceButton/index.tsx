@@ -85,13 +85,20 @@ export default function AnswerChoiceButton({
   return (
     <Button
       className={cn(
-        "flex w-full justify-between rounded-s border-[1px] border-text-gray3 px-3",
+        "flex h-[56px] w-full justify-between rounded-s border-[1px] border-text-gray3 px-3",
         className,
       )}
       onClick={onClickAnswerChoice}
     >
       <span className="sub2-bold">{content}</span>
+
       <ChoiceFillCircleSvg
+        isChoice={
+          (!answerResultInfo && choiceAnswer === number) ||
+          (answerResultInfo &&
+            (postChoiceAnswer.sub === number ||
+              answerResultInfo.data.answer === number))
+        }
         fill={
           (!answerResultInfo && choiceAnswer === number && "white") ||
           (!answerResultInfo && choiceAnswer !== number && "#A5A5A5") ||
@@ -102,6 +109,7 @@ export default function AnswerChoiceButton({
             answerResultInfo.data.isSolved === false &&
             postChoiceAnswer.sub === number &&
             "#B00020") ||
+          (answerResultInfo && postChoiceAnswer.sub !== number && "#A5A5A5") ||
           ""
         }
       />

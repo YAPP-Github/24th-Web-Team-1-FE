@@ -13,6 +13,7 @@ import { QUERY_KEY } from "@problem/remotes/api";
 import { postProblemAnswerMutationOptions } from "@problem/remotes/postProblemAnswerOption";
 import { AnswerCheckInfo } from "@problem/types/problemInfo";
 import { useProblemIdsViewModel } from "@common/models/useProblemIdsViewModel";
+import { cn } from "@shared/utils/cn";
 
 export default function AnswerSubmitButton() {
   const { push } = useRouter();
@@ -69,7 +70,10 @@ export default function AnswerSubmitButton() {
     (isPostAnswerSuccess && BUTTON_INFO.POST_SUBMIT.className);
 
   return (
-    <Button className={style || ""} onClick={onPostProblemAnswer}>
+    <Button
+      className={cn(style || "", "h-[56px]")}
+      onClick={onPostProblemAnswer}
+    >
       {result}
     </Button>
   );
