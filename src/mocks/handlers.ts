@@ -29,7 +29,7 @@ export const submitAnswerHandler = http.post(
   async ({ request, params }) => {
     const problemId = params?.problemId;
     const result: any = await request.json();
-    const choiceAns = result?.choiceAns;
+    const choiceAns = result?.sub;
     if (!choiceAns && problemId) {
       return new HttpResponse(null, { status: 404 });
     }
@@ -42,6 +42,7 @@ export const submitAnswerHandler = http.post(
       case "3":
         return HttpResponse.json(response[apiRoutes.submitAnswer + "3"]);
     }
+    return HttpResponse.json(response[apiRoutes.submitAnswer + "1"]);
   },
 );
 export const workbookHandler = http.get(

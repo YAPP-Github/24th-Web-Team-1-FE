@@ -110,8 +110,12 @@ describe("마지막 문제 풀이 페이지 테스트", () => {
     });
     await userEvent.click(answerSubmitButton);
 
-    const problemExplanation = screen.getByRole("article");
+    const problemCompleteDialogCloseButton = screen.getByRole("button", {
+      name: "Close",
+    });
+    await userEvent.click(problemCompleteDialogCloseButton);
 
+    const problemExplanation = screen.getByRole("article");
     expect(problemExplanation.childElementCount).toBe(2);
     const explanationParagraphy = screen.getByRole("paragraph");
 
