@@ -4,8 +4,9 @@ import { Button } from "@shared/components/ui/button";
 import { cn } from "@shared/utils/cn";
 
 import { buttonStyle } from "@workbook/constants/buttonStyle";
-import { UNSUBSCRIBE_FORM } from "@workbook/constants/unsubscribe";
-import { useUnsubscribeForm } from "@workbook/hooks/useUnsubscribeForm";
+
+import { UNSUBSCRIBE_FORM } from "@subscription/constants/unsubscribe";
+import { useUnsubscribeForm } from "@subscription/hooks/useUnsubscribeForm";
 
 import UnsubscribeFormField from "../UnsubscribeFormField";
 

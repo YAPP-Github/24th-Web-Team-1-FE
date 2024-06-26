@@ -4,9 +4,9 @@ import { z } from "zod";
 
 import { useToast } from "@shared/components/ui/use-toast";
 
-import { UNSUBSCRIBE_CONFIRM } from "@workbook/constants/unsubscribe";
-import { unSubscribeSchema } from "@workbook/schemas";
-import { UnsubscribeFormData } from "@workbook/types";
+import { UNSUBSCRIBE_CONFIRM } from "@subscription/constants/unsubscribe";
+import { unSubscribeSchema } from "@subscription/schemas";
+import { UnsubscribeFormData } from "@subscription/types/subscription";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 

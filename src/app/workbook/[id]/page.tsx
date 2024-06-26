@@ -18,10 +18,9 @@ import WriterInfo from "@workbook/components/WriterInfo";
 import { getWorkbookQueryOptions } from "@workbook/remotes/getWorkbookQueryOptions";
 import { getWorkbookId } from "@workbook/utils";
 
+import SubscribeBottomBar from "@subscription/components/SubscribeBottomBar";
 import SubscribeForm from "@subscription/components/SubscribeForm";
-
-import SubscribeBottomBar from "@main/components/SubscribeBottomBar";
-import { SUBSCRIBE_TITLES } from "@main/constants/main";
+import { SUBSCRIBE_TITLES } from "@subscription/constants/main";
 
 const SUBSCRIBE_POPUP_TITLE = (
   <div className="h3-bold text-lg text-black">

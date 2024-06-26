@@ -4,9 +4,9 @@ import { z } from 'zod';
 
 import { useToast } from '@shared/components/ui/use-toast';
 
-import { SUBSCRIBE_USER_ACTIONS } from '@main/constants/main';
-import { emailSubscribeSchema } from '@main/schemas';
-import { EmailSubscribeFormData } from '@main/types';
+import { SUBSCRIBE_USER_ACTIONS } from '@subscription/constants/main';
+import { emailSubscribeSchema } from '@subscription/schemas';
+import { EmailSubscribeFormData } from '@subscription/types/subscription';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 

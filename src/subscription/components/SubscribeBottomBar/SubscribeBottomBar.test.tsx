@@ -2,8 +2,7 @@ import { Control,useForm } from 'react-hook-form';
 
 import { describe, expect, it, vi } from 'vitest';
 
-// import as module
-import { EMAIL_CONTROL, SUBSCRIBE_ANNOUCE, SUBSCRIBE_TITLES,SUBSCRIBE_USER_ACTIONS } from '@main/constants/main';
+import { EMAIL_CONTROL, SUBSCRIBE_ANNOUCE, SUBSCRIBE_TITLES, SUBSCRIBE_USER_ACTIONS } from '@subscription/constants/main';
 
 import SubscribeBottomBar from '.';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
@@ -11,7 +10,7 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 // Mock the useSubscribeForm hook
 const mockOnSubmit = vi.fn();
 
-vi.mock('@main/hooks/useSubscribeForm', () => ({
+vi.mock('@subscription/hooks/useSubscribeForm', () => ({
   useSubscribeForm: () => {
     const form = useForm({
       resolver: async (data) => {
