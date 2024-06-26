@@ -75,7 +75,7 @@ describe("마지막 선택지 제출완료시 팝업 노출 테스트", () => {
     );
 
     act(() => {
-      result.current.mutate({ choiceAns: "2" });
+      result.current.mutate({ sub: "2" });
     });
 
     await waitFor(() => expect(result.current.isSuccess).toBeTruthy());

@@ -36,7 +36,7 @@ export default function AnswerSubmitButton() {
 
   const onPostProblemAnswer = () => {
     if (choiceAnswer && !problemAnswerInfo[0])
-      postProblemAnswer({ choiceAns: choiceAnswer.toString() });
+      postProblemAnswer({ sub: choiceAnswer.toString() });
 
     if (problemAnswerInfo[0] && isExistNextProblem()) {
       initProblemContextInfo();

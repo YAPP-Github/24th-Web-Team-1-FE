@@ -43,7 +43,7 @@ export type AnswerCheckInfo = {
 };
 
 export type ProblemAnswerBody = {
-  choiceAns: string;
+  sub: string;
 };
 
 export type ProblemAnswerMuationState = {
