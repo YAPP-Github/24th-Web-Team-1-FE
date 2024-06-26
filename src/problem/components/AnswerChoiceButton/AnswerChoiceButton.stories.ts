@@ -13,6 +13,7 @@ export const InitChoiceAnswer = {
   args: {
     // className: ANSWER_CHOICHE_BUTTON_INFO.INIT_CHOICE_ANSWER.className,
     content: "유동성",
+    number: "1",
   },
 } satisfies Story;
 
@@ -20,6 +21,7 @@ export const CurrentChoiceAnswer = {
   args: {
     // className: ANSWER_CHOICHE_BUTTON_INFO.CURRENT_CHOICE_ANSWER.className,
     content: "유동성",
+    number: "1",
   },
 } satisfies Story;
 
@@ -27,6 +29,7 @@ export const ChoiceAnswerCorrect = {
   args: {
     // className: ANSWER_CHOICHE_BUTTON_INFO.CHOICE_ANSWER_CORRECT.className,
     content: "유동성",
+    number: "1",
   },
 } satisfies Story;
 
@@ -34,5 +37,6 @@ export const ChoiceAnswerFail = {
   args: {
     // className: ANSWER_CHOICHE_BUTTON_INFO.CHOICE_ANSWER_FAIL.className,
     content: "유동성",
+    number: "1",
   },
 } satisfies Story;

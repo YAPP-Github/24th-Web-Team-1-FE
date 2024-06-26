@@ -17,12 +17,9 @@ vi.mock("next/navigation", () => {
       replace: vi.fn(),
       prefetch: vi.fn(),
     }),
-    useParams: () => ({
-      get: () => {},
-      query: {
-        problemId: "1",
-      },
-    }),
+    useParams: vi.fn(() => ({
+      problemId: "1",
+    })),
   };
 });
 
@@ -36,7 +33,7 @@ const renderWithQueryClient = () => {
 
 describe("선택지 불러오고, 버튼 클릭으로 버튼 ui 변경", () => {
   it("contents 불러오는지 확인", async () => {
-    await waitFor(() => renderWithQueryClient());
+    const { container } = renderWithQueryClient();
     const { result } = renderHook(
       () =>
         useQuery({
@@ -44,6 +41,9 @@ describe("선택지 불러오고, 버튼 클릭으로 버튼 ui 변경", () => {
         }),
       { wrapper: createQueryProviderWrapper() },
     );
+    await waitFor(() => result.current.isLoading);
+    expect(container.firstChild?.childNodes[1]).toHaveClass("skeleton");
+
     await waitFor(() => result.current.isSuccess);
 
     expect(screen.getByText("유동성"));

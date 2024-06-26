@@ -2,18 +2,20 @@
 
 import { useParams } from "next/navigation";
 
-import React from "react";
-
-import { useQuery } from "@tanstack/react-query";
+import React, { useEffect } from "react";
 
 import TitleSection from "@shared/components/TitleSection";
 
 import { getArticleQueryOptions } from "@article/remotes/getArticleQueryOptions";
 
 import WriterInfo from "../WriterInfo";
+import { useProblemIdsViewModel } from "@common/models/useProblemIdsViewModel";
+import { useQuery } from "@tanstack/react-query";
+import ArticleSkeleton from "../ArticleSkeleton";
 
 export default function ArticleTitle() {
   const { articleId } = useParams<{ articleId: string }>();
+  const { setProblemIds } = useProblemIdsViewModel();
   const {
     data: articleInfo,
     isLoading,
@@ -22,8 +24,15 @@ export default function ArticleTitle() {
     ...getArticleQueryOptions({ articleId }),
     staleTime: 2000,
   });
-  // TODO : Loading 컴포넌트 제작 필요
-  if (isLoading) return <div>로딩중</div>;
+
+  useEffect(
+    function setProblemIdsData() {
+      if (articleInfo) setProblemIds(articleInfo.problemIds);
+    },
+    [articleInfo],
+  );
+
+  if (isLoading || isError) return <ArticleSkeleton.TitleSkeleton />;
   if (isError || !articleInfo) return <div>에러</div>;
 
   const { category, title, writer } = articleInfo;
