@@ -85,7 +85,7 @@ export default function AnswerChoiceButton({
   return (
     <Button
       className={cn(
-        "flex w-full justify-between rounded-s border-[1px] border-text-gray3 px-3",
+        "flex h-[56px] w-full justify-between rounded-s border-[1px] border-text-gray3 px-3",
         className,
       )}
       onClick={onClickAnswerChoice}
