@@ -1,13 +1,11 @@
 import { usePathname } from 'next/navigation';
 
-import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { useMutation } from '@tanstack/react-query';
 
 import { useToast } from '@shared/components/ui/use-toast';
-
-import { getWorkbookId } from '@workbook/utils';
+import useWorkbookId from '@shared/hooks/useWorkbookId';
 
 import { SUBSCRIBE_USER_ACTIONS } from '@subscription/constants/subscribe';
 import { subscribeWorkbookOptions } from '@subscription/remotes/postSubscriptionQueryOptions';
@@ -19,11 +17,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 export const useSubscribeForm = () => {
   const { toast } = useToast();
   const pathname = usePathname()
-  const [workbookId, setWorkbookId] = useState<string>("")
-
-  useEffect(function getId() {
-    return setWorkbookId(getWorkbookId(pathname));
-  }, [pathname])
+  const workbookId = useWorkbookId(pathname)
   
   const form = useForm<EmailSubscribeFormData>({
     resolver: zodResolver(emailSubscribeSchema),
@@ -38,6 +32,8 @@ export const useSubscribeForm = () => {
   }));
 
   const onSubmit = (values: EmailSubscribeFormData) => {
+    console.log(workbookId);
+    
     try {
       subscribeWorkbook(values, {
         onSuccess: () => {
