@@ -1,35 +1,21 @@
 import { useQuery } from "@tanstack/react-query";
 
-import {
-  afterEach,
-  beforeAll,
-  beforeEach,
-  describe,
-  expect,
-  it,
-  vi,
-} from "vitest";
+import { beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
 
 import QueryClientProviders from "@shared/components/queryClientProvider";
 import { createQueryProviderWrapper } from "@shared/constants/createQueryProvider";
 
+import ProblemLayout from "../layout";
 import ProblemPage from "./page";
-
+import { mockProblemModuleStore } from "@common/stores/mockZustandStore";
 import ProblemContext, {
   defaultActions,
   defaultStates,
 } from "@problem/context/problemContext";
 import { getProblemQueryOptions } from "@problem/remotes/getProblemQueryOptions";
 import { ProblemContextInfo } from "@problem/types/problemContextInfo";
-import {
-  act,
-  render,
-  renderHook,
-  screen,
-  waitFor,
-} from "@testing-library/react";
+import { render, renderHook, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { mockProblemModuleStore } from "@common/stores/mockZustandStore";
 
 const isExistNextProblem = vi.fn(() => false);
 const clearProblem = vi.fn();
@@ -44,7 +30,9 @@ const renderWithContext = ({
   return render(
     <QueryClientProviders>
       <ProblemContext.Provider value={problemContextValue}>
-        <ProblemPage />
+        <ProblemLayout>
+          <ProblemPage />
+        </ProblemLayout>
       </ProblemContext.Provider>
     </QueryClientProviders>,
   );
@@ -82,6 +70,7 @@ describe("마지막 문제 풀이 페이지 테스트", () => {
           getTagCurrentProblemText: vi.fn(() => "3/3"),
           currentIdx: 0,
           prevSetProblemId: vi.fn(),
+          getArticlePathText: vi.fn(),
         })),
       };
     });
@@ -94,7 +83,11 @@ describe("마지막 문제 풀이 페이지 테스트", () => {
         ...defaultActions,
       },
     });
-    mockProblemModuleStore({ problemIds: [1, 2, 3], currentIdx: 2 });
+    mockProblemModuleStore({
+      problemIds: [1, 2, 3],
+      currentIdx: 2,
+      articleId: "1",
+    });
   });
 
   it("마지막 문제 가져오기 확인", async () => {

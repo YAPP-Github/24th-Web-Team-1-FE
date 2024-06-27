@@ -5,8 +5,9 @@ import { beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
 import QueryClientProviders from "@shared/components/queryClientProvider";
 import { createQueryProviderWrapper } from "@shared/constants/createQueryProvider";
 
+import ProblemLayout from "../layout";
 import ProblemPage from "./page";
-
+import { mockProblemModuleStore } from "@common/stores/mockZustandStore";
 import ProblemContext, {
   defaultActions,
   defaultStates,
@@ -15,7 +16,6 @@ import { getProblemQueryOptions } from "@problem/remotes/getProblemQueryOptions"
 import { ProblemContextInfo } from "@problem/types/problemContextInfo";
 import { render, renderHook, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { mockProblemModuleStore } from "@common/stores/mockZustandStore";
 
 const isExistNextProblem = vi.fn(() => true);
 const nextSetProblemId = vi.fn(() => "2");
@@ -30,7 +30,9 @@ const renderWithContext = ({
   return render(
     <QueryClientProviders>
       <ProblemContext.Provider value={problemContextValue}>
-        <ProblemPage />
+        <ProblemLayout>
+          <ProblemPage />
+        </ProblemLayout>
       </ProblemContext.Provider>
     </QueryClientProviders>,
   );
@@ -68,6 +70,7 @@ describe("첫 번째 문제풀기 페이지 테스트", () => {
           getTagCurrentProblemText: vi.fn(() => "1/3"),
           currentIdx: 0,
           prevSetProblemId: vi.fn(),
+          getArticlePathText: vi.fn(),
         })),
       };
     });
