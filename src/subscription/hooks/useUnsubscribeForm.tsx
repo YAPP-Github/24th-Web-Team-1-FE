@@ -32,7 +32,7 @@ export const useUnsubscribeForm = () => {
       const email = getCookie('user-email');
 
       // 폼 제출 성공 로직 추가
-      if (result.success && typeof email === "string") {
+      if (result.success && typeof email === "string") { // zod parse 가 가능하고, cookie 에 이메일이 존재한다면
         unsubscribeWorkbook(
           { email: decodeURIComponent(email), opinion: values.opinion },
           {
