@@ -11,7 +11,7 @@ import { useToast } from '@shared/components/ui/use-toast';
 
 import { getWorkbookId } from '@workbook/utils';
 
-import { EMAIL_CONTROL, SUBSCRIBE_USER_ACTIONS } from '@subscription/constants/main';
+import { EMAIL_CONTROL, SUBSCRIBE_USER_ACTIONS } from '@subscription/constants/subscribe';
 import { subscribeWorkbookOptions } from '@subscription/remotes/postSubscriptionQueryOptions';
 import { emailSubscribeSchema } from '@subscription/schemas';
 import { EmailSubscribeFormData } from '@subscription/types/subscription';

@@ -2,7 +2,7 @@ import { Control,useForm } from 'react-hook-form';
 
 import { describe, expect, it, vi } from 'vitest';
 
-import { EMAIL_CONTROL, SUBSCRIBE_ANNOUCE, SUBSCRIBE_TITLES, SUBSCRIBE_USER_ACTIONS } from '@subscription/constants/main';
+import { EMAIL_CONTROL, SUBSCRIBE_ANNOUCE, SUBSCRIBE_TITLES, SUBSCRIBE_USER_ACTIONS } from '@subscription/constants/subscribe';
 
 import SubscribeBottomBar from '.';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';

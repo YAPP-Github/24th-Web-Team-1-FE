@@ -20,7 +20,7 @@ import { getWorkbookId } from "@workbook/utils";
 
 import SubscribeBottomBar from "@subscription/components/SubscribeBottomBar";
 import SubscribeForm from "@subscription/components/SubscribeForm";
-import { SUBSCRIBE_TITLES } from "@subscription/constants/main";
+import { SUBSCRIBE_TITLES } from "@subscription/constants/subscribe";
 
 const SUBSCRIBE_POPUP_TITLE = (
   <div className="h3-bold text-lg text-black">

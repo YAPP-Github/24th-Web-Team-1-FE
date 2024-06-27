@@ -1,6 +1,6 @@
 import { z } from "zod"
 
-import { EMAIL_CONTROL } from "@subscription/constants/main"
+import { EMAIL_CONTROL } from "@subscription/constants/subscribe"
 import { UNSUBSCRIBE_FORM } from "@subscription/constants/unsubscribe"
 
 export const unSubscribeSchema = z.object({
