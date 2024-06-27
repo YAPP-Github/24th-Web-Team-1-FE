@@ -18,3 +18,8 @@ export type SubscribeBody = {
 }
 
 export interface MessageOnlyResponse extends Pick<ApiResponse<any>, 'message'> {}
+
+export type UnsubscribeBody = {
+    email: string
+    opinion: string
+}
