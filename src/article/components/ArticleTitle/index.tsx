@@ -4,14 +4,15 @@ import { useParams } from "next/navigation";
 
 import React, { useEffect } from "react";
 
+import { useQuery } from "@tanstack/react-query";
+
 import TitleSection from "@shared/components/TitleSection";
 
 import { getArticleQueryOptions } from "@article/remotes/getArticleQueryOptions";
 
+import ArticleSkeleton from "../ArticleSkeleton";
 import WriterInfo from "../WriterInfo";
 import { useProblemIdsViewModel } from "@common/models/useProblemIdsViewModel";
-import { useQuery } from "@tanstack/react-query";
-import ArticleSkeleton from "../ArticleSkeleton";
 
 export default function ArticleTitle() {
   const { articleId } = useParams<{ articleId: string }>();
@@ -27,7 +28,8 @@ export default function ArticleTitle() {
 
   useEffect(
     function setProblemIdsData() {
-      if (articleInfo) setProblemIds(articleInfo.problemIds);
+      if (articleInfo)
+        setProblemIds({ problemIds: articleInfo.problemIds, articleId });
     },
     [articleInfo],
   );
