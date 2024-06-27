@@ -17,7 +17,8 @@ export type SubscribeBody = {
     email: string
 }
 
-export interface MessageOnlyResponse extends Pick<ApiResponse<any>, 'message'> {}
+export type MessageOnlyResponse = Omit<ApiResponse<any>, 'message'>
+
 
 export type UnsubscribeBody = {
     email: string
