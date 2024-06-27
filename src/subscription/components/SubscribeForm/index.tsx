@@ -5,10 +5,8 @@ import { cn } from "@shared/utils/cn";
 
 import { buttonStyle } from "@workbook/constants/buttonStyle";
 
-import {
-  SUBSCRIBE_USER_ACTIONS,
-} from "@main/constants/main";
-import { useSubscribeForm } from "@main/hooks/useSubscribeForm";
+import { SUBSCRIBE_USER_ACTIONS } from "@subscription/constants/subscribe";
+import { useSubscribeForm } from "@subscription/hooks/useSubscribeForm";
 
 import SubscribeFormField from "../SubscribeFormField";
 

@@ -10,8 +10,8 @@ import {
 } from "@shared/components/ui/form"
 import { Input } from "@shared/components/ui/input";
 
-import { EMAIL_CONTROL, SUBSCRIBE_ANNOUCE, SUBSCRIBE_TITLES,SUBSCRIBE_USER_ACTIONS } from "@main/constants/main";
-import { useSubscribeForm } from "@main/hooks/useSubscribeForm";
+import { EMAIL_CONTROL, SUBSCRIBE_ANNOUCE, SUBSCRIBE_TITLES,SUBSCRIBE_USER_ACTIONS } from "@subscription/constants/subscribe";
+import { useSubscribeForm } from "@subscription/hooks/useSubscribeForm";
 
 export default function SubscribeBottomBar() {
     const { form, onSubmit } = useSubscribeForm();

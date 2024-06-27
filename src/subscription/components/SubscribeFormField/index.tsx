@@ -4,10 +4,7 @@ import { Controller,useFormContext } from "react-hook-form";
 import { FormControl, FormItem, FormMessage } from "@shared/components/ui/form";
 import { Input } from "@shared/components/ui/input";
 
-import {
-  EMAIL_CONTROL,
-  SUBSCRIBE_ANNOUCE,
-} from "@main/constants/main";
+import { EMAIL_CONTROL, SUBSCRIBE_ANNOUCE } from "@subscription/constants/subscribe";
 
 const SubscribeFormField = () => {
   const { control, formState } = useFormContext();

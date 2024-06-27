@@ -1,7 +1,7 @@
 "use client"
 
-import UnsubscribeForm from "@workbook/components/UnsubscribeForm";
-import UnsubscribeTitle from "@workbook/components/UnsubscribeTitle";
+import UnsubscribeForm from "@subscription/components/UnsubscribeForm";
+import UnsubscribeTitle from "@subscription/components/UnsubscribeTitle";
 
 export default function SubscriptionCancelPage () {
     return (

@@ -4,7 +4,7 @@ import { Controller,useFormContext } from "react-hook-form";
 import { FormControl, FormItem, FormLabel, FormMessage } from "@shared/components/ui/form";
 import { Textarea } from "@shared/components/ui/textarea";
 
-import { UNSUBSCRIBE_FORM } from "@workbook/constants/unsubscribe";
+import { UNSUBSCRIBE_FORM } from "@subscription/constants/unsubscribe";
 
 const UnsubscribeFormField = () => {
   const { control, formState } = useFormContext();
