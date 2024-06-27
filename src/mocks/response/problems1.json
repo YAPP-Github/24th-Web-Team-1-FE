@@ -1,24 +1,24 @@
 {
   "message": "String",
   "data": {
-    "id": 1,
-    "title": "ETF(상장지수펀드)의 특징이 아닌것은?",
+    "id": 2,
+    "title": "에드윈 루드가 개량한 최초의 자동 저장 탱크식 가스 온수기는 무엇을 해결했나요?",
     "contents": [
       {
         "number": 1,
-        "content": "분산투자"
+        "content": "냄비에 물을 끓이는 번거로움"
       },
       {
         "number": 2,
-        "content": "높은 운용 비용"
+        "content": "가스를 배기하는 장치의 부족"
       },
       {
         "number": 3,
-        "content": "유동성"
+        "content": "찬물을 데우는 시간"
       },
       {
         "number": 4,
-        "content": "투명성"
+        "content": "온수기의 크기"
       }
     ]
   }
