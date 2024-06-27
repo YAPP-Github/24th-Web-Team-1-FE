@@ -15,13 +15,13 @@ export const unsubscribeWorkbook = (
   return axiosRequest("post", API_ROUTE.UNSUBSCRIBE(), body);
 };
 
-export const unsubscribeWorkbookOptions = (): UseMutationOptions<
+export const unsubscribeWorkbookOptions = (email: string | undefined): UseMutationOptions<
   ApiResponse<MessageOnlyResponse>,
   Error,
   UnsubscribeBody
 > => {
   return {
-    mutationKey: [QUERY_KEY.UNSUBSCRIBE_WORKBOOK],
+    mutationKey: [QUERY_KEY.UNSUBSCRIBE_WORKBOOK, email],
     mutationFn: (body) => unsubscribeWorkbook(body),
   };
 };

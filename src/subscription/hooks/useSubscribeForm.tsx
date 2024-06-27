@@ -5,13 +5,11 @@ import { useForm } from 'react-hook-form';
 
 import { useMutation } from '@tanstack/react-query';
 
-import { z } from 'zod';
-
 import { useToast } from '@shared/components/ui/use-toast';
 
 import { getWorkbookId } from '@workbook/utils';
 
-import { EMAIL_CONTROL, SUBSCRIBE_USER_ACTIONS } from '@subscription/constants/subscribe';
+import { SUBSCRIBE_USER_ACTIONS } from '@subscription/constants/subscribe';
 import { subscribeWorkbookOptions } from '@subscription/remotes/postSubscriptionQueryOptions';
 import { emailSubscribeSchema } from '@subscription/schemas';
 import { EmailSubscribeFormData } from '@subscription/types/subscription';
@@ -32,6 +30,7 @@ export const useSubscribeForm = () => {
     defaultValues: {
       email: '',
     },
+    mode: "onSubmit"
   });
 
   const { mutate: subscribeWorkbook } = useMutation(subscribeWorkbookOptions({
@@ -40,8 +39,6 @@ export const useSubscribeForm = () => {
 
   const onSubmit = (values: EmailSubscribeFormData) => {
     try {
-      emailSubscribeSchema.safeParse(values);
-
       subscribeWorkbook(values, {
         onSuccess: () => {
           form.reset();
@@ -57,13 +54,9 @@ export const useSubscribeForm = () => {
         },
       });
     } catch (error) {
-      if (error instanceof z.ZodError) {
-        error.errors.forEach(() => {
-          toast({
-            title: EMAIL_CONTROL.INVALID_EMAIL,
-          });
-        });
-      }
+      toast({
+        title: '구독 신청이 되지 않았습니다.'
+      });
     }
   };
 
