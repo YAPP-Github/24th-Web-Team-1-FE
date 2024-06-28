@@ -13,7 +13,7 @@ vi.mock("next/navigation", () => {
   };
 });
 const titleSectionProps = {
-  category: "경제",
+  tagTexts: ["경제"],
   title: "재태크, 투자 필수 용어 모음집",
   editorComponent: <WriterInfo name="안나포" url="" id={1} />,
 };
