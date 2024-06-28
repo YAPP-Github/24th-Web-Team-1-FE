@@ -9,5 +9,5 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const TagComponent = {
-  parameters: {},
+  args: { tagTexts: ["Day1", "1/2"] },
 } satisfies Story;
