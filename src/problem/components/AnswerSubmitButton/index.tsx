@@ -46,7 +46,8 @@ export default function AnswerSubmitButton() {
     }
     if (problemAnswerInfo[0] && !isExistNextProblem()) {
       clearProblem();
-      push("/");
+      // NOTE : 나중에 메인으로 변경 필요
+      push("/workbook/1");
     }
   };
   const isPostAnswerSuccess = problemAnswerInfo[0];
