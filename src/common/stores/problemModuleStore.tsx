@@ -5,6 +5,7 @@ import { ProblemListInfo } from "@problem/types/problemInfo";
 interface ProblemIdsData {
   problemIds: ProblemListInfo[];
   articleId: string;
+  day: string | undefined;
 }
 interface CurrentProblem {
   currentIdx: number;
@@ -16,9 +17,11 @@ interface ProblemAction {
   setProblemIds: ({
     problemIds,
     articleId,
+    day,
   }: {
     problemIds: number[];
     articleId: string;
+    day: string | undefined;
   }) => void;
   clearProblem: () => void;
 }
@@ -33,6 +36,7 @@ export const useProblemModuleStore = create(
       problemIds: [],
       currentIdx: 0,
       articleId: "",
+      day: undefined,
       nextProblemId: () =>
         set((state) => ({
           ...state,
@@ -52,17 +56,19 @@ export const useProblemModuleStore = create(
 
         return problemIds[currentIdx];
       },
-      setProblemIds: ({ problemIds, articleId }) =>
+      setProblemIds: ({ problemIds, articleId, day }) =>
         set((state) => ({
           ...state,
           articleId,
           problemIds,
+          day,
         })),
       clearProblem: () =>
         set(() => ({
           problemIds: [],
           currentIdx: 0,
           articleId: "",
+          day: undefined,
         })),
     }),
     {

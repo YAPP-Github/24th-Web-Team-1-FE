@@ -71,6 +71,7 @@ describe("첫 번째 문제풀기 페이지 테스트", () => {
           currentIdx: 0,
           prevSetProblemId: vi.fn(),
           getArticlePathText: vi.fn(),
+          getDayText: vi.fn(),
         })),
       };
     });
