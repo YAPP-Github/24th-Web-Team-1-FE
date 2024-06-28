@@ -83,10 +83,10 @@ export default function WorkbookPage() {
             />
             <OverviewSection overview={workbookInfo.description} />
             <CurriculumSection curriculumItems={workbookInfo.articles} />
+            <SubscribeBottomBar />
           </>
         )}
       </article>
-      <SubscribeBottomBar />
     </main>
   );
 }
