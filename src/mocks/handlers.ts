@@ -77,9 +77,26 @@ export const articleHandler = http.get(
   },
 );
 
+export const articleWithWorkbookHandler = http.get(
+  apiRoutes.articleWithWorkbook,
+  async ({ params }) => {
+    const articleId = params?.articleId;
+    const workbookId = params?.workbookId;
+
+    if (!articleId && !workbookId) {
+      return new HttpResponse(null, { status: 404 });
+    }
+    switch (workbookId) {
+      case "1":
+        return HttpResponse.json(response[apiRoutes.articleWithWorkbook + "1"]);
+    }
+    return HttpResponse.json(response[apiRoutes.articleWithWorkbook + "1"]);
+  },
+);
 export const handlers = [
   problemsHandler,
   submitAnswerHandler,
   workbookHandler,
   articleHandler,
+  articleWithWorkbookHandler,
 ];
