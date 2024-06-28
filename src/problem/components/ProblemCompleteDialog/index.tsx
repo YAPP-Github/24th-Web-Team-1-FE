@@ -1,20 +1,24 @@
 "use client";
 
+import { useParams } from "next/navigation";
+
+import React, { useEffect, useState } from "react";
+
+import { useMutationState } from "@tanstack/react-query";
+
 import { ApiResponse } from "@api/api-config";
+
+import ExternalControlOpenDialog from "@shared/components/ExternalControlOpenDialog";
+
 import LinkShare from "@common/components/LinkShare";
 import { LINK_SHARE_CONTENT } from "@common/constants/linkShareContent";
 import { useProblemIdsViewModel } from "@common/models/useProblemIdsViewModel";
 import { QUERY_KEY } from "@problem/remotes/api";
 import { AnswerCheckInfo } from "@problem/types/problemInfo";
-import ExternalControlOpenDialog from "@shared/components/ExternalControlOpenDialog";
-import { useMutationState } from "@tanstack/react-query";
-import { useParams, usePathname } from "next/navigation";
-import React, { useEffect, useState } from "react";
 
 export default function ProblemCompleteDialog() {
-  const pathname = usePathname();
   const { problemId } = useParams<{ problemId: string }>();
-  const { isExistNextProblem } = useProblemIdsViewModel();
+  const { isExistNextProblem, getArticlePathText } = useProblemIdsViewModel();
 
   const problemAnswerInfo = useMutationState({
     filters: {
@@ -51,11 +55,7 @@ export default function ProblemCompleteDialog() {
           content={LINK_SHARE_CONTENT.ALL_PROBLEM_SUBMIT.DESCRIPTION}
         />
       }
-      content={
-        <LinkShare.Content
-          href={`${process.env.NEXT_PUBLIC_FEW_WEB}${pathname}`}
-        />
-      }
+      content={<LinkShare.Content href={getArticlePathText()} />}
     />
   );
 }

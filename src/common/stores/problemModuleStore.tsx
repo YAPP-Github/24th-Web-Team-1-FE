@@ -1,8 +1,11 @@
-import { ProblemListInfo } from "@problem/types/problemInfo";
 import { create } from "zustand";
-import { persist, createJSONStorage } from "zustand/middleware";
+import { createJSONStorage, persist } from "zustand/middleware";
+
+import { ProblemListInfo } from "@problem/types/problemInfo";
 interface ProblemIdsData {
   problemIds: ProblemListInfo[];
+  articleId: string;
+  day: string | undefined;
 }
 interface CurrentProblem {
   currentIdx: number;
@@ -11,7 +14,15 @@ interface ProblemAction {
   nextProblemId: () => void;
   prevProblemId: () => void;
   getCurrentProblemId: () => number;
-  setProblemIds: (problemIds: number[]) => void;
+  setProblemIds: ({
+    problemIds,
+    articleId,
+    day,
+  }: {
+    problemIds: number[];
+    articleId: string;
+    day: string | undefined;
+  }) => void;
   clearProblem: () => void;
 }
 
@@ -24,6 +35,8 @@ export const useProblemModuleStore = create(
     (set, get) => ({
       problemIds: [],
       currentIdx: 0,
+      articleId: "",
+      day: undefined,
       nextProblemId: () =>
         set((state) => ({
           ...state,
@@ -43,15 +56,19 @@ export const useProblemModuleStore = create(
 
         return problemIds[currentIdx];
       },
-      setProblemIds: (problemIds: number[]) =>
+      setProblemIds: ({ problemIds, articleId, day }) =>
         set((state) => ({
           ...state,
+          articleId,
           problemIds,
+          day,
         })),
       clearProblem: () =>
         set(() => ({
           problemIds: [],
           currentIdx: 0,
+          articleId: "",
+          day: undefined,
         })),
     }),
     {

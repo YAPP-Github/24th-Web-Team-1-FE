@@ -1,33 +1,59 @@
 "use client";
 
-import { useParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 
 import React, { useEffect } from "react";
+
+import { useQueries } from "@tanstack/react-query";
 
 import TitleSection from "@shared/components/TitleSection";
 
 import { getArticleQueryOptions } from "@article/remotes/getArticleQueryOptions";
 
+import ArticleSkeleton from "../ArticleSkeleton";
 import WriterInfo from "../WriterInfo";
 import { useProblemIdsViewModel } from "@common/models/useProblemIdsViewModel";
-import { useQuery } from "@tanstack/react-query";
-import ArticleSkeleton from "../ArticleSkeleton";
+import { getArticleWithWorkbookQueryOptions } from "@article/remotes/getArticleWithWorkbookQueryOptions";
+import { ArticleDetail, ArticleWithWorkbookDetail } from "@article/types";
+import { ARTICLE_INFO_TYPE } from "@common/constants/articleCase";
 
 export default function ArticleTitle() {
   const { articleId } = useParams<{ articleId: string }>();
-  const { setProblemIds } = useProblemIdsViewModel();
-  const {
-    data: articleInfo,
-    isLoading,
-    isError,
-  } = useQuery({
-    ...getArticleQueryOptions({ articleId }),
-    staleTime: 2000,
+  const { setProblemIds, getDayText } = useProblemIdsViewModel();
+
+  const params = useSearchParams();
+  const workbookId = params.get("workbookId");
+
+  const results = useQueries({
+    queries: [
+      {
+        ...getArticleQueryOptions({ articleId }),
+        enabled: !workbookId,
+      },
+      {
+        ...getArticleWithWorkbookQueryOptions({
+          workbookId,
+          articleId,
+        }),
+        enabled: Boolean(workbookId),
+      },
+    ],
   });
+
+  const { data, isLoading, isError } = workbookId
+    ? results[ARTICLE_INFO_TYPE.ARTICLE_WITH_WORKBOOK]
+    : results[ARTICLE_INFO_TYPE.ONLY_ARTICLE];
+
+  const articleInfo = data as ArticleDetail | ArticleWithWorkbookDetail;
 
   useEffect(
     function setProblemIdsData() {
-      if (articleInfo) setProblemIds(articleInfo.problemIds);
+      if (articleInfo)
+        setProblemIds({
+          problemIds: articleInfo.problemIds,
+          articleId,
+          day: "day" in articleInfo ? articleInfo.day : undefined,
+        });
     },
     [articleInfo],
   );
@@ -36,9 +62,10 @@ export default function ArticleTitle() {
   if (isError || !articleInfo) return <div>에러</div>;
 
   const { category, title, writer } = articleInfo;
+  const dayText = getDayText();
 
   const titleSectionData = {
-    category,
+    tagTexts: dayText ? [category, dayText] : [category],
     title,
     editorComponent: <WriterInfo {...writer} />,
   };

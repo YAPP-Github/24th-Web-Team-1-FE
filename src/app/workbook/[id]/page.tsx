@@ -76,7 +76,7 @@ export default function WorkbookPage() {
               />
             </figure>
             <TitleSection
-              category={workbookInfo.category}
+              tagTexts={[workbookInfo.category]}
               title={workbookInfo.title}
               editorComponent={<WriterInfo writers={workbookInfo.writers} />}
               className={"px-[20px]"}

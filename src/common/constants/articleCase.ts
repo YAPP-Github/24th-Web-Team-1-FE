@@ -1,0 +1,4 @@
+export const ARTICLE_INFO_TYPE = {
+  ARTICLE_WITH_WORKBOOK: 0,
+  ONLY_ARTICLE: 1,
+};

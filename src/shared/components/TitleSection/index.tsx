@@ -3,29 +3,31 @@ import { usePathname } from "next/navigation";
 
 import React, { HTMLAttributes, ReactElement, useState } from "react";
 
-import ExternalControlOpenDialog from "@shared/components/ExternalControlOpenDialog";
-import { Button } from "@shared/components/ui/button";
-import { cn } from "@shared/utils/cn";
-
-import LinkShare from "../../../common/components/LinkShare";
-import Tag from "../../../common/components/Tag";
-import { LINK_SHARE_CONTENT } from "@common/constants/linkShareContent";
 import ShareIcon from "public/assets/icon/share.svg";
 
+import ExternalControlOpenDialog from "@shared/components/ExternalControlOpenDialog";
+import { Button } from "@shared/components/ui/button";
+
+import LinkShare from "../../../common/components/LinkShare";
+import TagList from "@common/components/TagList";
+
+import { cn } from "@shared/utils/cn";
+
+import { LINK_SHARE_CONTENT } from "@common/constants/linkShareContent";
+
 interface TitleSectionProps extends HTMLAttributes<HTMLDivElement> {
-  category: string;
+  tagTexts: string[];
   title: string;
   editorComponent: ReactElement;
 }
 
 export default function TitleSection({
-  category,
+  tagTexts,
   title,
   editorComponent,
   className,
   ...props
 }: TitleSectionProps) {
-
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
 
@@ -35,11 +37,8 @@ export default function TitleSection({
 
   return (
     <>
-      <header className={cn(
-        "flex flex-col gap-[12px]",
-        className
-      )}>
-        <Tag title={category} />
+      <header className={cn("flex flex-col gap-[12px]", className)}>
+        <TagList tagTexts={tagTexts} />
         <div className="space-between flex items-center">
           <h1 className="h1-bold text-[28px] text-black">{title}</h1>
           <Button

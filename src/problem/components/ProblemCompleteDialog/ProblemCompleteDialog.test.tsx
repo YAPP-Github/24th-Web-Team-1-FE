@@ -1,7 +1,14 @@
+import { useMutation } from "@tanstack/react-query";
+
 import { beforeAll, describe, expect, it, vi } from "vitest";
 
 import QueryClientProviders from "@shared/components/queryClientProvider";
+import { createQueryProviderWrapper } from "@shared/constants/createQueryProvider";
 
+import ProblemCompleteDialog from ".";
+import { LINK_SHARE_CONTENT } from "@common/constants/linkShareContent";
+import { mockProblemModuleStore } from "@common/stores/mockZustandStore";
+import { postProblemAnswerMutationOptions } from "@problem/remotes/postProblemAnswerOption";
 import {
   act,
   render,
@@ -9,11 +16,6 @@ import {
   screen,
   waitFor,
 } from "@testing-library/react";
-import ProblemCompleteDialog from ".";
-import { useMutation } from "@tanstack/react-query";
-import { postProblemAnswerMutationOptions } from "@problem/remotes/postProblemAnswerOption";
-import { createQueryProviderWrapper } from "@shared/constants/createQueryProvider";
-import { LINK_SHARE_CONTENT } from "@common/constants/linkShareContent";
 
 const isExistNextProblem = vi.fn(() => false);
 const renderWithQueryClient = () => {
@@ -24,8 +26,13 @@ const renderWithQueryClient = () => {
   );
 };
 
+const getArticlePathText = vi.fn(
+  () => `${process.env.NEXT_PUBLIC_FEW_WEB}/article/1`,
+);
+
 describe("마지막 선택지 제출완료시 팝업 노출 테스트", () => {
   beforeAll(() => {
+    mockProblemModuleStore({ problemIds: [1, 2, 3], articleId: "1" });
     vi.mock("next/navigation", () => {
       return {
         __esModule: true,
@@ -55,6 +62,7 @@ describe("마지막 선택지 제출완료시 팝업 노출 테스트", () => {
           getTagCurrentProblemText: vi.fn(() => "3/3"),
           currentIdx: 0,
           prevSetProblemId: vi.fn(),
+          getArticlePathText,
         })),
       };
     });
@@ -85,6 +93,10 @@ describe("마지막 선택지 제출완료시 팝업 노출 테스트", () => {
     ).toBeInTheDocument();
     expect(
       screen.getByText(LINK_SHARE_CONTENT.ALL_PROBLEM_SUBMIT.TITLE),
+    ).toBeInTheDocument();
+
+    expect(
+      screen.getByDisplayValue(`${process.env.NEXT_PUBLIC_FEW_WEB}/article/1`),
     ).toBeInTheDocument();
   });
 });

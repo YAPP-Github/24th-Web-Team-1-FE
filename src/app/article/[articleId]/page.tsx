@@ -4,9 +4,9 @@ import React from "react";
 
 export default function ArticlePage() {
   return (
-    <main className="flex h-full flex-col gap-[46px]">
+    <div className="flex h-full flex-col gap-[46px]">
       <ArticleTitle />
       <EmailContentTemplate />
-    </main>
+    </div>
   );
 }

@@ -1,21 +1,41 @@
 "use client";
 
 import { getArticleQueryOptions } from "@article/remotes/getArticleQueryOptions";
-import { useQuery } from "@tanstack/react-query";
-import { useParams } from "next/navigation";
+import { useQueries } from "@tanstack/react-query";
+import { useParams, useSearchParams } from "next/navigation";
 import React from "react";
 import ArticleSkeleton from "../ArticleSkeleton";
+import { getArticleWithWorkbookQueryOptions } from "@article/remotes/getArticleWithWorkbookQueryOptions";
+import { ARTICLE_INFO_TYPE } from "@common/constants/articleCase";
 
 export default function EmailContentTemplate() {
   const { articleId } = useParams<{ articleId: string }>();
+
+  const params = useSearchParams();
+  const workbookId = params.get("workbookId");
+
+  const results = useQueries({
+    queries: [
+      {
+        ...getArticleQueryOptions({ articleId }),
+        enabled: !workbookId,
+      },
+      {
+        ...getArticleWithWorkbookQueryOptions({
+          workbookId,
+          articleId,
+        }),
+        enabled: Boolean(workbookId),
+      },
+    ],
+  });
   const {
     data: articleInfo,
     isLoading,
     isError,
-  } = useQuery({
-    ...getArticleQueryOptions({ articleId }),
-    staleTime: 2000,
-  });
+  } = workbookId
+    ? results[ARTICLE_INFO_TYPE.ARTICLE_WITH_WORKBOOK]
+    : results[ARTICLE_INFO_TYPE.ONLY_ARTICLE];
 
   if (isLoading || isError)
     return <ArticleSkeleton.EmailContentTemplateSkeleton />;
