@@ -7,3 +7,7 @@ export type ArticleDetail = {
   writer: Writer;
 } & Article &
   Pick<WorkbookInfo, "category" | "createdAt">;
+
+export type ArticleWithWorkbookDetail = {
+  day: string;
+} & ArticleDetail;
