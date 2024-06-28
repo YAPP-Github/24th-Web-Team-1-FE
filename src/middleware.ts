@@ -19,7 +19,14 @@ export default function middleware(req: NextRequest) {
   const isWithOutAuth = false;
 
   const nextUrl = req.nextUrl.clone();
-  const email = nextUrl.searchParams.get("user");
+  const { pathname, searchParams } = nextUrl;
+  const email = searchParams.get("user");
+
+  /** /workbook 으로 진입 시 리다이랙션 */
+  if (pathname === "/workbook") {
+    nextUrl.pathname = "/workbook/1";
+    return NextResponse.redirect(nextUrl);
+  }
 
   if (email) {
     nextUrl.searchParams.delete("user");
@@ -39,5 +46,5 @@ export default function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/unsubscribe/:path*"],
+  matcher: ["/unsubscribe/:path*", "/workbook/:path*"],
 };

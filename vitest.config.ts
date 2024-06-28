@@ -38,6 +38,7 @@ export default defineConfig({
       "@mocks": resolve("src/mocks"),
       "@common": resolve("src/common"),
       "@problem": resolve("src/problem"),
+      "@subscription": resolve("src/subscription"),
       public: resolve("public"),
     },
   },

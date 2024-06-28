@@ -3,11 +3,9 @@ import { Controller,useFormContext } from "react-hook-form";
 
 import { FormControl, FormItem, FormMessage } from "@shared/components/ui/form";
 import { Input } from "@shared/components/ui/input";
+import { cn } from "@shared/utils/cn";
 
-import {
-  EMAIL_CONTROL,
-  SUBSCRIBE_ANNOUCE,
-} from "@main/constants/main";
+import { EMAIL_CONTROL, SUBSCRIBE_ANNOUCE } from "@subscription/constants/subscribe";
 
 const SubscribeFormField = () => {
   const { control, formState } = useFormContext();
@@ -23,7 +21,10 @@ const SubscribeFormField = () => {
               placeholder={EMAIL_CONTROL.EMAIL_PLACEHOLDER}
               {...field}
               value={field.value || ""}
-              className={`rounded-[10px] text-[16px] focus-visible:ring-transparent ${formState.errors.email ? "border-error" : ""}`}
+              className={cn(
+                "rounded-[10px] text-[16px] focus-visible:ring-transparent h-[48px]",
+                { 'border-error': formState.errors.email }
+              )}
             />
           </FormControl>
           <FormMessage />

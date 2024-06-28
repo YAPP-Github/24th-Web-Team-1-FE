@@ -3,6 +3,9 @@ const nextConfig = {
   experimental: {
     instrumentationHook: true,
   },
+  images: {
+    domains: ['github.com', 'oopy.lazyrockets.com'],
+  },
   webpack: (config, context) => {
     config.module.rules.push({
       test: /\.svg$/,

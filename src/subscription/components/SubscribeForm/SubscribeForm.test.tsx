@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 
 import { describe, expect, it, vi } from 'vitest';
 
-import { EMAIL_CONTROL, SUBSCRIBE_ANNOUCE, SUBSCRIBE_USER_ACTIONS } from '@main/constants/main';
+import { EMAIL_CONTROL, SUBSCRIBE_ANNOUCE, SUBSCRIBE_USER_ACTIONS } from '@subscription/constants/subscribe';
 
 import SubscribeForm from '.';
 import { render, screen, waitFor } from '@testing-library/react';
@@ -11,7 +11,7 @@ import userEvent from '@testing-library/user-event';
 const mockSetIsOpen = vi.fn();
 const mockOnSubmit = vi.fn();
 
-vi.mock('@main/hooks/useSubscribeForm', () => ({
+vi.mock('@subscription/hooks/useSubscribeForm', () => ({
   useSubscribeForm: () => ({
     form: useForm(),
     onSubmit: mockOnSubmit,

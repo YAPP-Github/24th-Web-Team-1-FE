@@ -5,9 +5,9 @@ import { describe, expect, it, vi } from "vitest";
 import {
     UNSUBSCRIBE_CONFIRM,
   UNSUBSCRIBE_FORM,
-} from "@workbook/constants/unsubscribe";
-import { unSubscribeSchema } from "@workbook/schemas";
-import { UnsubscribeFormData } from "@workbook/types";
+} from "@subscription/constants/unsubscribe";
+import { unSubscribeSchema } from "@subscription/schemas";
+import { UnsubscribeFormData } from "@subscription/types/subscription";
 
 import UnsubscribeForm from ".";
 import { render, screen, waitFor } from "@testing-library/react";
@@ -28,7 +28,7 @@ const mockOnSubmit = vi.fn(async (values: UnsubscribeFormData) => {
     }
   });
 
-vi.mock("@workbook/hooks/useUnsubscribeForm", () => ({
+vi.mock("@subscription/hooks/useUnsubscribeForm", () => ({
   useUnsubscribeForm: () => ({
     form: useForm(),
     onSubmit: mockOnSubmit,
