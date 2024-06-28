@@ -79,6 +79,7 @@ export default function WorkbookPage() {
               category={workbookInfo.category}
               title={workbookInfo.title}
               editorComponent={<WriterInfo writers={workbookInfo.writers} />}
+              className={"px-[20px]"}
             />
             <OverviewSection overview={workbookInfo.description} />
             <CurriculumSection curriculumItems={workbookInfo.articles} />

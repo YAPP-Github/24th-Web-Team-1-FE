@@ -3,6 +3,7 @@ import { Controller,useFormContext } from "react-hook-form";
 
 import { FormControl, FormItem, FormLabel, FormMessage } from "@shared/components/ui/form";
 import { Textarea } from "@shared/components/ui/textarea";
+import { cn } from "@shared/utils/cn";
 
 import { UNSUBSCRIBE_FORM } from "@subscription/constants/unsubscribe";
 
@@ -24,7 +25,10 @@ const UnsubscribeFormField = () => {
               {...field}
               value={field.value || ""}
               maxLength={255}
-              className={`rounded-[10px] text-[16px] focus-visible:ring-transparent ${formState.errors.opinion ? "border-error" : ""}`}
+              className={cn(
+                "rounded-[10px] text-[16px] focus-visible:ring-transparent",
+                { 'border-error': formState.errors.opinion }
+              )}
             />
           </FormControl>
           <FormMessage className="text-gray1">
