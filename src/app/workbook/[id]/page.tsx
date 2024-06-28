@@ -75,11 +75,13 @@ export default function WorkbookPage() {
                 style={{ width: "100%", height: "338px" }}
               />
             </figure>
-            <TitleSection
-              category={workbookInfo.category}
-              title={workbookInfo.title}
-              editorComponent={<WriterInfo writers={workbookInfo.writers} />}
-            />
+            <div className="px-[20px]">
+              <TitleSection
+                category={workbookInfo.category}
+                title={workbookInfo.title}
+                editorComponent={<WriterInfo writers={workbookInfo.writers} />}
+              />
+            </div>
             <OverviewSection overview={workbookInfo.description} />
             <CurriculumSection curriculumItems={workbookInfo.articles} />
           </>
