@@ -1,8 +1,8 @@
-import Link from "next/link";
-
-import React, { Fragment } from "react";
+import React from "react";
 
 import { WorkbookInfo } from "@workbook/types";
+
+import WriterLink from "../WriterLink";
 
 type WriterInfoProps = Pick<WorkbookInfo, "writers">;
 
@@ -13,15 +13,14 @@ export default function WriterInfo({ writers }: WriterInfoProps) {
         <span className="body1-medium text-text-gray2">작가</span>
       </div>
       {writers.map((writer, idx) => (
-        <Fragment key={idx}>
-          <Link href={writer.url} className="body1-medium text-text-gray1">
-            {writer.name}
-          </Link>
-          {idx < writers.length - 1 && (
-            <span className="body1-medium text-text-gray1"> · </span>
-          )}
-        </Fragment>
+        <WriterLink
+          key={idx}
+          name={writer.name}
+          url={writer.url}
+          isLast={idx === writers.length - 1}
+        />
       ))}
     </div>
   );
 }
+
