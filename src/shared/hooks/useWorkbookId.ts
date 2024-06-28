@@ -5,7 +5,7 @@ import { getWorkbookId } from '@workbook/utils';
 const useWorkbookId = (pathname: string) => {
   const [workbookId, setWorkbookId] = useState<string>("");
 
-  useEffect(() => {
+  useEffect(function setWorkbookIdByPathname () {
     const id = getWorkbookId(pathname);
     setWorkbookId(id);
   }, [pathname]);
