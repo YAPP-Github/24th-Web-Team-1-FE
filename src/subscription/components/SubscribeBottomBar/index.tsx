@@ -20,7 +20,7 @@ export default function SubscribeBottomBar() {
     return (
         <div className="w-full flex items-center justify-center bg-background1 p-[16px]">
             <div className="bg-transparent w-full">
-                <h3 className="text-[17px] h3-bold mb-4">{SUBSCRIBE_TITLES.SUBSCRIBE_TITLE_FEW}</h3>
+                <h3 className="body1-medium mb-4">{SUBSCRIBE_TITLES.SUBSCRIBE_TITLE_FEW}</h3>
                 <Form {...form}>
                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-[20px]">
                         <FormField
