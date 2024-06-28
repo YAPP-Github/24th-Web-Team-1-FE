@@ -22,6 +22,7 @@ export default function TitleSection({
   category,
   title,
   editorComponent,
+  className,
   ...props
 }: TitleSectionProps) {
 
@@ -36,7 +37,7 @@ export default function TitleSection({
     <>
       <header className={cn(
         "flex flex-col gap-[12px]",
-        props.className
+        className
       )}>
         <Tag title={category} />
         <div className="space-between flex items-center">
