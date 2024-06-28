@@ -43,5 +43,10 @@ export default function EmailContentTemplate() {
 
   const { content } = articleInfo;
 
-  return <article dangerouslySetInnerHTML={{ __html: content }}></article>;
+  return (
+    <article
+      className="overflow-hidden"
+      dangerouslySetInnerHTML={{ __html: content }}
+    ></article>
+  );
 }
