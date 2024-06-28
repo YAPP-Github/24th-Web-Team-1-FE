@@ -16,7 +16,7 @@ export default function ArticleBottomButton({
   };
   return (
     <Button
-      className="h-[50px] w-full rounded-none bg-main"
+      className="sub2-bold h-[88px] w-full rounded-none bg-main"
       onClick={onClickGoProblem}
     >
       {title}
