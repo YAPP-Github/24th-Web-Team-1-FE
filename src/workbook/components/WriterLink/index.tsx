@@ -8,15 +8,13 @@ interface WriterLinkProps {
   isLast: boolean;
 }
 
-const WriterLink: React.FC<WriterLinkProps> = ({ name, url, isLast }) => {
+export default function WriterLink({ name, url, isLast }: WriterLinkProps) {
   return (
     <>
-      <Link href={url} className="body1-medium text-text-gray1">
+      <Link target="blank" href={url} className="body1-medium text-text-gray1">
         {name}
       </Link>
       {!isLast && <span className="body1-medium text-text-gray1"> · </span>}
     </>
   );
-};
-
-export default WriterLink;
+}
