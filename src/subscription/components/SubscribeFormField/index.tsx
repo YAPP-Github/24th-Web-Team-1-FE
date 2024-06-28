@@ -20,7 +20,7 @@ const SubscribeFormField = () => {
               placeholder={EMAIL_CONTROL.EMAIL_PLACEHOLDER}
               {...field}
               value={field.value || ""}
-              className={`rounded-[10px] text-[16px] focus-visible:ring-transparent ${formState.errors.email ? "border-error" : ""}`}
+              className={`rounded-[10px] text-[16px] focus-visible:ring-transparent h-[48px] ${formState.errors.email ? "border-error" : ""}`}
             />
           </FormControl>
           <FormMessage />

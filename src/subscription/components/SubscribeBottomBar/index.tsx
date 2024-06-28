@@ -29,7 +29,7 @@ export default function SubscribeBottomBar() {
                             render={({ field }) => (
                                 <FormItem>
                                     <FormControl>
-                                        <Input placeholder={EMAIL_CONTROL.EMAIL_PLACEHOLDER} {...field} className={`rounded-[10px] focus-visible:ring-transparent text-[16px] ${formState.errors.email ? 'border-error' : ''}`} />
+                                        <Input placeholder={EMAIL_CONTROL.EMAIL_PLACEHOLDER} {...field} className={`rounded-[10px] focus-visible:ring-transparent text-[16px] h-[48px] ${formState.errors.email ? 'border-error' : ''}`} />
                                     </FormControl>
                                     <FormMessage />
                                     <span className="text-[12px] font-semibold text-text-gray2 mt-[11px]">
