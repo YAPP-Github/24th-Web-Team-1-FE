@@ -7,6 +7,7 @@ export const useProblemIdsViewModel = () => {
   const setProblemIds = useProblemModuleStore((state) => state.setProblemIds);
   const problemIds = useProblemModuleStore((state) => state.problemIds);
   const articleId = useProblemModuleStore((state) => state.articleId);
+  const day = useProblemModuleStore((state) => state.day);
   const currentIdx = useProblemModuleStore((state) => state.currentIdx);
   const nextProblemId = useProblemModuleStore((state) => state.nextProblemId);
   const prevSetProblemId = useProblemModuleStore(
@@ -17,6 +18,10 @@ export const useProblemIdsViewModel = () => {
 
   const getTagCurrentProblemText = () => {
     return `${currentIdx + 1}/${problemIds.length}`;
+  };
+
+  const getDayText = () => {
+    return day ? `Day ${day}` : undefined;
   };
 
   const isExistNextProblem = () => {
@@ -37,6 +42,7 @@ export const useProblemIdsViewModel = () => {
     clearProblem,
     getCurrentProblemId,
     currentIdx,
+    getDayText,
     prevSetProblemId,
     getTagCurrentProblemText,
     nextSetProblemId,
