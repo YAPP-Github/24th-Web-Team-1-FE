@@ -1,8 +1,8 @@
 {
   "message": "String",
   "data": {
-    "explanation": "이 유행어는 개발자 PM 영모님께서 종준이에게 주로 사용하는 말입니다. ",
-    "isSolved": false,
-    "answer": "3"
+    "explanation": "온돌은 바닥 아래에 연기가 지나가는 길이 있는 반면, 하이포코스트는 바닥 아래가 거의 다 뚫려있는 형태입니다.",
+    "isSolved": true,
+    "answer": "2"
   }
 }
