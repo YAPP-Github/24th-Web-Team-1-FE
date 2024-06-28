@@ -39,7 +39,7 @@ export default function SubscribeBottomBar() {
                             )}
                         />
                         <div className="flex flex-row w-full space-x-[8px]">
-                            <Button type="submit" className="w-full bg-main text-white rounded-none py-6">
+                            <Button type="submit" className="w-full bg-main text-white rounded-none py-6 h-[56px]">
                                 {SUBSCRIBE_USER_ACTIONS.SUBSCRIBE_CONFIRM}
                             </Button>
                         </div>
