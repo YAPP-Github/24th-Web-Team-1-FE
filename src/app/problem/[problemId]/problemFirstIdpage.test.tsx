@@ -106,21 +106,20 @@ describe("첫 번째 문제풀기 페이지 테스트", () => {
     });
     expect(screen.getByText("1/3")).toBeInTheDocument();
     const choiceAnswerButton = screen.getByRole("button", {
-      name: "높은 운용 비용",
+      name: "찬물을 데우는 시간",
     });
     await userEvent.click(choiceAnswerButton);
     const answerSubmitButton = screen.getByRole("button", {
       name: "정답 제출하기",
     });
     await userEvent.click(answerSubmitButton);
-
     const problemExplanation = screen.getByRole("article");
 
     expect(problemExplanation.childElementCount).toBe(2);
     const explanationParagraphy = screen.getByRole("paragraph");
 
     expect(explanationParagraphy.textContent).toBe(
-      "ETF는 일반적으로 낮은 운용 비용을 특징으로 합니다.이는 ETF가 보통 지수 추종(passive management) 방식으로 운용되기 때문입니다. 지수를 추종하는 전략은 액티브 매니지먼트(active management)에 비해 관리가 덜 복잡하고, 따라서 비용이 낮습니다.",
+      "제임스 와트는 증기를 이용하여 공기를 따뜻하게 만드는 라디에이터를 만들었습니다.",
     );
 
     const nextProblemButton = screen.getByRole("button", {
