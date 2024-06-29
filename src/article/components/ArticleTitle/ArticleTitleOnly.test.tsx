@@ -43,9 +43,9 @@ describe("아티클의 타이틀 영역 데이터 잘 노출되는지 확인", (
     await waitFor(async () => result.current.isSuccess);
     await waitFor(() => {
       const headingTag = screen.getByRole("heading", { level: 1 });
-      expect(headingTag).toHaveTextContent("재태크, 투자 필수 용어 모음집");
+      expect(headingTag).toHaveTextContent("겨울철 노벨상 후보들");
 
-      expect(screen.findByText("안나포")).toBeTruthy();
+      expect(screen.findByText("Fig.1")).toBeTruthy();
     });
   });
 });

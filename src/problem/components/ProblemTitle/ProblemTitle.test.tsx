@@ -50,7 +50,7 @@ describe("퀴즈 정보 불러오기 테스트", () => {
 
         const subHeading = screen.getByRole("heading", { level: 2 });
         expect(subHeading).toHaveTextContent(
-          "ETF(상장지수펀드)의 특징이 아닌것은?",
+          "에드윈 루드가 개량한 최초의 자동 저장 탱크식 가스 온수기는 무엇을 해결했나요?",
         );
       },
       { timeout: 500 },

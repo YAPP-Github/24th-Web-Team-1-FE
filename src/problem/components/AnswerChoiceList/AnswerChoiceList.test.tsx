@@ -46,9 +46,9 @@ describe("선택지 불러오고, 버튼 클릭으로 버튼 ui 변경", () => {
 
     await waitFor(() => result.current.isSuccess);
 
-    expect(screen.getByText("유동성"));
-    expect(screen.getByText("분산투자"));
-    expect(screen.getByText("높은 운용 비용"));
-    expect(screen.getByText("투명성"));
+    expect(screen.getByText("냄비에 물을 끓이는 번거로움"));
+    expect(screen.getByText("가스를 배기하는 장치의 부족"));
+    expect(screen.getByText("찬물을 데우는 시간"));
+    expect(screen.getByText("온수기의 크기"));
   });
 });
