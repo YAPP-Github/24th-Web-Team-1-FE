@@ -12,11 +12,11 @@ export default function TopBar({ onClick }: TopBarProps) {
 
   const onClickBackIcon = (e: React.MouseEvent<HTMLDivElement>) => {
     if (onClick) onClick(e);
-    back();
+    else back()
   };
 
   return (
-    <div className="flex h-[66px] items-center" onClick={onClickBackIcon}>
+    <div className="flex h-[66px] items-center" onClick={onClickBackIcon} data-testid="back-icon">
       <IcBack />
     </div>
   );
