@@ -21,6 +21,8 @@ export default function middleware(req: NextRequest) {
   const nextUrl = req.nextUrl.clone();
   const { pathname, searchParams } = nextUrl;
   const email = searchParams.get("user");
+  const articleId = searchParams.get("articleId");
+  const workbookId = searchParams.get("workbookId");
 
   /** /workbook 으로 진입 시 리다이랙션 */
   if (pathname === "/workbook") {
@@ -28,13 +30,18 @@ export default function middleware(req: NextRequest) {
     return NextResponse.redirect(nextUrl);
   }
 
-  if (email) {
+  /** unsubscribe page 진입 시 이메일, 아티클 아이디, 워크북 아이디 쿠키에 저장하는 로직 */
+  if (email && articleId && workbookId) {
     nextUrl.searchParams.delete("user");
+    nextUrl.searchParams.delete("articleId");
+    nextUrl.searchParams.delete("workbookId");
     const decodedEmail = decodeURIComponent(email);
 
     // Store the email in a cookie to pass to the page
     const response = NextResponse.redirect(nextUrl);
     response.cookies.set("user-email", decodedEmail);
+    response.cookies.set("articleId", articleId);
+    response.cookies.set("workbookId", workbookId);
 
     return response;
   }
