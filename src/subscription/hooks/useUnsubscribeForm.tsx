@@ -3,8 +3,6 @@ import { useForm } from "react-hook-form";
 
 import { useMutation } from "@tanstack/react-query";
 
-import { z } from "zod";
-
 import { useToast } from "@shared/components/ui/use-toast";
 
 import { UNSUBSCRIBE_CONFIRM } from "@subscription/constants/unsubscribe";
