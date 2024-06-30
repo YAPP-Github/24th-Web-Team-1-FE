@@ -3,8 +3,8 @@ import { useEffect, useState } from "react"
 import { getCookie } from "@subscription/utils"
 
 export const useArticleInfo = () =>{
-    const [articleId, setArticleId] = useState<string | undefined>(undefined)
-    const [workbookId, setWorkbookId] = useState<string | undefined>(undefined)
+    const [articleId, setArticleId] = useState<string | null>(null)
+    const [workbookId, setWorkbookId] = useState<string | null>(null)
 
     useEffect(function getArticleInfo () {
         const curArticleId = getCookie('articleId');

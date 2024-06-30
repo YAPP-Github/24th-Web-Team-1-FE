@@ -15,7 +15,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 export const useUnsubscribeForm = () => {
   const { toast } = useToast();
-  const [email, setEmail] = useState<string | undefined>(undefined);
+  const [email, setEmail] = useState<string | null>(null);
 
   useEffect(function getEmailFromCookie() {
     const userEmail = getCookie('user-email');
