@@ -70,5 +70,6 @@ describe("UnsubscribePage 동작 테스트", () => {
     await user.click(backButton);
 
     expect(push).toHaveBeenCalledWith("/article/123?workbookId=456");
+    expect(back).not.toHaveBeenCalled()
   });
 });
