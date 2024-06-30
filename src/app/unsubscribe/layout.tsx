@@ -16,6 +16,7 @@ export default function UnsubscribeLayout({ children }: UnsubscribeLayoutProps) 
 
   const handleClickBack = () => {
     router.push(`/article/${articleId}?workbookId=${workbookId}`)
+    return
   }
   
   return (

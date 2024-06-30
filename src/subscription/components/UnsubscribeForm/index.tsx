@@ -21,6 +21,7 @@ export default function UnsubscribeForm() {
 
   const handleClickBack = () => {
     router.push(`/article/${articleId}?workbookId=${workbookId}`)
+    return
   }
 
   return (

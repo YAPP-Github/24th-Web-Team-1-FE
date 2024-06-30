@@ -8,6 +8,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 const push = vi.fn();
+const back = vi.fn()
 
 vi.mock("next/navigation", async () => {
   const actual =
@@ -16,6 +17,7 @@ vi.mock("next/navigation", async () => {
     ...actual,
     useRouter: vi.fn(() => ({
       push,
+      back,
     })),
   };
 });

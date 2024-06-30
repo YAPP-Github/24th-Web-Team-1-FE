@@ -12,7 +12,7 @@ export default function TopBar({ onClick }: TopBarProps) {
 
   const onClickBackIcon = (e: React.MouseEvent<HTMLDivElement>) => {
     if (onClick) onClick(e);
-    else back()
+    back()
   };
 
   return (
