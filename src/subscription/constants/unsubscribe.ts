@@ -1,6 +1,6 @@
 export const UNSUBSCRIBE_TITLES = {
-    TITLE_NEWS_LETTER: "FEW 뉴스레터",
-    TITLE_CANCEL: "구독을 취소하시겠어요?"
+    TITLE_NEWS_LETTER: "앞으로 FEW의 모든 뉴스레터를",
+    TITLE_CANCEL: "이메일로 받을 수 없게됩니다."
 }
 
 export const UNSUBSCRIBE_FORM = {

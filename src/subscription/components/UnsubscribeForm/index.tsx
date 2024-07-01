@@ -1,3 +1,5 @@
+import { useRouter } from "next/navigation";
+
 import { FormProvider } from "react-hook-form";
 
 import { Button } from "@shared/components/ui/button";
@@ -6,12 +8,21 @@ import { cn } from "@shared/utils/cn";
 import { buttonStyle } from "@workbook/constants/buttonStyle";
 
 import { UNSUBSCRIBE_FORM } from "@subscription/constants/unsubscribe";
+import { useArticleInfo } from "@subscription/hooks/useArticleInfo";
 import { useUnsubscribeForm } from "@subscription/hooks/useUnsubscribeForm";
 
 import UnsubscribeFormField from "../UnsubscribeFormField";
 
 export default function UnsubscribeForm() {
   const { form, onSubmit } = useUnsubscribeForm();
+  const router = useRouter()
+
+  const { articleId, workbookId } = useArticleInfo()
+
+  const handleClickBack = () => {
+    router.push(`/article/${articleId}?workbookId=${workbookId}`)
+    return
+  }
 
   return (
     <FormProvider {...form}>
@@ -25,6 +36,7 @@ export default function UnsubscribeForm() {
               "border-text-gray3 text-black",
               buttonStyle
             )}
+            onClick={handleClickBack}
           >
             {UNSUBSCRIBE_FORM.BACK}
           </Button>

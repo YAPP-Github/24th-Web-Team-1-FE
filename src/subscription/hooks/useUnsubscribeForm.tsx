@@ -3,8 +3,6 @@ import { useForm } from "react-hook-form";
 
 import { useMutation } from "@tanstack/react-query";
 
-import { z } from "zod";
-
 import { useToast } from "@shared/components/ui/use-toast";
 
 import { UNSUBSCRIBE_CONFIRM } from "@subscription/constants/unsubscribe";
@@ -17,7 +15,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 export const useUnsubscribeForm = () => {
   const { toast } = useToast();
-  const [email, setEmail] = useState<string | undefined>(undefined);
+  const [email, setEmail] = useState<string | null>(null);
 
   useEffect(function getEmailFromCookie() {
     const userEmail = getCookie('user-email');

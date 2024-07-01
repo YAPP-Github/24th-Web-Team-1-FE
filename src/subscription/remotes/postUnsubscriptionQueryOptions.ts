@@ -15,7 +15,7 @@ export const unsubscribeWorkbook = (
   return axiosRequest("post", API_ROUTE.UNSUBSCRIBE(), body);
 };
 
-export const unsubscribeWorkbookOptions = (email: string | undefined): UseMutationOptions<
+export const unsubscribeWorkbookOptions = (email: string | null): UseMutationOptions<
   ApiResponse<MessageOnlyResponse>,
   Error,
   UnsubscribeBody

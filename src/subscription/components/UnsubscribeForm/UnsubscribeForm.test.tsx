@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { describe, expect, it, vi } from "vitest";
 
 import {
-    UNSUBSCRIBE_CONFIRM,
+  UNSUBSCRIBE_CONFIRM,
   UNSUBSCRIBE_FORM,
 } from "@subscription/constants/unsubscribe";
 import { unSubscribeSchema } from "@subscription/schemas";
@@ -13,20 +13,41 @@ import UnsubscribeForm from ".";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
+const push = vi.fn();
 const mockToast = vi.fn();
+const mockOnSubmit = vi.fn(async (values: UnsubscribeFormData) => {
+  const result = unSubscribeSchema.safeParse(values);
+  // 성공 케이스 시 toast 호출 로직 포함
+  if (result.success) {
+    mockToast({ title: UNSUBSCRIBE_CONFIRM });
+  }
+});
+
+vi.mock("next/navigation", async () => {
+  const actual =
+    await vi.importActual<typeof import("next/navigation")>(
+      "next/navigation",
+    );
+  return {
+    ...actual,
+    useRouter: vi.fn(() => ({
+      push,
+    })),
+  };
+});
+
+vi.mock("@subscription/hooks/useArticleInfo", () => ({
+  useArticleInfo: vi.fn().mockReturnValue({
+    articleId: '123',
+    workbookId: '456',
+  }),
+}));
+
 vi.mock("@shared/components/ui/use-toast", () => ({
   useToast: () => ({
     toast: mockToast,
   }),
 }));
-
-const mockOnSubmit = vi.fn(async (values: UnsubscribeFormData) => {
-    const result = unSubscribeSchema.safeParse(values);
-    // 성공 케이스 시 toast 호출 로직 포함
-    if (result.success) {
-      mockToast({ title: UNSUBSCRIBE_CONFIRM });
-    }
-  });
 
 vi.mock("@subscription/hooks/useUnsubscribeForm", () => ({
   useUnsubscribeForm: () => ({
@@ -87,14 +108,14 @@ describe("UnsubscribeForm 컴포넌트 동작 테스트", () => {
     });
   });
 
-  /** TBD: 개발 필요 */
-  //   it('레터로 돌아가기 버튼 클릭 시 이메일에서 보낸 아티클 페이지로 이동한다.', async () => {
-  //     render(<UnsubscribeForm />);
+  it("레터로 돌아가기 버튼 클릭 시 이메일에서 보낸 아티클 페이지로 이동한다.", async () => {
+    
+    render(<UnsubscribeForm />);
 
-  //     const user = userEvent.setup();
-  //     const backButton = screen.getByText(UNSUBSCRIBE_FORM.BACK);
-  //     await user.click(backButton);
+    const user = userEvent.setup();
+    const backButton = screen.getByText(UNSUBSCRIBE_FORM.BACK);
+    await user.click(backButton);
 
-  //     expect(mockOnSubmit).not.toHaveBeenCalled();
-  //   });
+    expect(push).toHaveBeenCalledWith('/article/123?workbookId=456');
+  });
 });
