@@ -11,6 +11,7 @@ import { cn } from "@shared/utils/cn";
 import "./globals.css";
 import MSWProviders from "@mocks/MSWProviders";
 import { Toaster } from "@shared/components/ui/toaster";
+import MixpanelProvider from "@shared/components/MixpanelProvider";
 
 export const metadata: Metadata = {
   title: "FEW",
@@ -54,28 +55,30 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <QueryClientProviders>
-      <html lang="en" className={`${pretendard.variable}`}>
-        <head>
-          <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"
-          />
-        </head>
-        <body
-          className={cn(
-            'scrollbar-hide" relative mx-auto flex',
-            "min-h-[100dvh] w-full max-w-[480px] overscroll-y-none",
-          )}
-        >
-          <MSWProviders>
-            <Suspense>{children}</Suspense>
-            <Toaster />
-          </MSWProviders>
+    <MixpanelProvider>
+      <QueryClientProviders>
+        <html lang="en" className={`${pretendard.variable}`}>
+          <head>
+            <meta
+              name="viewport"
+              content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"
+            />
+          </head>
+          <body
+            className={cn(
+              'scrollbar-hide" relative mx-auto flex',
+              "min-h-[100dvh] w-full max-w-[480px] overscroll-y-none",
+            )}
+          >
+            <MSWProviders>
+              <Suspense>{children}</Suspense>
+              <Toaster />
+            </MSWProviders>
 
-          <ReactQueryDevtools />
-        </body>
-      </html>
-    </QueryClientProviders>
+            <ReactQueryDevtools />
+          </body>
+        </html>
+      </QueryClientProviders>
+    </MixpanelProvider>
   );
 }
