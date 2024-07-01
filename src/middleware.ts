@@ -38,7 +38,7 @@ export default function middleware(req: NextRequest) {
     const paramsToDelete = Object.values(UNSUB_PARAMS);
 
     // searchParams.delete 반복적으로 호출
-    paramsToDelete.forEach((param) => {
+    paramsToDelete.map((param) => {
       nextUrl.searchParams.delete(param);
     });
     const decodedEmail = decodeURIComponent(email);
