@@ -23,11 +23,14 @@ export async function generateMetadata({
 
   return {
     title: articleInfo.title,
+    description: `${articleInfo.writer.name} 작가의 ${articleInfo.title} 아티클 입니다.`,
     openGraph: {
       title: articleInfo.title,
+      description: `${articleInfo.writer.name} 작가의 ${articleInfo.title} 아티클 입니다.`,
     },
     twitter: {
       title: articleInfo.title,
+      description: `${articleInfo.writer.name} 작가의 ${articleInfo.title} 아티클 입니다.`,
     },
   };
 }
