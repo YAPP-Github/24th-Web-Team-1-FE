@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   },
 };
 
-// export const runtime = "edge"; // TBD: 개발환경과 분리
+export const runtime = "edge"; // TBD: 개발환경과 분리
 
 const pretendard = localFont({
   src: [

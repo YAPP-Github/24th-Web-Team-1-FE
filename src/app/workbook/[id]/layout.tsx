@@ -1,6 +1,8 @@
 // app/workbook/[id]/layout.tsx
 import type { Metadata } from "next";
 
+import { ApiResponse } from "@api/api-config";
+
 import { API_ROUTE } from "@workbook/remotes/api";
 import { WorkbookInfo } from "@workbook/types";
 
@@ -11,9 +13,9 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const id = params.id;
   const response = await fetch(
-    `https://api.fewletter.site${API_ROUTE.WORKBOOK(id)}`,
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}${API_ROUTE.WORKBOOK(id)}`,
   );
-  const workbookInfo: WorkbookInfo = await response.json();
+  const { data: workbookInfo }: ApiResponse<WorkbookInfo> = await response.json();
 
   return {
     title: workbookInfo.title,
