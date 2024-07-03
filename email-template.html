@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="KR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"
+    />
+    <title>FEW</title>
+    <link
+      rel="stylesheet"
+      as="style"
+      crossorigin
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"
+    />
+    <style>
+      * {
+        font-family:
+          "Pretendard Variable",
+          Pretendard,
+          -apple-system,
+          BlinkMacSystemFont,
+          system-ui,
+          Roboto,
+          "Helvetica Neue",
+          "Segoe UI",
+          "Apple SD Gothic Neo",
+          "Noto Sans KR",
+          "Malgun Gothic",
+          "Apple Color Emoji",
+          "Segoe UI Emoji",
+          "Segoe UI Symbol",
+          sans-serif;
+      }
+    </style>
+    <style>
+      .h1-bold {
+        font-family: "Pretendard Variable";
+        font-size: 28px;
+        line-height: 42px;
+        font-weight: 700;
+      }
+      .h2-bold {
+        font-family: "Pretendard Variable";
+        font-size: 24px;
+        line-height: 33.6px;
+        font-weight: 700;
+      }
+      .h3-bold {
+        font-family: "Pretendard Variable";
+        font-size: 18px;
+        line-height: 27px;
+        font-weight: 700;
+      }
+      .body1-medium {
+        font-family: "Pretendard Variable";
+        font-size: 17px;
+        line-height: 28.05px;
+        font-weight: 500;
+      }
+      .body1-regular {
+        font-family: "Pretendard Variable";
+        font-size: 17px;
+        line-height: 28.05px;
+        font-weight: 400;
+      }
+      .body2-bold {
+        font-family: "Pretendard Variable";
+        font-size: 15px;
+        line-height: 24.75px;
+        font-weight: 700;
+      }
+      .body2-medium {
+        font-family: "Pretendard Variable";
+        font-size: 15px;
+        line-height: 24.75px;
+        font-weight: 500;
+      }
+      .body2-regular {
+        font-family: "Pretendard Variable";
+        font-size: 15px;
+        line-height: 24.75px;
+        font-weight: 400;
+      }
+      .body3-medium {
+        font-family: "Pretendard Variable";
+        font-size: 14px;
+        line-height: 21px;
+        font-weight: 500;
+      }
+      .sub1-bold {
+        font-family: "Pretendard Variable";
+        font-size: 20px;
+        line-height: 28px;
+        font-weight: 700;
+      }
+      .sub1-semibold {
+        font-family: "Pretendard Variable";
+        font-size: 20px;
+        line-height: 28px;
+        font-weight: 600; /* semibold */
+      }
+      .sub2-bold {
+        font-family: "Pretendard Variable";
+        font-size: 16px;
+        line-height: 25.44px;
+        font-weight: 700;
+      }
+      .sub2-medium {
+        font-family: "Pretendard Variable";
+        font-size: 16px;
+        line-height: 25.44px;
+        font-weight: 500;
+      }
+      .sub3-500 {
+        font-family: "Pretendard Variable";
+        font-size: 12px;
+        line-height: 18px;
+        font-weight: 500;
+      }
+      .reference-li {
+        font-family: "Pretendard Variable";
+        font-size: 12px;
+        line-height: 18px;
+        font-weight: 500;
+      }
+      .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+      }
+      .article-img {
+        max-height: 260px !important;
+        object-fit: contain;
+      }
+    </style>
+  </head>
+  <body
+    style="
+      margin: 0 auto;
+      display: flex;
+      min-height: 100dvh;
+      width: 100%;
+      max-width: 480px;
+    "
+  >
+    <main style="display: flex; height: auto; width: 100%">
+      <div
+        style="
+          margin: 30px 20px 30px 20px;
+          display: flex;
+          width: 100%;
+          height: 100%;
+          flex-direction: column;
+          justify-content: space-between;
+          gap: 46px;
+        "
+      >
+        <section
+          style="
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 37px;
+          "
+        >
+          <div style="display: flex; flex-direction: column; gap: 12px">
+            <img
+              src="https://eehhqckznniu25210545.cdn.ntruss.com/images/2024-07-04/8sGcmxyOykodsmLf.svg"
+              alt="few_logo"
+            />
+            <div
+              style="
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 1px;
+              "
+            >
+              <p class="body3-medium" style="padding: 0" id="current-date"></p>
+              <a
+                class="body3-medium article-link"
+                href=""
+                style="text-decoration: underline; color: #484848"
+              >
+                웹으로 읽을래요!
+              </a>
+            </div>
+          </div>
+
+          <div style="display: flex; flex-direction: column; width: 100%">
+            <div style="margin-top: 4px; display: flex; gap: 12px">
+              <div
+                class="body3-medium"
+                id="category"
+                style="
+                  background-color: #f5f5f5;
+                  padding: 6px 4px;
+                  color: #484848;
+                "
+              ></div>
+              <div
+                class="body3-medium"
+                id="current-day"
+                style="
+                  height: content;
+                  width: content;
+                  background-color: #f5f5f5;
+                  padding: 4px 6px;
+                  color: #484848;
+                "
+              ></div>
+            </div>
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: 40px;
+              "
+            >
+              <header>
+                <h1
+                  class="h1-bold"
+                  style="color: black"
+                  id="article-title"
+                ></h1>
+              </header>
+            </div>
+            <article style="display: flex; align-items: center; gap: 8px">
+              <span class="sub2-bold" style="color: #a5a5a5"> 작가 </span>
+              <span class="sub2-bold" style="color: #484848" id="writer-name">
+                안나포
+              </span>
+              <a href="" target="_blank">
+                <img alt="next_icon" width="10" height="18" />
+              </a>
+            </article>
+          </div>
+        </section>
+        <section
+          style="
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+          "
+        >
+          <div style="display: flex; flex-direction: column; overflow: hidden">
+            <article
+              id="article-content"
+              style="display: flex; flex-direction: column; gap: 1rem"
+              class="body2-regular"
+            ></article>
+          </div>
+
+          <a
+            id="article-to-problem"
+            class="body3-medium"
+            style="
+              display: flex;
+              height: 20px;
+              text-decoration: none;
+              padding: 17px 0px 18px 0px;
+              justify-content: center;
+              align-items: center;
+              color: #ffffff;
+              background-color: #264932;
+            "
+            href=""
+            target="_blank"
+          >
+            문제 풀러 가기
+          </a>
+        </section>
+        <footer
+          style="
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            width: 100%;
+            margin-bottom: 30px;
+          "
+        >
+          <div
+            style="
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              gap: 12px;
+            "
+          >
+            <a href="">
+              <img
+                src="https://eehhqckznniu25210545.cdn.ntruss.com/images/2024-07-03/M39BxJ5JJM0p5VCq.svg"
+                alt="instagram"
+                target="_blank"
+              />
+            </a>
+
+            <a href="">
+              <img
+                src="https://eehhqckznniu25210545.cdn.ntruss.com/images/2024-07-03/QuoDJMYOR0KNCxaX.svg"
+                alt="link"
+                target="_blank"
+              />
+            </a>
+          </div>
+          <a
+            id="unsubscribe-email"
+            style="
+              text-decoration: underline;
+              color: #a5a5a5;
+              font-size: 14px;
+              font-weight: 500;
+              line-height: 21px;
+            "
+            href=""
+            target="_blank"
+          >
+            수신거부
+          </a>
+        </footer>
+      </div>
+    </main>
+  </body>
+</html>

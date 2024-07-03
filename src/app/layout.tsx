@@ -6,11 +6,11 @@ import { Suspense } from "react";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 import QueryClientProviders from "@shared/components/queryClientProvider";
+import { Toaster } from "@shared/components/ui/toaster";
 import { cn } from "@shared/utils/cn";
 
 import "./globals.css";
 import MSWProviders from "@mocks/MSWProviders";
-import { Toaster } from "@shared/components/ui/toaster";
 
 export const metadata: Metadata = {
   title: "FEW",
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   },
 };
 
-export const runtime = "edge"; // TBD: 개발환경과 분리
+// export const runtime = "edge"; // TBD: 개발환경과 분리
 
 const pretendard = localFont({
   src: [
