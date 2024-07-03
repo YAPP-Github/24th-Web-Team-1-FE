@@ -118,7 +118,13 @@
   .sub2-medium {
     @apply font-pretendard text-[16px]/[25.44px] font-medium;
   }
+  .sub3-medium {
+    @apply font-pretendard text-[12px]/[18px] font-medium;
+  }
 
+  .reference-li {
+    @apply font-pretendard text-[12px]/[18px] font-medium;
+  }
   .scrollbar-hide {
     -ms-overflow-style: none;
     scrollbar-width: none;
