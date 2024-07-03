@@ -4,6 +4,8 @@ import React, { ReactNode } from "react";
 
 import { ApiResponse } from "@api/api-config";
 
+import { createMetadata } from "@shared/utils/metadata";
+
 import ArticleBottomButton from "@article/components/ArticleBottomButton/indext";
 import { API_ROUTE } from "@article/remotes/api";
 import { ArticleDetail } from "@article/types";
@@ -21,18 +23,12 @@ export async function generateMetadata({
   );
   const { data: articleInfo }: ApiResponse<ArticleDetail> = await response.json();
 
-  return {
-    title: articleInfo.title,
-    description: `${articleInfo.writer.name} 작가의 ${articleInfo.title} 아티클 입니다.`,
-    openGraph: {
-      title: articleInfo.title,
-      description: `${articleInfo.writer.name} 작가의 ${articleInfo.title} 아티클 입니다.`,
-    },
-    twitter: {
-      title: articleInfo.title,
-      description: `${articleInfo.writer.name} 작가의 ${articleInfo.title} 아티클 입니다.`,
-    },
-  };
+  const { title, writer } = articleInfo
+
+  return createMetadata({
+    title: title,
+    description: `${writer.name} 작가의 ${articleInfo.title} 아티클 입니다.`,
+  });
 }
 
 interface ArticlePageLayoutProps {

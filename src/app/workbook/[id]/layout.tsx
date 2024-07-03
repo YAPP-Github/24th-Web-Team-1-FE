@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 
 import { ApiResponse } from "@api/api-config";
 
+import { createMetadata } from "@shared/utils/metadata";
+
 import { API_ROUTE } from "@workbook/remotes/api";
 import { WorkbookInfo } from "@workbook/types";
 
@@ -17,27 +19,13 @@ export async function generateMetadata({
   );
   const { data: workbookInfo }: ApiResponse<WorkbookInfo> = await response.json();
 
-  return {
-    title: workbookInfo.title,
-    description: workbookInfo.description,
-    openGraph: {
-      title: workbookInfo.title,
-      description: workbookInfo.description,
-      images: [
-        {
-          url: workbookInfo.mainImageUrl,
-          width: 800,
-          height: 600,
-          alt: "Workbook Image",
-        },
-      ],
-    },
-    twitter: {
-      title: workbookInfo.title,
-      description: workbookInfo.description,
-      images: [workbookInfo.mainImageUrl],
-    },
-  };
+  const { title, description, mainImageUrl } = workbookInfo
+
+   return createMetadata({
+    title: title,
+    description: description,
+    imageUrl: mainImageUrl
+  });
 }
 
 interface WorkbookLayoutProps {
