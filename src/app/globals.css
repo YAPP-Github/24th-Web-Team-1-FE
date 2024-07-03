@@ -125,6 +125,10 @@
   .reference-li {
     @apply font-pretendard text-[12px]/[18px] font-medium;
   }
+  .article-img {
+    max-height: 260px !important;
+    object-fit: contain;
+  }
   .scrollbar-hide {
     -ms-overflow-style: none;
     scrollbar-width: none;
