@@ -21,6 +21,8 @@ import { getWorkbookId } from "@workbook/utils";
 import SubscribeBottomBar from "@subscription/components/SubscribeBottomBar";
 import SubscribeForm from "@subscription/components/SubscribeForm";
 import { SUBSCRIBE_TITLES } from "@subscription/constants/subscribe";
+import { Mixpanel } from "@shared/utils/mixpanel";
+import { EVENT_NAME } from "@shared/constants/mixpanel";
 
 const SUBSCRIBE_POPUP_TITLE = (
   <div className="h3-bold text-lg text-black">
@@ -48,6 +50,11 @@ export default function WorkbookPage() {
   useEffect(function detectClient() {
     setIsClient(true);
   }, []);
+
+  Mixpanel.track({
+    name: EVENT_NAME.WORKBOOK_APPEAR,
+    property: { id: workbookId },
+  });
 
   if (isLoading) return <WorkbookSkeleton />;
   // if (isError) return <div>Error loading workbook</div>;
