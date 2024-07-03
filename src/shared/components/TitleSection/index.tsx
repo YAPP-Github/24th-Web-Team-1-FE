@@ -39,7 +39,7 @@ export default function TitleSection({
     <>
       <header className={cn("flex flex-col gap-[12px]", className)}>
         <TagList tagTexts={tagTexts} />
-        <div className="space-between flex items-center">
+        <div className="space-between flex items-center justify-between">
           <h1 className="h1-bold text-[28px] text-black">{title}</h1>
           <Button
             className="bg-transprent hover:bg-transprent"
