@@ -26,6 +26,10 @@ export default function middleware(req: NextRequest) {
   const articleId = searchParams.get("articleId");
   const workbookId = searchParams.get("workbookId");
 
+  if (pathname === '/') {
+    return NextResponse.redirect("https://fewletter.notion.site/FEW-a87459feb21246b0bc63c68ef6140645");
+  }
+
   /** /workbook 으로 진입 시 리다이랙션 */
   if (pathname === "/workbook") {
     nextUrl.pathname = "/workbook/1";
@@ -59,5 +63,5 @@ export default function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/unsubscribe/:path*", "/workbook/:path*"],
+  matcher: ["/unsubscribe/:path*", "/workbook/:path*", "/"],
 };

@@ -10,7 +10,7 @@ interface WorkbookParam {
   workbookId: string;
 }
 
-const getWorkbook = async ({
+export const getWorkbook = async ({
   workbookId,
 }: WorkbookParam): Promise<ApiResponse<WorkbookInfo>> => {
   return axiosRequest("get", (API_ROUTE.WORKBOOK(workbookId)))
