@@ -19,6 +19,7 @@ import SubscribeBottomBar from "@subscription/components/SubscribeBottomBar";
 
 import { EVENT_NAME } from "@shared/constants/mixpanel";
 import { Mixpanel } from "@shared/utils/mixpanel";
+import { useEffect } from "react";
 
 export default function WorkbookPage() {
   // usePathname 로 workbook id 받기
@@ -29,10 +30,15 @@ export default function WorkbookPage() {
     ...getWorkbookQueryOptions(workbookId),
   });
 
-  Mixpanel.track({
-    name: EVENT_NAME.WORKBOOK_APPEAR,
-    property: { id: workbookId },
-  });
+  useEffect(
+    function trackMixpanel() {
+      Mixpanel.track({
+        name: EVENT_NAME.WORKBOOK_APPEAR,
+        property: { id: workbookId },
+      });
+    },
+    [pathname],
+  );
 
   if (isLoading) return <WorkbookSkeleton />;
 

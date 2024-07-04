@@ -2,8 +2,6 @@
 
 import { useParams } from "next/navigation";
 
-import React from "react";
-
 import { useMutationState, useQuery } from "@tanstack/react-query";
 
 import { ApiResponse } from "@api/api-config";
@@ -12,9 +10,10 @@ import { PROBLEM_TITLE_INFO } from "@problem/constants/problemInfo";
 import { QUERY_KEY } from "@problem/remotes/api";
 import { getProblemQueryOptions } from "@problem/remotes/getProblemQueryOptions";
 import { AnswerCheckInfo } from "@problem/types/problemInfo";
-import ProblemSkeleton from "../ProblemSkeleton";
-import { Mixpanel } from "@shared/utils/mixpanel";
 import { EVENT_NAME } from "@shared/constants/mixpanel";
+import { Mixpanel } from "@shared/utils/mixpanel";
+import { useEffect } from "react";
+import ProblemSkeleton from "../ProblemSkeleton";
 
 export default function ProblemTitle() {
   const { problemId } = useParams<{ problemId: string }>();
@@ -32,10 +31,15 @@ export default function ProblemTitle() {
     select: (mutation) => mutation.state.data as ApiResponse<AnswerCheckInfo>,
   });
 
-  Mixpanel.track({
-    name: EVENT_NAME.PROBLEM_APPEAR,
-    property: { id: problemId },
-  });
+  useEffect(
+    function trackMixpanel() {
+      Mixpanel.track({
+        name: EVENT_NAME.PROBLEM_APPEAR,
+        property: { id: problemId },
+      });
+    },
+    [problemId],
+  );
   if (isLoading || isError) return <ProblemSkeleton.TitleSkeleton />;
 
   if (problemInfo) {

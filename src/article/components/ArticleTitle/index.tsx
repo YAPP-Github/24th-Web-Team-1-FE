@@ -14,10 +14,10 @@ import { getArticleWithWorkbookQueryOptions } from "@article/remotes/getArticleW
 import { ArticleDetail, ArticleWithWorkbookDetail } from "@article/types";
 import { ARTICLE_INFO_TYPE } from "@common/constants/articleCase";
 import { useProblemIdsViewModel } from "@common/models/useProblemIdsViewModel";
+import { EVENT_NAME } from "@shared/constants/mixpanel";
+import { Mixpanel } from "@shared/utils/mixpanel";
 import ArticleSkeleton from "../ArticleSkeleton";
 import WriterInfo from "../WriterInfo";
-import { Mixpanel } from "@shared/utils/mixpanel";
-import { EVENT_NAME } from "@shared/constants/mixpanel";
 
 export default function ArticleTitle() {
   const { articleId } = useParams<{ articleId: string }>();
@@ -42,7 +42,7 @@ export default function ArticleTitle() {
     ],
   });
 
-  const { data, isLoading, isError } = workbookId
+  const { data, isLoading } = workbookId
     ? results[ARTICLE_INFO_TYPE.ARTICLE_WITH_WORKBOOK]
     : results[ARTICLE_INFO_TYPE.ONLY_ARTICLE];
 
@@ -60,13 +60,17 @@ export default function ArticleTitle() {
     [articleInfo],
   );
 
-  Mixpanel.track({
-    name: EVENT_NAME.ARTICLE_APPREAR,
-    property: { id: articleId },
-  });
+  useEffect(
+    function trackMixpanel() {
+      Mixpanel.track({
+        name: EVENT_NAME.ARTICLE_APPREAR,
+        property: { id: articleId },
+      });
+    },
+    [articleInfo],
+  );
 
-  if (isLoading || isError) return <ArticleSkeleton.TitleSkeleton />;
-  if (isError || !articleInfo) return <div>에러</div>;
+  if (isLoading || !articleInfo) return <ArticleSkeleton.TitleSkeleton />;
 
   const { category, title, writer } = articleInfo;
   const dayText = getDayText();
