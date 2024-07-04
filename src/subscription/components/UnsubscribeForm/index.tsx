@@ -33,7 +33,7 @@ export default function UnsubscribeForm() {
             type="button"
             variant={"outline"}
             className={cn(
-              "border-text-gray3 text-black",
+              "border-text-gray3 text-black h-[46px]",
               buttonStyle
             )}
             onClick={handleClickBack}
@@ -44,7 +44,7 @@ export default function UnsubscribeForm() {
             type="submit"
             variant={"outline"}
             className={cn(
-              "border-error text-error",
+              "border-error text-error h-[46px]",
               buttonStyle
             )}
           >
