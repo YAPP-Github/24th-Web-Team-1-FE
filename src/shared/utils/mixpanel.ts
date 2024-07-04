@@ -14,7 +14,7 @@ const actions = {
     if (isDebug) mixpanel.identify(id);
   },
   track: ({ name, property }: { name: string; property?: Dict }) => {
-    if (isDebug) mixpanel.track(name, property);
+    mixpanel.track(name, property);
   },
   people: {
     set: ({ peoples }: { peoples: Dict }) => {
