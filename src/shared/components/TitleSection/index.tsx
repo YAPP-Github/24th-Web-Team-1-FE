@@ -3,17 +3,14 @@ import { usePathname } from "next/navigation";
 
 import React, { HTMLAttributes, ReactElement, useState } from "react";
 
-import ShareIcon from "public/assets/icon/share.svg";
-
 import ExternalControlOpenDialog from "@shared/components/ExternalControlOpenDialog";
 import { Button } from "@shared/components/ui/button";
+import { cn } from "@shared/utils/cn";
 
 import LinkShare from "../../../common/components/LinkShare";
 import TagList from "@common/components/TagList";
-
-import { cn } from "@shared/utils/cn";
-
 import { LINK_SHARE_CONTENT } from "@common/constants/linkShareContent";
+import ShareIcon from "public/assets/icon/share.svg";
 
 interface TitleSectionProps extends HTMLAttributes<HTMLDivElement> {
   tagTexts: string[];
@@ -40,7 +37,7 @@ export default function TitleSection({
       <header className={cn("flex flex-col gap-[12px]", className)}>
         <TagList tagTexts={tagTexts} />
         <div className="space-between flex items-center">
-          <h1 className="h1-bold text-[28px] text-black">{title}</h1>
+          <h2 className="h2-bold text-[28px] text-black">{title}</h2>
           <Button
             className="bg-transprent hover:bg-transprent"
             onClick={onClickControlOpenDialog}

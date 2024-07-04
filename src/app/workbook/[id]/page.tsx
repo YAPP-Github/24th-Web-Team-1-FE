@@ -3,14 +3,11 @@
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 
-import React, { useEffect, useState } from "react";
-
 import { useQuery } from "@tanstack/react-query";
-
-import SubscribePopup from "src/shared/components/ExternalControlOpenDialog";
 
 import TitleSection from "@shared/components/TitleSection";
 
+import { ClientSubscribePopup } from "@workbook/components/ClientSubscribePopup";
 import CurriculumSection from "@workbook/components/CurriculumSection";
 import OverviewSection from "@workbook/components/OverviewSection";
 import WorkbookSkeleton from "@workbook/components/WorkbookSkeleton";
@@ -19,6 +16,7 @@ import { getWorkbookQueryOptions } from "@workbook/remotes/getWorkbookQueryOptio
 import { getWorkbookId } from "@workbook/utils";
 
 import SubscribeBottomBar from "@subscription/components/SubscribeBottomBar";
+
 import SubscribeForm from "@subscription/components/SubscribeForm";
 import { SUBSCRIBE_TITLES } from "@subscription/constants/subscribe";
 import { Mixpanel } from "@shared/utils/mixpanel";
@@ -31,10 +29,8 @@ const SUBSCRIBE_POPUP_TITLE = (
   </div>
 );
 
-export default function WorkbookPage() {
-  const [isOpen, setIsOpen] = useState<boolean>(true);
-  const [isClient, setIsClient] = useState<boolean>(false);
 
+export default function WorkbookPage() {
   // usePathname 로 workbook id 받기
   const pathname = usePathname();
   const workbookId = getWorkbookId(pathname);
@@ -42,10 +38,10 @@ export default function WorkbookPage() {
   const {
     data: workbookInfo,
     isLoading,
-    isError,
   } = useQuery({
     ...getWorkbookQueryOptions(workbookId),
   });
+
 
   useEffect(function detectClient() {
     setIsClient(true);
@@ -56,20 +52,13 @@ export default function WorkbookPage() {
     property: { id: workbookId },
   });
 
+
   if (isLoading) return <WorkbookSkeleton />;
-  // if (isError) return <div>Error loading workbook</div>;
 
   return (
     <main className="flex h-[100vh] w-full flex-col items-center overflow-x-hidden">
       <article className="flex h-full w-full max-w-screen-sm flex-col space-y-[24px] overflow-y-scroll">
-        {isClient && (
-          <SubscribePopup
-            isOpen={isOpen}
-            setIsOpen={setIsOpen}
-            title={SUBSCRIBE_POPUP_TITLE}
-            content={<SubscribeForm setIsOpen={setIsOpen} />}
-          />
-        )}
+        <ClientSubscribePopup />
         {workbookInfo && (
           <>
             <figure>

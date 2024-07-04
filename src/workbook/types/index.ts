@@ -25,3 +25,7 @@ export interface WorkbookInfo {
   writers: Writer[];
   articles: Article[];
 }
+
+export type MetadataProps = {
+  params: { id: string };
+};
