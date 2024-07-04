@@ -2,7 +2,7 @@
 
 import { useParams, useSearchParams } from "next/navigation";
 
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 import { useQueries } from "@tanstack/react-query";
 
@@ -10,12 +10,12 @@ import TitleSection from "@shared/components/TitleSection";
 
 import { getArticleQueryOptions } from "@article/remotes/getArticleQueryOptions";
 
-import ArticleSkeleton from "../ArticleSkeleton";
-import WriterInfo from "../WriterInfo";
-import { useProblemIdsViewModel } from "@common/models/useProblemIdsViewModel";
 import { getArticleWithWorkbookQueryOptions } from "@article/remotes/getArticleWithWorkbookQueryOptions";
 import { ArticleDetail, ArticleWithWorkbookDetail } from "@article/types";
 import { ARTICLE_INFO_TYPE } from "@common/constants/articleCase";
+import { useProblemIdsViewModel } from "@common/models/useProblemIdsViewModel";
+import ArticleSkeleton from "../ArticleSkeleton";
+import WriterInfo from "../WriterInfo";
 import { Mixpanel } from "@shared/utils/mixpanel";
 import { EVENT_NAME } from "@shared/constants/mixpanel";
 

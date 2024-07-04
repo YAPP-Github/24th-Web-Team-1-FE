@@ -13,8 +13,6 @@ import {
 import QueryClientProviders from "@shared/components/queryClientProvider";
 import { createQueryProviderWrapper } from "@shared/constants/createQueryProvider";
 
-import ProblemLayout from "../layout";
-import ProblemPage from "./page";
 import { mockProblemModuleStore } from "@common/stores/mockZustandStore";
 import ProblemContext, {
   defaultActions,
@@ -30,6 +28,8 @@ import {
   waitFor,
 } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import ProblemLayout from "./layout";
+import ProblemPage from "./page";
 
 const isExistNextProblem = vi.fn(() => false);
 const clearProblem = vi.fn();
