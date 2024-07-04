@@ -1,10 +1,11 @@
 import { ApiResponse } from "@api/api-config";
+import { ProblemIdsData } from "@common/stores/problemModuleStore";
 import { ConstKeyObject } from "@common/types/constKeyObject";
 import {
   ANSWER_CHOICHE_TYPE,
   PROBLEM_ANSWER_TYPE,
 } from "@problem/constants/problemInfo";
-
+export type StoreProblemIds = Pick<ProblemIdsData, "problemIds">;
 export type ProblemTitleInfo = ConstKeyObject<
   (typeof PROBLEM_ANSWER_TYPE)[number],
   React.HTMLAttributes<HTMLHeadElement>
