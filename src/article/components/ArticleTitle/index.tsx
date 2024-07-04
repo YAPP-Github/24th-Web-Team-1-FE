@@ -2,7 +2,7 @@
 
 import { useParams, useSearchParams } from "next/navigation";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 import { useQueries } from "@tanstack/react-query";
 
@@ -20,6 +20,7 @@ import ArticleSkeleton from "../ArticleSkeleton";
 import WriterInfo from "../WriterInfo";
 
 export default function ArticleTitle() {
+  const isFirstRender = useRef(false);
   const { articleId } = useParams<{ articleId: string }>();
   const { setProblemIds, getDayText } = useProblemIdsViewModel();
 
@@ -42,7 +43,7 @@ export default function ArticleTitle() {
     ],
   });
 
-  const { data, isLoading } = workbookId
+  const { data, isLoading, isError } = workbookId
     ? results[ARTICLE_INFO_TYPE.ARTICLE_WITH_WORKBOOK]
     : results[ARTICLE_INFO_TYPE.ONLY_ARTICLE];
 
@@ -62,10 +63,13 @@ export default function ArticleTitle() {
 
   useEffect(
     function trackMixpanel() {
-      Mixpanel.track({
-        name: EVENT_NAME.ARTICLE_APPREAR,
-        property: { id: articleId },
-      });
+      if (!isFirstRender.current) {
+        isFirstRender.current = true;
+        Mixpanel.track({
+          name: EVENT_NAME.ARTICLE_APPREAR,
+          property: { id: articleId },
+        });
+      }
     },
     [articleInfo],
   );
