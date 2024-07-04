@@ -1,6 +1,6 @@
 import { useParams } from "next/navigation";
 
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { useMutationState } from "@tanstack/react-query";
 
@@ -9,7 +9,6 @@ import { ApiResponse } from "@api/api-config";
 import { Button } from "@shared/components/ui/button";
 import { cn } from "@shared/utils/cn";
 
-import ChoiceFillCircleSvg from "../ChoiceFillCircleSvg";
 import { ANSWER_CHOICHE_BUTTON_INFO } from "@problem/constants/problemInfo";
 import ProblemContext from "@problem/context/problemContext";
 import { QUERY_KEY } from "@problem/remotes/api";
@@ -19,6 +18,7 @@ import {
   ProblemAnswerBody,
   ProblemAnswerMuationState,
 } from "@problem/types/problemInfo";
+import ChoiceFillCircleSvg from "../ChoiceFillCircleSvg";
 
 interface AnswerChoiceButtonProps extends AnswerChoiceClientInfo {}
 
@@ -85,12 +85,14 @@ export default function AnswerChoiceButton({
   return (
     <Button
       className={cn(
-        "flex h-[56px] w-full justify-between rounded-s border-[1px] border-text-gray3 px-3",
+        "flex h-fit min-h-[56px] justify-between rounded-s border-[1px] border-text-gray3 px-3",
         className,
       )}
       onClick={onClickAnswerChoice}
     >
-      <span className="sub2-bold">{content}</span>
+      <span className="sub2-bold max-w-[247px] whitespace-normal">
+        {content}
+      </span>
 
       <ChoiceFillCircleSvg
         isChoice={
