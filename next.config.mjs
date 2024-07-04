@@ -4,7 +4,11 @@ const nextConfig = {
     instrumentationHook: true,
   },
   images: {
-    domains: ['github.com', 'oopy.lazyrockets.com'],
+    domains: [
+      "github.com",
+      "oopy.lazyrockets.com",
+      "eehhqckznniu25210545.cdn.ntruss.com",
+    ],
   },
   webpack: (config, context) => {
     config.module.rules.push({
