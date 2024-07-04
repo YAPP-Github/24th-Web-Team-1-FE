@@ -13,6 +13,8 @@ import { QUERY_KEY } from "@problem/remotes/api";
 import { getProblemQueryOptions } from "@problem/remotes/getProblemQueryOptions";
 import { AnswerCheckInfo } from "@problem/types/problemInfo";
 import ProblemSkeleton from "../ProblemSkeleton";
+import { Mixpanel } from "@shared/utils/mixpanel";
+import { EVENT_NAME } from "@shared/constants/mixpanel";
 
 export default function ProblemTitle() {
   const { problemId } = useParams<{ problemId: string }>();
@@ -30,6 +32,10 @@ export default function ProblemTitle() {
     select: (mutation) => mutation.state.data as ApiResponse<AnswerCheckInfo>,
   });
 
+  Mixpanel.track({
+    name: EVENT_NAME.PROBLEM_APPEAR,
+    property: { id: problemId },
+  });
   if (isLoading || isError) return <ProblemSkeleton.TitleSkeleton />;
 
   if (problemInfo) {

@@ -17,6 +17,19 @@ import { getWorkbookId } from "@workbook/utils";
 
 import SubscribeBottomBar from "@subscription/components/SubscribeBottomBar";
 
+import SubscribeForm from "@subscription/components/SubscribeForm";
+import { SUBSCRIBE_TITLES } from "@subscription/constants/subscribe";
+import { Mixpanel } from "@shared/utils/mixpanel";
+import { EVENT_NAME } from "@shared/constants/mixpanel";
+
+const SUBSCRIBE_POPUP_TITLE = (
+  <div className="h3-bold text-lg text-black">
+    <div>{SUBSCRIBE_TITLES.SUBSCRIBE_TITLE_1}</div>
+    <div>{SUBSCRIBE_TITLES.SUBSCRIBE_TITLE_2}</div>
+  </div>
+);
+
+
 export default function WorkbookPage() {
   // usePathname 로 workbook id 받기
   const pathname = usePathname();
@@ -28,6 +41,17 @@ export default function WorkbookPage() {
   } = useQuery({
     ...getWorkbookQueryOptions(workbookId),
   });
+
+
+  useEffect(function detectClient() {
+    setIsClient(true);
+  }, []);
+
+  Mixpanel.track({
+    name: EVENT_NAME.WORKBOOK_APPEAR,
+    property: { id: workbookId },
+  });
+
 
   if (isLoading) return <WorkbookSkeleton />;
 
