@@ -16,6 +16,8 @@ import { ARTICLE_INFO_TYPE } from "@common/constants/articleCase";
 import { useProblemIdsViewModel } from "@common/models/useProblemIdsViewModel";
 import ArticleSkeleton from "../ArticleSkeleton";
 import WriterInfo from "../WriterInfo";
+import { Mixpanel } from "@shared/utils/mixpanel";
+import { EVENT_NAME } from "@shared/constants/mixpanel";
 
 export default function ArticleTitle() {
   const { articleId } = useParams<{ articleId: string }>();
@@ -57,6 +59,11 @@ export default function ArticleTitle() {
     },
     [articleInfo],
   );
+
+  Mixpanel.track({
+    name: EVENT_NAME.ARTICLE_APPREAR,
+    property: { id: articleId },
+  });
 
   if (isLoading || isError) return <ArticleSkeleton.TitleSkeleton />;
   if (isError || !articleInfo) return <div>에러</div>;
