@@ -1,12 +1,11 @@
 "use client";
 
 import { getArticleQueryOptions } from "@article/remotes/getArticleQueryOptions";
-import { useQueries } from "@tanstack/react-query";
-import { useParams, useSearchParams } from "next/navigation";
-import React from "react";
-import ArticleSkeleton from "../ArticleSkeleton";
 import { getArticleWithWorkbookQueryOptions } from "@article/remotes/getArticleWithWorkbookQueryOptions";
 import { ARTICLE_INFO_TYPE } from "@common/constants/articleCase";
+import { useQueries } from "@tanstack/react-query";
+import { useParams, useSearchParams } from "next/navigation";
+import ArticleSkeleton from "../ArticleSkeleton";
 
 export default function EmailContentTemplate() {
   const { articleId } = useParams<{ articleId: string }>();
@@ -44,9 +43,10 @@ export default function EmailContentTemplate() {
   const { content } = articleInfo;
 
   return (
-    <article
-      className="overflow-hidden"
-      dangerouslySetInnerHTML={{ __html: content }}
-    ></article>
+    <table>
+      <td style={{}}>
+        <tr dangerouslySetInnerHTML={{ __html: content }}></tr>
+      </td>
+    </table>
   );
 }

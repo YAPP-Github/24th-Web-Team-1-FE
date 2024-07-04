@@ -126,4 +126,13 @@
       display: none;
     }
   }
+  tr p {
+    margin: 13px 0px;
+  }
+  tr article h3 {
+    margin-top: 20px;
+  }
+  tr article a {
+    text-decoration: underline;
+  }
 }
