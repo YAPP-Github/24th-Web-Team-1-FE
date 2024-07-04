@@ -93,10 +93,29 @@ export const articleWithWorkbookHandler = http.get(
     return HttpResponse.json(response[apiRoutes.articleWithWorkbook + "1"]);
   },
 );
+
+export const problemsWithArticleHandler = http.get(
+  apiRoutes.problemsWithArticle,
+  async ({ request }) => {
+    const isArticleId = request.url.includes("articleId");
+    const articleId = request.url.split("articleId=")[1];
+
+    if (!isArticleId) {
+      return new HttpResponse(null, { status: 404 });
+    }
+    switch (articleId) {
+      case "1":
+        return HttpResponse.json(response[apiRoutes.problemsWithArticle + "1"]);
+    }
+    return HttpResponse.json(response[apiRoutes.problemsWithArticle + "1"]);
+  },
+);
+
 export const handlers = [
   problemsHandler,
   submitAnswerHandler,
   workbookHandler,
   articleHandler,
   articleWithWorkbookHandler,
+  problemsWithArticleHandler,
 ];

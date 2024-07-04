@@ -5,4 +5,5 @@ export const apiRoutes = {
   article: "/api/v1/articles/:articleId",
   unsubscribe: "/api/v1/subscriptions/all",
   articleWithWorkbook: "/api/v1/workbooks/:workbookId/articles/:articleId",
+  problemsWithArticle: "/api/v1/problems",
 };
