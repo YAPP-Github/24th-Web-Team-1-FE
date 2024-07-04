@@ -1,10 +1,16 @@
 "use client";
-import { useProblemIdsViewModel } from "@common/models/useProblemIdsViewModel";
 import TopBar from "@common/components/TopBar";
-import React from "react";
+import { useProblemIdsViewModel } from "@common/models/useProblemIdsViewModel";
+import { useRouter } from "next/navigation";
 
 export default function ProblemTopbar() {
   const { prevSetProblemId } = useProblemIdsViewModel();
+  const { back } = useRouter();
 
-  return <TopBar onClick={() => prevSetProblemId()} />;
+  const handleBackClick = () => {
+    prevSetProblemId();
+    back();
+  };
+
+  return <TopBar onClick={handleBackClick} />;
 }

@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
 import { ProblemListInfo } from "@problem/types/problemInfo";
-interface ProblemIdsData {
+export interface ProblemIdsData {
   problemIds: ProblemListInfo[];
   articleId: string;
   day: string | undefined;
@@ -19,9 +19,9 @@ interface ProblemAction {
     articleId,
     day,
   }: {
-    problemIds: number[];
+    problemIds: ProblemListInfo[];
     articleId: string;
-    day: string | undefined;
+    day?: string;
   }) => void;
   clearProblem: () => void;
 }

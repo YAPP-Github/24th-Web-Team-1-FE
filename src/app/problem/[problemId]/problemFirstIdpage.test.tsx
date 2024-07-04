@@ -5,8 +5,6 @@ import { beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
 import QueryClientProviders from "@shared/components/queryClientProvider";
 import { createQueryProviderWrapper } from "@shared/constants/createQueryProvider";
 
-import ProblemLayout from "../layout";
-import ProblemPage from "./page";
 import { mockProblemModuleStore } from "@common/stores/mockZustandStore";
 import ProblemContext, {
   defaultActions,
@@ -16,6 +14,8 @@ import { getProblemQueryOptions } from "@problem/remotes/getProblemQueryOptions"
 import { ProblemContextInfo } from "@problem/types/problemContextInfo";
 import { render, renderHook, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import ProblemLayout from "./layout";
+import ProblemPage from "./page";
 
 const isExistNextProblem = vi.fn(() => true);
 const nextSetProblemId = vi.fn(() => "2");

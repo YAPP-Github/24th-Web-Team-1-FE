@@ -1,10 +1,10 @@
-import QueryClientProviders from "@shared/components/queryClientProvider";
-import { render, renderHook, waitFor, screen } from "@testing-library/react";
-import ArticleTitle from ".";
-import { describe, expect, it, vi } from "vitest";
-import { useQuery } from "@tanstack/react-query";
 import { getArticleQueryOptions } from "@article/remotes/getArticleQueryOptions";
+import QueryClientProviders from "@shared/components/queryClientProvider";
 import { createQueryProviderWrapper } from "@shared/constants/createQueryProvider";
+import { useQuery } from "@tanstack/react-query";
+import { render, renderHook, screen, waitFor } from "@testing-library/react";
+import { describe, expect, it, vi } from "vitest";
+import ArticleTitle from ".";
 
 const paramsGet = vi.fn();
 
@@ -42,7 +42,7 @@ describe("아티클의 타이틀 영역 데이터 잘 노출되는지 확인", (
 
     await waitFor(async () => result.current.isSuccess);
     await waitFor(() => {
-      const headingTag = screen.getByRole("heading", { level: 1 });
+      const headingTag = screen.getByRole("heading", { level: 2 });
       expect(headingTag).toHaveTextContent("겨울철 노벨상 후보들");
 
       expect(screen.findByText("Fig.1")).toBeTruthy();
