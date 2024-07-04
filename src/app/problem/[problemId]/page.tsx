@@ -1,10 +1,8 @@
-import React from "react";
-
 import AnswerChoiceList from "@problem/components/AnswerChoiceList";
 import LottieWithContext from "@problem/components/LottieWithContext";
 import ProblemExplanation from "@problem/components/ProblemExplanation";
-import ProblemTitle from "@problem/components/ProblemTitle";
 import ProblemTagList from "@problem/components/ProblemTagList";
+import ProblemTitle from "@problem/components/ProblemTitle";
 
 export default function ProblemPage() {
   return (
