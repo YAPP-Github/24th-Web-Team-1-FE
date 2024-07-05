@@ -1,7 +1,10 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
-import { UNSUB_PARAMS } from "@shared/constants/middlewareConstant";
+import {
+  IS_EXIST_PROBLEMS,
+  UNSUB_PARAMS,
+} from "@shared/constants/middlewareConstant";
 
 const withOutAuthList = [];
 const withAuthList = [];
@@ -26,8 +29,10 @@ export default function middleware(req: NextRequest) {
   const articleId = searchParams.get("articleId");
   const workbookId = searchParams.get("workbookId");
 
-  if (pathname === '/') {
-    return NextResponse.redirect("https://fewletter.notion.site/FEW-a87459feb21246b0bc63c68ef6140645");
+  if (pathname === "/") {
+    return NextResponse.redirect(
+      "https://fewletter.notion.site/FEW-a87459feb21246b0bc63c68ef6140645",
+    );
   }
 
   /** /workbook 으로 진입 시 리다이랙션 */
@@ -56,6 +61,15 @@ export default function middleware(req: NextRequest) {
     return response;
   }
 
+  if (pathname.includes("/problem")) {
+    const isProblemIds = req.cookies.get(IS_EXIST_PROBLEMS)?.value === "true";
+
+    if (!isProblemIds) {
+      nextUrl.pathname = "/";
+      return NextResponse.redirect(nextUrl);
+    }
+  }
+
   if (isWithAuth) return withAuth(req);
   if (isWithOutAuth) return withOutAuth(req);
 
@@ -63,5 +77,5 @@ export default function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/unsubscribe/:path*", "/workbook/:path*", "/"],
+  matcher: ["/unsubscribe/:path*", "/workbook/:path*", "/problem/:path*"],
 };

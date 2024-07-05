@@ -1,18 +1,20 @@
 "use client";
 import { useParams, useRouter } from "next/navigation";
 
-import React, { useContext } from "react";
+import { useContext } from "react";
 
 import { useMutation, useMutationState } from "@tanstack/react-query";
 
 import { Button } from "@shared/components/ui/button";
+import { deleteCookie } from "cookies-next";
 
+import { useProblemIdsViewModel } from "@common/models/useProblemIdsViewModel";
 import { BUTTON_INFO } from "@problem/constants/answerButtonInfo";
 import QuizContext from "@problem/context/problemContext";
 import { QUERY_KEY } from "@problem/remotes/api";
 import { postProblemAnswerMutationOptions } from "@problem/remotes/postProblemAnswerOption";
 import { AnswerCheckInfo } from "@problem/types/problemInfo";
-import { useProblemIdsViewModel } from "@common/models/useProblemIdsViewModel";
+import { IS_EXIST_PROBLEMS } from "@shared/constants/middlewareConstant";
 import { cn } from "@shared/utils/cn";
 
 export default function AnswerSubmitButton() {
@@ -45,9 +47,9 @@ export default function AnswerSubmitButton() {
       push(`/problem/${problemId}`);
     }
     if (problemAnswerInfo[0] && !isExistNextProblem()) {
+      push("/");
       clearProblem();
-      // NOTE : 나중에 메인으로 변경 필요
-      push("/workbook/1");
+      deleteCookie(IS_EXIST_PROBLEMS);
     }
   };
   const isPostAnswerSuccess = problemAnswerInfo[0];
