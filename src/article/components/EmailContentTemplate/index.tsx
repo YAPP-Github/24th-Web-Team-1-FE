@@ -43,9 +43,11 @@ export default function EmailContentTemplate() {
 
   return (
     <table>
-      <td style={{}}>
-        <tr dangerouslySetInnerHTML={{ __html: content }}></tr>
-      </td>
+      <tbody>
+        <tr style={{}}>
+          <td dangerouslySetInnerHTML={{ __html: content }}></td>
+        </tr>
+      </tbody>
     </table>
   );
 }
