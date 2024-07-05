@@ -40,7 +40,8 @@ export default function ProblemTitle() {
     },
     [problemId],
   );
-  if (isLoading || isError) return <ProblemSkeleton.TitleSkeleton />;
+  if (isLoading || isError || !problemInfo)
+    return <ProblemSkeleton.TitleSkeleton />;
 
   if (problemInfo) {
     const problemAnswerData = problemAnswerInfo[0];
