@@ -3,8 +3,12 @@ import { NextResponse } from "next/server";
 
 import {
   IS_EXIST_PROBLEMS,
+  LOG_PARAMS,
   UNSUB_PARAMS,
 } from "@shared/constants/middlewareConstant";
+import { API_ROUTE } from "@shared/remotes";
+import { LogData } from "@shared/types";
+import { undefined } from "zod";
 
 const withOutAuthList = [];
 const withAuthList = [];
@@ -19,7 +23,7 @@ const withAuth = async (req: NextRequest) => {
   return NextResponse.next();
 };
 
-export default function middleware(req: NextRequest) {
+export default async function middleware(req: NextRequest) {
   const isWithAuth = true;
   const isWithOutAuth = false;
 
@@ -28,6 +32,7 @@ export default function middleware(req: NextRequest) {
   const email = searchParams.get("user");
   const articleId = searchParams.get("articleId");
   const workbookId = searchParams.get("workbookId");
+  const fromEmail = searchParams.get(LOG_PARAMS.FROM_EMAIL);
 
   if (pathname === "/") {
     return NextResponse.redirect(
@@ -61,7 +66,34 @@ export default function middleware(req: NextRequest) {
     return response;
   }
 
+  /** article url 진입시 이메일 로그 쌓는 로직 */
+  if (pathname.includes("/article") && fromEmail) {
+    try {
+      const history: LogData = {
+        from: "email",
+        to: "readArticle",
+      };
+      await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}${API_ROUTE.LOGS()}`,
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            history: JSON.stringify(history),
+          }),
+        },
+      );
+      nextUrl.searchParams.delete(LOG_PARAMS.FROM_EMAIL);
+      return NextResponse.redirect(nextUrl);
+    } catch (error) {
+      return undefined;
+    }
+  }
   if (pathname.includes("/problem")) {
+    /** problme url 진입시 전역상태 없으면 들어올 수 없게 방어하는 로직 */
     const isProblemIds = req.cookies.get(IS_EXIST_PROBLEMS)?.value === "true";
 
     if (!isProblemIds) {
@@ -77,5 +109,10 @@ export default function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/unsubscribe/:path*", "/workbook/:path*", "/problem/:path*"],
+  matcher: [
+    "/unsubscribe/:path*",
+    "/workbook/:path*",
+    "/problem/:path*",
+    "/article/:path*",
+  ],
 };
