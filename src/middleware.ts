@@ -36,7 +36,7 @@ export default async function middleware(req: NextRequest) {
 
   if (pathname === "/") {
     return NextResponse.redirect(
-      "https://fewletter.notion.site/FEW-a87459feb21246b0bc63c68ef6140645",
+      "https://fewletter.notion.site/FEW-a87459feb21246b0bc63c68ef6140645"
     );
   }
 
@@ -114,5 +114,6 @@ export const config = {
     "/workbook/:path*",
     "/problem/:path*",
     "/article/:path*",
+    "/"
   ],
 };
