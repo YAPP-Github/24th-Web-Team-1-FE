@@ -5,3 +5,7 @@ export const UNSUB_PARAMS = {
 };
 
 export const IS_EXIST_PROBLEMS = "isProblemIds";
+
+export const LOG_PARAMS = {
+  FROM_EMAIL: "fromEmail",
+};
