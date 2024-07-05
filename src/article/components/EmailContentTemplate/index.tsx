@@ -36,9 +36,8 @@ export default function EmailContentTemplate() {
     ? results[ARTICLE_INFO_TYPE.ARTICLE_WITH_WORKBOOK]
     : results[ARTICLE_INFO_TYPE.ONLY_ARTICLE];
 
-  if (isLoading || isError)
+  if (isLoading || isError || !articleInfo)
     return <ArticleSkeleton.EmailContentTemplateSkeleton />;
-  if (isError || !articleInfo) return <div>에러</div>;
 
   const { content } = articleInfo;
 

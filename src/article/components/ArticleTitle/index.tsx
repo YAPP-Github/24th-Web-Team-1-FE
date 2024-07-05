@@ -74,7 +74,8 @@ export default function ArticleTitle() {
     [articleInfo],
   );
 
-  if (isLoading || !articleInfo) return <ArticleSkeleton.TitleSkeleton />;
+  if (isLoading || isError || !articleInfo)
+    return <ArticleSkeleton.TitleSkeleton />;
 
   const { category, title, writer } = articleInfo;
   const dayText = getDayText();
