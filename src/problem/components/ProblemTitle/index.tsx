@@ -10,9 +10,6 @@ import { PROBLEM_TITLE_INFO } from "@problem/constants/problemInfo";
 import { QUERY_KEY } from "@problem/remotes/api";
 import { getProblemQueryOptions } from "@problem/remotes/getProblemQueryOptions";
 import { AnswerCheckInfo } from "@problem/types/problemInfo";
-import { EVENT_NAME } from "@shared/constants/mixpanel";
-import { Mixpanel } from "@shared/utils/mixpanel";
-import { useEffect } from "react";
 import ProblemSkeleton from "../ProblemSkeleton";
 
 export default function ProblemTitle() {
@@ -31,15 +28,15 @@ export default function ProblemTitle() {
     select: (mutation) => mutation.state.data as ApiResponse<AnswerCheckInfo>,
   });
 
-  useEffect(
-    function trackMixpanel() {
-      Mixpanel.track({
-        name: EVENT_NAME.PROBLEM_APPEAR,
-        property: { id: problemId },
-      });
-    },
-    [problemId],
-  );
+  // useEffect(
+  //   function trackMixpanel() {
+  //     Mixpanel.track({
+  //       name: EVENT_NAME.PROBLEM_APPEAR,
+  //       property: { id: problemId },
+  //     });
+  //   },
+  //   [problemId],
+  // );
   if (isLoading || isError || !problemInfo)
     return <ProblemSkeleton.TitleSkeleton />;
 
