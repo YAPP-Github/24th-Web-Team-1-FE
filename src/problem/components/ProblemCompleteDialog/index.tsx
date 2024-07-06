@@ -2,7 +2,7 @@
 
 import { useParams } from "next/navigation";
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useMutationState } from "@tanstack/react-query";
 
@@ -18,7 +18,8 @@ import { AnswerCheckInfo } from "@problem/types/problemInfo";
 
 export default function ProblemCompleteDialog() {
   const { problemId } = useParams<{ problemId: string }>();
-  const { isExistNextProblem, getArticlePathText } = useProblemIdsViewModel();
+  const { isExistNextProblem, getArticlePathText, getCurrentProblemId } =
+    useProblemIdsViewModel();
 
   const problemAnswerInfo = useMutationState({
     filters: {
@@ -31,10 +32,11 @@ export default function ProblemCompleteDialog() {
   const [isOpen, setIsOpen] = useState(
     isPostAnswerSuccess && !isExistNextProblem(),
   );
+  const isLastProblemId = getCurrentProblemId() === Number(problemId);
 
   useEffect(
     function updateOpenDialog() {
-      if (isPostAnswerSuccess && !isExistNextProblem()) {
+      if (isPostAnswerSuccess && !isExistNextProblem() && isLastProblemId) {
         setTimeout(() => {
           setIsOpen(isPostAnswerSuccess && !isExistNextProblem());
         }, 5000);
