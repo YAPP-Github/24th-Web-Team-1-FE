@@ -5,7 +5,6 @@ import { beforeAll, describe, expect, it, vi } from "vitest";
 import QueryClientProviders from "@shared/components/queryClientProvider";
 import { createQueryProviderWrapper } from "@shared/constants/createQueryProvider";
 
-import ProblemCompleteDialog from ".";
 import { LINK_SHARE_CONTENT } from "@common/constants/linkShareContent";
 import { mockProblemModuleStore } from "@common/stores/mockZustandStore";
 import { postProblemAnswerMutationOptions } from "@problem/remotes/postProblemAnswerOption";
@@ -16,6 +15,7 @@ import {
   screen,
   waitFor,
 } from "@testing-library/react";
+import ProblemCompleteDialog from ".";
 
 const isExistNextProblem = vi.fn(() => false);
 const renderWithQueryClient = () => {
@@ -58,7 +58,7 @@ describe("마지막 선택지 제출완료시 팝업 노출 테스트", () => {
           nextSetProblemId: vi.fn(),
           clearProblem: vi.fn(),
           setProblemIds: vi.fn(),
-          getCurrentProblemId: vi.fn(),
+          getCurrentProblemId: vi.fn(() => 3),
           getTagCurrentProblemText: vi.fn(() => "3/3"),
           currentIdx: 0,
           prevSetProblemId: vi.fn(),
