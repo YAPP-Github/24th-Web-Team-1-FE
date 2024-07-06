@@ -48,8 +48,10 @@ export default function AnswerSubmitButton() {
     }
     if (problemAnswerInfo[0] && !isExistNextProblem()) {
       push("/");
-      clearProblem();
-      deleteCookie(IS_EXIST_PROBLEMS);
+      setTimeout(() => {
+        clearProblem();
+        deleteCookie(IS_EXIST_PROBLEMS);
+      }, 2000);
     }
   };
   const isPostAnswerSuccess = problemAnswerInfo[0];
