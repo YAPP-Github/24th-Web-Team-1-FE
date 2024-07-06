@@ -26,12 +26,12 @@ const UnsubscribeFormField = () => {
               value={field.value || ""}
               maxLength={255}
               className={cn(
-                "rounded-[10px] text-[16px] focus-visible:ring-transparent",
+                "rounded-[10px] text-[14px] focus-visible:ring-transparent",
                 { 'border-error': formState.errors.opinion }
               )}
             />
           </FormControl>
-          <FormMessage className="text-gray1">
+          <FormMessage className="text-text-gray1">
             {UNSUBSCRIBE_FORM.DESCRIPTION}
           </FormMessage>
         </FormItem>

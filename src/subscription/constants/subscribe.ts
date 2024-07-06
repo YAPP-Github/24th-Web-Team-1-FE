@@ -17,5 +17,5 @@ export const SUBSCRIBE_USER_ACTIONS = {
     SUBSCRIBE_REJECT: "좀 더 둘러볼래요",
     SUBSCRIBE_ACCEPT: "구독할게요",
     SUBSCRIBE_SUCCESS: "구독 신청이 완료되었어요!",
-    SUBSCRIBE_CONFIRM:  "매일 경제 문제 받기"
+    SUBSCRIBE_CONFIRM:  "구독하기"
 }

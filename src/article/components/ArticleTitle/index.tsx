@@ -1,5 +1,4 @@
 "use client";
-
 import { useParams, useSearchParams } from "next/navigation";
 
 import { useEffect, useRef } from "react";
@@ -16,6 +15,8 @@ import { ARTICLE_INFO_TYPE } from "@common/constants/articleCase";
 import { useProblemIdsViewModel } from "@common/models/useProblemIdsViewModel";
 import ArticleSkeleton from "../ArticleSkeleton";
 import WriterInfo from "../WriterInfo";
+import { IS_EXIST_PROBLEMS } from "@shared/constants/middlewareConstant";
+import { setCookie } from "cookies-next";
 
 export default function ArticleTitle() {
   const isFirstRender = useRef(false);
@@ -55,6 +56,7 @@ export default function ArticleTitle() {
           articleId,
           day: "day" in articleInfo ? articleInfo.day : undefined,
         });
+      setCookie(IS_EXIST_PROBLEMS, "true");
     },
     [articleInfo],
   );
