@@ -27,11 +27,13 @@
   "rules": {
     "react/react-in-jsx-scope": "off",
     "no-unused-vars": "off",
-    "import/no-duplicates": "error",
-    "unused-imports/no-unused-imports": "error",
-    "@typescript-eslint/no-explicit-any": "warn",
+    "import/no-duplicates": "warn",
+    "unused-imports/no-unused-imports": "warn",
     "@typescript-eslint/no-unused-vars": "warn",
     "simple-import-sort/exports": "warn",
+    "react/display-name": "off",
+    "@next/next/no-img-element": "off",
+    "@typescript-eslint/no-explicit-any": "warn",
     "simple-import-sort/imports": [
       "warn",
       {
@@ -43,6 +45,7 @@
           ["^@api/(.*)$"],
           ["^@shared/(.*)$"],
           ["^@workbook/(.*)$"],
+          ["^@subscription/(.*)$"],
           ["^@article/(.*)$"],
           ["^@quiz/(.*)$"],
           ["^@main/(.*)$"],

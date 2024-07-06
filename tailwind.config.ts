@@ -8,7 +8,7 @@ const config = {
     "./app/**/*.{ts,tsx}",
     "./src/**/*.{ts,tsx}",
     "./src/stories/**/*.{js,ts,jsx,tsx}",
-    "./src/**/**/**/*.{js,ts,jsx,tsx}"
+    "./src/**/**/**/*.{js,ts,jsx,tsx}",
   ],
   prefix: "",
   theme: {
@@ -55,7 +55,7 @@ const config = {
           foreground: "hsl(var(--card-foreground))",
         },
         success: "#0166B3",
-        error: "##B00020",
+        error: "#B00020",
         main: "#264932",
         background1: "#F5F5F5",
         text: {
@@ -63,6 +63,7 @@ const config = {
           gray1: "#484848",
           gray2: "#A5A5A5",
           gray3: "#E6E6E6",
+          gray4: "#3D3D3E",
         },
       },
       borderRadius: {

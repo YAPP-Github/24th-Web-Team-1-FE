@@ -1,0 +1,25 @@
+{
+  "message": "String",
+  "data": {
+    "id": 1,
+    "title": "에드윈 루드가 개량한 최초의 자동 저장 탱크식 가스 온수기는 무엇을 해결했나요?",
+    "contents": [
+      {
+        "number": 1,
+        "content": "냄비에 물을 끓이는 번거로움"
+      },
+      {
+        "number": 2,
+        "content": "가스를 배기하는 장치의 부족"
+      },
+      {
+        "number": 3,
+        "content": "찬물을 데우는 시간"
+      },
+      {
+        "number": 4,
+        "content": "온수기의 크기"
+      }
+    ]
+  }
+}

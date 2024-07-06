@@ -2,13 +2,9 @@ import axios from "axios";
 
 type Method = "get" | "post" | "put" | "delete" | "patch";
 
-export interface ApiMeta {
-  code: number;
+export interface ApiResponse<DataType> {
   message: string;
-}
-export interface ApiResponse<T> {
-  data: T;
-  meta: ApiMeta | null;
+  data: DataType;
   error?: {
     code: number;
     detail: string;
@@ -21,6 +17,28 @@ export const axiosInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
 });
 
+axiosInstance.interceptors.request.use(
+  function (config) {
+    if (!config.headers) {
+      return config;
+    }
+
+    return config;
+  },
+  function (error) {
+    return Promise.reject(error);
+  },
+);
+
+axiosInstance.interceptors.response.use(
+  function (response) {
+    return response;
+  },
+  async function (error) {
+    const { config } = error;
+    return axios(config);
+  },
+);
 export const axiosRequest = async <T>(
   method: Method,
   url: string,

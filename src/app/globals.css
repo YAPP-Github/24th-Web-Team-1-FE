@@ -92,6 +92,9 @@
     @apply font-pretendard text-[17px]/[28.05px] font-normal;
   }
 
+  .body2-bold {
+    @apply font-pretendard text-[15px]/[24.75px] font-bold;
+  }
   .body2-medium {
     @apply font-pretendard text-[15px]/[24.75px] font-medium;
   }
@@ -122,5 +125,14 @@
     ::-webkit-scrollbar {
       display: none;
     }
+  }
+  tr p {
+    margin: 13px 0px;
+  }
+  tr article h3 {
+    margin-top: 20px;
+  }
+  tr article a {
+    text-decoration: underline;
   }
 }
