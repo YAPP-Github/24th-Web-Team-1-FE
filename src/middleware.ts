@@ -20,6 +20,7 @@ const withOutAuth = async (req: NextRequest) => {
 
   if (pathname === "/") {
     return redirectToMain()
+  }
 
   if (pathname === "/workbook") {
     return redirectToWorkbook(nextUrl)
