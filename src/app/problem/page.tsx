@@ -2,8 +2,10 @@
 
 import { useProblemIdsViewModel } from "@common/models/useProblemIdsViewModel";
 import { getProblemsQueryOptions } from "@problem/remotes/getProblemsQueryOptions";
+import { IS_EXIST_PROBLEMS } from "@shared/constants/middlewareConstant";
 import { postLogMutationOptions } from "@shared/remotes/postLogMutationOptions";
 import { useMutation, useQuery } from "@tanstack/react-query";
+import { setCookie } from "cookies-next";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 
@@ -28,6 +30,7 @@ export default function ProblemPage() {
           problemIds: problemData.problemIds,
           articleId,
         });
+        setCookie(IS_EXIST_PROBLEMS, "true");
         postLog({ from: "email", to: "solveProblem" });
         push(`/problem/${problemData.problemIds[currentIdx]}`);
       }

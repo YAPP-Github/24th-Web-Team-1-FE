@@ -20,7 +20,6 @@ const withOutAuth = async (req: NextRequest) => {
 
   if (pathname === "/") {
     return redirectToMain()
-  }
 
   if (pathname === "/workbook") {
     return redirectToWorkbook(nextUrl)
@@ -71,6 +70,6 @@ export const config = {
     "/workbook/:path*",
     "/problem/:path*",
     "/article/:path*",
-    "/"
+    "/",
   ],
 };
