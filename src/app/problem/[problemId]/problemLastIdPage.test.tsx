@@ -164,6 +164,6 @@ describe("마지막 문제 풀이 페이지 테스트", () => {
     expect(isExistNextProblem).toBeCalled();
 
     expect(clearProblem).toHaveBeenCalledOnce();
-    expect(push).toHaveBeenNthCalledWith(1, "/workbook/1");
+    expect(push).toHaveBeenNthCalledWith(1, "/");
   });
 });

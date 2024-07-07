@@ -33,10 +33,9 @@ export default async function middleware(req: NextRequest) {
   const articleId = searchParams.get("articleId");
   const workbookId = searchParams.get("workbookId");
   const fromEmail = searchParams.get(LOG_PARAMS.FROM_EMAIL);
-
   if (pathname === "/") {
     return NextResponse.redirect(
-      "https://fewletter.notion.site/FEW-a87459feb21246b0bc63c68ef6140645"
+      "https://fewletter.notion.site/FEW-a87459feb21246b0bc63c68ef6140645",
     );
   }
 
@@ -92,7 +91,7 @@ export default async function middleware(req: NextRequest) {
       return undefined;
     }
   }
-  if (pathname.includes("/problem")) {
+  if (pathname.includes("/problem") && !articleId) {
     /** problme url 진입시 전역상태 없으면 들어올 수 없게 방어하는 로직 */
     const isProblemIds = req.cookies.get(IS_EXIST_PROBLEMS)?.value === "true";
 
@@ -114,6 +113,6 @@ export const config = {
     "/workbook/:path*",
     "/problem/:path*",
     "/article/:path*",
-    "/"
+    "/",
   ],
 };

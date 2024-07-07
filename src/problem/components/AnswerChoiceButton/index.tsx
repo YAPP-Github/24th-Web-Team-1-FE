@@ -90,7 +90,7 @@ export default function AnswerChoiceButton({
       )}
       onClick={onClickAnswerChoice}
     >
-      <span className="sub2-bold max-w-[247px] whitespace-normal">
+      <span className="sub2-bold max-w-[247px] whitespace-normal text-left">
         {content}
       </span>
 
