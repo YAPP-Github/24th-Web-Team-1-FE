@@ -80,7 +80,7 @@ describe("마지막 문제 풀이 페이지 테스트", () => {
           nextSetProblemId: vi.fn(),
           clearProblem,
           setProblemIds: vi.fn(),
-          getCurrentProblemId: vi.fn(),
+          getCurrentProblemId: vi.fn(() => 3),
           getTagCurrentProblemText: vi.fn(() => "3/3"),
           currentIdx: 0,
           prevSetProblemId: vi.fn(),
@@ -162,7 +162,9 @@ describe("마지막 문제 풀이 페이지 테스트", () => {
     await userEvent.click(nextProblemButton);
 
     expect(isExistNextProblem).toBeCalled();
-
+    act(() => {
+      vi.advanceTimersByTime(2000);
+    });
     expect(clearProblem).toHaveBeenCalledOnce();
     expect(push).toHaveBeenNthCalledWith(1, "/");
   });
