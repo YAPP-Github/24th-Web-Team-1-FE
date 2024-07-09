@@ -5,10 +5,10 @@ import {
   LOG_PARAMS,
 } from "@shared/constants/middlewareConstant";
 import { setArticleLogs } from "@shared/middlewares/article";
-import { redirectToMain } from "@shared/middlewares/main";
-import { redirectProblemNotExist } from "@shared/middlewares/problem";
-import { saveUnsubscribeUserInfo } from "@shared/middlewares/subscription";
-import { redirectToWorkbook } from "@shared/middlewares/workbook";
+import { MainMiddleware } from "@shared/middlewares/main";
+import { problemMiddleware } from "@shared/middlewares/problem";
+import { unsubscriptionMiddleware } from "@shared/middlewares/subscription";
+import { workbookMiddleware } from "@shared/middlewares/workbook";
 
 const withOutAuthList = [];
 const withAuthList = [];
@@ -19,21 +19,15 @@ const withOutAuth = async (req: NextRequest) => {
   const { pathname, searchParams } = nextUrl;
 
   if (pathname === "/") {
-    return redirectToMain()
+    return MainMiddleware()
   }
 
   if (pathname === "/workbook") {
-    return redirectToWorkbook(nextUrl)
+    return workbookMiddleware(nextUrl)
   }
 
   if (pathname.includes("/unsubscribe")) {
-    const email = searchParams.get("user");
-    const articleId = searchParams.get("articleId");
-    const workbookId = searchParams.get("workbookId");
-
-    if (email && articleId && workbookId) {
-      return saveUnsubscribeUserInfo({ email, articleId, workbookId, nextUrl})
-    }
+    return unsubscriptionMiddleware({ nextUrl })
   }
 
   if (pathname.includes("/article")) {
@@ -45,7 +39,7 @@ const withOutAuth = async (req: NextRequest) => {
   }
 
   if (pathname.includes("/problem")) {
-    return redirectProblemNotExist({ req, nextUrl })
+    return problemMiddleware({ req, nextUrl })
   }
 
 };

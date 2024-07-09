@@ -5,11 +5,11 @@ import { LOG_PARAMS } from "@shared/constants/middlewareConstant";
 import { API_ROUTE } from "@shared/remotes";
 import { LogData } from "@shared/types";
 
-type setArticleLogsParams = {
+type articleMiddlewareProps = {
   nextUrl: NextURL;
 };
 
-export const setArticleLogs = async ({ nextUrl }: setArticleLogsParams) => {
+export const setArticleLogs = async ({ nextUrl }: articleMiddlewareProps) => {
   try {
     const history: LogData = {
       from: "email",
@@ -29,5 +29,15 @@ export const setArticleLogs = async ({ nextUrl }: setArticleLogsParams) => {
     return NextResponse.redirect(nextUrl);
   } catch (error) {
     return undefined;
+  }
+};
+
+export const articleMiddleware = ({ nextUrl }: articleMiddlewareProps) => {
+  const { searchParams } = nextUrl;
+
+  const fromEmail = searchParams.get(LOG_PARAMS.FROM_EMAIL);
+
+  if (fromEmail) {
+    return setArticleLogs({ nextUrl });
   }
 };

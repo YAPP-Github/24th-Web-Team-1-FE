@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 import { IS_EXIST_PROBLEMS } from "@shared/constants/middlewareConstant";
 
-type setProblemNotExistParams = {
+type problemMiddlewareProps = {
   req: NextRequest;
   nextUrl: NextURL;
 };
@@ -11,7 +11,7 @@ type setProblemNotExistParams = {
 export const redirectProblemNotExist = ({
   req,
   nextUrl,
-}: setProblemNotExistParams) => {
+}: problemMiddlewareProps) => {
   /** problme url 진입시 전역상태 없으면 들어올 수 없게 방어하는 로직 */
   const isProblemIds = req.cookies.get(IS_EXIST_PROBLEMS)?.value === "true";
 
@@ -20,3 +20,10 @@ export const redirectProblemNotExist = ({
     return NextResponse.redirect(nextUrl);
   }
 };
+
+export const problemMiddleware = ({
+  req,
+  nextUrl,
+}: problemMiddlewareProps) => {
+  return redirectProblemNotExist({ req, nextUrl })
+}

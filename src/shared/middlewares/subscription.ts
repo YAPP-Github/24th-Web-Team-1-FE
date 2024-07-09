@@ -10,6 +10,8 @@ type saveUserInfoParams = {
   nextUrl: NextURL;
 };
 
+type subscriptionMiddlewareProps = Pick<saveUserInfoParams, "nextUrl">;
+
 export const saveUnsubscribeUserInfo = ({
   email,
   articleId,
@@ -32,4 +34,20 @@ export const saveUnsubscribeUserInfo = ({
   response.cookies.set(UNSUB_PARAMS.WORKBOOK_ID, workbookId);
 
   return response;
+};
+
+export const unsubscriptionMiddleware = ({
+  nextUrl,
+}: subscriptionMiddlewareProps) => {
+  const { searchParams } = nextUrl;
+
+  const email = searchParams.get("user");
+  const articleId = searchParams.get("articleId");
+  const workbookId = searchParams.get("workbookId");
+
+  if (email && articleId && workbookId) {
+    return saveUnsubscribeUserInfo({ email, articleId, workbookId, nextUrl });
+  }
+
+  return NextResponse.next()
 };
