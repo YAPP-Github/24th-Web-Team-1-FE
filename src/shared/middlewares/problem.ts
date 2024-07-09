@@ -8,7 +8,7 @@ type problemMiddlewareProps = {
   nextUrl: NextURL;
 };
 
-export const redirectProblemNotExist = ({
+const redirectProblemNotExist = ({
   req,
   nextUrl,
 }: problemMiddlewareProps) => {

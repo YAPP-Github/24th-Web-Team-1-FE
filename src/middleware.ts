@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 import {
   LOG_PARAMS,
 } from "@shared/constants/middlewareConstant";
-import { setArticleLogs } from "@shared/middlewares/article";
+import { articleMiddleware } from "@shared/middlewares/article";
 import { MainMiddleware } from "@shared/middlewares/main";
 import { problemMiddleware } from "@shared/middlewares/problem";
 import { unsubscriptionMiddleware } from "@shared/middlewares/subscription";
@@ -23,7 +23,7 @@ const withOutAuth = async (req: NextRequest) => {
   }
 
   if (pathname === "/workbook") {
-    return workbookMiddleware(nextUrl)
+    return workbookMiddleware({ nextUrl })
   }
 
   if (pathname.includes("/unsubscribe")) {
@@ -31,11 +31,7 @@ const withOutAuth = async (req: NextRequest) => {
   }
 
   if (pathname.includes("/article")) {
-    const fromEmail = searchParams.get(LOG_PARAMS.FROM_EMAIL);
-
-    if (fromEmail) {
-      return setArticleLogs({ nextUrl })
-    }
+    return articleMiddleware({ nextUrl })
   }
 
   if (pathname.includes("/problem")) {

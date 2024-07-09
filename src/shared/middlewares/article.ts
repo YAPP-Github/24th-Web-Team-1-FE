@@ -9,7 +9,7 @@ type articleMiddlewareProps = {
   nextUrl: NextURL;
 };
 
-export const setArticleLogs = async ({ nextUrl }: articleMiddlewareProps) => {
+const setArticleLogs = async ({ nextUrl }: articleMiddlewareProps) => {
   try {
     const history: LogData = {
       from: "email",

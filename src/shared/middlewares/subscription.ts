@@ -12,7 +12,7 @@ type saveUserInfoParams = {
 
 type subscriptionMiddlewareProps = Pick<saveUserInfoParams, "nextUrl">;
 
-export const saveUnsubscribeUserInfo = ({
+const saveUnsubscribeUserInfo = ({
   email,
   articleId,
   workbookId,
