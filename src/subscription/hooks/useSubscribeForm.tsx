@@ -55,7 +55,7 @@ export const useSubscribeForm = () => {
         },
       });
     } catch (error) {
-      console.log('catch error', error);
+      console.error('catch error', error);
       
       toast({
         title: SUBSCRIBE_USER_ACTIONS.SUBSCRIBE_FAIL
