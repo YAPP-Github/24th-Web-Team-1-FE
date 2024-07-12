@@ -1,7 +1,7 @@
 export const SUBSCRIBE_TITLES = {
     SUBSCRIBE_TITLE_1: "매일 아침마다",
     SUBSCRIBE_TITLE_2: "경제 아티클과 문제를 보내드려요!",
-    SUBSCRIBE_TITLE_FEW: "FEW는 매일 경제 아티클과 문제를 보내드려요!"
+    SUBSCRIBE_TITLE_FEW: "매일 아티클과 문제를 보내드려요!"
 }
 export const EMAIL_CONTROL = {
     EMAIL_PLACEHOLDER: "이메일을 입력해주세요",
@@ -17,5 +17,5 @@ export const SUBSCRIBE_USER_ACTIONS = {
     SUBSCRIBE_REJECT: "좀 더 둘러볼래요",
     SUBSCRIBE_ACCEPT: "구독할게요",
     SUBSCRIBE_SUCCESS: "구독 신청이 완료되었어요!",
-    SUBSCRIBE_CONFIRM:  "구독하기"
+    SUBSCRIBE_CONFIRM:  "이 학습지 구독하기"
 }
