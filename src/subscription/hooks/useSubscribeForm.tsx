@@ -45,7 +45,7 @@ export const useSubscribeForm = () => {
           });
         },
         onError: (error) => {
-          let errorMessage = '구독 신청이 되지 않았습니다.';
+          let errorMessage = SUBSCRIBE_USER_ACTIONS.SUBSCRIBE_FAIL;
           if (axios.isAxiosError(error) && error.response) {
             errorMessage = error.response.data.message || errorMessage;
           }
@@ -58,7 +58,7 @@ export const useSubscribeForm = () => {
       console.log('catch error', error);
       
       toast({
-        title: '구독 신청이 되지 않았습니다.'
+        title: SUBSCRIBE_USER_ACTIONS.SUBSCRIBE_FAIL
       });
     }
   };
