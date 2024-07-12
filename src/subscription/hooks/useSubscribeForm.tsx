@@ -4,6 +4,8 @@ import { useForm } from 'react-hook-form';
 
 import { useMutation } from '@tanstack/react-query';
 
+import axios from 'axios';
+
 import { useToast } from '@shared/components/ui/use-toast';
 import useWorkbookId from '@shared/hooks/useWorkbookId';
 
@@ -43,15 +45,20 @@ export const useSubscribeForm = () => {
           });
         },
         onError: (error) => {
-          console.error(error);
+          let errorMessage = SUBSCRIBE_USER_ACTIONS.SUBSCRIBE_FAIL;
+          if (axios.isAxiosError(error) && error.response) {
+            errorMessage = error.response.data.message || errorMessage;
+          }
           toast({
-            title: '구독 신청이 되지 않았습니다.'
+            title: errorMessage,
           });
         },
       });
     } catch (error) {
+      console.error('catch error', error);
+      
       toast({
-        title: '구독 신청이 되지 않았습니다.'
+        title: SUBSCRIBE_USER_ACTIONS.SUBSCRIBE_FAIL
       });
     }
   };
