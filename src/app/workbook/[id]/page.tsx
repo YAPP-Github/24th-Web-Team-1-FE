@@ -7,7 +7,6 @@ import { useQuery } from "@tanstack/react-query";
 
 import TitleSection from "@shared/components/TitleSection";
 
-import { ClientSubscribePopup } from "@workbook/components/ClientSubscribePopup";
 import CurriculumSection from "@workbook/components/CurriculumSection";
 import OverviewSection from "@workbook/components/OverviewSection";
 import WorkbookSkeleton from "@workbook/components/WorkbookSkeleton";
@@ -44,7 +43,6 @@ export default function WorkbookPage() {
   return (
     <main className="flex h-[100vh] w-full flex-col items-center overflow-x-hidden">
       <article className="flex h-full w-full max-w-screen-sm flex-col space-y-[24px] overflow-y-scroll">
-        <ClientSubscribePopup />
         {workbookInfo && (
           <>
             <figure>
