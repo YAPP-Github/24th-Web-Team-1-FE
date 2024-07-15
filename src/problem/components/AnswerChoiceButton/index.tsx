@@ -11,6 +11,7 @@ import { cn } from "@shared/utils/cn";
 
 import { ANSWER_CHOICHE_BUTTON_INFO } from "@problem/constants/problemInfo";
 import ProblemContext from "@problem/context/problemContext";
+import useAnswerChoiceModel from "@problem/models/useAnswerChoiceModel";
 import { QUERY_KEY } from "@problem/remotes/api";
 import {
   AnswerCheckInfo,
@@ -46,40 +47,27 @@ export default function AnswerChoiceButton({
       };
     },
   });
-  const problemAnswerInfo = problemAnswersInfo[0];
+  const {
+    getAnswerChoiceButtonClassName,
+    isChoiceFillCircle,
+    isProblemAnswerInfo,
+    getChoiceFillColor,
+  } = useAnswerChoiceModel({
+    problemAnswerInfo: problemAnswersInfo[0],
+    choiceNumber: choiceAnswer,
+    renderNumber: number,
+  });
 
   const onClickAnswerChoice = () => {
-    if (!problemAnswerInfo) updateChoiceAnswer(number);
+    if (!isProblemAnswerInfo()) updateChoiceAnswer(number);
   };
-
-  const answerResultInfo = problemAnswerInfo?.data;
-  const postChoiceAnswer = problemAnswerInfo?.variables;
 
   useEffect(
     function setButtonClassName() {
-      if (!answerResultInfo) {
-        if (choiceAnswer === number)
-          setClassName(
-            ANSWER_CHOICHE_BUTTON_INFO.CURRENT_CHOICE_ANSWER.className,
-          );
-
-        if (choiceAnswer !== number)
-          setClassName(ANSWER_CHOICHE_BUTTON_INFO.INIT_CHOICE_ANSWER.className);
-      }
-      if (answerResultInfo) {
-        if (answerResultInfo.data.answer === number)
-          setClassName(
-            ANSWER_CHOICHE_BUTTON_INFO.CHOICE_ANSWER_CORRECT.className,
-          );
-        if (
-          answerResultInfo.data.isSolved === false &&
-          number === postChoiceAnswer.sub
-        ) {
-          setClassName(ANSWER_CHOICHE_BUTTON_INFO.CHOICE_ANSWER_FAIL.className);
-        }
-      }
+      const buttonInfo = getAnswerChoiceButtonClassName();
+      setClassName(buttonInfo?.className);
     },
-    [choiceAnswer, number, problemAnswerInfo],
+    [choiceAnswer, number, problemAnswersInfo],
   );
 
   return (
@@ -95,25 +83,8 @@ export default function AnswerChoiceButton({
       </span>
 
       <ChoiceFillCircleSvg
-        isChoice={
-          (!answerResultInfo && choiceAnswer === number) ||
-          (answerResultInfo &&
-            (postChoiceAnswer.sub === number ||
-              answerResultInfo.data.answer === number))
-        }
-        fill={
-          (!answerResultInfo && choiceAnswer === number && "white") ||
-          (!answerResultInfo && choiceAnswer !== number && "#A5A5A5") ||
-          (answerResultInfo &&
-            answerResultInfo.data.answer === number &&
-            "#0166B3") ||
-          (answerResultInfo &&
-            answerResultInfo.data.isSolved === false &&
-            postChoiceAnswer.sub === number &&
-            "#B00020") ||
-          (answerResultInfo && postChoiceAnswer.sub !== number && "#A5A5A5") ||
-          ""
-        }
+        isChoice={isChoiceFillCircle()}
+        fill={getChoiceFillColor()}
       />
     </Button>
   );
