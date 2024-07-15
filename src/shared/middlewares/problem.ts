@@ -8,22 +8,18 @@ type problemMiddlewareProps = {
   nextUrl: NextURL;
 };
 
-const redirectProblemNotExist = ({
-  req,
-  nextUrl,
-}: problemMiddlewareProps) => {
+const redirectProblemNotExist = ({ req, nextUrl }: problemMiddlewareProps) => {
   /** problme url 진입시 전역상태 없으면 들어올 수 없게 방어하는 로직 */
   const isProblemIds = req.cookies.get(IS_EXIST_PROBLEMS)?.value === "true";
+  const { searchParams } = req.nextUrl;
+  const articeId = searchParams.get("articleId");
 
-  if (!isProblemIds) {
+  if (!isProblemIds && !articeId) {
     nextUrl.pathname = "/";
     return NextResponse.redirect(nextUrl);
   }
 };
 
-export const problemMiddleware = ({
-  req,
-  nextUrl,
-}: problemMiddlewareProps) => {
-  return redirectProblemNotExist({ req, nextUrl })
-}
+export const problemMiddleware = ({ req, nextUrl }: problemMiddlewareProps) => {
+  return redirectProblemNotExist({ req, nextUrl });
+};
