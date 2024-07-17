@@ -11,7 +11,7 @@ import { cn } from "@shared/utils/cn";
 
 import { ANSWER_CHOICHE_BUTTON_INFO } from "@problem/constants/problemInfo";
 import ProblemContext from "@problem/context/problemContext";
-import useAnswerChoiceModel from "@problem/models/useAnswerChoiceModel";
+import { AnswerChoiceModel } from "@problem/models/AnswerChoiceModel";
 import { QUERY_KEY } from "@problem/remotes/api";
 import {
   AnswerCheckInfo,
@@ -47,24 +47,20 @@ export default function AnswerChoiceButton({
       };
     },
   });
-  const {
-    getAnswerChoiceButtonClassName,
-    isChoiceFillCircle,
-    isProblemAnswerInfo,
-    getChoiceFillColor,
-  } = useAnswerChoiceModel({
+
+  const answerChoiceModel = new AnswerChoiceModel({
     problemAnswerInfo: problemAnswersInfo[0],
     choiceNumber: choiceAnswer,
     renderNumber: number,
   });
 
   const onClickAnswerChoice = () => {
-    if (!isProblemAnswerInfo()) updateChoiceAnswer(number);
+    if (!answerChoiceModel.isProblemAnswerInfo) updateChoiceAnswer(number);
   };
 
   useEffect(
     function setButtonClassName() {
-      const buttonInfo = getAnswerChoiceButtonClassName();
+      const buttonInfo = answerChoiceModel.answerChoiceButtonClassName;
       setClassName(buttonInfo?.className);
     },
     [choiceAnswer, number, problemAnswersInfo],
@@ -83,8 +79,8 @@ export default function AnswerChoiceButton({
       </span>
 
       <ChoiceFillCircleSvg
-        isChoice={isChoiceFillCircle()}
-        fill={getChoiceFillColor()}
+        isChoice={answerChoiceModel.isChoiceFillCircle}
+        fill={answerChoiceModel.getChoiceFillColor}
       />
     </Button>
   );

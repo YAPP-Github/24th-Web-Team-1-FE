@@ -10,7 +10,7 @@ import { deleteCookie } from "cookies-next";
 
 import { useProblemIdsViewModel } from "@common/models/useProblemIdsViewModel";
 import QuizContext from "@problem/context/problemContext";
-import useAnswerSubmitModel from "@problem/models/useAnswerSubmitModel";
+import { AnswerSubmitModel } from "@problem/models/AnswerSubmitModel";
 import { QUERY_KEY } from "@problem/remotes/api";
 import { postProblemAnswerMutationOptions } from "@problem/remotes/postProblemAnswerOption";
 import { AnswerCheckInfo } from "@problem/types/problemInfo";
@@ -37,15 +37,19 @@ export default function AnswerSubmitButton() {
     select: (mutation) => mutation.state.data as AnswerCheckInfo,
   });
 
-  const { getAnswerSubmitButtonInfo, getAnswerButtonState } =
-    useAnswerSubmitModel({
+  const answerSubmitModel = new AnswerSubmitModel({
+    isChoiceAnswer: Boolean(choiceAnswer),
+    isPostAnswerSuccess: Boolean(problemAnswerInfo[0]),
+    isExistNextProblem: isExistNextProblem(),
+  });
+
+  const onPostProblemAnswer = () => {
+    const answerSubmitModel = new AnswerSubmitModel({
       isChoiceAnswer: Boolean(choiceAnswer),
       isPostAnswerSuccess: Boolean(problemAnswerInfo[0]),
       isExistNextProblem: isExistNextProblem(),
     });
-
-  const onPostProblemAnswer = () => {
-    const BUTTON_STATE = getAnswerButtonState();
+    const BUTTON_STATE = answerSubmitModel.answerButtonState;
 
     switch (BUTTON_STATE) {
       case "PRE_ANSWER_SELECT":
@@ -67,9 +71,10 @@ export default function AnswerSubmitButton() {
         break;
     }
   };
+  const buttonInfo = answerSubmitModel.answerSubmitButtonClassName;
 
-  const result = getAnswerSubmitButtonInfo()?.title;
-  const style = getAnswerSubmitButtonInfo()?.className;
+  const result = buttonInfo?.title;
+  const style = buttonInfo?.className;
 
   return (
     <Button
