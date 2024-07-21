@@ -31,6 +31,7 @@ export default function ArticleTitle() {
       {
         ...getArticleQueryOptions({ articleId }),
         enabled: !workbookId,
+        staleTime: Infinity,
       },
       {
         ...getArticleWithWorkbookQueryOptions({
@@ -38,6 +39,7 @@ export default function ArticleTitle() {
           articleId,
         }),
         enabled: Boolean(workbookId),
+        staleTime: Infinity,
       },
     ],
   });
