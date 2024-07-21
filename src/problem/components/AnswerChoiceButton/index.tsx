@@ -4,11 +4,10 @@ import { useContext, useEffect, useState } from "react";
 
 import { useMutationState } from "@tanstack/react-query";
 
-import { ApiResponse } from "@api/api-config";
-
 import { Button } from "@shared/components/ui/button";
 import { cn } from "@shared/utils/cn";
 
+import { ApiResponse } from "@api/fewFetch";
 import { ANSWER_CHOICHE_BUTTON_INFO } from "@problem/constants/problemInfo";
 import ProblemContext from "@problem/context/problemContext";
 import { QUERY_KEY } from "@problem/remotes/api";
@@ -47,12 +46,12 @@ export default function AnswerChoiceButton({
     },
   });
   const problemAnswerInfo = problemAnswersInfo[0];
-
   const onClickAnswerChoice = () => {
     if (!problemAnswerInfo) updateChoiceAnswer(number);
   };
 
-  const answerResultInfo = problemAnswerInfo?.data;
+  const answerResultInfo =
+    problemAnswerInfo?.data as ApiResponse<AnswerCheckInfo>;
   const postChoiceAnswer = problemAnswerInfo?.variables;
 
   useEffect(
@@ -67,12 +66,12 @@ export default function AnswerChoiceButton({
           setClassName(ANSWER_CHOICHE_BUTTON_INFO.INIT_CHOICE_ANSWER.className);
       }
       if (answerResultInfo) {
-        if (answerResultInfo.data.answer === number)
+        if (answerResultInfo.data.data.answer === number)
           setClassName(
             ANSWER_CHOICHE_BUTTON_INFO.CHOICE_ANSWER_CORRECT.className,
           );
         if (
-          answerResultInfo.data.isSolved === false &&
+          answerResultInfo.data.data.isSolved === false &&
           number === postChoiceAnswer.sub
         ) {
           setClassName(ANSWER_CHOICHE_BUTTON_INFO.CHOICE_ANSWER_FAIL.className);
@@ -99,16 +98,16 @@ export default function AnswerChoiceButton({
           (!answerResultInfo && choiceAnswer === number) ||
           (answerResultInfo &&
             (postChoiceAnswer.sub === number ||
-              answerResultInfo.data.answer === number))
+              answerResultInfo.data.data.answer === number))
         }
         fill={
           (!answerResultInfo && choiceAnswer === number && "white") ||
           (!answerResultInfo && choiceAnswer !== number && "#A5A5A5") ||
           (answerResultInfo &&
-            answerResultInfo.data.answer === number &&
+            answerResultInfo.data.data.answer === number &&
             "#0166B3") ||
           (answerResultInfo &&
-            answerResultInfo.data.isSolved === false &&
+            answerResultInfo.data.data.isSolved === false &&
             postChoiceAnswer.sub === number &&
             "#B00020") ||
           (answerResultInfo && postChoiceAnswer.sub !== number && "#A5A5A5") ||
