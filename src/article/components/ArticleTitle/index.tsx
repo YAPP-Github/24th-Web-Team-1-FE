@@ -14,11 +14,11 @@ import { ArticleDetail, ArticleWithWorkbookDetail } from "@article/types";
 import { ARTICLE_INFO_TYPE } from "@common/constants/articleCase";
 import { useProblemIdsViewModel } from "@common/models/useProblemIdsViewModel";
 import { IS_EXIST_PROBLEMS } from "@shared/constants/middlewareConstant";
+import { EVENT_NAME } from "@shared/constants/mixpanel";
+import { Mixpanel } from "@shared/utils/mixpanel";
 import { setCookie } from "cookies-next";
 import ArticleSkeleton from "../ArticleSkeleton";
 import WriterInfo from "../WriterInfo";
-import { EVENT_NAME } from "@shared/constants/mixpanel";
-import { Mixpanel } from "@shared/utils/mixpanel";
 
 export default function ArticleTitle() {
   const isFirstRender = useRef(false);
@@ -33,6 +33,7 @@ export default function ArticleTitle() {
       {
         ...getArticleQueryOptions({ articleId }),
         enabled: !workbookId,
+        staleTime: Infinity,
       },
       {
         ...getArticleWithWorkbookQueryOptions({
@@ -40,6 +41,7 @@ export default function ArticleTitle() {
           articleId,
         }),
         enabled: Boolean(workbookId),
+        staleTime: Infinity,
       },
     ],
   });
