@@ -4,8 +4,7 @@ import { useParams } from "next/navigation";
 
 import { useMutationState, useQuery } from "@tanstack/react-query";
 
-import { ApiResponse } from "@api/api-config";
-
+import { ApiResponse } from "@api/fewFetch";
 import { PROBLEM_TITLE_INFO } from "@problem/constants/problemInfo";
 import { QUERY_KEY } from "@problem/remotes/api";
 import { getProblemQueryOptions } from "@problem/remotes/getProblemQueryOptions";
@@ -44,7 +43,7 @@ export default function ProblemTitle() {
     const problemAnswerData = problemAnswerInfo[0];
     const subTitleInfo =
       (problemAnswerData &&
-        (problemAnswerData.data.isSolved
+        (problemAnswerData.data.data.isSolved
           ? PROBLEM_TITLE_INFO.ANSWER_CORRECT
           : PROBLEM_TITLE_INFO.ANSWER_FAIL)) ||
       PROBLEM_TITLE_INFO.NO_ANSWER;

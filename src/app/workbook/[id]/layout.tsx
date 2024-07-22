@@ -1,10 +1,9 @@
 // app/workbook/[id]/layout.tsx
 import type { Metadata } from "next";
 
-import { ApiResponse } from "@api/api-config";
-
 import { createMetadata } from "@shared/utils/metadata";
 
+import { fewFetch } from "@api/fewFetch";
 import { API_ROUTE } from "@workbook/remotes/api";
 import { WorkbookInfo } from "@workbook/types";
 
@@ -14,17 +13,15 @@ export async function generateMetadata({
   params: { id: string };
 }): Promise<Metadata> {
   const id = params.id;
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}${API_ROUTE.WORKBOOK(id)}`,
+  const { data: workbookInfo } = await fewFetch().get<WorkbookInfo>(
+    `${API_ROUTE.WORKBOOK(id)}`,
   );
-  const { data: workbookInfo }: ApiResponse<WorkbookInfo> = await response.json();
+  const { title, description, mainImageUrl } = workbookInfo.data;
 
-  const { title, description, mainImageUrl } = workbookInfo
-
-   return createMetadata({
+  return createMetadata({
     title: title,
     description: description,
-    imageUrl: mainImageUrl
+    imageUrl: mainImageUrl,
   });
 }
 
@@ -33,5 +30,5 @@ interface WorkbookLayoutProps {
 }
 
 export default function WorkbookLayout({ children }: WorkbookLayoutProps) {
-  return <section>{children}</section>;
+  return <section className="w-full">{children}</section>;
 }

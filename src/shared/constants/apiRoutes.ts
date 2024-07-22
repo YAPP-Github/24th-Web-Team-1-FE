@@ -1,9 +1,9 @@
 export const apiRoutes = {
-  problems: "/api/v1/problems/:problemId",
-  submitAnswer: "/api/v1/problems/:problemId",
-  workbook: "/api/v1/workbooks/:workbookId",
-  article: "/api/v1/articles/:articleId",
-  unsubscribe: "/api/v1/subscriptions/all",
-  articleWithWorkbook: "/api/v1/workbooks/:workbookId/articles/:articleId",
-  problemsWithArticle: "/api/v1/problems",
+  problems: `${process.env.NEXT_PUBLIC_FEW_WEB}/api/v1/problems/:problemId`,
+  submitAnswer: `${process.env.NEXT_PUBLIC_FEW_WEB}/api/v1/problems/:problemId`,
+  workbook: `${process.env.NEXT_PUBLIC_FEW_WEB}/api/v1/workbooks/:workbookId`,
+  article: `${process.env.NEXT_PUBLIC_FEW_WEB}/api/v1/articles/:articleId`,
+  unsubscribe: `${process.env.NEXT_PUBLIC_FEW_WEB}/api/v1/subscriptions/all`,
+  articleWithWorkbook: `${process.env.NEXT_PUBLIC_FEW_WEB}/api/v1/workbooks/:workbookId/articles/:articleId`,
+  problemsWithArticle: `${process.env.NEXT_PUBLIC_FEW_WEB}/api/v1/problems`,
 };

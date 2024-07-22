@@ -1,21 +1,24 @@
 import { UseMutationOptions } from "@tanstack/react-query";
 
-import { ApiResponse, axiosRequest } from "@api/api-config";
-
 import {
   MessageOnlyResponse,
   UnsubscribeBody,
 } from "@subscription/types/subscription";
 
+import { ApiResponse, fewFetch } from "@api/fewFetch";
 import { API_ROUTE, QUERY_KEY } from "./api";
 
 export const unsubscribeWorkbook = (
   body: UnsubscribeBody,
 ): Promise<ApiResponse<MessageOnlyResponse>> => {
-  return axiosRequest("post", API_ROUTE.UNSUBSCRIBE(), body);
+  return fewFetch().post(API_ROUTE.UNSUBSCRIBE(), {
+    body: JSON.stringify(body),
+  });
 };
 
-export const unsubscribeWorkbookOptions = (email: string | null): UseMutationOptions<
+export const unsubscribeWorkbookOptions = (
+  email: string | null,
+): UseMutationOptions<
   ApiResponse<MessageOnlyResponse>,
   Error,
   UnsubscribeBody

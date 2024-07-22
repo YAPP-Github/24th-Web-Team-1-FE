@@ -4,11 +4,10 @@ import { useContext, useEffect, useState } from "react";
 
 import { useMutationState } from "@tanstack/react-query";
 
-import { ApiResponse } from "@api/api-config";
-
 import { Button } from "@shared/components/ui/button";
 import { cn } from "@shared/utils/cn";
 
+import { ApiResponse } from "@api/fewFetch";
 import { ANSWER_CHOICHE_BUTTON_INFO } from "@problem/constants/problemInfo";
 import ProblemContext from "@problem/context/problemContext";
 import { AnswerChoiceModel } from "@problem/models/AnswerChoiceModel";
@@ -48,11 +47,13 @@ export default function AnswerChoiceButton({
     },
   });
 
+
   const answerChoiceModel = new AnswerChoiceModel({
     problemAnswerInfo: problemAnswersInfo[0],
     choiceNumber: choiceAnswer,
     renderNumber: number,
   });
+
 
   const onClickAnswerChoice = () => {
     if (!answerChoiceModel.isProblemAnswerInfo) updateChoiceAnswer(number);
@@ -81,6 +82,7 @@ export default function AnswerChoiceButton({
       <ChoiceFillCircleSvg
         isChoice={answerChoiceModel.isChoiceFillCircle}
         fill={answerChoiceModel.getChoiceFillColor}
+
       />
     </Button>
   );
