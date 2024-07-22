@@ -34,8 +34,6 @@ export const useSubscribeForm = () => {
   );
 
   const onSubmit = (values: EmailSubscribeFormData) => {
-    console.log(workbookId);
-
     try {
       subscribeWorkbook(values, {
         onSuccess: () => {
