@@ -6,10 +6,9 @@ import { useEffect, useState } from "react";
 
 import { useMutationState } from "@tanstack/react-query";
 
-import { ApiResponse } from "@api/api-config";
-
 import ExternalControlOpenDialog from "@shared/components/ExternalControlOpenDialog";
 
+import { ApiResponse } from "@api/fewFetch";
 import LinkShare from "@common/components/LinkShare";
 import { LINK_SHARE_CONTENT } from "@common/constants/linkShareContent";
 import { useProblemIdsViewModel } from "@common/models/useProblemIdsViewModel";

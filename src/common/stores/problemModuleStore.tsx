@@ -62,6 +62,7 @@ export const useProblemModuleStore = create(
           articleId,
           problemIds,
           day,
+          currentIdx: 0,
         })),
       clearProblem: () =>
         set(() => ({

@@ -1,31 +1,32 @@
 import { UseMutationOptions } from "@tanstack/react-query";
 
-import { ApiResponse, axiosRequest } from "@api/api-config";
-
 import {
-    MessageOnlyResponse,
+  MessageOnlyResponse,
   SubscribeBody,
   SubscribeParams,
 } from "@subscription/types/subscription";
 
+import { ApiResponse, FewError, fewFetch } from "@api/fewFetch";
 import { API_ROUTE, QUERY_KEY } from "./api";
 
 export const subscribeWorkbook = (
   params: SubscribeParams,
   body: SubscribeBody,
 ): Promise<ApiResponse<MessageOnlyResponse>> => {
-  return axiosRequest("post", API_ROUTE.SUBSCRIBE(params.workbookId), body);
+  return fewFetch().post(API_ROUTE.SUBSCRIBE(params.workbookId), {
+    body: JSON.stringify(body),
+  });
 };
 
 export const subscribeWorkbookOptions = (
-    params: SubscribeParams
+  params: SubscribeParams,
 ): UseMutationOptions<
-    ApiResponse<MessageOnlyResponse>,
-    Error, 
-    SubscribeBody
+  ApiResponse<MessageOnlyResponse>,
+  ApiResponse<FewError>,
+  SubscribeBody
 > => {
-    return {
-        mutationKey: [QUERY_KEY.SUBSCRIBE_WORKBOOK, params.workbookId],
-        mutationFn: (body) => subscribeWorkbook(params, body)
-    };
-}
+  return {
+    mutationKey: [QUERY_KEY.SUBSCRIBE_WORKBOOK, params.workbookId],
+    mutationFn: (body) => subscribeWorkbook(params, body),
+  };
+};

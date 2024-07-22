@@ -1,15 +1,16 @@
 import { UseMutationOptions } from "@tanstack/react-query";
 
-import { ApiResponse, axiosRequest } from "@api/api-config";
-
-import { API_ROUTE, QUERY_KEY } from "./api";
+import { ApiResponse, fewFetch } from "@api/fewFetch";
 import { AnswerCheckInfo, ProblemAnswerBody } from "@problem/types/problemInfo";
+import { API_ROUTE, QUERY_KEY } from "./api";
 
 export const postProblemAnswer = (
   params: ProblemAnswerParams,
   body: ProblemAnswerBody,
 ): Promise<ApiResponse<AnswerCheckInfo>> => {
-  return axiosRequest("post", API_ROUTE.PROBLEM(params.problemId), body);
+  return fewFetch().post(API_ROUTE.PROBLEM(params.problemId), {
+    body: JSON.stringify(body),
+  });
 };
 export const postProblemAnswerMutationOptions = (
   params: ProblemAnswerParams,

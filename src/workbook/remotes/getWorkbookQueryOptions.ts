@@ -1,9 +1,8 @@
 import { UseQueryOptions } from "@tanstack/react-query";
 
-import { ApiResponse, axiosRequest } from "@api/api-config";
-
 import { WorkbookInfo } from "@workbook/types";
 
+import { ApiResponse, fewFetch } from "@api/fewFetch";
 import { API_ROUTE, QUERY_KEY } from "./api";
 
 interface WorkbookParam {
@@ -13,7 +12,7 @@ interface WorkbookParam {
 export const getWorkbook = async ({
   workbookId,
 }: WorkbookParam): Promise<ApiResponse<WorkbookInfo>> => {
-  return axiosRequest("get", (API_ROUTE.WORKBOOK(workbookId)))
+  return fewFetch().get(API_ROUTE.WORKBOOK(workbookId));
 };
 
 export const getWorkbookQueryOptions = (
@@ -22,6 +21,6 @@ export const getWorkbookQueryOptions = (
   return {
     queryKey: [QUERY_KEY.GET_WORKBOOK, workbookId],
     queryFn: () => getWorkbook({ workbookId }),
-    select: (data) => data.data,
+    select: (data) => data.data.data,
   };
 };

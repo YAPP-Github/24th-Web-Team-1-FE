@@ -1,4 +1,4 @@
-import { ApiResponse } from "@api/api-config";
+import { ApiResponse } from "@api/fewFetch";
 import { ProblemIdsData } from "@common/stores/problemModuleStore";
 import { ConstKeyObject } from "@common/types/constKeyObject";
 import {

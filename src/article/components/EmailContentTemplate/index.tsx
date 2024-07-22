@@ -18,6 +18,7 @@ export default function EmailContentTemplate() {
       {
         ...getArticleQueryOptions({ articleId }),
         enabled: !workbookId,
+        staleTime: Infinity,
       },
       {
         ...getArticleWithWorkbookQueryOptions({
@@ -25,6 +26,7 @@ export default function EmailContentTemplate() {
           articleId,
         }),
         enabled: Boolean(workbookId),
+        staleTime: Infinity,
       },
     ],
   });
