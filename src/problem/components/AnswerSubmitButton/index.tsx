@@ -9,8 +9,8 @@ import { Button } from "@shared/components/ui/button";
 import { deleteCookie } from "cookies-next";
 
 import { useProblemIdsViewModel } from "@common/models/useProblemIdsViewModel";
-import { BUTTON_INFO } from "@problem/constants/answerButtonInfo";
 import QuizContext from "@problem/context/problemContext";
+import { AnswerSubmitModel } from "@problem/models/AnswerSubmitModel";
 import { QUERY_KEY } from "@problem/remotes/api";
 import { postProblemAnswerMutationOptions } from "@problem/remotes/postProblemAnswerOption";
 import { AnswerCheckInfo } from "@problem/types/problemInfo";
@@ -37,42 +37,44 @@ export default function AnswerSubmitButton() {
     select: (mutation) => mutation.state.data as AnswerCheckInfo,
   });
 
-  const onPostProblemAnswer = () => {
-    if (choiceAnswer && !problemAnswerInfo[0])
-      postProblemAnswer({ sub: choiceAnswer.toString() });
+  const answerSubmitModel = new AnswerSubmitModel({
+    isChoiceAnswer: Boolean(choiceAnswer),
+    isPostAnswerSuccess: Boolean(problemAnswerInfo[0]),
+    isExistNextProblem: isExistNextProblem(),
+  });
 
-    if (problemAnswerInfo[0] && isExistNextProblem()) {
-      initProblemContextInfo();
-      const problemId = nextSetProblemId();
-      push(`/problem/${problemId}`);
-    }
-    if (problemAnswerInfo[0] && !isExistNextProblem()) {
-      push("/");
-      setTimeout(() => {
-        clearProblem();
-        deleteCookie(IS_EXIST_PROBLEMS);
-      }, 2000);
+  const onPostProblemAnswer = () => {
+    const answerSubmitModel = new AnswerSubmitModel({
+      isChoiceAnswer: Boolean(choiceAnswer),
+      isPostAnswerSuccess: Boolean(problemAnswerInfo[0]),
+      isExistNextProblem: isExistNextProblem(),
+    });
+    const BUTTON_STATE = answerSubmitModel.answerButtonState;
+    const problemId = nextSetProblemId();
+
+    switch (BUTTON_STATE) {
+      case "PRE_ANSWER_SELECT":
+        postProblemAnswer({ sub: (choiceAnswer || "").toString() });
+        break;
+
+      case "POST_SUBMIT":
+        initProblemContextInfo();
+        push(`/problem/${problemId}`);
+        break;
+
+      case "LINK_TO_MAIN":
+        push("/");
+        setTimeout(() => {
+          clearProblem();
+          deleteCookie(IS_EXIST_PROBLEMS);
+        }, 2000);
+        break;
     }
   };
-  const isPostAnswerSuccess = problemAnswerInfo[0];
-  const result =
-    (isPostAnswerSuccess &&
-      !isExistNextProblem() &&
-      BUTTON_INFO.LINK_TO_MAIN.title) ||
-    (isPostAnswerSuccess && BUTTON_INFO.POST_SUBMIT.title) ||
-    (!isPostAnswerSuccess && BUTTON_INFO.PRE_ANSWER_SELECT.title);
+  const buttonInfo = answerSubmitModel.answerSubmitButtonClassName;
 
-  const style =
-    (!choiceAnswer &&
-      !isPostAnswerSuccess &&
-      BUTTON_INFO.PRE_ANSWER_SELECT.className) ||
-    (choiceAnswer &&
-      !isPostAnswerSuccess &&
-      BUTTON_INFO.POST_ANSWER_PRE_SUBMIT.className) ||
-    (isPostAnswerSuccess &&
-      !isExistNextProblem() &&
-      BUTTON_INFO.LINK_TO_MAIN.className) ||
-    (isPostAnswerSuccess && BUTTON_INFO.POST_SUBMIT.className);
+  const result = buttonInfo?.title;
+  const style = buttonInfo?.className;
 
   return (
     <Button

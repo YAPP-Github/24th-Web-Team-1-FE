@@ -10,6 +10,7 @@ import { cn } from "@shared/utils/cn";
 import { ApiResponse } from "@api/fewFetch";
 import { ANSWER_CHOICHE_BUTTON_INFO } from "@problem/constants/problemInfo";
 import ProblemContext from "@problem/context/problemContext";
+import { AnswerChoiceModel } from "@problem/models/AnswerChoiceModel";
 import { QUERY_KEY } from "@problem/remotes/api";
 import {
   AnswerCheckInfo,
@@ -45,40 +46,25 @@ export default function AnswerChoiceButton({
       };
     },
   });
-  const problemAnswerInfo = problemAnswersInfo[0];
-  const onClickAnswerChoice = () => {
-    if (!problemAnswerInfo) updateChoiceAnswer(number);
-  };
 
-  const answerResultInfo =
-    problemAnswerInfo?.data as ApiResponse<AnswerCheckInfo>;
-  const postChoiceAnswer = problemAnswerInfo?.variables;
+
+  const answerChoiceModel = new AnswerChoiceModel({
+    problemAnswerInfo: problemAnswersInfo[0],
+    choiceNumber: choiceAnswer,
+    renderNumber: number,
+  });
+
+
+  const onClickAnswerChoice = () => {
+    if (!answerChoiceModel.isProblemAnswerInfo) updateChoiceAnswer(number);
+  };
 
   useEffect(
     function setButtonClassName() {
-      if (!answerResultInfo) {
-        if (choiceAnswer === number)
-          setClassName(
-            ANSWER_CHOICHE_BUTTON_INFO.CURRENT_CHOICE_ANSWER.className,
-          );
-
-        if (choiceAnswer !== number)
-          setClassName(ANSWER_CHOICHE_BUTTON_INFO.INIT_CHOICE_ANSWER.className);
-      }
-      if (answerResultInfo) {
-        if (answerResultInfo.data.data.answer === number)
-          setClassName(
-            ANSWER_CHOICHE_BUTTON_INFO.CHOICE_ANSWER_CORRECT.className,
-          );
-        if (
-          answerResultInfo.data.data.isSolved === false &&
-          number === postChoiceAnswer.sub
-        ) {
-          setClassName(ANSWER_CHOICHE_BUTTON_INFO.CHOICE_ANSWER_FAIL.className);
-        }
-      }
+      const buttonInfo = answerChoiceModel.answerChoiceButtonClassName;
+      setClassName(buttonInfo?.className);
     },
-    [choiceAnswer, number, problemAnswerInfo],
+    [choiceAnswer, number, problemAnswersInfo],
   );
 
   return (
@@ -94,25 +80,9 @@ export default function AnswerChoiceButton({
       </span>
 
       <ChoiceFillCircleSvg
-        isChoice={
-          (!answerResultInfo && choiceAnswer === number) ||
-          (answerResultInfo &&
-            (postChoiceAnswer.sub === number ||
-              answerResultInfo.data.data.answer === number))
-        }
-        fill={
-          (!answerResultInfo && choiceAnswer === number && "white") ||
-          (!answerResultInfo && choiceAnswer !== number && "#A5A5A5") ||
-          (answerResultInfo &&
-            answerResultInfo.data.data.answer === number &&
-            "#0166B3") ||
-          (answerResultInfo &&
-            answerResultInfo.data.data.isSolved === false &&
-            postChoiceAnswer.sub === number &&
-            "#B00020") ||
-          (answerResultInfo && postChoiceAnswer.sub !== number && "#A5A5A5") ||
-          ""
-        }
+        isChoice={answerChoiceModel.isChoiceFillCircle}
+        fill={answerChoiceModel.getChoiceFillColor}
+
       />
     </Button>
   );
