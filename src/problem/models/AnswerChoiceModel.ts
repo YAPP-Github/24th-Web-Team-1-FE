@@ -29,10 +29,11 @@ export class AnswerChoiceModel {
       !isSubmitAnswer && this.choiceNumber === this.renderNumber;
 
     this.CHOICE_ANSWER_CORRECT =
-      isSubmitAnswer && answerResultInfo?.data.answer === this.renderNumber;
+      isSubmitAnswer &&
+      answerResultInfo?.data.data.answer === this.renderNumber;
     this.CHOICE_ANSWER_FAIL =
       isSubmitAnswer &&
-      answerResultInfo?.data.isSolved === false &&
+      answerResultInfo?.data.data.isSolved === false &&
       this.renderNumber === postChoiceAnswer?.sub;
   }
   get answerChoiceButtonClassName() {
