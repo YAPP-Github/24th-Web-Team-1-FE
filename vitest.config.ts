@@ -39,6 +39,7 @@ export default defineConfig({
       "@common": resolve("src/common"),
       "@problem": resolve("src/problem"),
       "@subscription": resolve("src/subscription"),
+      "@auth": resolve("src/auth"),
       public: resolve("public"),
     },
   },
