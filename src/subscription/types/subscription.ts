@@ -2,10 +2,9 @@ import { z } from "zod";
 
 import { ApiResponse } from "@api/api-config";
 
-import { emailSubscribeSchema, unSubscribeSchema } from "@subscription/schemas";
+import { unSubscribeSchema } from "@subscription/schemas";
 
 export type variantType = "default" | "destructive" | "outline" | "secondary" | "ghost" | "link"
-export type EmailSubscribeFormData = z.infer<typeof emailSubscribeSchema>;
 
 export type UnsubscribeFormData = z.infer<typeof unSubscribeSchema>;
 
