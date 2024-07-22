@@ -2,6 +2,9 @@ type FewResponse<DataType extends object> = {
   data: DataType;
   message: string;
 };
+export type FewError = {
+  message: string;
+};
 export type ApiResponse<DataType extends object> = {
   data: FewResponse<DataType>;
   config: RequestInit;
@@ -74,7 +77,8 @@ export const fewFetch = (
         .then(fetInterceptor.onResponse)
         .catch(fetInterceptor.onResponseError);
     } catch (reason) {
-      return fetInterceptor.onRequestError(reason);
+      const error = reason as FewError;
+      return fetInterceptor.onRequestError(error);
     }
   };
   return {

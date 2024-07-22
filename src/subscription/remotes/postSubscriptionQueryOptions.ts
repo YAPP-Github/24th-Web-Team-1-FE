@@ -6,7 +6,7 @@ import {
   SubscribeParams,
 } from "@subscription/types/subscription";
 
-import { ApiResponse, fewFetch } from "@api/fewFetch";
+import { ApiResponse, FewError, fewFetch } from "@api/fewFetch";
 import { API_ROUTE, QUERY_KEY } from "./api";
 
 export const subscribeWorkbook = (
@@ -22,7 +22,7 @@ export const subscribeWorkbookOptions = (
   params: SubscribeParams,
 ): UseMutationOptions<
   ApiResponse<MessageOnlyResponse>,
-  Error,
+  ApiResponse<FewError>,
   SubscribeBody
 > => {
   return {

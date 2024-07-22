@@ -46,9 +46,9 @@ export const useSubscribeForm = () => {
         },
         onError: (error) => {
           let errorMessage = SUBSCRIBE_USER_ACTIONS.SUBSCRIBE_FAIL;
-          // if (axios.isAxiosError(error) && error.response) {
-          //   errorMessage = error.response.data.message || errorMessage;
-          // }
+          if (error && error.data && error.data.message) {
+            errorMessage = error.data.message || errorMessage;
+          }
           toast({
             title: errorMessage,
           });
