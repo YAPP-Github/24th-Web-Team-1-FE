@@ -2,13 +2,13 @@ import { Metadata } from "next";
 
 import { ReactNode } from "react";
 
+import queryClient from "@api/queryClient";
+
 import { createMetadata } from "@shared/utils/metadata";
 
 import ArticleBottomButton from "@article/components/ArticleBottomButton/indext";
-import { API_ROUTE } from "@article/remotes/api";
-import { ArticleDetail } from "@article/types";
+import { getArticleQueryOptions } from "@article/remotes/getArticleQueryOptions";
 
-import { fewFetch } from "@api/fewFetch";
 import TopBar from "@common/components/TopBar";
 
 export async function generateMetadata({
@@ -18,9 +18,11 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const articleId = params.articleId;
 
-  const { data: articleInfo } = await fewFetch().get<ArticleDetail>(
-    `${API_ROUTE.ARTICLE(articleId)}`,
-  );
+  const { data: articleInfo } = await queryClient.fetchQuery({
+    ...getArticleQueryOptions({ articleId }),
+    staleTime: Infinity,
+  });
+
   const { title, writer } = articleInfo.data;
 
   return createMetadata({
