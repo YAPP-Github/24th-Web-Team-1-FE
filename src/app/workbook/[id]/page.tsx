@@ -28,15 +28,15 @@ export default function WorkbookPage() {
     ...getWorkbookQueryOptions(workbookId),
   });
 
-  useEffect(
-    function trackMixpanel() {
-      Mixpanel.track({
-        name: EVENT_NAME.WORKBOOK_APPEAR,
-        property: { id: workbookId },
-      });
-    },
-    [pathname],
-  );
+  // useEffect(
+  //   function trackMixpanel() {
+  //     Mixpanel.track({
+  //       name: EVENT_NAME.WORKBOOK_APPEAR,
+  //       property: { id: workbookId },
+  //     });
+  //   },
+  //   [pathname],
+  // );
 
   if (isLoading) return <WorkbookSkeleton />;
 
