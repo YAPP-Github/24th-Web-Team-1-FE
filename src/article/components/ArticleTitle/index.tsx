@@ -13,10 +13,12 @@ import { getArticleWithWorkbookQueryOptions } from "@article/remotes/getArticleW
 import { ArticleDetail, ArticleWithWorkbookDetail } from "@article/types";
 import { ARTICLE_INFO_TYPE } from "@common/constants/articleCase";
 import { useProblemIdsViewModel } from "@common/models/useProblemIdsViewModel";
-import ArticleSkeleton from "../ArticleSkeleton";
-import WriterInfo from "../WriterInfo";
 import { IS_EXIST_PROBLEMS } from "@shared/constants/middlewareConstant";
 import { setCookie } from "cookies-next";
+import ArticleSkeleton from "../ArticleSkeleton";
+import WriterInfo from "../WriterInfo";
+import { EVENT_NAME } from "@shared/constants/mixpanel";
+import { Mixpanel } from "@shared/utils/mixpanel";
 
 export default function ArticleTitle() {
   const isFirstRender = useRef(false);
