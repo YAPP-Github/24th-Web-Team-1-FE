@@ -9,15 +9,16 @@ import TitleSection from "@shared/components/TitleSection";
 
 import { getArticleQueryOptions } from "@article/remotes/getArticleQueryOptions";
 
+import { ARTICLE_INFO_TYPE } from "@article/constants/articleCase";
 import { getArticleWithWorkbookQueryOptions } from "@article/remotes/getArticleWithWorkbookQueryOptions";
 import { ArticleDetail, ArticleWithWorkbookDetail } from "@article/types";
-import { ARTICLE_INFO_TYPE } from "@common/constants/articleCase";
-import { useProblemIdsViewModel } from "@common/models/useProblemIdsViewModel";
 import { IS_EXIST_PROBLEMS } from "@shared/constants/middlewareConstant";
+import { useProblemIdsViewModel } from "@shared/models/useProblemIdsViewModel";
 import { setCookie } from "cookies-next";
 import ArticleSkeleton from "../ArticleSkeleton";
 import WriterInfo from "../WriterInfo";
-
+import { EVENT_NAME } from "@shared/constants/mixpanel";
+import { Mixpanel } from "@shared/utils/mixpanel";
 
 export default function ArticleTitle() {
   const isFirstRender = useRef(false);
@@ -32,6 +33,7 @@ export default function ArticleTitle() {
       {
         ...getArticleQueryOptions({ articleId }),
         enabled: !workbookId,
+        staleTime: Infinity,
       },
       {
         ...getArticleWithWorkbookQueryOptions({
@@ -39,6 +41,7 @@ export default function ArticleTitle() {
           articleId,
         }),
         enabled: Boolean(workbookId),
+        staleTime: Infinity,
       },
     ],
   });
@@ -46,7 +49,7 @@ export default function ArticleTitle() {
   const { data, isLoading, isError } = workbookId
     ? results[ARTICLE_INFO_TYPE.ARTICLE_WITH_WORKBOOK]
     : results[ARTICLE_INFO_TYPE.ONLY_ARTICLE];
-    
+
   const articleInfo = data as ArticleDetail | ArticleWithWorkbookDetail;
 
   useEffect(
@@ -62,18 +65,18 @@ export default function ArticleTitle() {
     [articleInfo],
   );
 
-  // useEffect(
-  //   function trackMixpanel() {
-  //     if (!isFirstRender.current) {
-  //       isFirstRender.current = true;
-  //       Mixpanel.track({
-  //         name: EVENT_NAME.ARTICLE_APPREAR,
-  //         property: { id: articleId },
-  //       });
-  //     }
-  //   },
-  //   [articleInfo],
-  // );
+  useEffect(
+    function trackMixpanel() {
+      if (!isFirstRender.current) {
+        isFirstRender.current = true;
+        Mixpanel.track({
+          name: EVENT_NAME.ARTICLE_APPREAR,
+          property: { id: articleId },
+        });
+      }
+    },
+    [articleInfo],
+  );
 
   if (isLoading || isError || !articleInfo)
     return <ArticleSkeleton.TitleSkeleton />;

@@ -8,13 +8,13 @@ import { useMutation, useMutationState } from "@tanstack/react-query";
 import { Button } from "@shared/components/ui/button";
 import { deleteCookie } from "cookies-next";
 
-import { useProblemIdsViewModel } from "@common/models/useProblemIdsViewModel";
 import QuizContext from "@problem/context/problemContext";
 import { AnswerSubmitModel } from "@problem/models/AnswerSubmitModel";
 import { QUERY_KEY } from "@problem/remotes/api";
 import { postProblemAnswerMutationOptions } from "@problem/remotes/postProblemAnswerOption";
 import { AnswerCheckInfo } from "@problem/types/problemInfo";
 import { IS_EXIST_PROBLEMS } from "@shared/constants/middlewareConstant";
+import { useProblemIdsViewModel } from "@shared/models/useProblemIdsViewModel";
 import { cn } from "@shared/utils/cn";
 
 export default function AnswerSubmitButton() {

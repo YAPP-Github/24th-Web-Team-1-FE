@@ -1,6 +1,6 @@
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 
-import TopBar from "@common/components/TopBar";
+import TopBar from "@shared/components/TopBar";
 
 interface CancelLayoutProps {
   children: ReactNode;

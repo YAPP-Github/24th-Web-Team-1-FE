@@ -11,6 +11,11 @@ import WorkbookSkeleton from "@workbook/components/WorkbookSkeleton";
 import WriterInfo from "@workbook/components/WriterInfo";
 import dynamic from "next/dynamic";
 
+import { EVENT_NAME } from "@shared/constants/mixpanel";
+import { Mixpanel } from "@shared/utils/mixpanel";
+import SubscribeBottomBar from "@subscription/components/SubscribeBottomBar";
+import { useEffect } from "react";
+
 const TitleSection = dynamic(() => import("@shared/components/TitleSection"), {
   loading: () => <WorkbookSkeleton.TitleSkeleton />,
 });
@@ -33,6 +38,7 @@ const WorkbookMainImage = dynamic(
   },
 );
 
+
 const SubscribeBottomBar = dynamic(
   () => import("@subscription/components/SubscribeBottomBar"),
   {
@@ -48,15 +54,25 @@ export default function WorkbookPage() {
     ...getWorkbookQueryOptions(workbookId),
   });
 
-  // useEffect(
-  //   function trackMixpanel() {
-  //     Mixpanel.track({
-  //       name: EVENT_NAME.WORKBOOK_APPEAR,
-  //       property: { id: workbookId },
-  //     });
-  //   },
-  //   [pathname],
-  // );
+  useEffect(
+    function trackMixpanel() {
+      Mixpanel.track({
+        name: EVENT_NAME.WORKBOOK_APPEAR,
+        property: { id: workbookId },
+      });
+    },
+    [pathname],
+  );
+  if(isLoading){
+    return <main className="flex h-[100vh] w-full flex-col items-center overflow-x-hidden">
+        <article className="flex h-full w-full max-w-screen-sm flex-col space-y-[24px] overflow-y-scroll">
+              <WorkbookSkeleton.ImageSkeleton />
+              <WorkbookSkeleton.TitleSkeleton />
+             <WorkbookSkeleton.OverviewSectionSkeleton />
+              <WorkbookSkeleton.ContentWrapperkeleton />
+        </article>
+      </main>
+  }
 
   return (
     <>

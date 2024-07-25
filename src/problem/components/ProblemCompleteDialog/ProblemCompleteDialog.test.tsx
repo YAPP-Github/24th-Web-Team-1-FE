@@ -5,9 +5,9 @@ import { beforeAll, describe, expect, it, vi } from "vitest";
 import QueryClientProviders from "@shared/components/queryClientProvider";
 import { createQueryProviderWrapper } from "@shared/constants/createQueryProvider";
 
-import { LINK_SHARE_CONTENT } from "@common/constants/linkShareContent";
-import { mockProblemModuleStore } from "@common/stores/mockZustandStore";
 import { postProblemAnswerMutationOptions } from "@problem/remotes/postProblemAnswerOption";
+import { LINK_SHARE_CONTENT } from "@shared/constants/linkShareContent";
+import { mockProblemModuleStore } from "@shared/stores/mockZustandStore";
 import {
   act,
   render,
@@ -47,10 +47,10 @@ describe("마지막 선택지 제출완료시 팝업 노출 테스트", () => {
         })),
       };
     });
-    vi.mock("@common/models/useProblemIdsViewModel", async () => {
+    vi.mock("@shared/models/useProblemIdsViewModel", async () => {
       const actual = await vi.importActual<
-        typeof import("@common/models/useProblemIdsViewModel")
-      >("@common/models/useProblemIdsViewModel");
+        typeof import("@shared/models/useProblemIdsViewModel")
+      >("@shared/models/useProblemIdsViewModel");
       return {
         ...actual,
         useProblemIdsViewModel: vi.fn(() => ({
