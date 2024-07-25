@@ -1,4 +1,4 @@
-type FewResponse<DataType extends object> = {
+export type FewResponse<DataType extends object> = {
   data: DataType;
   message: string;
 };
