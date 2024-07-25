@@ -7,6 +7,7 @@ export default function WorkbookMainImage({
   return (
     <figure className="flex justify-center">
       <Image
+        priority
         src={mainImageUrl}
         alt={"Workbook landing image"}
         width={0}
