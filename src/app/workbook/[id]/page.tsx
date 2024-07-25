@@ -57,6 +57,18 @@ export default function WorkbookPage() {
   //   },
   //   [pathname],
   // );
+  if (isLoading) {
+    return (
+      <main className="flex h-[100vh] w-full flex-col items-center overflow-x-hidden">
+        <article className="flex h-full w-full max-w-screen-sm flex-col space-y-[24px] overflow-y-scroll">
+          <WorkbookSkeleton.ImageSkeleton />
+          <WorkbookSkeleton.TitleSkeleton />
+          <WorkbookSkeleton.OverviewSectionSkeleton />
+          <WorkbookSkeleton.ContentWrapperkeleton />
+        </article>
+      </main>
+    );
+  }
 
   return (
     <>
