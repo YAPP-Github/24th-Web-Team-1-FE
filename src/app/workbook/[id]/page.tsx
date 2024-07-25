@@ -14,9 +14,9 @@ import WriterInfo from "@workbook/components/WriterInfo";
 import { getWorkbookQueryOptions } from "@workbook/remotes/getWorkbookQueryOptions";
 import { getWorkbookId } from "@workbook/utils";
 
-import SubscribeBottomBar from "@subscription/components/SubscribeBottomBar";
 import { EVENT_NAME } from "@shared/constants/mixpanel";
 import { Mixpanel } from "@shared/utils/mixpanel";
+import SubscribeBottomBar from "@subscription/components/SubscribeBottomBar";
 import { useEffect } from "react";
 
 export default function WorkbookPage() {
@@ -28,15 +28,15 @@ export default function WorkbookPage() {
     ...getWorkbookQueryOptions(workbookId),
   });
 
-  // useEffect(
-  //   function trackMixpanel() {
-  //     Mixpanel.track({
-  //       name: EVENT_NAME.WORKBOOK_APPEAR,
-  //       property: { id: workbookId },
-  //     });
-  //   },
-  //   [pathname],
-  // );
+  useEffect(
+    function trackMixpanel() {
+      Mixpanel.track({
+        name: EVENT_NAME.WORKBOOK_APPEAR,
+        property: { id: workbookId },
+      });
+    },
+    [pathname],
+  );
 
   if (isLoading) return <WorkbookSkeleton />;
 
