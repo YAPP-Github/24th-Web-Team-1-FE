@@ -13,9 +13,7 @@ import { ARTICLE_INFO_TYPE } from "@article/constants/articleCase";
 import { getArticleWithWorkbookQueryOptions } from "@article/remotes/getArticleWithWorkbookQueryOptions";
 import { ArticleDetail, ArticleWithWorkbookDetail } from "@article/types";
 import { IS_EXIST_PROBLEMS } from "@shared/constants/middlewareConstant";
-import { EVENT_NAME } from "@shared/constants/mixpanel";
 import { useProblemIdsViewModel } from "@shared/models/useProblemIdsViewModel";
-import { Mixpanel } from "@shared/utils/mixpanel";
 import { setCookie } from "cookies-next";
 import ArticleSkeleton from "../ArticleSkeleton";
 import WriterInfo from "../WriterInfo";
@@ -65,18 +63,18 @@ export default function ArticleTitle() {
     [articleInfo],
   );
 
-  useEffect(
-    function trackMixpanel() {
-      if (!isFirstRender.current) {
-        isFirstRender.current = true;
-        Mixpanel.track({
-          name: EVENT_NAME.ARTICLE_APPREAR,
-          property: { id: articleId },
-        });
-      }
-    },
-    [articleInfo],
-  );
+  // useEffect(
+  //   function trackMixpanel() {
+  //     if (!isFirstRender.current) {
+  //       isFirstRender.current = true;
+  //       Mixpanel.track({
+  //         name: EVENT_NAME.ARTICLE_APPREAR,
+  //         property: { id: articleId },
+  //       });
+  //     }
+  //   },
+  //   [articleInfo],
+  // );
 
   if (isLoading || isError || !articleInfo)
     return <ArticleSkeleton.TitleSkeleton />;
