@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 
 import ArticleBottomButton from "@article/components/ArticleBottomButton/indext";
 
-import TopBar from "@common/components/TopBar";
+import TopBar from "@shared/components/TopBar";
 
 interface ArticlePageLayoutProps {
   children: ReactNode;

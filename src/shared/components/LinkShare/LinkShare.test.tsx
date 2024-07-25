@@ -1,8 +1,6 @@
 import { render, screen, waitFor } from "@testing-library/react";
-import { describe, expect, it, vi } from "vitest";
-import LinkShareContent from ".";
 import userEvent from "@testing-library/user-event";
-import { COPY_CLIP_URL } from "@common/constants/linkShareContent";
+import { describe, expect, it, vi } from "vitest";
 import LinkShare from ".";
 
 const href = "www.few.article.co.kr";

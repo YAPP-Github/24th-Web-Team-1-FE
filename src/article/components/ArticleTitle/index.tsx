@@ -9,15 +9,14 @@ import TitleSection from "@shared/components/TitleSection";
 
 import { getArticleQueryOptions } from "@article/remotes/getArticleQueryOptions";
 
+import { ARTICLE_INFO_TYPE } from "@article/constants/articleCase";
 import { getArticleWithWorkbookQueryOptions } from "@article/remotes/getArticleWithWorkbookQueryOptions";
 import { ArticleDetail, ArticleWithWorkbookDetail } from "@article/types";
-import { ARTICLE_INFO_TYPE } from "@common/constants/articleCase";
-import { useProblemIdsViewModel } from "@common/models/useProblemIdsViewModel";
 import { IS_EXIST_PROBLEMS } from "@shared/constants/middlewareConstant";
+import { useProblemIdsViewModel } from "@shared/models/useProblemIdsViewModel";
 import { setCookie } from "cookies-next";
 import ArticleSkeleton from "../ArticleSkeleton";
 import WriterInfo from "../WriterInfo";
-
 
 export default function ArticleTitle() {
   const isFirstRender = useRef(false);
@@ -46,7 +45,7 @@ export default function ArticleTitle() {
   const { data, isLoading, isError } = workbookId
     ? results[ARTICLE_INFO_TYPE.ARTICLE_WITH_WORKBOOK]
     : results[ARTICLE_INFO_TYPE.ONLY_ARTICLE];
-    
+
   const articleInfo = data as ArticleDetail | ArticleWithWorkbookDetail;
 
   useEffect(

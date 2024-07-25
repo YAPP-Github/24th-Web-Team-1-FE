@@ -1,8 +1,8 @@
 "use client";
 
-import { useProblemIdsViewModel } from "@common/models/useProblemIdsViewModel";
 import { getProblemsQueryOptions } from "@problem/remotes/getProblemsQueryOptions";
 import { IS_EXIST_PROBLEMS } from "@shared/constants/middlewareConstant";
+import { useProblemIdsViewModel } from "@shared/models/useProblemIdsViewModel";
 import { postLogMutationOptions } from "@shared/remotes/postLogMutationOptions";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { setCookie } from "cookies-next";

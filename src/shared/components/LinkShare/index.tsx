@@ -1,7 +1,7 @@
-import { COPY_CLIP_URL } from "@common/constants/linkShareContent";
 import { Button } from "@shared/components/ui/button";
 import { Input } from "@shared/components/ui/input";
 import { useToast } from "@shared/components/ui/use-toast";
+import { COPY_CLIP_URL } from "@shared/constants/linkShareContent";
 import { cn } from "@shared/utils/cn";
 import LinkShareIcon from "public/assets/icon/link.svg";
 import React, { HTMLAttributes } from "react";
