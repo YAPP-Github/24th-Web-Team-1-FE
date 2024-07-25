@@ -1,24 +1,44 @@
 "use client";
 
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 import { useQuery } from "@tanstack/react-query";
 
-import TitleSection from "@shared/components/TitleSection";
-
-import CurriculumSection from "@workbook/components/CurriculumSection";
-import OverviewSection from "@workbook/components/OverviewSection";
-import WorkbookSkeleton from "@workbook/components/WorkbookSkeleton";
-import WriterInfo from "@workbook/components/WriterInfo";
 import { getWorkbookQueryOptions } from "@workbook/remotes/getWorkbookQueryOptions";
 import { getWorkbookId } from "@workbook/utils";
 
-import SubscribeBottomBar from "@subscription/components/SubscribeBottomBar";
-import { EVENT_NAME } from "@shared/constants/mixpanel";
-import { Mixpanel } from "@shared/utils/mixpanel";
-import { useEffect } from "react";
+import WorkbookSkeleton from "@workbook/components/WorkbookSkeleton";
+import WriterInfo from "@workbook/components/WriterInfo";
+import dynamic from "next/dynamic";
 
+const TitleSection = dynamic(() => import("@shared/components/TitleSection"), {
+  loading: () => <WorkbookSkeleton.TitleSkeleton />,
+});
+const OverviewSection = dynamic(
+  () => import("@workbook/components/OverviewSection"),
+  {
+    loading: () => <WorkbookSkeleton.OverviewSectionSkeleton />,
+  },
+);
+const CurriculumSection = dynamic(
+  () => import("@workbook/components/CurriculumSection"),
+  {
+    loading: () => <WorkbookSkeleton.ContentWrapperkeleton />,
+  },
+);
+const WorkbookMainImage = dynamic(
+  () => import("@workbook/components/WorkBookMainImage"),
+  {
+    loading: () => <WorkbookSkeleton.ImageSkeleton />,
+  },
+);
+
+const SubscribeBottomBar = dynamic(
+  () => import("@subscription/components/SubscribeBottomBar"),
+  {
+    loading: () => <></>,
+  },
+);
 export default function WorkbookPage() {
   // usePathname 로 workbook id 받기
   const pathname = usePathname();
@@ -38,35 +58,27 @@ export default function WorkbookPage() {
   //   [pathname],
   // );
 
-  if (isLoading) return <WorkbookSkeleton />;
-
   return (
-    <main className="flex h-[100vh] w-full flex-col items-center overflow-x-hidden">
-      <article className="flex h-full w-full max-w-screen-sm flex-col space-y-[24px] overflow-y-scroll">
-        {workbookInfo && (
-          <>
-            <figure>
-              <Image
-                src={workbookInfo.mainImageUrl}
-                alt={"Workbook landing image"}
-                width={0}
-                height={0}
-                sizes="100vw"
-                style={{ width: "100%", objectFit: "contain" }}
+    <>
+      <main className="flex h-[100vh] w-full flex-col items-center overflow-x-hidden">
+        <article className="flex h-full w-full max-w-screen-sm flex-col space-y-[24px] overflow-y-scroll">
+          {workbookInfo && (
+            <>
+              <WorkbookMainImage mainImageUrl={workbookInfo.mainImageUrl} />
+              <TitleSection
+                tagTexts={[workbookInfo.category]}
+                title={workbookInfo.title}
+                editorComponent={<WriterInfo writers={workbookInfo.writers} />}
+                className={"px-[20px]"}
               />
-            </figure>
-            <TitleSection
-              tagTexts={[workbookInfo.category]}
-              title={workbookInfo.title}
-              editorComponent={<WriterInfo writers={workbookInfo.writers} />}
-              className={"px-[20px]"}
-            />
-            <OverviewSection overview={workbookInfo.description} />
-            <CurriculumSection curriculumItems={workbookInfo.articles} />
-            <SubscribeBottomBar />
-          </>
-        )}
-      </article>
-    </main>
+
+              <OverviewSection overview={workbookInfo.description} />
+              <CurriculumSection curriculumItems={workbookInfo.articles} />
+              <SubscribeBottomBar />
+            </>
+          )}
+        </article>
+      </main>
+    </>
   );
 }
