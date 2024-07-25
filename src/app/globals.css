@@ -118,6 +118,9 @@
   .sub2-medium {
     @apply font-pretendard text-[16px]/[25.44px] font-medium;
   }
+  .sub3-semibold {
+    @apply font-pretendard text-[12px] font-semibold
+  }
 
   .scrollbar-hide {
     -ms-overflow-style: none;
@@ -127,12 +130,16 @@
     }
   }
   tr p {
-    margin: 13px 0px;
+    margin: 12px 0px;
   }
   tr article h3 {
     margin-top: 20px;
   }
   tr article a {
     text-decoration: underline;
+  }
+  tr {
+    overflow: hidden;
+    word-break: break-all;
   }
 }

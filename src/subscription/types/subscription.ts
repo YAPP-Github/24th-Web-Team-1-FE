@@ -1,7 +1,10 @@
 import { z } from "zod";
 
-import { emailSubscribeSchema, unSubscribeSchema } from "@subscription/schemas";
 import { ApiResponse } from "@api/fewFetch";
+
+import { unSubscribeSchema } from "@subscription/schemas";
+
+import { emailSubscribeSchema } from "@common/schemas/emailSchema";
 
 export type variantType =
   | "default"

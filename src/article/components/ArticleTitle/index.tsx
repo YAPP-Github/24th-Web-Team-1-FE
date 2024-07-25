@@ -18,6 +18,7 @@ import { setCookie } from "cookies-next";
 import ArticleSkeleton from "../ArticleSkeleton";
 import WriterInfo from "../WriterInfo";
 
+
 export default function ArticleTitle() {
   const isFirstRender = useRef(false);
   const { articleId } = useParams<{ articleId: string }>();

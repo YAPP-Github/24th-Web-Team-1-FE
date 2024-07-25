@@ -2,6 +2,8 @@
 
 import { useProblemIdsViewModel } from "@common/models/useProblemIdsViewModel";
 import { Button } from "@shared/components/ui/button";
+import { EVENT_NAME } from "@shared/constants/mixpanel";
+import { Mixpanel } from "@shared/utils/mixpanel";
 import { useParams, useRouter } from "next/navigation";
 import { HTMLAttributes } from "react";
 
@@ -14,10 +16,10 @@ export default function ArticleBottomButton({
   const { getCurrentProblemId } = useProblemIdsViewModel();
   const onClickGoProblem = () => {
     push(`/problem/${getCurrentProblemId()}`);
-    // Mixpanel.track({
-    //   name: EVENT_NAME.ARTICLE_PROBLEMBUTTON_TAPPED,
-    //   property: { id: articleId },
-    // });
+    Mixpanel.track({
+      name: EVENT_NAME.ARTICLE_PROBLEMBUTTON_TAPPED,
+      property: { id: articleId },
+    });
   };
   return (
     <Button
