@@ -1,4 +1,4 @@
-import { useProblemModuleStore } from "@common/stores/problemModuleStore";
+import { useProblemModuleStore } from "@shared/stores/problemModuleStore";
 
 export const useProblemIdsViewModel = () => {
   const getCurrentProblemId = useProblemModuleStore(

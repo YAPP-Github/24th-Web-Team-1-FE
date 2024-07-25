@@ -9,11 +9,11 @@ import { useMutationState } from "@tanstack/react-query";
 import ExternalControlOpenDialog from "@shared/components/ExternalControlOpenDialog";
 
 import { ApiResponse } from "@api/fewFetch";
-import LinkShare from "@common/components/LinkShare";
-import { LINK_SHARE_CONTENT } from "@common/constants/linkShareContent";
-import { useProblemIdsViewModel } from "@common/models/useProblemIdsViewModel";
 import { QUERY_KEY } from "@problem/remotes/api";
 import { AnswerCheckInfo } from "@problem/types/problemInfo";
+import LinkShare from "@shared/components/LinkShare";
+import { LINK_SHARE_CONTENT } from "@shared/constants/linkShareContent";
+import { useProblemIdsViewModel } from "@shared/models/useProblemIdsViewModel";
 
 export default function ProblemCompleteDialog() {
   const { problemId } = useParams<{ problemId: string }>();

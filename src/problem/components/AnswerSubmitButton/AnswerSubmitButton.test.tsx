@@ -2,7 +2,6 @@ import { beforeAll, describe, expect, it, vi } from "vitest";
 
 import QueryClientProviders from "@shared/components/queryClientProvider";
 
-import AnswerSubmitButton from ".";
 import { BUTTON_INFO } from "@problem/constants/answerButtonInfo";
 import ProblemContext, {
   defaultActions,
@@ -11,6 +10,7 @@ import ProblemContext, {
 import { ProblemContextInfo } from "@problem/types/problemContextInfo";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import AnswerSubmitButton from ".";
 
 const isExistNextProblem = vi.fn(() => true);
 
@@ -42,10 +42,10 @@ describe("퀴즈 푸는 하단 버튼, 정답 선택에 따른 테스트", () =>
       };
     });
 
-    vi.mock("@common/models/useProblemIdsViewModel", async () => {
+    vi.mock("@shared/models/useProblemIdsViewModel", async () => {
       const actual = await vi.importActual<
-        typeof import("@common/models/useProblemIdsViewModel")
-      >("@common/models/useProblemIdsViewModel");
+        typeof import("@shared/models/useProblemIdsViewModel")
+      >("@shared/models/useProblemIdsViewModel");
       return {
         ...actual,
         useProblemIdsViewModel: vi.fn(() => ({

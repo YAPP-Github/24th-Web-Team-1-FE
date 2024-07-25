@@ -1,9 +1,9 @@
-import { render, screen, waitFor } from "@testing-library/react";
-import { describe, expect, it, vi } from "vitest";
 import WriterInfo from "@article/components/WriterInfo";
-import TitleSection from ".";
+import { LINK_SHARE_CONTENT } from "@shared/constants/linkShareContent";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { LINK_SHARE_CONTENT } from "@common/constants/linkShareContent";
+import { describe, expect, it, vi } from "vitest";
+import TitleSection from ".";
 
 vi.mock("next/navigation", () => {
   return {

@@ -1,8 +1,8 @@
 "use client";
 
+import { ARTICLE_INFO_TYPE } from "@article/constants/articleCase";
 import { getArticleQueryOptions } from "@article/remotes/getArticleQueryOptions";
 import { getArticleWithWorkbookQueryOptions } from "@article/remotes/getArticleWithWorkbookQueryOptions";
-import { ARTICLE_INFO_TYPE } from "@common/constants/articleCase";
 import { useQueries } from "@tanstack/react-query";
 import { useParams, useSearchParams } from "next/navigation";
 import ArticleSkeleton from "../ArticleSkeleton";

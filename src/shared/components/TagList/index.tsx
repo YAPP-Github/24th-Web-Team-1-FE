@@ -1,6 +1,4 @@
-import React from "react";
-
-import Tag from "@common/components/Tag";
+import Tag from "../Tag";
 
 interface TagListProps {
   tagTexts: string[];
