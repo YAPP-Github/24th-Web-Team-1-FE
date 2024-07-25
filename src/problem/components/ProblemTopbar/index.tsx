@@ -1,6 +1,6 @@
 "use client";
-import TopBar from "@common/components/TopBar";
-import { useProblemIdsViewModel } from "@common/models/useProblemIdsViewModel";
+import TopBar from "@shared/components/TopBar";
+import { useProblemIdsViewModel } from "@shared/models/useProblemIdsViewModel";
 import { useRouter } from "next/navigation";
 
 export default function ProblemTopbar() {

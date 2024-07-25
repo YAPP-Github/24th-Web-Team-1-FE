@@ -2,8 +2,8 @@ import { defineConfig } from "vitest/config";
 
 import react from "@vitejs/plugin-react";
 import { resolve as pathResolve } from "node:path";
-const resolve = (path: string) => pathResolve(__dirname, path);
 import svgr from "vite-plugin-svgr";
+const resolve = (path: string) => pathResolve(__dirname, path);
 
 export default defineConfig({
   plugins: [

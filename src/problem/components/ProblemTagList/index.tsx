@@ -1,9 +1,7 @@
 "use client";
 
-import React, { useContext } from "react";
-
-import { useProblemIdsViewModel } from "@common/models/useProblemIdsViewModel";
-import TagList from "@common/components/TagList";
+import TagList from "@shared/components/TagList";
+import { useProblemIdsViewModel } from "@shared/models/useProblemIdsViewModel";
 
 export default function ProblemTagList() {
   const { getTagCurrentProblemText, getDayText } = useProblemIdsViewModel();

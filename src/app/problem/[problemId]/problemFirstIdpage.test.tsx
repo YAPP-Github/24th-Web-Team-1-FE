@@ -5,13 +5,13 @@ import { beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
 import QueryClientProviders from "@shared/components/queryClientProvider";
 import { createQueryProviderWrapper } from "@shared/constants/createQueryProvider";
 
-import { mockProblemModuleStore } from "@common/stores/mockZustandStore";
 import ProblemContext, {
   defaultActions,
   defaultStates,
 } from "@problem/context/problemContext";
 import { getProblemQueryOptions } from "@problem/remotes/getProblemQueryOptions";
 import { ProblemContextInfo } from "@problem/types/problemContextInfo";
+import { mockProblemModuleStore } from "@shared/stores/mockZustandStore";
 import { render, renderHook, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import ProblemLayout from "./layout";
@@ -55,10 +55,10 @@ describe("첫 번째 문제풀기 페이지 테스트", () => {
         })),
       };
     });
-    vi.mock("@common/models/useProblemIdsViewModel", async () => {
+    vi.mock("@shared/models/useProblemIdsViewModel", async () => {
       const actual = await vi.importActual<
-        typeof import("@common/models/useProblemIdsViewModel")
-      >("@common/models/useProblemIdsViewModel");
+        typeof import("@shared/models/useProblemIdsViewModel")
+      >("@shared/models/useProblemIdsViewModel");
       return {
         ...actual,
         useProblemIdsViewModel: vi.fn(() => ({

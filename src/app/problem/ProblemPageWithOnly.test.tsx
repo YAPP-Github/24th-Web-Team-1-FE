@@ -30,10 +30,10 @@ describe("UnsubscribePage 동작 테스트", () => {
       };
     });
 
-    vi.mock("@common/models/useProblemIdsViewModel", async () => {
+    vi.mock("@shared/models/useProblemIdsViewModel", async () => {
       const actual = await vi.importActual<
-        typeof import("@common/models/useProblemIdsViewModel")
-      >("@common/models/useProblemIdsViewModel");
+        typeof import("@shared/models/useProblemIdsViewModel")
+      >("@shared/models/useProblemIdsViewModel");
       return {
         ...actual,
         useProblemIdsViewModel: vi.fn(() => ({

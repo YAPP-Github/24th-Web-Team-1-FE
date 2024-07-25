@@ -1,15 +1,15 @@
 "use client";
 import { usePathname } from "next/navigation";
 
-import React, { HTMLAttributes, ReactElement, useState } from "react";
+import { HTMLAttributes, ReactElement, useState } from "react";
 
 import ExternalControlOpenDialog from "@shared/components/ExternalControlOpenDialog";
 import { Button } from "@shared/components/ui/button";
 import { cn } from "@shared/utils/cn";
 
-import LinkShare from "../../../common/components/LinkShare";
-import TagList from "@common/components/TagList";
-import { LINK_SHARE_CONTENT } from "@common/constants/linkShareContent";
+import LinkShare from "@shared/components/LinkShare";
+import TagList from "@shared/components/TagList";
+import { LINK_SHARE_CONTENT } from "@shared/constants/linkShareContent";
 import ShareIcon from "public/assets/icon/share.svg";
 
 interface TitleSectionProps extends HTMLAttributes<HTMLDivElement> {
