@@ -8,10 +8,12 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import QueryClientProviders from "@shared/components/queryClientProvider";
 import { cn } from "@shared/utils/cn";
 
-import "./globals.css";
+import queryClient from "@api/queryClient";
 import MSWProviders from "@mocks/MSWProviders";
-import { Toaster } from "@shared/components/ui/toaster";
 import MixpanelProvider from "@shared/components/MixpanelProvider";
+import { Toaster } from "@shared/components/ui/toaster";
+import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "FEW",
@@ -71,7 +73,11 @@ export default function RootLayout({
             )}
           >
             <MSWProviders>
-              <Suspense>{children}</Suspense>
+              <Suspense>
+                <HydrationBoundary state={dehydrate(queryClient)}>
+                  {children}
+                </HydrationBoundary>
+              </Suspense>
               <Toaster />
             </MSWProviders>
 
