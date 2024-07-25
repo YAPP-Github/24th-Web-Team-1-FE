@@ -9,10 +9,10 @@ import useWorkbookId from "@shared/hooks/useWorkbookId";
 
 import { SUBSCRIBE_USER_ACTIONS } from "@subscription/constants/subscribe";
 import { subscribeWorkbookOptions } from "@subscription/remotes/postSubscriptionQueryOptions";
-import { emailSubscribeSchema } from "@subscription/schemas";
-import { EmailSubscribeFormData } from "@subscription/types/subscription";
 
-import { zodResolver } from "@hookform/resolvers/zod";
+import { emailSubscribeSchema } from '@common/schemas/emailSchema';
+import { EmailSubscribeFormData } from '@common/types/emailSubscribeData';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 export const useSubscribeForm = () => {
   const { toast } = useToast();

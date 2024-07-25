@@ -27,7 +27,8 @@
       "@common/*": ["src/common/*"],
       "@mocks/*": ["src/mocks/*"],
       "@problem/*": ["src/problem/*"],
-      "@subscription/*": ["src/subscription/*"]
+      "@subscription/*": ["src/subscription/*"],
+      "@auth/*": ["src/auth/*"]
     }
   },
   "include": [
