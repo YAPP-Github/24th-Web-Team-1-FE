@@ -20,6 +20,7 @@ import { setCookie } from "cookies-next";
 import ArticleSkeleton from "../ArticleSkeleton";
 import WriterInfo from "../WriterInfo";
 
+
 export default function ArticleTitle() {
   const isFirstRender = useRef(false);
   const { articleId } = useParams<{ articleId: string }>();
@@ -49,7 +50,7 @@ export default function ArticleTitle() {
   const { data, isLoading, isError } = workbookId
     ? results[ARTICLE_INFO_TYPE.ARTICLE_WITH_WORKBOOK]
     : results[ARTICLE_INFO_TYPE.ONLY_ARTICLE];
-
+    
   const articleInfo = data as ArticleDetail | ArticleWithWorkbookDetail;
 
   useEffect(

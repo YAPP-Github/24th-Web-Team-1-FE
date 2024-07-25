@@ -118,6 +118,9 @@
   .sub2-medium {
     @apply font-pretendard text-[16px]/[25.44px] font-medium;
   }
+  .sub3-semibold {
+    @apply font-pretendard text-[12px] font-semibold
+  }
 
   .scrollbar-hide {
     -ms-overflow-style: none;

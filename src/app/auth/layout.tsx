@@ -1,15 +1,13 @@
-import { ReactNode } from "react";
-
-import ArticleBottomButton from "@article/components/ArticleBottomButton/indext";
+import React, { ReactNode } from "react";
 
 import TopBar from "@common/components/TopBar";
 
-interface ArticlePageLayoutProps {
+interface AuthLayoutProps {
   children: ReactNode;
 }
-export default function ArticlePageLayout({
+export default function AuthLayout({
   children,
-}: ArticlePageLayoutProps) {
+}: AuthLayoutProps) {
   return (
     <main className="flex h-auto w-full">
       <section className="flex h-auto w-full flex-col justify-between">
@@ -17,8 +15,8 @@ export default function ArticlePageLayout({
           <TopBar />
           {children}
         </div>
-        <ArticleBottomButton title={"문제풀기"} />
       </section>
     </main>
   );
 }
+

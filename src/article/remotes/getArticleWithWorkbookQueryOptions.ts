@@ -1,9 +1,8 @@
 import { UseQueryOptions } from "@tanstack/react-query";
 
-import { ApiResponse, axiosRequest } from "@api/api-config";
-
 import { ArticleWithWorkbookDetail } from "@article/types";
 
+import { ApiResponse, fewFetch } from "@api/fewFetch";
 import { API_ROUTE, QUERY_KEY } from "./api";
 
 export const getArticleWithWorkbookInfo = ({
@@ -12,8 +11,7 @@ export const getArticleWithWorkbookInfo = ({
 }: ArticleWithWorkbookInfoParams): Promise<
   ApiResponse<ArticleWithWorkbookDetail>
 > => {
-  return axiosRequest(
-    "get",
+  return fewFetch().get(
     API_ROUTE.ARTICLE_WITH_WORKBOOK({ workbookId, articleId }),
   );
 };
@@ -26,9 +24,9 @@ export const getArticleWithWorkbookQueryOptions = ({
   ArticleWithWorkbookDetail
 > => {
   return {
-    queryKey: [QUERY_KEY.GET_ARTICLE, articleId],
+    queryKey: [QUERY_KEY.GET_ARTICLE + "-with-workbook", articleId, workbookId],
     queryFn: () => getArticleWithWorkbookInfo({ workbookId, articleId }),
-    select: (data) => data.data,
+    select: (data) => data.data.data,
   };
 };
 

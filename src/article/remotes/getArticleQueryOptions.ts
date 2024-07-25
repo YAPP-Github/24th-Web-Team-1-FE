@@ -1,14 +1,13 @@
 import { UseQueryOptions } from "@tanstack/react-query";
 
-import { ApiResponse, axiosRequest } from "@api/api-config";
-
-import { API_ROUTE, QUERY_KEY } from "./api";
+import { ApiResponse, fewFetch } from "@api/fewFetch";
 import { ArticleDetail } from "@article/types";
+import { API_ROUTE, QUERY_KEY } from "./api";
 
 export const getArticleInfo = ({
   articleId,
 }: ArticleInfoParams): Promise<ApiResponse<ArticleDetail>> => {
-  return axiosRequest("get", API_ROUTE.ARTICLE(articleId));
+  return fewFetch().get(API_ROUTE.ARTICLE(articleId));
 };
 export const getArticleQueryOptions = ({
   articleId,
@@ -20,7 +19,7 @@ export const getArticleQueryOptions = ({
   return {
     queryKey: [QUERY_KEY.GET_ARTICLE, articleId],
     queryFn: () => getArticleInfo({ articleId }),
-    select: (data) => data.data,
+    select: (data) => data.data.data,
   };
 };
 
