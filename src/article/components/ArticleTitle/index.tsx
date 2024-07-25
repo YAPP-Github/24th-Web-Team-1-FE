@@ -14,6 +14,8 @@ import { ArticleDetail, ArticleWithWorkbookDetail } from "@article/types";
 import { ARTICLE_INFO_TYPE } from "@common/constants/articleCase";
 import { useProblemIdsViewModel } from "@common/models/useProblemIdsViewModel";
 import { IS_EXIST_PROBLEMS } from "@shared/constants/middlewareConstant";
+import { EVENT_NAME } from "@shared/constants/mixpanel";
+import { Mixpanel } from "@shared/utils/mixpanel";
 import { setCookie } from "cookies-next";
 import ArticleSkeleton from "../ArticleSkeleton";
 import WriterInfo from "../WriterInfo";
@@ -32,6 +34,7 @@ export default function ArticleTitle() {
       {
         ...getArticleQueryOptions({ articleId }),
         enabled: !workbookId,
+        staleTime: Infinity,
       },
       {
         ...getArticleWithWorkbookQueryOptions({
@@ -39,6 +42,7 @@ export default function ArticleTitle() {
           articleId,
         }),
         enabled: Boolean(workbookId),
+        staleTime: Infinity,
       },
     ],
   });
@@ -62,18 +66,18 @@ export default function ArticleTitle() {
     [articleInfo],
   );
 
-  // useEffect(
-  //   function trackMixpanel() {
-  //     if (!isFirstRender.current) {
-  //       isFirstRender.current = true;
-  //       Mixpanel.track({
-  //         name: EVENT_NAME.ARTICLE_APPREAR,
-  //         property: { id: articleId },
-  //       });
-  //     }
-  //   },
-  //   [articleInfo],
-  // );
+  useEffect(
+    function trackMixpanel() {
+      if (!isFirstRender.current) {
+        isFirstRender.current = true;
+        Mixpanel.track({
+          name: EVENT_NAME.ARTICLE_APPREAR,
+          property: { id: articleId },
+        });
+      }
+    },
+    [articleInfo],
+  );
 
   if (isLoading || isError || !articleInfo)
     return <ArticleSkeleton.TitleSkeleton />;
