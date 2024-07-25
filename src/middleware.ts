@@ -2,7 +2,6 @@ import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
 import { articleMiddleware } from "@shared/middlewares/article";
-import { MainMiddleware } from "@shared/middlewares/main";
 import { problemMiddleware } from "@shared/middlewares/problem";
 import { unsubscriptionMiddleware } from "@shared/middlewares/subscription";
 import { workbookMiddleware } from "@shared/middlewares/workbook";
@@ -15,9 +14,9 @@ const withOutAuth = async (req: NextRequest) => {
   const nextUrl = req.nextUrl.clone();
   const { pathname, searchParams } = nextUrl;
 
-  if (pathname === "/") {
-    return MainMiddleware();
-  }
+  // if (pathname === "/") {
+  //   return MainMiddleware();
+  // }
 
   if (pathname === "/workbook") {
     return workbookMiddleware({ nextUrl });
