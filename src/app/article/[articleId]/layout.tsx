@@ -1,35 +1,8 @@
-import { Metadata } from "next";
-
 import { ReactNode } from "react";
 
-import queryClient from "@api/queryClient";
-
-import { createMetadata } from "@shared/utils/metadata";
-
 import ArticleBottomButton from "@article/components/ArticleBottomButton/indext";
-import { getArticleQueryOptions } from "@article/remotes/getArticleQueryOptions";
 
 import TopBar from "@common/components/TopBar";
-
-export async function generateMetadata({
-  params,
-}: {
-  params: { articleId: string };
-}): Promise<Metadata> {
-  const articleId = params.articleId;
-
-  const { data: articleInfo } = await queryClient.fetchQuery({
-    ...getArticleQueryOptions({ articleId }),
-    staleTime: Infinity,
-  });
-
-  const { title, writer } = articleInfo.data;
-
-  return createMetadata({
-    title: title,
-    description: `${writer.name} 작가의 ${title} 아티클 입니다.`,
-  });
-}
 
 interface ArticlePageLayoutProps {
   children: ReactNode;

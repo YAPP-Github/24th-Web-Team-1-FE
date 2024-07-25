@@ -3,19 +3,19 @@ import type { Metadata } from "next";
 
 import { createMetadata } from "@shared/utils/metadata";
 
-import { fewFetch } from "@api/fewFetch";
-import { API_ROUTE } from "@workbook/remotes/api";
-import { WorkbookInfo } from "@workbook/types";
+import queryClient from "@api/queryClient";
+import { getWorkbookQueryOptions } from "@workbook/remotes/getWorkbookQueryOptions";
 
 export async function generateMetadata({
   params,
 }: {
   params: { id: string };
 }): Promise<Metadata> {
-  const id = params.id;
-  const { data: workbookInfo } = await fewFetch().get<WorkbookInfo>(
-    `${API_ROUTE.WORKBOOK(id)}`,
-  );
+  const workbookId = params.id;
+
+  const { data: workbookInfo } = await queryClient.fetchQuery({
+    ...getWorkbookQueryOptions(workbookId),
+  });
   const { title, description, mainImageUrl } = workbookInfo.data;
 
   return createMetadata({
