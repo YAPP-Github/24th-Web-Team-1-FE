@@ -50,7 +50,6 @@ export default function AnswerSubmitButton() {
       isExistNextProblem: isExistNextProblem(),
     });
     const BUTTON_STATE = answerSubmitModel.answerButtonState;
-    const problemId = nextSetProblemId();
 
     switch (BUTTON_STATE) {
       case "PRE_ANSWER_SELECT":
@@ -59,7 +58,7 @@ export default function AnswerSubmitButton() {
 
       case "POST_SUBMIT":
         initProblemContextInfo();
-        push(`/problem/${problemId}`);
+        push(`/problem/${nextSetProblemId()}`);
         break;
 
       case "LINK_TO_MAIN":

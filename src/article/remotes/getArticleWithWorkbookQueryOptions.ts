@@ -24,7 +24,7 @@ export const getArticleWithWorkbookQueryOptions = ({
   ArticleWithWorkbookDetail
 > => {
   return {
-    queryKey: [QUERY_KEY.GET_ARTICLE, articleId],
+    queryKey: [QUERY_KEY.GET_ARTICLE + "-with-workbook", articleId, workbookId],
     queryFn: () => getArticleWithWorkbookInfo({ workbookId, articleId }),
     select: (data) => data.data.data,
   };

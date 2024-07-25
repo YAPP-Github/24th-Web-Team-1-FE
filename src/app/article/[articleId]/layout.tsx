@@ -1,33 +1,8 @@
-import { Metadata } from "next";
-
 import { ReactNode } from "react";
 
-import { createMetadata } from "@shared/utils/metadata";
-
 import ArticleBottomButton from "@article/components/ArticleBottomButton/indext";
-import { API_ROUTE } from "@article/remotes/api";
-import { ArticleDetail } from "@article/types";
 
-import { fewFetch } from "@api/fewFetch";
 import TopBar from "@common/components/TopBar";
-
-export async function generateMetadata({
-  params,
-}: {
-  params: { articleId: string };
-}): Promise<Metadata> {
-  const articleId = params.articleId;
-
-  const { data: articleInfo } = await fewFetch().get<ArticleDetail>(
-    `${API_ROUTE.ARTICLE(articleId)}`,
-  );
-  const { title, writer } = articleInfo.data;
-
-  return createMetadata({
-    title: title,
-    description: `${writer.name} 작가의 ${title} 아티클 입니다.`,
-  });
-}
 
 interface ArticlePageLayoutProps {
   children: ReactNode;
