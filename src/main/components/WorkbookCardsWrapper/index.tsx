@@ -7,7 +7,7 @@ export default function WorkbookCardsWrapper() {
   const { category, handleCategory } = useCategory();
 
   return (
-    <MainContentWrapper title="Workbooks" className="mt-[48px]">
+    <MainContentWrapper title="Workboks" className="mb-[73px] mt-[48px]">
       <CategoryTabs
         type="WORKBOOK"
         handleCategory={handleCategory}

@@ -7,7 +7,7 @@ export default function ArticleCardsWrapper() {
   const { category, handleCategory } = useCategory();
 
   return (
-    <MainContentWrapper title="Articles">
+    <MainContentWrapper title="Articles" className="mt-[16px]">
       <CategoryTabs
         type="ARTICLE"
         handleCategory={handleCategory}
