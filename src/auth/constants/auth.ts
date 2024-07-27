@@ -22,3 +22,5 @@ export const SIGNUP_COMPLETED = {
     INTRO: "원하는 워크북을 구독하면 매일 아티클과 퀴즈를 매일 보내드려요.",
     MAIN_BUTTON: "메인으로 가기"
 }
+
+export const DESCRIPTION_STYLE = "text-[12px] font-bold"
