@@ -3,13 +3,13 @@ import { Button } from "@shared/components/ui/button";
 
 import { SIGNUP_COMPLETED } from "@auth/constants/auth";
 import lottieJson from "public/assets/Problem_Complete.json";
-import Logo from "public/enterlogo.svg";
+import FewLogo from "public/enterlogo.svg";
 
-export default function SignupComplete() {
+export default function SignupCompletePage() {
   return (
     <div className="flex h-auto flex-col items-center">
       <LottieClient animationData={lottieJson} /> 
-      <Logo />
+      <FewLogo />
       <span className="h3-bold mb-[20px] mt-[63px] text-black">
         {SIGNUP_COMPLETED.GRETTING}
       </span>
