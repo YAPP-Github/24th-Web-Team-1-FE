@@ -1,3 +1,5 @@
+import { cn } from "@shared/utils/cn";
+
 import { DESCRIPTION_STYLE, SIGNUP_PROGRESS } from "@auth/constants/auth";
 
 export default function SignupProgress() {
@@ -10,7 +12,13 @@ export default function SignupProgress() {
         </div>
         <span className="body3-medium text-text-gray1">{SIGNUP_PROGRESS.COMPLETE_MESSAGE}</span>
       </div>
-      <div className="bg-background1 rounded-[4px] flex flex-col gap-y-[4px] items-start p-[15px] w-full">
+      <div className={
+        cn(
+          "flex flex-col gap-y-[4px]",
+          "bg-background1 rounded-[4px]",
+          "items-start p-[15px] w-full"
+        )
+      }>
         <span className={`text-main ${DESCRIPTION_STYLE}`}>{SIGNUP_PROGRESS.NOT_SENT_INFO_TITLE}</span>
         <span className={`text-text-gray1 ${DESCRIPTION_STYLE}`}>{SIGNUP_PROGRESS.NOT_SENT_INFO_SPAM_CHECK}</span>
         <span className={`text-text-gray1 ${DESCRIPTION_STYLE}`}>{SIGNUP_PROGRESS.NOT_SENT_INFO_CHECK}</span>
