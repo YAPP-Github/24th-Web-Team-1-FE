@@ -17,8 +17,6 @@ import { useProblemIdsViewModel } from "@shared/models/useProblemIdsViewModel";
 import { setCookie } from "cookies-next";
 import ArticleSkeleton from "../ArticleSkeleton";
 import WriterInfo from "../WriterInfo";
-import { EVENT_NAME } from "@shared/constants/mixpanel";
-import { Mixpanel } from "@shared/utils/mixpanel";
 
 export default function ArticleTitle() {
   const isFirstRender = useRef(false);

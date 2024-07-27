@@ -53,15 +53,16 @@ export default function WorkbookPage() {
     ...getWorkbookQueryOptions(workbookId),
   });
 
-  useEffect(
-    function trackMixpanel() {
-      Mixpanel.track({
-        name: EVENT_NAME.WORKBOOK_APPEAR,
-        property: { id: workbookId },
-      });
-    },
-    [pathname],
-  );
+  // useEffect(
+  //   function trackMixpanel() {
+  //     Mixpanel.track({
+  //       name: EVENT_NAME.WORKBOOK_APPEAR,
+  //       property: { id: workbookId },
+  //     });
+  //   },
+  //   [pathname],
+  // );
+
   if (isLoading) {
     return (
       <main className="flex h-[100vh] w-full flex-col items-center overflow-x-hidden">
