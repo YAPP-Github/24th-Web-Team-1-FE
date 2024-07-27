@@ -5,7 +5,7 @@ import { SIGNUP_COMPLETED } from "@auth/constants/auth";
 import lottieJson from "public/assets/Problem_Complete.json";
 import FewLogo from "public/enterlogo.svg";
 
-export default function SignupCompletePage() {
+export default function ValidationCompletePage() {
   return (
     <div className="flex h-auto flex-col items-center">
       <LottieClient animationData={lottieJson} /> 

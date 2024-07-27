@@ -1,7 +1,7 @@
 import SignupProgress from '@auth/components/SignupProgress';
 import FewLogo from 'public/enterlogo.svg'
 
-export default function SignupPage() {
+export default function ValidationPage() {
   return (
     <div className="flex h-full flex-col items-center">
       <FewLogo />
