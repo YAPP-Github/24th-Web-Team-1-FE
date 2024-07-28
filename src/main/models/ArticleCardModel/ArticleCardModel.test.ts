@@ -70,6 +70,7 @@ describe("메인 아티클 카드 모델 테스트", () => {
     const articleCardClientList = articleCardModel.articleCardList();
     expect(articleCardClientList).toEqual([
       expect.objectContaining({
+        id: 1,
         writerInfo: {
           name: "안나포",
           url: "https://storage.mrblog.net/files/dosi_draw/a3NgiDGW2H3NhsYp1Qp3RuWNzUx9sg8L2yyooYqF.jpg",
@@ -92,6 +93,7 @@ describe("메인 아티클 카드 모델 테스트", () => {
         ],
       }),
       expect.objectContaining({
+        id: 2,
         writerInfo: {
           name: "몰티즈",
           url: "https://storage.mrblog.net/files/dosi_draw/a3NgiDGW2H3NhsYp1Qp3RuWNzUx9sg8L2yyooYqF.jpg",

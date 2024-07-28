@@ -12,6 +12,7 @@ export default class ArticleCardModel {
   articleCardList(): ArticleClientInfo[] {
     return this.articleCardServerList.map(
       ({
+        id,
         writer,
         title,
         content,
@@ -21,6 +22,7 @@ export default class ArticleCardModel {
         mainImageUrl,
       }) => {
         const changeToClientData: ArticleClientInfo = {
+          id,
           writerInfo: {
             name: writer.name,
             url: writer.url,

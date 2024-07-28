@@ -1,12 +1,12 @@
 import { ArticleDetail } from "@article/types";
 import { WorkbookInfo } from "@workbook/types";
-import { title } from "process";
 
 interface ArticleWithWorkbookInfo {
   id: WorkbookInfo["id"];
   title: WorkbookInfo["title"];
 }
 export interface ArticleClientInfo {
+  id: number;
   writerInfo: {
     name: string;
     url: string;
