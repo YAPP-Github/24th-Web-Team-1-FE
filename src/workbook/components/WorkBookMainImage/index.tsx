@@ -10,8 +10,8 @@ export default function WorkbookMainImage({
         priority
         src={mainImageUrl}
         alt={"Workbook landing image"}
-        width={0}
-        height={0}
+        width={100}
+        height={100}
         sizes="100vw"
         className="w-full object-contain"
       />

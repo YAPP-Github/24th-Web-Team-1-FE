@@ -11,6 +11,10 @@ import WorkbookSkeleton from "@workbook/components/WorkbookSkeleton";
 import WriterInfo from "@workbook/components/WriterInfo";
 import dynamic from "next/dynamic";
 
+import { EVENT_NAME } from "@shared/constants/mixpanel";
+import { Mixpanel } from "@shared/utils/mixpanel";
+import { useEffect } from "react";
+
 const TitleSection = dynamic(() => import("@shared/components/TitleSection"), {
   loading: () => <WorkbookSkeleton.TitleSkeleton />,
 });
@@ -39,6 +43,7 @@ const SubscribeBottomBar = dynamic(
     loading: () => <></>,
   },
 );
+
 export default function WorkbookPage() {
   // usePathname 로 workbook id 받기
   const pathname = usePathname();
@@ -57,6 +62,7 @@ export default function WorkbookPage() {
   //   },
   //   [pathname],
   // );
+
   if (isLoading) {
     return (
       <main className="flex h-[100vh] w-full flex-col items-center overflow-x-hidden">

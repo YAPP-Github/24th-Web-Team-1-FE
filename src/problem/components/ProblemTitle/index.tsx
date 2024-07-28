@@ -30,15 +30,15 @@ export default function ProblemTitle() {
     select: (mutation) => mutation.state.data as ApiResponse<AnswerCheckInfo>,
   });
 
-  // useEffect(
-  //   function trackMixpanel() {
-  //     Mixpanel.track({
-  //       name: EVENT_NAME.PROBLEM_APPEAR,
-  //       property: { id: problemId },
-  //     });
-  //   },
-  //   [problemId],
-  // );
+  useEffect(
+    function trackMixpanel() {
+      Mixpanel.track({
+        name: EVENT_NAME.PROBLEM_APPEAR,
+        property: { id: problemId },
+      });
+    },
+    [problemId],
+  );
   if (isLoading || isError || !problemInfo)
     return <ProblemSkeleton.TitleSkeleton />;
 
