@@ -1,4 +1,4 @@
 export type CategoryInfo = {
-  parameterName: string;
-  displayName: string;
+  code: number;
+  name: string;
 };
