@@ -1,8 +1,11 @@
+"use client";
 import { ArticleClientInfo } from "@main/types/article";
+import { useRouter } from "next/navigation";
 import { title } from "process";
 import ArticleCardDetail from "../ArticleCardDetail";
 
 export default function ArticleCard({
+  id,
   writerInfo,
   thumbnail,
   viewCount,
@@ -10,6 +13,10 @@ export default function ArticleCard({
   content,
   withWorkbookList,
 }: ArticleClientInfo) {
+  const { push } = useRouter();
+  const onClickArticlePage = () => {
+    push(`/article/${id}`);
+  };
   return (
     <section className="border-b-[0.5px] border-text-gray2 px-[20px] py-[26px]">
       <ArticleCardDetail.TopComponentWrapper>
@@ -17,9 +24,11 @@ export default function ArticleCard({
         <ArticleCardDetail.ViewCount viewCount={viewCount} />
       </ArticleCardDetail.TopComponentWrapper>
       <ArticleCardDetail.CategoryTag category={category} />
-      <ArticleCardDetail.Title title={title} />
-      <ArticleCardDetail.Description content={content} />
-      <ArticleCardDetail.Thumbnail thumbnail={thumbnail} />
+      <article onClick={onClickArticlePage}>
+        <ArticleCardDetail.Title title={title} />
+        <ArticleCardDetail.Description content={content} />
+        <ArticleCardDetail.Thumbnail thumbnail={thumbnail} />
+      </article>
       <ArticleCardDetail.WithWorkbookList withWorkbookList={withWorkbookList} />
     </section>
   );
