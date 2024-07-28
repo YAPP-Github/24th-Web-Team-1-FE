@@ -45,6 +45,12 @@ export const submitAnswerHandler = http.post(
     return HttpResponse.json(response[apiRoutes.submitAnswer + "3"]);
   },
 );
+export const workbooksHandler = http.get(
+  apiRoutes.workbooks,
+  async ({ params, request }) => {
+    return HttpResponse.json(response[apiRoutes.workbooks + "entire"]);
+  },
+);
 export const workbookHandler = http.get(
   apiRoutes.workbook,
   async ({ params }) => {
@@ -114,8 +120,6 @@ export const problemsWithArticleHandler = http.get(
 export const categoryHandler = http.get(
   apiRoutes.category,
   async ({ request }) => {
-    console.log(request, apiRoutes.category);
-
     return HttpResponse.json(response[apiRoutes.category]);
   },
 );

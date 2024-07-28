@@ -3,6 +3,7 @@ import { apiRoutes } from "@shared/constants/apiRoutes";
 import article1 from "./article1.json";
 import articleWithWorkbook1 from "./articleWithWorkbook1.json";
 import category from "./category.json";
+import mainWorkbooksEntire from "./mainWorkbooksEntire.json";
 import problems1 from "./problems1.json";
 import problems2 from "./problems2.json";
 import problems3 from "./problems3.json";
@@ -21,6 +22,7 @@ export default {
   [apiRoutes.submitAnswer + "2"]: submitAnswer2,
   [apiRoutes.submitAnswer + "3"]: submitAnswer3,
   [apiRoutes.workbook]: workbook,
+  [apiRoutes.workbooks + "entire"]: mainWorkbooksEntire,
   [apiRoutes.article + "1"]: article1,
   [apiRoutes.articleWithWorkbook + "1"]: articleWithWorkbook1,
   [apiRoutes.problemsWithArticle + "1"]: problemsWithArticleId1,
