@@ -1,18 +1,20 @@
 "use client";
+import { CategoryInfo } from "@common/types/category";
 import { getWorkbookCategoryQueryOptions } from "@main/remotes/getWorkbookCategoryQueryOptions";
 import { Tabs, TabsList, TabsTrigger } from "@radix-ui/react-tabs";
 import { cn } from "@shared/utils/cn";
 import { useQuery } from "@tanstack/react-query";
-import { useEffect } from "react";
-interface CategoryTabsProps {
+import { HTMLAttributes, useEffect } from "react";
+interface CategoryTabsProps extends HTMLAttributes<HTMLDivElement> {
   type: "WORKBOOK" | "ARTICLE";
-  category: string;
-  handleCategory: (category: string) => void;
+  category: CategoryInfo | undefined;
+  handleCategory: (category: CategoryInfo) => void;
 }
 export default function CategoryTabs({
   type,
   category,
   handleCategory,
+  className,
 }: CategoryTabsProps) {
   const {
     data: categoryList,
@@ -24,40 +26,41 @@ export default function CategoryTabs({
   });
   // MEMO : msw에서 모킹을 처음에 실패해서 일부러 넣은코드..! 실서버 연결시에는 삭제필요
   useEffect(() => {
-    setTimeout(() => refetch(), 200);
+    setTimeout(() => refetch(), 3000);
   }, []);
 
   useEffect(
     function setInitCategory() {
-      if (categoryList) handleCategory(categoryList[0].displayName);
+      if (categoryList) handleCategory(categoryList[0]);
     },
     [categoryList],
   );
+
   if (isLoading) return <></>;
 
-  if (categoryList)
+  if (categoryList && category)
     return (
       <Tabs
-        defaultValue={categoryList[0].displayName}
-        className="overflow-x-auto"
+        defaultValue={categoryList[0].name}
+        className={cn("overflow-x-auto", className)}
       >
         <TabsList className="sub2-bold flex gap-3 py-[10px]">
-          {categoryList.map(({ parameterName, displayName }) => (
+          {categoryList.map(({ code, name }) => (
             <TabsTrigger
-              key={`${parameterName}-${type}`}
-              value={displayName}
+              key={`${code}-${type}`}
+              value={name}
               className={cn(
-                category !== displayName && "text-text-gray2",
+                category.code !== code && "text-text-gray2",
                 "box-border flex flex-col gap-[10px] pt-[10px]",
                 "min-w-[48px]",
               )}
-              name={displayName}
-              onClick={() => handleCategory(displayName)}
+              name={name}
+              onClick={() => handleCategory({ code, name })}
             >
               <span className="flex w-full items-center justify-center">
-                {displayName}
+                {name}
               </span>
-              {category === displayName && (
+              {category.code === code && (
                 <span className="w-full border-b-2 border-black"></span>
               )}
             </TabsTrigger>
