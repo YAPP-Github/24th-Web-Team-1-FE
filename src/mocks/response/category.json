@@ -1,29 +1,27 @@
 {
-  "message": "성공",
-  "data": [
-    {
-      "parameterName": "all",
-      "displayName": "전체"
-    },
-    {
-      "parameterName": "economy",
-      "displayName": "경제"
-    },
-    {
-      "parameterName": "it",
-      "displayName": "IT"
-    },
-    {
-      "parameterName": "marketing",
-      "displayName": "마케팅"
-    },
-    {
-      "parameterName": "culture",
-      "displayName": "문화"
-    },
-    {
-      "parameterName": "science",
-      "displayName": "과학"
-    }
-  ]
+  "data": {
+    "categories": [
+      {
+        "code": 0,
+        "name": "경제"
+      },
+      {
+        "code": 10,
+        "name": "IT"
+      },
+      {
+        "code": 20,
+        "name": "마케팅"
+      },
+      {
+        "code": 30,
+        "name": "교양"
+      },
+      {
+        "code": 40,
+        "name": "과학"
+      }
+    ]
+  },
+  "message": "성공"
 }
