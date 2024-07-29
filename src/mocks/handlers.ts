@@ -111,6 +111,20 @@ export const problemsWithArticleHandler = http.get(
   },
 );
 
+export const membersAuthHandler = http.post(
+  apiRoutes.members,
+  async ({ request }) => {
+    const requestBody: any = await request.json();
+    const email = requestBody?.email;
+
+    if (!email) {
+      return new HttpResponse(null, { status: 400 });
+    }
+
+    return HttpResponse.json(response[apiRoutes.members]);
+  },
+);
+
 export const handlers = [
   problemsHandler,
   submitAnswerHandler,
@@ -118,4 +132,5 @@ export const handlers = [
   articleHandler,
   articleWithWorkbookHandler,
   problemsWithArticleHandler,
+  membersAuthHandler,
 ];
