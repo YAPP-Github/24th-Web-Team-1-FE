@@ -1,15 +1,16 @@
-import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { useToast } from "@shared/components/ui/use-toast";
+
 import { EMAIL_CONTROL } from "@subscription/constants/subscribe";
+
 import EmailForm from ".";
 import "@testing-library/jest-dom";
 import { LOGIN_OR_SIGNUP } from "@auth/constants/auth";
-import { useEmailForm } from "@auth/hooks/useEmailForm";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { useForm } from "react-hook-form";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const mockOnSubmit = vi.fn();
 
@@ -37,12 +38,6 @@ vi.mock("@shared/components/ui/use-toast", () => ({
 }));
 
 describe("이메일 폼 컴포넌트", () => {
-  const mockForm = {
-    handleSubmit: vi.fn(),
-    control: {},
-    formState: { errors: {} },
-  };
-
   const queryClient = new QueryClient();
 
   const renderWithClient = () => {
@@ -53,8 +48,11 @@ describe("이메일 폼 컴포넌트", () => {
     );
   };
 
-  it("폼을 렌더링해야 한다", () => {
+  beforeEach(() => {
     renderWithClient();
+  })
+
+  it("폼을 렌더링해야 한다", () => {
     expect(
       screen.getByPlaceholderText(EMAIL_CONTROL.EMAIL_PLACEHOLDER),
     ).toBeInTheDocument();
@@ -64,7 +62,6 @@ describe("이메일 폼 컴포넌트", () => {
   it("올바르지 않은 이메일 형식에 에러 메시지를 보여줘야 한다", async () => {
     const user = userEvent.setup();
 
-    renderWithClient();
 
     const submitButton = screen.getByText(LOGIN_OR_SIGNUP);
 
@@ -82,7 +79,6 @@ describe("이메일 폼 컴포넌트", () => {
   it("폼 제출 시 onSubmit을 호출해야 한다", async () => {
     const user = userEvent.setup();
 
-    renderWithClient();
 
     const submitButton = screen.getByText(LOGIN_OR_SIGNUP);
     await user.click(submitButton);
@@ -102,7 +98,6 @@ describe("이메일 폼 컴포넌트", () => {
 
     const user = userEvent.setup();
 
-    renderWithClient();
     const submitButton = screen.getByText(LOGIN_OR_SIGNUP);
 
     await user.click(submitButton);
@@ -121,7 +116,6 @@ describe("이메일 폼 컴포넌트", () => {
 
     const user = userEvent.setup();
 
-    renderWithClient();
     const submitButton = screen.getByText(LOGIN_OR_SIGNUP);
 
     await user.click(submitButton);
