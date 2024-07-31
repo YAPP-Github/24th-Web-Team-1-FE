@@ -1,0 +1,27 @@
+{
+  "data": {
+    "categories": [
+      {
+        "code": 0,
+        "name": "경제"
+      },
+      {
+        "code": 10,
+        "name": "IT"
+      },
+      {
+        "code": 20,
+        "name": "마케팅"
+      },
+      {
+        "code": 30,
+        "name": "교양"
+      },
+      {
+        "code": 40,
+        "name": "과학"
+      }
+    ]
+  },
+  "message": "성공"
+}

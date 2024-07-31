@@ -7,4 +7,5 @@ export const apiRoutes = {
   articleWithWorkbook: `${process.env.NEXT_PUBLIC_FEW_WEB}/api/v1/workbooks/:workbookId/articles/:articleId`,
   problemsWithArticle: `${process.env.NEXT_PUBLIC_FEW_WEB}/api/v1/problems`,
   members: `${process.env.NEXT_PUBLIC_FEW_WEB}/api/v1/members`,
+  category: `${process.env.NEXT_PUBLIC_FEW_WEB}/api/v1/workbooks/categories`,
 };
