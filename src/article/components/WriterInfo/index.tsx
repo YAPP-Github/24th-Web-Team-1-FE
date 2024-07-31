@@ -1,7 +1,6 @@
 import { Writer } from "@workbook/types";
-import React from "react";
-import NextIcon from "public/assets/icon/next.svg";
 import Link from "next/link";
+import NextIcon from "public/assets/icon/next.svg";
 
 interface WriterInfoProps extends Writer {}
 export default function WriterInfo({ name, url }: WriterInfoProps) {
