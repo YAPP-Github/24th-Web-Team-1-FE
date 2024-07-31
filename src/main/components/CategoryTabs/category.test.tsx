@@ -1,3 +1,4 @@
+import { CategoryInfo } from "@common/types/category";
 import { getWorkbookCategoryQueryOptions } from "@main/remotes/getWorkbookCategoryQueryOptions";
 import QueryClientProviders from "@shared/components/queryClientProvider";
 import { createQueryProviderWrapper } from "@shared/constants/createQueryProvider";
@@ -8,8 +9,8 @@ import CategoryTabs from ".";
 
 const categoryTabsProps = {
   type: "WORKBOOK" as const,
-  category: "",
-  handleCategory: (category: string) => vi.fn(),
+  category: { code: 0, name: "" },
+  handleCategory: (category: CategoryInfo) => vi.fn(),
 };
 
 describe("카테고리 리스트 테스트", () => {
@@ -31,6 +32,7 @@ describe("카테고리 리스트 테스트", () => {
     await waitFor(() => {
       expect(result.current.isSuccess).toBe(true);
     });
+    screen.debug();
     expect(screen.getByText("경제"));
     expect(screen.getByText("IT"));
     expect(result.current.data?.length === 5).toBeTruthy();
