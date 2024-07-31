@@ -10,7 +10,7 @@ export default function MainContentWrapper({
   return (
     <section className={cn("ml-[20px]", className)}>
       <header>
-        <h2 className="h2-bold">{title}</h2>
+        <h2 className="h2-bold ml-[20px]">{title}</h2>
       </header>
       {children}
     </section>
