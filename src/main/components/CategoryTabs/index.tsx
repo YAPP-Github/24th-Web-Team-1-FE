@@ -31,7 +31,8 @@ export default function CategoryTabs({
 
   useEffect(
     function setInitCategory() {
-      if (categoryList) handleCategory(categoryList[0]);
+      if (categoryList) handleCategory(categoryList[0].name);
+
     },
     [categoryList],
   );
@@ -40,12 +41,10 @@ export default function CategoryTabs({
 
   if (categoryList && category)
     return (
-      <Tabs
-        defaultValue={categoryList[0].name}
-        className={cn("overflow-x-auto", className)}
-      >
+
+      <Tabs defaultValue={categoryList[0].name} className="overflow-x-auto">
         <TabsList className="sub2-bold flex gap-3 py-[10px]">
-          {categoryList.map(({ code, name }) => (
+          {categoryList.map(({ name, code }) => (
             <TabsTrigger
               key={`${code}-${type}`}
               value={name}
