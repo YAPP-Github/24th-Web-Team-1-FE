@@ -2,6 +2,7 @@
 import useCategory from "@main/hooks/useCategory";
 import CategoryTabs from "../CategoryTabs";
 import MainContentWrapper from "../MainContentWrapper";
+import WorkbookCardList from "../WorkbookCardList";
 
 export default function WorkbookCardsWrapper() {
   const { category, handleCategory } = useCategory();
@@ -13,6 +14,7 @@ export default function WorkbookCardsWrapper() {
         handleCategory={handleCategory}
         category={category}
       />
+      <WorkbookCardList category={category} />
     </MainContentWrapper>
   );
 }

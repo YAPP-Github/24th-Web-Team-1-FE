@@ -29,7 +29,7 @@ export default function CategoryTabs({
 
   useEffect(
     function setInitCategory() {
-      if (categoryList) handleCategory(categoryList[0].displayName);
+      if (categoryList) handleCategory(categoryList[0].name);
     },
     [categoryList],
   );
@@ -37,27 +37,24 @@ export default function CategoryTabs({
 
   if (categoryList)
     return (
-      <Tabs
-        defaultValue={categoryList[0].displayName}
-        className="overflow-x-auto"
-      >
+      <Tabs defaultValue={categoryList[0].name} className="overflow-x-auto">
         <TabsList className="sub2-bold flex gap-3 py-[10px]">
-          {categoryList.map(({ parameterName, displayName }) => (
+          {categoryList.map(({ name, code }) => (
             <TabsTrigger
-              key={`${parameterName}-${type}`}
-              value={displayName}
+              key={`${code}-${type}`}
+              value={name}
               className={cn(
-                category !== displayName && "text-text-gray2",
+                category !== name && "text-text-gray2",
                 "box-border flex flex-col gap-[10px] pt-[10px]",
                 "min-w-[48px]",
               )}
-              name={displayName}
-              onClick={() => handleCategory(displayName)}
+              name={name}
+              onClick={() => handleCategory(name)}
             >
               <span className="flex w-full items-center justify-center">
-                {displayName}
+                {name}
               </span>
-              {category === displayName && (
+              {category === name && (
                 <span className="w-full border-b-2 border-black"></span>
               )}
             </TabsTrigger>

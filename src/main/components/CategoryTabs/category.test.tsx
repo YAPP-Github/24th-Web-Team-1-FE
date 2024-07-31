@@ -31,8 +31,8 @@ describe("카테고리 리스트 테스트", () => {
     await waitFor(() => {
       expect(result.current.isSuccess).toBe(true);
     });
-    expect(screen.getByText("전체"));
-    expect(screen.getByText("과학"));
-    expect(result.current.data?.length === 6).toBeTruthy();
+    expect(screen.getByText("경제"));
+    expect(screen.getByText("IT"));
+    expect(result.current.data?.length === 5).toBeTruthy();
   });
 });
