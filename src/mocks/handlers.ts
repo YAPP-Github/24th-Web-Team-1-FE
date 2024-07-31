@@ -111,7 +111,17 @@ export const problemsWithArticleHandler = http.get(
   },
 );
 
+export const categoryHandler = http.get(
+  apiRoutes.category,
+  async ({ request }) => {
+    console.log(request, apiRoutes.category);
+
+    return HttpResponse.json(response[apiRoutes.category]);
+  },
+);
+
 export const handlers = [
+  categoryHandler,
   problemsHandler,
   submitAnswerHandler,
   workbookHandler,
