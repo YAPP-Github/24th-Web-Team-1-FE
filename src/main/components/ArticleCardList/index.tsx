@@ -1,7 +1,7 @@
-import { CategoryInfo } from "@common/types/category";
 import ArticleCardModel from "@main/models/ArticleCardModel";
 import { ArticleServerInfo } from "@main/types/article";
 import ArticleCard from "../ArticleCard";
+import { CategoryClientInfo } from "@common/types/category";
 
 const data: ArticleServerInfo[] = [
   {
@@ -60,7 +60,7 @@ const data: ArticleServerInfo[] = [
   },
 ];
 
-export default function ArticleCardList({ code, name }: CategoryInfo) {
+export default function ArticleCardList({ code, name }: CategoryClientInfo) {
   const articleCardModel = new ArticleCardModel({
     initArticleCardServerList: data,
   });

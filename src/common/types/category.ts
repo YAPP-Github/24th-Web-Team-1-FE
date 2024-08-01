@@ -1,8 +1,8 @@
-export type CategoryInfo = {
+export type CategoryServerInfo = {
   code: number;
   name: string;
 };
-
-export type CategoryInfoList = {
-  categories: CategoryInfo[];
+export type CategoryClientInfo = {
+  code: number;
+  name: string;
 };
