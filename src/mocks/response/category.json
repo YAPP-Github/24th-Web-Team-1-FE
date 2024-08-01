@@ -2,6 +2,10 @@
   "data": {
     "categories": [
       {
+        "code": -1,
+        "name": "전체"
+      },
+      {
         "code": 0,
         "name": "경제"
       },
@@ -15,7 +19,7 @@
       },
       {
         "code": 30,
-        "name": "교양"
+        "name": "문화"
       },
       {
         "code": 40,
