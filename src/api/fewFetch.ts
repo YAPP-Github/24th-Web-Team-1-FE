@@ -29,7 +29,7 @@ type Interceptor = {
 const processApiResponse = async <T extends object>(
   response: Response,
   config: RequestInit,
-) => {
+): Promise<ApiResponse<T>> => {
   const data = (await response.json().catch(() => ({}))) as FewResponse<T>;
   const { headers, ok, redirected, status, statusText, type, url } = response;
   return {
@@ -45,12 +45,74 @@ const processApiResponse = async <T extends object>(
   };
 };
 
+// refreshToken 으로 새로운 accessToken 발급 받기
+const refreshAccessToken = async (): Promise<string> => {
+  const refreshToken = document.cookie
+    .split('; ')
+    .find(row => row.startsWith('refreshToken='))
+    ?.split('=')[1];
+
+  if (!refreshToken) {
+    throw new Error('No refresh token found');
+  }
+
+  // TBD: URL 이름 바꿔야 함
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/refresh`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ refreshToken }),
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to refresh access token');
+  }
+
+  const data = await response.json();
+  document.cookie = `accessToken=${data.accessToken}; path=/`;
+  document.cookie = `refreshToken=${data.refreshToken}; path=/`;
+
+  return data.accessToken;
+};
+
 const fetInterceptor: Interceptor = {
-  onRequest: (config) => config,
-  onResponse: (response) => response,
+  onRequest: (config) => {
+    const accessToken = document.cookie
+      .split('; ')
+      .find(row => row.startsWith('accessToken='))
+      ?.split('=')[1];
+
+    if (accessToken) {
+      config.headers = {
+        ...config.headers,
+        'Authorization': `Bearer ${accessToken}`,
+      };
+    }
+
+    return config;
+  },
+  onResponse: async <T extends object>(response: ApiResponse<T>) => {
+    if (!response.ok && response.status === 401) {
+      try {
+        const newAccessToken = await refreshAccessToken();
+        response.config.headers = {
+          ...response.config.headers,
+          'Authorization': `Bearer ${newAccessToken}`,
+        };
+        const retryResponse = await fetch(response.url, response.config);
+        return processApiResponse<T>(retryResponse, response.config);
+      } catch (error) {
+        console.error('Failed to refresh token', error);
+        return Promise.reject(error);
+      }
+    }
+    return response;
+  },
   onRequestError: (reason) => Promise.reject(reason),
   onResponseError: (reason) => Promise.reject(reason),
 };
+
 export const fewFetch = (
   defaultConfig: RequestInit = {
     headers: {
@@ -61,8 +123,8 @@ export const fewFetch = (
 ) => {
   const request = async <T extends object = object>(
     url: string,
-    config: RequestInit,
-  ) => {
+    config: RequestInit = {},
+  ): Promise<ApiResponse<T>> => {
     if (!url.startsWith("http")) {
       url = `${process.env.NEXT_PUBLIC_API_BASE_URL}${url}`;
     } else {
@@ -81,6 +143,7 @@ export const fewFetch = (
       return fetInterceptor.onRequestError(error);
     }
   };
+
   return {
     request,
     get: <T extends object>(url: string, config: RequestInit = {}) =>
