@@ -1,4 +1,5 @@
 import { WorkbookInfo } from "@workbook/types";
+import { HTMLAttributes } from "react";
 
 type SubscriptionStatus = "ACTIVE" | "DONE";
 
@@ -16,10 +17,17 @@ export type WorkbookServerInfo = {
 } & Omit<WorkbookInfo, "articles" | "name">;
 
 export interface WorkbookClientInfo {
+  id: number;
   mainImageUrl: string;
   metaComponent: React.ReactElement;
   title: string;
   writers: string[];
   personCourse: string;
   buttonTitle: string;
+  badgeInfo: HTMLAttributes<HTMLDivElement>;
+  cardType: "LEARN" | "SUBSCRIBE" | "SHARE";
 }
+
+export type WorkbookServerInfoListRes<T> = {
+  workbooks: T[];
+};
