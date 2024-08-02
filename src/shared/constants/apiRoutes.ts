@@ -9,4 +9,5 @@ export const apiRoutes = {
   articleWithWorkbook: `${process.env.NEXT_PUBLIC_FEW_WEB}/api/v1/workbooks/:workbookId/articles/:articleId`,
   problemsWithArticle: `${process.env.NEXT_PUBLIC_FEW_WEB}/api/v1/problems`,
   category: `${process.env.NEXT_PUBLIC_FEW_WEB}/api/v1/workbooks/categories`,
+  articleCategory: `${process.env.NEXT_PUBLIC_FEW_WEB}/api/v1/articles/categories`,
 };
