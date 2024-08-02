@@ -26,6 +26,7 @@ export interface WorkbookClientInfo {
   buttonTitle: string;
   badgeInfo: HTMLAttributes<HTMLDivElement>;
   cardType: "LEARN" | "SUBSCRIBE" | "SHARE";
+  articleId: string | null;
 }
 
 export type WorkbookServerInfoListRes<T> = {
