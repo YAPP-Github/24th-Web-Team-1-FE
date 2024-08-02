@@ -6,7 +6,6 @@ import WorkbookCardList from "../WorkbookCardList";
 
 export default function WorkbookCardsWrapper() {
   const { category, handleCategory } = useCategory();
-
   return (
     <MainContentWrapper title="Workboks" className="mb-[73px] mt-[48px]">
       <CategoryTabs
@@ -14,7 +13,7 @@ export default function WorkbookCardsWrapper() {
         handleCategory={handleCategory}
         category={category}
       />
-      <WorkbookCardList category={category} />
+      {category && <WorkbookCardList {...category} />}
     </MainContentWrapper>
   );
 }
