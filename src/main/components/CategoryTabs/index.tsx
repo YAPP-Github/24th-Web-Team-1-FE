@@ -32,7 +32,10 @@ export default function CategoryTabs({
 
   if (categoryList && category)
     return (
-      <Tabs defaultValue={categoryList[0].name} className="overflow-x-auto">
+      <Tabs
+        defaultValue={categoryList[0].name}
+        className={cn("overflow-x-auto", className)}
+      >
         <TabsList className="sub2-bold flex gap-3 py-[10px]">
           {categoryList.map(({ name, code }) => (
             <TabsTrigger
