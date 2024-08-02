@@ -16,11 +16,7 @@ export default function CategoryTabs({
   handleCategory,
   className,
 }: CategoryTabsProps) {
-  const {
-    data: categoryList,
-    refetch,
-    isLoading,
-  } = useQuery({
+  const { data: categoryList, isLoading } = useQuery({
     ...getWorkbookCategoryQueryOptions(),
     enabled: type !== "ARTICLE",
   });
