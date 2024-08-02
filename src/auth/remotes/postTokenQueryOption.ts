@@ -3,23 +3,21 @@ import { UseMutationOptions } from "@tanstack/react-query";
 import { ApiResponse, fewFetch } from "@api/fewFetch";
 
 import { API_ROUTE, QUERY_KEY } from "./api";
-import { AnswerCheckInfo, ProblemAnswerBody } from "@problem/types/problemInfo";
+import { tokenResponse } from "@auth/types/auth";
 
 export const postToken = (
   params: TokenParams,
-): Promise<ApiResponse<AnswerCheckInfo>> => {
+): Promise<ApiResponse<tokenResponse>> => {
   return fewFetch().post(API_ROUTE.TOKEN(params.auth_token));
 };
-export const postProblemAnswerMutationOptions = (
+export const postTokenQueryOptions = (
   params: TokenParams,
-): UseMutationOptions<
-  ApiResponse<AnswerCheckInfo>,
-  Error,
-  ProblemAnswerBody
-> => {
+  options?: UseMutationOptions<ApiResponse<tokenResponse>, Error, void>
+) => {
   return {
-    mutationKey: [QUERY_KEY.TOKEN, params.auth_token],
+    mutationKey: ['TOKEN', params.auth_token],
     mutationFn: () => postToken(params),
+    ...options,
   };
 };
 

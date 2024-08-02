@@ -1,11 +1,19 @@
+import { useSearchParams } from "next/navigation";
+
 import LottieClient from "@shared/components/Lottie";
 import { Button } from "@shared/components/ui/button";
 
 import { SIGNUP_COMPLETED } from "@auth/constants/auth";
+import { useAuth } from "@auth/hooks/useAuth";
 import lottieJson from "public/assets/Problem_Complete.json";
 import FewLogo from "public/enterlogo.svg";
 
 export default function ValidationCompletePage() {
+  const searchParams = useSearchParams();
+
+  const auth_token = searchParams.get("auth_token");
+  useAuth(auth_token? auth_token : "");
+  
   return (
     <div className="flex h-auto flex-col items-center">
       <LottieClient animationData={lottieJson} /> 

@@ -42,6 +42,14 @@ const withOutAuth = async (req: NextRequest) => {
 
 // NOTE : 인증기반 접근할 수 있는 페이지에 대한 middleware
 const withAuth = async (req: NextRequest) => {
+  const url = req.nextUrl.clone();
+  const accessToken = req.cookies.get('accessToken');
+
+  if (!accessToken) {
+    url.pathname = '/auth';
+    return NextResponse.redirect(url);
+  }
+
   return NextResponse.next();
 };
 
