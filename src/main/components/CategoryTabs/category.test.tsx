@@ -35,6 +35,6 @@ describe("카테고리 리스트 테스트", () => {
     screen.debug();
     expect(screen.getByText("경제"));
     expect(screen.getByText("IT"));
-    expect(result.current.data?.length === 5).toBeTruthy();
+    expect(result.current.data?.length === 6).toBeTruthy();
   });
 });
