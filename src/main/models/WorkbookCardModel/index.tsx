@@ -80,6 +80,7 @@ export class WorkbookCardModel {
         status,
         currentDay,
         totalDay,
+        articleInfo,
       }) => {
         const cardType = this.getWorkbookCardType({ status, currentDay });
         const changeToClientData: WorkbookClientInfo = {
@@ -102,6 +103,7 @@ export class WorkbookCardModel {
             currentDay,
           }),
           cardType,
+          articleId: this.getArticleId({ articleInfo }),
         };
         return changeToClientData;
       },
@@ -202,6 +204,12 @@ export class WorkbookCardModel {
     }
   }
 
+  getArticleId({ articleInfo }: Pick<WorkbookCombineInfo, "articleInfo">) {
+    if (articleInfo) {
+      return JSON.parse(articleInfo).articleId;
+    }
+    return null;
+  }
   transformDataToSet({
     data,
   }: {
