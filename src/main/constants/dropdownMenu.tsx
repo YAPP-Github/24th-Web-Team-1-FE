@@ -39,7 +39,7 @@ export const AUTH_LINK: DropdownMenuItem[] = [
   {
     title: "FEW와 협업하려면",
     component: ({ title }: { title: string }) => (
-      <Link href="https://www.instagram.com/few.letter" target="_blank">
+      <Link href="https://tally.so/r/nP0OMQ" target="_blank">
         {title}
       </Link>
     ),
@@ -63,7 +63,7 @@ export const UNAUTH_LINK: DropdownMenuItem[] = [
   {
     title: "FEW와 협업하려면",
     component: ({ title }: { title: string }) => (
-      <Link href="https://www.instagram.com/few.letter" target="_blank">
+      <Link href="https://tally.so/r/nP0OMQ" target="_blank">
         {title}
       </Link>
     ),
