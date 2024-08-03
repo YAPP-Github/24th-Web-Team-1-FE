@@ -134,6 +134,10 @@ export const membersAuthHandler = http.post(
   },
 );
 
+export const tokenHandler = http.post(apiRoutes.token, async ({ request }) => {
+  return HttpResponse.json(response[apiRoutes.token]);
+});
+
 export const categoryHandler = http.get(
   apiRoutes.category,
   async ({ request }) => {
@@ -158,5 +162,5 @@ export const handlers = [
   problemsWithArticleHandler,
   articleCategoryHandler,
   membersAuthHandler,
-
+  tokenHandler,
 ];

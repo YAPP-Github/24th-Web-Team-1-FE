@@ -2,6 +2,7 @@ import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
 import { articleMiddleware } from "@shared/middlewares/article";
+import { AuthMiddleware } from "@shared/middlewares/auth";
 import { problemMiddleware } from "@shared/middlewares/problem";
 import { unsubscriptionMiddleware } from "@shared/middlewares/subscription";
 import { workbookMiddleware } from "@shared/middlewares/workbook";
@@ -33,10 +34,22 @@ const withOutAuth = async (req: NextRequest) => {
   if (pathname.includes("/problem")) {
     return problemMiddleware({ req, nextUrl });
   }
+
+  // if (pathname.includes("/auth/validation/complete")) {
+  //   return AuthMiddleware();
+  // }
 };
 
 // NOTE : 인증기반 접근할 수 있는 페이지에 대한 middleware
 const withAuth = async (req: NextRequest) => {
+  const url = req.nextUrl.clone();
+  const accessToken = req.cookies.get('accessToken');
+
+  if (!accessToken) {
+    url.pathname = '/auth';
+    return NextResponse.redirect(url);
+  }
+
   return NextResponse.next();
 };
 
@@ -57,5 +70,6 @@ export const config = {
     "/problem/:path*",
     "/article/:path*",
     "/",
+    "/auth/:path*"
   ],
 };
