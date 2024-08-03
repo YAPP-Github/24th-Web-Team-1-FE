@@ -1,3 +1,6 @@
+import { getTokenCookie } from "@shared/utils/getTokenCookie";
+import { setCookie } from "cookies-next";
+
 export type FewResponse<DataType extends object> = {
   data: DataType;
   message: string;
@@ -48,68 +51,73 @@ const processApiResponse = async <T extends object>(
 // refreshToken 으로 새로운 accessToken 발급 받기
 const refreshAccessToken = async (): Promise<string> => {
   const refreshToken = document.cookie
-    .split('; ')
-    .find(row => row.startsWith('refreshToken='))
-    ?.split('=')[1];
+    .split("; ")
+    .find((row) => row.startsWith("refreshToken="))
+    ?.split("=")[1];
 
   if (!refreshToken) {
-    throw new Error('No refresh token found');
+    throw new Error("No refresh token found");
   }
 
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/memebers/token`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/memebers/token`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ refreshToken }),
     },
-    body: JSON.stringify({ refreshToken }),
-  });
+  );
 
   if (!response.ok) {
-    throw new Error('Failed to refresh access token');
+    throw new Error("Failed to refresh access token");
   }
 
   const data = await response.json();
-  
-  if (typeof document !== 'undefined') {
-    document.cookie = `accessToken=${data.accessToken}; path=/`;
-    document.cookie = `refreshToken=${data.refreshToken}; path=/`;
-  }
+
+  setCookie("accessToken", data.accessToken, {
+    maxAge: 24 * 60 * 60, // 30 days
+    path: "/",
+  });
+
+  setCookie("refreshToken", data.refreshToken, {
+    maxAge: 30 * 24 * 60 * 60, // 30 days
+    path: "/",
+  });
 
   return data.accessToken;
 };
 
 const fetInterceptor: Interceptor = {
   onRequest: (config) => {
-    if (typeof document !== 'undefined') {
-      const accessToken = document.cookie
-        .split('; ')
-        .find(row => row.startsWith('accessToken='))
-        ?.split('=')[1];
+    const accessToken = getTokenCookie();
 
-      if (accessToken) {
-        config.headers = {
-          ...config.headers,
-          'Authorization': `Bearer ${accessToken}`,
-        };
-      }
+    console.log('access Token ', accessToken);
+    
+
+    if (accessToken) {
+      config.headers = {
+        ...config.headers,
+        Authorization: `Bearer ${accessToken}`,
+      };
     }
-
     return config;
   },
   onResponse: async <T extends object>(response: ApiResponse<T>) => {
     if (!response.ok && response.status === 401) {
       try {
         const newAccessToken = await refreshAccessToken();
-        if (typeof document !== 'undefined') { 
+        if (typeof document !== "undefined") {
           response.config.headers = {
             ...response.config.headers,
-            'Authorization': `Bearer ${newAccessToken}`,
+            Authorization: `Bearer ${newAccessToken}`,
           };
         }
         const retryResponse = await fetch(response.url, response.config);
         return processApiResponse<T>(retryResponse, response.config);
       } catch (error) {
-        console.error('Failed to refresh token', error);
+        console.error("Failed to refresh token", error);
         return Promise.reject(error);
       }
     }
