@@ -17,13 +17,13 @@ export interface ArticleClientInfo {
   content: string;
   category: string;
   viewCount: number;
-  withWorkbookList: Pick<WorkbookInfo, "id" | "title">[];
+  withWorkbookList: Pick<WorkbookInfo, "id" | "title">[] | null;
 }
 
 export type ArticleServerInfo = {
   mainImageUrl: string;
   views: number;
-  includedWorkbooks: ArticleWithWorkbookInfo[];
+  workbooks: ArticleWithWorkbookInfo[];
 } & ArticleDetail;
 
 export type ArticlesInfiniteQueryParams = {

@@ -65,24 +65,28 @@ const Thumbnail = ({ thumbnail }: Pick<ArticleClientInfo, "thumbnail">) => (
 const WithWorkbookList = ({
   withWorkbookList,
 }: Pick<ArticleClientInfo, "withWorkbookList">) => (
-  <footer className="grid grid-cols-[130px_1fr] items-center py-[14px]">
-    <span className="sub3-medium text-text-gray1">
-      이 아티클이 포함된 학습지
-    </span>
-    <ul className="flex justify-end gap-[4px]">
-      {withWorkbookList.map(({ id, title }) => (
-        <li
-          key={`with-workbook-${id}`}
-          className={cn(
-            "sub3-semibold bg-background1 px-[5px] py-[2px] text-text-gray1",
-            "line-clamp-1 rounded border-[0.5px] border-text-gray2",
-          )}
-        >
-          <Link href={`/workbook/${id}`}>{title}</Link>
-        </li>
-      ))}
-    </ul>
-  </footer>
+  <>
+    {withWorkbookList && (
+      <footer className="grid grid-cols-[130px_1fr] items-center py-[14px]">
+        <span className="sub3-medium text-text-gray1">
+          이 아티클이 포함된 학습지
+        </span>
+        <ul className="flex justify-end gap-[4px]">
+          {withWorkbookList.map(({ id, title }) => (
+            <li
+              key={`with-workbook-${id}`}
+              className={cn(
+                "sub3-semibold bg-background1 px-[5px] py-[2px] text-text-gray1",
+                "line-clamp-1 rounded border-[0.5px] border-text-gray2",
+              )}
+            >
+              <Link href={`/workbook/${id}`}>{title}</Link>
+            </li>
+          ))}
+        </ul>
+      </footer>
+    )}
+  </>
 );
 
 const ArticleCardDetail = {

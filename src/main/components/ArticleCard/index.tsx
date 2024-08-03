@@ -11,6 +11,7 @@ export default function ArticleCard({
   category,
   title,
   content,
+  withWorkbookList,
 }: ArticleClientInfo) {
   const { push } = useRouter();
   const onClickArticlePage = () => {
@@ -27,6 +28,9 @@ export default function ArticleCard({
         <ArticleCardDetail.Title title={title} />
         <ArticleCardDetail.Description content={content} />
         <ArticleCardDetail.Thumbnail thumbnail={thumbnail} />
+        <ArticleCardDetail.WithWorkbookList
+          withWorkbookList={withWorkbookList}
+        />
       </article>
     </section>
   );
