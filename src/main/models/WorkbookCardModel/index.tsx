@@ -70,6 +70,7 @@ export class WorkbookCardModel {
   }): WorkbookClientInfo[] {
     return workbookCombineList.map(
       ({
+        id,
         mainImageUrl,
         title,
         description,
@@ -79,8 +80,12 @@ export class WorkbookCardModel {
         status,
         currentDay,
         totalDay,
+        articleInfo,
       }) => {
+        const cardType = this.getWorkbookCardType({ status, currentDay });
         const changeToClientData: WorkbookClientInfo = {
+          id,
+          badgeInfo: this.getBadeInfo({ cardType }),
           mainImageUrl,
           title,
           writers: this.getWriterNameList({ writers }),
@@ -94,15 +99,48 @@ export class WorkbookCardModel {
             status,
           }),
           buttonTitle: this.getButtonTitle({
-            status,
+            cardType,
             currentDay,
           }),
+          cardType,
+          articleId: this.getArticleId({ articleInfo }),
         };
         return changeToClientData;
       },
     );
   }
+  getWorkbookCardType({
+    status,
+    currentDay,
+  }: {
+    status: WorkbookSubscriptionInfo["status"] | undefined;
+    currentDay: WorkbookSubscriptionInfo["currentDay"] | undefined;
+  }): WorkbookClientInfo["cardType"] {
+    if (status && currentDay) {
+      if (status === "ACTIVE") return "LEARN";
+      else return "SHARE";
+    }
+    return "SUBSCRIBE";
+  }
 
+  getBadeInfo({
+    cardType,
+  }: Pick<WorkbookClientInfo, "cardType">): WorkbookClientInfo["badgeInfo"] {
+    switch (cardType) {
+      case "LEARN":
+        return {
+          title: "현재 학습중",
+          className: "text-text-gray1 bg-[#f5f5f5]",
+        };
+      case "SHARE":
+        return {
+          title: "학습완료",
+          className: "bg-success text-white text-[10px]",
+        };
+      default:
+        return {};
+    }
+  }
   getWriterNameList({ writers }: { writers: WorkbookServerInfo["writers"] }) {
     return writers.map(({ name }) => name);
   }
@@ -148,19 +186,30 @@ export class WorkbookCardModel {
   }
 
   getButtonTitle({
-    status,
+    cardType,
     currentDay,
   }: {
-    status: WorkbookSubscriptionInfo["status"] | undefined;
     currentDay: WorkbookSubscriptionInfo["currentDay"] | undefined;
+    cardType: WorkbookClientInfo["cardType"];
   }): WorkbookClientInfo["buttonTitle"] {
-    if (status && currentDay) {
-      if (status === "ACTIVE") return `Day ${currentDay} 학습하기`;
-      if (status === "DONE") return "공유하기";
+    if (currentDay) {
+      if (cardType === "LEARN") return `Day ${currentDay} 학습하기`;
     }
-    return "구독하기";
+    switch (cardType) {
+      case "SUBSCRIBE":
+        return "구독하기";
+
+      default:
+        return "공유하기";
+    }
   }
 
+  getArticleId({ articleInfo }: Pick<WorkbookCombineInfo, "articleInfo">) {
+    if (articleInfo) {
+      return JSON.parse(articleInfo).articleId;
+    }
+    return null;
+  }
   transformDataToSet({
     data,
   }: {

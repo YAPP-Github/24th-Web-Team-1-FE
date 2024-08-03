@@ -6,8 +6,12 @@ import LinkShare from ".";
 const href = "www.few.article.co.kr";
 
 const mockToast = vi.fn();
-vi.mock("@shared/components/ui/use-toast", () => {
+vi.mock("@shared/components/ui/use-toast", async () => {
+  const actual = await vi.importActual<
+    typeof import("@shared/components/ui/use-toast")
+  >("@shared/components/ui/use-toast");
   return {
+    ...actual,
     useToast: () => ({
       toast: mockToast,
     }),

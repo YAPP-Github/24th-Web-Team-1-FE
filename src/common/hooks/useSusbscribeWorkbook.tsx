@@ -1,44 +1,26 @@
-import { usePathname } from "next/navigation";
-
-import { useForm } from "react-hook-form";
-
-import { useMutation } from "@tanstack/react-query";
-
-import { useToast } from "@shared/components/ui/use-toast";
-import useWorkbookId from "@shared/hooks/useWorkbookId";
-
+import { toast } from "@shared/components/ui/use-toast";
 import { SUBSCRIBE_USER_ACTIONS } from "@subscription/constants/subscribe";
 import { subscribeWorkbookOptions } from "@subscription/remotes/postSubscriptionQueryOptions";
+import { useMutation } from "@tanstack/react-query";
 
-import { emailSubscribeSchema } from "@common/schemas/emailSchema";
-import { EmailSubscribeFormData } from "@common/types/emailSubscribeData";
-import { zodResolver } from "@hookform/resolvers/zod";
-
-export const useSubscribeForm = () => {
-  const { toast } = useToast();
-  const pathname = usePathname();
-  const workbookId = useWorkbookId(pathname);
-
-  const form = useForm<EmailSubscribeFormData>({
-    resolver: zodResolver(emailSubscribeSchema),
-    defaultValues: {
-      email: "",
-    },
-    mode: "onSubmit",
-  });
-
+export default function useSusbscribeWorkbook() {
   const { mutate: subscribeWorkbook } = useMutation(subscribeWorkbookOptions());
-
-  const onSubmit = (values: EmailSubscribeFormData) => {
+  const postSubscribeWorkbook = ({
+    workbookId,
+    handleSucess,
+  }: {
+    workbookId: string;
+    handleSucess?: () => void;
+  }) => {
     try {
       subscribeWorkbook(
         { workbookId },
         {
           onSuccess: () => {
-            form.reset();
             toast({
               title: SUBSCRIBE_USER_ACTIONS.SUBSCRIBE_SUCCESS,
             });
+            if (handleSucess) handleSucess();
           },
           onError: (error) => {
             let errorMessage = SUBSCRIBE_USER_ACTIONS.SUBSCRIBE_FAIL;
@@ -59,9 +41,5 @@ export const useSubscribeForm = () => {
       });
     }
   };
-
-  return {
-    form,
-    onSubmit,
-  };
-};
+  return { postSubscribeWorkbook };
+}

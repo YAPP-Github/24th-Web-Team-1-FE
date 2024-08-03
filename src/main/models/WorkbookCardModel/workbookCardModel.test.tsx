@@ -3,7 +3,7 @@ import {
   WorkbookSubscriptionInfo,
 } from "@main/types/workbook";
 import { beforeEach, describe, expect, it } from "vitest";
-import { WorkbookCardModel } from "./workbookCardModel";
+import { WorkbookCardModel } from ".";
 
 // 테스트 데이터
 const mockWorkbookServerList: WorkbookServerInfo[] = [
@@ -112,6 +112,42 @@ describe("메인 워크북 카드 모델 테스트", () => {
     expect(workbookCardList[1]).toHaveProperty("buttonTitle", "공유하기");
   });
 
+  it("워크북 카드 타입 테스트", () => {
+    const workbookCardLearn = model.getWorkbookCardType({
+      status: "ACTIVE",
+      currentDay: 10,
+    });
+    expect(workbookCardLearn).toBe("LEARN");
+
+    const workbookCardShare = model.getWorkbookCardType({
+      status: "DONE",
+      currentDay: 10,
+    });
+    expect(workbookCardShare).toBe("SHARE");
+
+    const workbookCardSubscribe = model.getWorkbookCardType({
+      status: "ACTIVE",
+      currentDay: 0,
+    });
+    expect(workbookCardSubscribe).toBe("SUBSCRIBE");
+  });
+
+  it("이미지 좌측 상단 뱃지 테스트", () => {
+    const badgeLearn = model.getBadeInfo({ cardType: "LEARN" });
+    expect(badgeLearn).toStrictEqual({
+      title: "현재 학습중",
+      className: "text-text-gray1 bg-[#f5f5f5]",
+    });
+
+    const badgeShare = model.getBadeInfo({ cardType: "SHARE" });
+    expect(badgeShare).toStrictEqual({
+      title: "학습완료",
+      className: "bg-success text-white text-[10px]",
+    });
+
+    const badgeSubscribe = model.getBadeInfo({ cardType: "SUBSCRIBE" });
+    expect(badgeSubscribe).toStrictEqual({});
+  });
   it("작가이름 리스트로 변환", () => {
     const writerNames = model.getWriterNameList({
       writers: mockWorkbookServerList[0].writers,
@@ -151,13 +187,13 @@ describe("메인 워크북 카드 모델 테스트", () => {
 
   it("구독상태에 따른 버튼 타이틀 테스트", () => {
     const buttonTitleActive = model.getButtonTitle({
-      status: "ACTIVE",
+      cardType: "LEARN",
       currentDay: 5,
     });
     expect(buttonTitleActive).toBe("Day 5 학습하기");
 
     const buttonTitleDone = model.getButtonTitle({
-      status: "DONE",
+      cardType: "SHARE",
       currentDay: 10,
     });
     expect(buttonTitleDone).toBe("공유하기");

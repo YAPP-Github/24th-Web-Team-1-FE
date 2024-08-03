@@ -4,18 +4,18 @@ import { CategoryModel } from "@main/models/CategoryModel";
 import { UseQueryOptions } from "@tanstack/react-query";
 import { API_ROUTE, QUERY_KEY } from ".";
 
-const getWorkbookCategory = (): Promise<ApiResponse<CategoryListRes>> => {
-  return fewFetch().get(API_ROUTE.CATEGORY);
+const getArticleCategory = (): Promise<ApiResponse<CategoryListRes>> => {
+  return fewFetch().get(API_ROUTE.ARTICLE_CATEGORY);
 };
 
-export const getWorkbookCategoryQueryOptions = (): UseQueryOptions<
+export const getArticleCategoryQueryOptions = (): UseQueryOptions<
   ApiResponse<CategoryListRes>,
   unknown,
   CategoryClientInfo[]
 > => {
   return {
-    queryKey: [QUERY_KEY.GET_CATEGORY],
-    queryFn: () => getWorkbookCategory(),
+    queryKey: [QUERY_KEY.GET_ARICLE_CATEGORY],
+    queryFn: () => getArticleCategory(),
     select: (data) => {
       const categories = data.data.data.categories;
       const categoryModel = new CategoryModel({

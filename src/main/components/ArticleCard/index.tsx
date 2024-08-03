@@ -1,7 +1,6 @@
 "use client";
 import { ArticleClientInfo } from "@main/types/article";
 import { useRouter } from "next/navigation";
-import { title } from "process";
 import ArticleCardDetail from "../ArticleCardDetail";
 
 export default function ArticleCard({
@@ -10,6 +9,7 @@ export default function ArticleCard({
   thumbnail,
   viewCount,
   category,
+  title,
   content,
   withWorkbookList,
 }: ArticleClientInfo) {
@@ -28,8 +28,10 @@ export default function ArticleCard({
         <ArticleCardDetail.Title title={title} />
         <ArticleCardDetail.Description content={content} />
         <ArticleCardDetail.Thumbnail thumbnail={thumbnail} />
+        <ArticleCardDetail.WithWorkbookList
+          withWorkbookList={withWorkbookList}
+        />
       </article>
-      <ArticleCardDetail.WithWorkbookList withWorkbookList={withWorkbookList} />
     </section>
   );
 }
