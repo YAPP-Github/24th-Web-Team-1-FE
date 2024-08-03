@@ -15,6 +15,7 @@ export const SIGNUP_PROGRESS = {
     NOT_SENT_INFO_TITLE: "(i) 이메일이 오지 않는다면?",
     NOT_SENT_INFO_SPAM_CHECK: "스팸함을 확인해주세요!",
     NOT_SENT_INFO_CHECK: "이메일의 철자를 제대로 입력했는지 확인해주세요!",
+    EMAIL_SEND_FAIL: "이메일 전송에 실패했습니다."
 }
 
 export const SIGNUP_COMPLETED = {
