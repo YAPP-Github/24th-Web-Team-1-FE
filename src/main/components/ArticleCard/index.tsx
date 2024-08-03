@@ -1,7 +1,6 @@
 "use client";
 import { ArticleClientInfo } from "@main/types/article";
 import { useRouter } from "next/navigation";
-import { title } from "process";
 import ArticleCardDetail from "../ArticleCardDetail";
 
 export default function ArticleCard({
@@ -10,8 +9,8 @@ export default function ArticleCard({
   thumbnail,
   viewCount,
   category,
+  title,
   content,
-  withWorkbookList,
 }: ArticleClientInfo) {
   const { push } = useRouter();
   const onClickArticlePage = () => {
@@ -29,7 +28,6 @@ export default function ArticleCard({
         <ArticleCardDetail.Description content={content} />
         <ArticleCardDetail.Thumbnail thumbnail={thumbnail} />
       </article>
-      <ArticleCardDetail.WithWorkbookList withWorkbookList={withWorkbookList} />
     </section>
   );
 }
