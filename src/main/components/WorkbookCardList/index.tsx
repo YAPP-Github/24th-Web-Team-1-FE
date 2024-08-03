@@ -5,13 +5,16 @@ import { getWorkbooksWithCategoryQueryOptions } from "@main/remotes/getWorkbooks
 import { useQueries } from "@tanstack/react-query";
 import WorkbookCard from "../WorkbookCard";
 import WorkbookCardListSkeleton from "../WorkbookCardListSkeleton";
+import { ENTIRE_CATEGORY } from "@main/constants";
 
 export default function WorkbookCardList({
   code,
 }: Partial<CategoryClientInfo>) {
   const workbookCardList = useQueries({
     queries: [
-      getWorkbooksWithCategoryQueryOptions({ code: code || -1 }),
+      getWorkbooksWithCategoryQueryOptions({
+        code: code !== undefined ? code : ENTIRE_CATEGORY,
+      }),
       getSubscriptionWorkbooksQueryOptions(),
     ],
     combine: (result) => {
