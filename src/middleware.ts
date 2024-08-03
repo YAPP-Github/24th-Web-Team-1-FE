@@ -35,9 +35,9 @@ const withOutAuth = async (req: NextRequest) => {
     return problemMiddleware({ req, nextUrl });
   }
 
-  if (pathname.includes("/auth/validation/complete")) {
-    return AuthMiddleware();
-  }
+  // if (pathname.includes("/auth/validation/complete")) {
+  //   return AuthMiddleware();
+  // }
 };
 
 // NOTE : 인증기반 접근할 수 있는 페이지에 대한 middleware

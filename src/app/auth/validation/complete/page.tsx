@@ -1,3 +1,5 @@
+"use client"
+
 import { useSearchParams } from "next/navigation";
 
 import LottieClient from "@shared/components/Lottie";

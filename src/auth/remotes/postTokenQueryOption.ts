@@ -13,9 +13,12 @@ export const postToken = (
 export const postTokenQueryOptions = (
   params: TokenParams,
   options?: UseMutationOptions<ApiResponse<tokenResponse>, Error, void>
-) => {
+): UseMutationOptions<
+  ApiResponse<tokenResponse>,
+  Error
+> => {
   return {
-    mutationKey: ['TOKEN', params.auth_token],
+    mutationKey: [QUERY_KEY.TOKEN, params.auth_token],
     mutationFn: () => postToken(params),
     ...options,
   };
