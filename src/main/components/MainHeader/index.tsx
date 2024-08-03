@@ -1,11 +1,27 @@
+"use client";
+import { cn } from "@shared/utils/cn";
 import FewLogo from "public/assets/icon/fewlogo.svg";
-import HamburgerMenu from "public/assets/icon/hamburgerMenu.svg";
+
+import { useState } from "react";
+import DropDownMenuWrapper from "../DropdownMenuWrapper";
 export default function MainHeader() {
+  const [toggleMenu, setToggleMenu] = useState(false);
+
+  const handleToggleMenu = () => {
+    setToggleMenu((prev) => !prev);
+  };
   return (
-    <div className="flex h-[66px] w-full items-center justify-between bg-main">
+    <header
+      className={cn(
+        "relative flex h-[66px] w-full items-center justify-between",
+        toggleMenu ? "bg-white" : "bg-main",
+      )}
+    >
       <FewLogo width={32} height={32} className="ml-[17px]" />
-      {/* TODO : 메뉴바 클릭시 노출되는 로직 작업해야함 */}
-      <HamburgerMenu width={24} height={24} className="mr-[28px]" />
-    </div>
+      <DropDownMenuWrapper
+        toggleMenu={toggleMenu}
+        handleToggleMenu={handleToggleMenu}
+      />
+    </header>
   );
 }
