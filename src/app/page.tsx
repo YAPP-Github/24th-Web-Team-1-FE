@@ -1,3 +1,4 @@
+import TopButton from "@common/components/TopButton";
 import ArticleCardsWrapper from "@main/components/ArticleCardsWrapper";
 import MainHeader from "@main/components/MainHeader";
 import WorkbookCardsWrapper from "@main/components/WorkbookCardsWrapper";
@@ -10,6 +11,7 @@ export default function MainPage() {
       <WorkbookCardsWrapper />
       <Separator className="h-[20px] bg-background1" />
       <ArticleCardsWrapper />
+      <TopButton />
     </main>
   );
 }
