@@ -5,6 +5,7 @@ import { Tabs, TabsList, TabsTrigger } from "@radix-ui/react-tabs";
 import { cn } from "@shared/utils/cn";
 import { useQuery } from "@tanstack/react-query";
 import { HTMLAttributes, useEffect } from "react";
+import CategoryTabSkeleton from "../CategoryTabSkeleton";
 interface CategoryTabsProps extends HTMLAttributes<HTMLDivElement> {
   type: "WORKBOOK" | "ARTICLE";
   category: CategoryClientInfo | undefined;
@@ -28,7 +29,8 @@ export default function CategoryTabs({
     [categoryList],
   );
 
-  if (isLoading) return <></>;
+  if (isLoading || !categoryList)
+    return <CategoryTabSkeleton className={className} />;
 
   if (categoryList && category)
     return (

@@ -4,11 +4,17 @@ import { getSubscriptionWorkbooksQueryOptions } from "@main/remotes/getSubscript
 import { getWorkbooksWithCategoryQueryOptions } from "@main/remotes/getWorkbooksWithCategoryQueryOptions";
 import { useQueries } from "@tanstack/react-query";
 import WorkbookCard from "../WorkbookCard";
+import WorkbookCardListSkeleton from "../WorkbookCardListSkeleton";
+import { ENTIRE_CATEGORY } from "@main/constants";
 
-export default function WorkbookCardList({ code, name }: CategoryClientInfo) {
+export default function WorkbookCardList({
+  code,
+}: Partial<CategoryClientInfo>) {
   const workbookCardList = useQueries({
     queries: [
-      getWorkbooksWithCategoryQueryOptions({ code }),
+      getWorkbooksWithCategoryQueryOptions({
+        code: code !== undefined ? code : ENTIRE_CATEGORY,
+      }),
       getSubscriptionWorkbooksQueryOptions(),
     ],
     combine: (result) => {
@@ -24,6 +30,8 @@ export default function WorkbookCardList({ code, name }: CategoryClientInfo) {
       }
     },
   });
+
+  if (!workbookCardList) return <WorkbookCardListSkeleton />;
 
   return (
     <section className="mr-[18px] flex gap-[8px] overflow-x-auto">

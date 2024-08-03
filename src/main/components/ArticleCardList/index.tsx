@@ -1,4 +1,5 @@
 import { CategoryClientInfo } from "@common/types/category";
+import { ENTIRE_CATEGORY } from "@main/constants";
 import { getArticlesWithCategoryInfiniteQueryOptions } from "@main/remotes/getArticlesWithCategoryInfiniteQueryOptions";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
@@ -8,7 +9,7 @@ import ArticleCardListSkeleton from "../ArticleCardListSkeleton";
 export default function ArticleCardList({ code }: Partial<CategoryClientInfo>) {
   const { data, fetchNextPage, isLoading } = useInfiniteQuery({
     ...getArticlesWithCategoryInfiniteQueryOptions({
-      code: code || -1,
+      code: code !== undefined ? code : ENTIRE_CATEGORY,
     }),
   });
   const { ref, inView } = useInView();
@@ -29,12 +30,10 @@ export default function ArticleCardList({ code }: Partial<CategoryClientInfo>) {
   return (
     <section>
       {data?.articles.map((data, idx) => (
-        <>
-          {idx === lastIdx && (
-            <div ref={ref} className="h-[2px]" key={`ref-${idx}`} />
-          )}
-          <ArticleCard {...data} key={`article-card-${idx}`} />
-        </>
+        <div key={`article-card-${idx}`}>
+          {idx === lastIdx && <div ref={ref} className="h-[2px]" />}
+          <ArticleCard {...data} />
+        </div>
       ))}
     </section>
   );
