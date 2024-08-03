@@ -14,6 +14,7 @@ const nextConfig = {
       "cdn.maily.so",
       "maily.so",
       "pension.inmostadvisor.com",
+      "localhost",
     ],
   },
   webpack: (config, context) => {
