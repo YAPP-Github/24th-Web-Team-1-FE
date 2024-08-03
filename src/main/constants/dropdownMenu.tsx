@@ -21,12 +21,20 @@ export const AUTH_LINK: DropdownMenuItem[] = [
   },
   {
     title: "회원탈퇴",
-    component: ({ title }: { title: string }) => <Link href="/">{title}</Link>,
+    component: ({ title }: { title: string }) => (
+      <Link href="/" onClick={() => window.location.reload()}>
+        {title}
+      </Link>
+    ),
   },
 
   {
     title: "로그아웃",
-    component: ({ title }: { title: string }) => <Link href="/">{title}</Link>,
+    component: ({ title }: { title: string }) => (
+      <Link href="/" onClick={() => window.location.reload()}>
+        {title}
+      </Link>
+    ),
   },
   {
     title: "FEW와 협업하려면",
