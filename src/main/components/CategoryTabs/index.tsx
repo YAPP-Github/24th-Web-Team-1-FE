@@ -1,5 +1,6 @@
 "use client";
 import { CategoryClientInfo } from "@common/types/category";
+import { getArticleCategoryQueryOptions } from "@main/remotes/getArticleCategoryQueryOptions";
 import { getWorkbookCategoryQueryOptions } from "@main/remotes/getWorkbookCategoryQueryOptions";
 import { Tabs, TabsList, TabsTrigger } from "@radix-ui/react-tabs";
 import { cn } from "@shared/utils/cn";
@@ -17,22 +18,34 @@ export default function CategoryTabs({
   handleCategory,
   className,
 }: CategoryTabsProps) {
-  const { data: categoryList, isLoading } = useQuery({
-    ...getWorkbookCategoryQueryOptions(),
-    enabled: type !== "ARTICLE",
-  });
-
+  const { data: workbookCategoryList, isLoading: isWorkbookCategoryLoading } =
+    useQuery({
+      ...getWorkbookCategoryQueryOptions(),
+      enabled: type !== "WORKBOOK",
+    });
+  const { data: articleCategoryList, isLoading: isArticleCategoryLoading } =
+    useQuery({
+      ...getArticleCategoryQueryOptions(),
+      enabled: type !== "ARTICLE",
+    });
   useEffect(
     function setInitCategory() {
-      if (categoryList) handleCategory(categoryList[0]);
+      if (workbookCategoryList && type === "WORKBOOK")
+        handleCategory(workbookCategoryList[0]);
+      if (articleCategoryList && type === "ARTICLE")
+        handleCategory(articleCategoryList[0]);
     },
-    [categoryList],
+    [workbookCategoryList, articleCategoryList],
   );
+  const categoryList =
+    type === "WORKBOOK" ? workbookCategoryList : articleCategoryList;
+  const isLoading =
+    type === "WORKBOOK" ? isWorkbookCategoryLoading : isArticleCategoryLoading;
 
   if (isLoading || !categoryList)
     return <CategoryTabSkeleton className={className} />;
 
-  if (categoryList && category)
+  if (categoryList && category !== undefined)
     return (
       <Tabs
         defaultValue={categoryList[0].name}
