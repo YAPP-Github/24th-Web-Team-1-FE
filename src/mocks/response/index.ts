@@ -15,6 +15,7 @@ import submitAnswer3 from "./submitAnswer3.json";
 import workbook from "./workbook.json";
 import token from "./token.json"
 import workbooksSubscription from "./workbooksSubscription.json";
+import logout from "./logout.json"
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
@@ -34,4 +35,5 @@ export default {
   [apiRoutes.category]: category,
   [apiRoutes.token]: token,
   [apiRoutes.articleCategory]: category,
+  [apiRoutes.logout]: logout
 };

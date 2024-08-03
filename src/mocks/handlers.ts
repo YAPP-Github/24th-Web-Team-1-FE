@@ -150,6 +150,11 @@ export const articleCategoryHandler = http.get(
     return HttpResponse.json(response[apiRoutes.articleCategory]);
   },
 );
+
+export const logoutHandler = http.delete(apiRoutes.logout, async ({ request }) => {
+  return HttpResponse.json(response[apiRoutes.logout]);
+});
+
 export const handlers = [
   categoryHandler,
   problemsHandler,
@@ -163,4 +168,5 @@ export const handlers = [
   articleCategoryHandler,
   membersAuthHandler,
   tokenHandler,
+  logoutHandler,
 ];

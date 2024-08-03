@@ -1,3 +1,5 @@
+import LogoutLink from "@auth/components/LogoutLink";
+import { useLogout } from "@auth/hooks/useLogout";
 import { DropdownMenuItem } from "@main/types/dropdownMenu";
 import Link from "next/link";
 import FewLogo from "public/assets/icon/fewlogo.svg";
@@ -21,20 +23,12 @@ export const AUTH_LINK: DropdownMenuItem[] = [
   },
   {
     title: "회원탈퇴",
-    component: ({ title }: { title: string }) => (
-      <Link href="/" onClick={() => window.location.reload()}>
-        {title}
-      </Link>
-    ),
+    component: ({ title }: { title: string }) => <LogoutLink title={title} />,
   },
 
   {
     title: "로그아웃",
-    component: ({ title }: { title: string }) => (
-      <Link href="/" onClick={() => window.location.reload()}>
-        {title}
-      </Link>
-    ),
+    component: ({ title }: { title: string }) => <LogoutLink title={title} />,
   },
   {
     title: "FEW와 협업하려면",

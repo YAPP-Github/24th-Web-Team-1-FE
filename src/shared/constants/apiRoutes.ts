@@ -12,4 +12,5 @@ export const apiRoutes = {
   category: `${process.env.NEXT_PUBLIC_FEW_WEB}/api/v1/workbooks/categories`,
   token: `${process.env.NEXT_PUBLIC_FEW_WEB}/api/v1/members/token/:auth_token`,
   articleCategory: `${process.env.NEXT_PUBLIC_FEW_WEB}/api/v1/articles/categories`,
+  logout: `${process.env.NEXT_PUBLIC_FEW_WEB}/api/v1/members`,
 };
