@@ -29,7 +29,7 @@ export default class ArticleCardModel {
           },
           thumbnail: mainImageUrl,
           title,
-          content,
+          content: this.getRemoveTagContent({ content }),
           category,
           viewCount: views,
           withWorkbookList: includedWorkbooks,
@@ -37,6 +37,10 @@ export default class ArticleCardModel {
         return changeToClientData;
       },
     );
+  }
+
+  getRemoveTagContent({ content }: Pick<ArticleServerInfo, "content">) {
+    return content.replace(/<\/?[^>]+(>|$)/g, "");
   }
 
   private articleCardServerList: ArticleServerInfo[];
