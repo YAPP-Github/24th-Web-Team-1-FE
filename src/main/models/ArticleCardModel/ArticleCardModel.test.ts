@@ -19,7 +19,7 @@ const mockData: ArticleServerInfo[] = [
     mainImageUrl:
       "https://storage.mrblog.net/files/dosi_draw/a3NgiDGW2H3NhsYp1Qp3RuWNzUx9sg8L2yyooYqF.jpg",
 
-    includedWorkbooks: [
+    workbooks: [
       {
         id: 1,
         title: "사소한 것들의 역사",
@@ -45,7 +45,7 @@ const mockData: ArticleServerInfo[] = [
     category: "경제",
     createdAt: "2024-07-25T14:32:27.310368",
     views: 1,
-    includedWorkbooks: [
+    workbooks: [
       {
         id: 1,
         title: "사소한 것들의 역사",

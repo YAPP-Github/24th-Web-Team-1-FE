@@ -126,7 +126,12 @@ export const categoryHandler = http.get(
     return HttpResponse.json(response[apiRoutes.category]);
   },
 );
-
+export const articleCategoryHandler = http.get(
+  apiRoutes.articleCategory,
+  async ({ request }) => {
+    return HttpResponse.json(response[apiRoutes.articleCategory]);
+  },
+);
 export const handlers = [
   categoryHandler,
   problemsHandler,
@@ -137,4 +142,5 @@ export const handlers = [
   articleHandler,
   articleWithWorkbookHandler,
   problemsWithArticleHandler,
+  articleCategoryHandler,
 ];

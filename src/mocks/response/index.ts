@@ -29,4 +29,5 @@ export default {
   [apiRoutes.articleWithWorkbook + "1"]: articleWithWorkbook1,
   [apiRoutes.problemsWithArticle + "1"]: problemsWithArticleId1,
   [apiRoutes.category]: category,
+  [apiRoutes.articleCategory]: category,
 };
