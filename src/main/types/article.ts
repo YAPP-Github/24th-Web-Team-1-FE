@@ -1,4 +1,5 @@
 import { ArticleDetail } from "@article/types";
+import { CategoryClientInfo } from "@common/types/category";
 import { WorkbookInfo } from "@workbook/types";
 
 interface ArticleWithWorkbookInfo {
@@ -24,3 +25,7 @@ export type ArticleServerInfo = {
   views: number;
   includedWorkbooks: ArticleWithWorkbookInfo[];
 } & ArticleDetail;
+
+export type ArticlesInfiniteQueryParams = {
+  prevArticleId: string;
+} & Pick<CategoryClientInfo, "code">;
