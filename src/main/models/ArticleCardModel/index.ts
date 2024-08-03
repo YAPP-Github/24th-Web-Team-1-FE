@@ -18,7 +18,7 @@ export default class ArticleCardModel {
         content,
         category,
         views,
-        includedWorkbooks,
+        workbooks,
         mainImageUrl,
       }) => {
         const changeToClientData: ArticleClientInfo = {
@@ -32,7 +32,7 @@ export default class ArticleCardModel {
           content: this.getRemoveTagContent({ content }),
           category,
           viewCount: views,
-          withWorkbookList: includedWorkbooks,
+          withWorkbookList: this.getWithWorkbookList({ workbooks }),
         };
         return changeToClientData;
       },
@@ -43,5 +43,8 @@ export default class ArticleCardModel {
     return content.replace(/<\/?[^>]+(>|$)/g, "");
   }
 
+  getWithWorkbookList({ workbooks }: Pick<ArticleServerInfo, "workbooks">) {
+    return workbooks.length ? workbooks : null;
+  }
   private articleCardServerList: ArticleServerInfo[];
 }
