@@ -1,8 +1,16 @@
 "use client";
 import useCategory from "@main/hooks/useCategory";
-import ArticleCardList from "../ArticleCardList";
-import CategoryTabs from "../CategoryTabs";
+import dynamic from "next/dynamic";
+import ArticleCardListSkeleton from "../ArticleCardListSkeleton";
+import CategoryTabSkeleton from "../CategoryTabSkeleton";
 import MainContentWrapper from "../MainContentWrapper";
+
+const CategoryTabs = dynamic(() => import("../CategoryTabs"), {
+  loading: () => <CategoryTabSkeleton className="ml-[20px]" />,
+});
+const ArticleCardList = dynamic(() => import("../ArticleCardList"), {
+  loading: () => <ArticleCardListSkeleton />,
+});
 
 export default function ArticleCardsWrapper() {
   const { category, handleCategory } = useCategory();
@@ -18,7 +26,7 @@ export default function ArticleCardsWrapper() {
         category={category}
         className="ml-[20px]"
       />
-      {category && <ArticleCardList {...category} />}
+      <ArticleCardList {...category} />
     </MainContentWrapper>
   );
 }
