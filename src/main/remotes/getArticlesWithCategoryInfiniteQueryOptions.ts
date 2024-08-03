@@ -20,14 +20,13 @@ const getArticlesWithCategory = ({
 };
 export const getArticlesWithCategoryInfiniteQueryOptions = ({
   code,
-  prevArticleId,
-}: ArticlesInfiniteQueryParams): UseInfiniteQueryOptions<
+}: Pick<ArticlesInfiniteQueryParams, "code">): UseInfiniteQueryOptions<
   ApiResponse<AriclesWithCategoryRes<ArticleServerInfo>>,
   unknown,
   AriclesWithCategoryRes<ArticleClientInfo>
 > => {
   return {
-    queryKey: [QUERY_KEY.GET_ARTICLES_WITH_CATEGORY, code, prevArticleId],
+    queryKey: [QUERY_KEY.GET_ARTICLES_WITH_CATEGORY, code],
     queryFn: ({ pageParam }) =>
       getArticlesWithCategory({ code, prevArticleId: pageParam as string }),
     select: (data) => {
@@ -41,8 +40,11 @@ export const getArticlesWithCategoryInfiniteQueryOptions = ({
           articles: articleCardModel.articleCardList(),
         };
       });
+      const lastClientResIdx = articleClientList.length - 1;
+      const { isLast } = articleClientList[lastClientResIdx];
+
       return {
-        isLast: articleClientList[articleClientList.length - 1].isLast,
+        isLast,
         articles: [...articleClientList.map((data) => data.articles).flat()],
       };
     },
