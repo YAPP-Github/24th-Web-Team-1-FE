@@ -4,6 +4,12 @@ import { cn } from "@shared/utils/cn";
 import Image from "next/image";
 import FewLogo from "public/assets/icon/cardFewLogo.svg";
 
+const ImageWrapper = ({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) => <div className="relative">{children}</div>;
+
 const MainImage = ({
   mainImageUrl,
 }: Pick<WorkbookClientInfo, "mainImageUrl">) => (
@@ -15,6 +21,19 @@ const MainImage = ({
     priority
     className="h-[172px] w-[269px] rounded-t-lg object-cover"
   />
+);
+
+const CardBadge = ({ badgeInfo }: Pick<WorkbookClientInfo, "badgeInfo">) => (
+  <div
+    className={cn(
+      "absolute left-[13px] top-[14px] w-fit",
+      "px-[6.3px] py-[3.4px]",
+      "rounded-[3.2px] text-[10px]/[15px] font-extrabold",
+      badgeInfo.className,
+    )}
+  >
+    {badgeInfo.title}
+  </div>
 );
 const WorkbookDetailInfoWrapper = ({
   children,
@@ -55,23 +74,35 @@ const PersonCourseWithFewLogo = ({
 
 const BottomButton = ({
   buttonTitle,
-}: Pick<WorkbookClientInfo, "buttonTitle">) => (
+  handleClickBottomButton,
+}: Pick<WorkbookClientInfo, "buttonTitle"> & {
+  handleClickBottomButton: () => void;
+}) => (
   <Button
     className={cn(
       "sub3-semibold bg-white text-black",
       "h-fit rounded py-[4.5px]",
+      "hover:bg-white",
+      "focus:bg-white",
     )}
+    type="button"
+    onClick={(e) => {
+      e.stopPropagation();
+      handleClickBottomButton();
+    }}
   >
     {buttonTitle}
   </Button>
 );
 const WorkbookCardDetail = {
+  ImageWrapper,
   MainImage,
   WorkbookDetailInfoWrapper,
   Title,
   WriterList,
   PersonCourseWithFewLogo,
   BottomButton,
+  CardBadge,
 };
 
 export default WorkbookCardDetail;

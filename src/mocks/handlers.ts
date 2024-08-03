@@ -45,6 +45,9 @@ export const submitAnswerHandler = http.post(
     return HttpResponse.json(response[apiRoutes.submitAnswer + "3"]);
   },
 );
+export const workbooksHandler = http.get(apiRoutes.workbooks, async () => {
+  return HttpResponse.json(response[apiRoutes.workbooks + "entire"]);
+});
 export const workbookHandler = http.get(
   apiRoutes.workbook,
   async ({ params }) => {
@@ -58,6 +61,12 @@ export const workbookHandler = http.get(
     await delay(_3_SECOND);
 
     return HttpResponse.json(response[apiRoutes.workbook]);
+  },
+);
+export const workbooksSubscriptionHandler = http.get(
+  apiRoutes.workbooksSubscription,
+  async () => {
+    return HttpResponse.json(response[apiRoutes.workbooksSubscription]);
   },
 );
 
@@ -128,19 +137,26 @@ export const membersAuthHandler = http.post(
 export const categoryHandler = http.get(
   apiRoutes.category,
   async ({ request }) => {
-    console.log(request, apiRoutes.category);
-
     return HttpResponse.json(response[apiRoutes.category]);
   },
 );
-
+export const articleCategoryHandler = http.get(
+  apiRoutes.articleCategory,
+  async ({ request }) => {
+    return HttpResponse.json(response[apiRoutes.articleCategory]);
+  },
+);
 export const handlers = [
   categoryHandler,
   problemsHandler,
   submitAnswerHandler,
   workbookHandler,
+  workbooksHandler,
+  workbooksSubscriptionHandler,
   articleHandler,
   articleWithWorkbookHandler,
   problemsWithArticleHandler,
+  articleCategoryHandler,
   membersAuthHandler,
+
 ];

@@ -1,14 +1,16 @@
 "use client";
-import { CategoryInfo } from "@common/types/category";
+import { CategoryClientInfo } from "@common/types/category";
+import { getArticleCategoryQueryOptions } from "@main/remotes/getArticleCategoryQueryOptions";
 import { getWorkbookCategoryQueryOptions } from "@main/remotes/getWorkbookCategoryQueryOptions";
 import { Tabs, TabsList, TabsTrigger } from "@radix-ui/react-tabs";
 import { cn } from "@shared/utils/cn";
 import { useQuery } from "@tanstack/react-query";
 import { HTMLAttributes, useEffect } from "react";
+import CategoryTabSkeleton from "../CategoryTabSkeleton";
 interface CategoryTabsProps extends HTMLAttributes<HTMLDivElement> {
   type: "WORKBOOK" | "ARTICLE";
-  category: CategoryInfo | undefined;
-  handleCategory: (category: CategoryInfo) => void;
+  category: CategoryClientInfo | undefined;
+  handleCategory: (category: CategoryClientInfo) => void;
 }
 export default function CategoryTabs({
   type,
@@ -16,31 +18,39 @@ export default function CategoryTabs({
   handleCategory,
   className,
 }: CategoryTabsProps) {
-  const {
-    data: categoryList,
-    refetch,
-    isLoading,
-  } = useQuery({
-    ...getWorkbookCategoryQueryOptions(),
-    enabled: type !== "ARTICLE",
-  });
-  // MEMO : msw에서 모킹을 처음에 실패해서 일부러 넣은코드..! 실서버 연결시에는 삭제필요
-  useEffect(() => {
-    setTimeout(() => refetch(), 3000);
-  }, []);
-
+  const { data: workbookCategoryList, isLoading: isWorkbookCategoryLoading } =
+    useQuery({
+      ...getWorkbookCategoryQueryOptions(),
+      enabled: type !== "WORKBOOK",
+    });
+  const { data: articleCategoryList, isLoading: isArticleCategoryLoading } =
+    useQuery({
+      ...getArticleCategoryQueryOptions(),
+      enabled: type !== "ARTICLE",
+    });
   useEffect(
     function setInitCategory() {
-      if (categoryList) handleCategory(categoryList[0]);
+      if (workbookCategoryList && type === "WORKBOOK")
+        handleCategory(workbookCategoryList[0]);
+      if (articleCategoryList && type === "ARTICLE")
+        handleCategory(articleCategoryList[0]);
     },
-    [categoryList],
+    [workbookCategoryList, articleCategoryList],
   );
+  const categoryList =
+    type === "WORKBOOK" ? workbookCategoryList : articleCategoryList;
+  const isLoading =
+    type === "WORKBOOK" ? isWorkbookCategoryLoading : isArticleCategoryLoading;
 
-  if (isLoading) return <></>;
+  if (isLoading || !categoryList)
+    return <CategoryTabSkeleton className={className} />;
 
-  if (categoryList && category)
+  if (categoryList && category !== undefined)
     return (
-      <Tabs defaultValue={categoryList[0].name} className="overflow-x-auto">
+      <Tabs
+        defaultValue={categoryList[0].name}
+        className={cn("overflow-x-auto", className)}
+      >
         <TabsList className="sub2-bold flex gap-3 py-[10px]">
           {categoryList.map(({ name, code }) => (
             <TabsTrigger

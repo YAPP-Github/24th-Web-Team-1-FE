@@ -18,7 +18,7 @@ export default class ArticleCardModel {
         content,
         category,
         views,
-        includedWorkbooks,
+        workbooks,
         mainImageUrl,
       }) => {
         const changeToClientData: ArticleClientInfo = {
@@ -29,15 +29,22 @@ export default class ArticleCardModel {
           },
           thumbnail: mainImageUrl,
           title,
-          content,
+          content: this.getRemoveTagContent({ content }),
           category,
           viewCount: views,
-          withWorkbookList: includedWorkbooks,
+          withWorkbookList: this.getWithWorkbookList({ workbooks }),
         };
         return changeToClientData;
       },
     );
   }
 
+  getRemoveTagContent({ content }: Pick<ArticleServerInfo, "content">) {
+    return content.replace(/<\/?[^>]+(>|$)/g, "");
+  }
+
+  getWithWorkbookList({ workbooks }: Pick<ArticleServerInfo, "workbooks">) {
+    return workbooks.length ? workbooks : null;
+  }
   private articleCardServerList: ArticleServerInfo[];
 }
