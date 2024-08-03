@@ -6,6 +6,11 @@ import Link from "next/link";
 import EyeIcon from "public/assets/icon/eye.svg";
 import { ReactNode } from "react";
 
+const RootComponentWrapper = ({ children }: { children: ReactNode }) => (
+  <section className="border-b-[0.5px] border-text-gray2 px-[20px] py-[26px]">
+    {children}
+  </section>
+);
 const TopComponentWrapper = ({ children }: { children: ReactNode }) => (
   <div className="flex justify-between pb-[6px]">{children}</div>
 );
@@ -36,7 +41,9 @@ const CategoryTag = ({ category }: Pick<ArticleClientInfo, "category">) => (
 
 const Title = ({ title }: Pick<ArticleClientInfo, "title">) => (
   <header className="mb-[4px]">
-    <h3 className="h3-bold text-text-gary1 text-ellipsis">{title}</h3>
+    <h3 className="h3-bold text-text-gary1 line-clamp-1 text-ellipsis">
+      {title}
+    </h3>
   </header>
 );
 const Description = ({ content }: Pick<ArticleClientInfo, "content">) => (
@@ -79,6 +86,7 @@ const WithWorkbookList = ({
 );
 
 const ArticleCardDetail = {
+  RootComponentWrapper,
   TopComponentWrapper,
   WriterProfile,
   ViewCount,
