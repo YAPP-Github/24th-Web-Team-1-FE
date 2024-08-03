@@ -1,3 +1,5 @@
+"use client"
+
 import { useEffect } from "react";
 
 import { useMutation } from "@tanstack/react-query";
@@ -15,15 +17,18 @@ export const useAuth = (auth_token: string) => {
         onSuccess: (response: ApiResponse<tokenResponse>) => {
           if (response?.data?.data) {
             const { accessToken, refreshToken } = response.data.data;
+            
+            if (typeof document !== 'undefined') {
+              document.cookie = `accessToken=${accessToken}; path=/`;
+              document.cookie = `refreshToken=${refreshToken}; path=/`;
+            }
 
-            // 쿠키에 토큰 저장
-            document.cookie = `accessToken=${accessToken}; path=/`;
-            document.cookie = `refreshToken=${refreshToken}; path=/`;
           }
         },
         onError: (error) => {
           // 로그인 실패
           console.error("Authentication failed:", error);
+          
         },
       },
     ),
@@ -31,7 +36,11 @@ export const useAuth = (auth_token: string) => {
 
   useEffect(() => {
     if (auth_token) {
-      postToken();
+      const timeoutId = setTimeout(() => {
+        postToken();
+      }, 100); // 100ms delay
+
+      return () => clearTimeout(timeoutId); 
     }
   }, [auth_token, postToken]);
 };
