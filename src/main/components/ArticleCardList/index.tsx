@@ -29,12 +29,10 @@ export default function ArticleCardList({ code }: Partial<CategoryClientInfo>) {
   return (
     <section>
       {data?.articles.map((data, idx) => (
-        <>
-          {idx === lastIdx && (
-            <div ref={ref} className="h-[2px]" key={`ref-${idx}`} />
-          )}
-          <ArticleCard {...data} key={`article-card-${idx}`} />
-        </>
+        <div key={`article-card-${idx}`}>
+          {idx === lastIdx && <div ref={ref} className="h-[2px]" />}
+          <ArticleCard {...data} />
+        </div>
       ))}
     </section>
   );
