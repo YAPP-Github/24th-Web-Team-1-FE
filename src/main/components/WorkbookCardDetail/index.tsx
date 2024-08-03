@@ -16,10 +16,7 @@ const MainImage = ({
   <Image
     width={269}
     height={172}
-    src={
-      "https://storage.mrblog.net/files/dosi_draw/a3NgiDGW2H3NhsYp1Qp3RuWNzUx9sg8L2yyooYqF.jpg" ||
-      mainImageUrl
-    }
+    src={mainImageUrl}
     alt=""
     priority
     className="h-[172px] w-[269px] rounded-t-lg object-cover"
