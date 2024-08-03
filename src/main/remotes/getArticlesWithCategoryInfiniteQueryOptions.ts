@@ -1,5 +1,4 @@
 import { ApiResponse, fewFetch } from "@api/fewFetch";
-import { CategoryClientInfo } from "@common/types/category";
 import ArticleCardModel from "@main/models/ArticleCardModel";
 import {
   ArticleClientInfo,
@@ -21,23 +20,30 @@ const getArticlesWithCategory = ({
 };
 export const getArticlesWithCategoryInfiniteQueryOptions = ({
   code,
-}: Pick<CategoryClientInfo, "code">): UseInfiniteQueryOptions<
+  prevArticleId,
+}: ArticlesInfiniteQueryParams): UseInfiniteQueryOptions<
   ApiResponse<AriclesWithCategoryRes<ArticleServerInfo>>,
   unknown,
   AriclesWithCategoryRes<ArticleClientInfo>
 > => {
   return {
-    queryKey: [QUERY_KEY.GET_ARTICLES_WITH_CATEGORY, code],
+    queryKey: [QUERY_KEY.GET_ARTICLES_WITH_CATEGORY, code, prevArticleId],
     queryFn: ({ pageParam }) =>
       getArticlesWithCategory({ code, prevArticleId: pageParam as string }),
     select: (data) => {
-      const res = data.pages[0].data.data;
-      const articleCardModel = new ArticleCardModel({
-        initArticleCardServerList: res.articles,
+      const articleClientList = data.pages.map((data) => {
+        const res = data.data.data;
+        const articleCardModel = new ArticleCardModel({
+          initArticleCardServerList: res.articles,
+        });
+        return {
+          ...res,
+          articles: articleCardModel.articleCardList(),
+        };
       });
       return {
-        ...res,
-        articles: articleCardModel.articleCardList(),
+        isLast: articleClientList[articleClientList.length - 1].isLast,
+        articles: [...articleClientList.map((data) => data.articles).flat()],
       };
     },
     getNextPageParam: ({ data }) => {
