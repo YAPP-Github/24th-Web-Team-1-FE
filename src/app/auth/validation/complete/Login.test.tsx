@@ -9,7 +9,7 @@ import { render, screen,waitFor } from "@testing-library/react";
 // Mocking useRouter
 const mockPush = vi.fn();
 
-describe("ValidationCompletePage Component", () => {
+describe("ValidationCompletePage 페이지 테스트", () => {
   const queryClient = new QueryClient();
 
   const renderWithClient = () => {
@@ -42,14 +42,14 @@ describe("ValidationCompletePage Component", () => {
     renderWithClient();
   });
 
-  it("should authenticate and set cookies correctly", async () => {
+  it("인증을 완료하고 쿠키를 세팅한다.", async () => {
     await waitFor(() => {
       expect(document.cookie).toContain("accessToken=accessToken");
       expect(document.cookie).toContain("refreshToken=refreshToken");
     });
   });
 
-  it("should render the correct components", () => {
+  it("컴포넌트 내 요소들을 올바르게 렌더링 한다.", () => {
     expect(screen.getByText(SIGNUP_COMPLETED.GRETTING)).toBeInTheDocument();
     expect(screen.getByText(SIGNUP_COMPLETED.INTRO)).toBeInTheDocument();
     expect(
