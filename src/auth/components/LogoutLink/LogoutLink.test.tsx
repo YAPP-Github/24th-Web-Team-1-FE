@@ -2,15 +2,16 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import { beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
 
-import LogoutLink from ".";
+import { COOKIES } from "@shared/constants/token";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { deleteCookie } from "cookies-next";
+import LogoutLink from ".";
 
 const mockPush = vi.fn();
 const mockHandleLogout = vi.fn(() => {
-  deleteCookie("accessToken");
-  deleteCookie("refreshToken");
+  deleteCookie(COOKIES.ACCESS_TOKEN);
+  deleteCookie(COOKIES.REFRESH_TOKEN);
   mockPush("/auth");
 });
 
@@ -55,8 +56,12 @@ describe("LogoutLink 컴포넌트 테스트", () => {
     await user.click(logoutButton);
 
     await waitFor(() => {
-      expect(document.cookie).not.toContain("accessToken=accessToken");
-      expect(document.cookie).not.toContain("refreshToken=refreshToken");
+      expect(document.cookie).not.toContain(
+        `${COOKIES.ACCESS_TOKEN}=${COOKIES.ACCESS_TOKEN}`,
+      );
+      expect(document.cookie).not.toContain(
+        `${COOKIES.REFRESH_TOKEN}=${COOKIES.REFRESH_TOKEN}`,
+      );
       expect(mockPush).toHaveBeenCalledWith("/");
     });
   });

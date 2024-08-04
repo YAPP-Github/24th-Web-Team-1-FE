@@ -25,7 +25,9 @@ const WriterProfile = ({
       alt="profile-image"
       className="h-[30px] w-[30px] rounded-full"
     />
-    <p className="sub2-bold">{writerInfo.name}</p>
+    <Link className="sub2-bold" href={writerInfo.url}>
+      {writerInfo.name}
+    </Link>
   </div>
 );
 const ViewCount = ({ viewCount }: Pick<ArticleClientInfo, "viewCount">) => (

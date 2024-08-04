@@ -17,7 +17,7 @@ const MainImage = ({
     width={269}
     height={172}
     src={mainImageUrl}
-    alt=""
+    alt="main-image"
     priority
     className="h-[172px] w-[269px] rounded-t-lg object-cover"
   />
