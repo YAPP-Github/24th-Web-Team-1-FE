@@ -67,7 +67,16 @@ describe("메인페이지 내 카테고리별 워크북 카드 리스트 테스�
     });
   });
 
-  it("cardtype LEARN 일때, 바텀 버튼 클릭 테스트", async () => {
+  it("로그인 상태이고, cardtype LEARN 일때, 바텀 버튼 클릭 테스트", async () => {
+    vi.mock("@shared/hooks/useIsLogin", async () => {
+      const actual = await vi.importActual<
+        typeof import("@shared/hooks/useIsLogin")
+      >("@shared/hooks/useIsLogin");
+      return {
+        ...actual,
+        isLogin: true,
+      };
+    });
     const { result: workbookListResult } = renderHook(
       () =>
         useQueries({
@@ -75,14 +84,20 @@ describe("메인페이지 내 카테고리별 워크북 카드 리스트 테스�
             getWorkbooksWithCategoryQueryOptions({
               code: ENTIRE_CATEGORY,
             }),
-            getSubscriptionWorkbooksQueryOptions(),
+            {
+              ...getSubscriptionWorkbooksQueryOptions(),
+              enabled: true,
+            },
           ],
         }),
       { wrapper: createQueryProviderWrapper() },
     );
-    await waitFor(() =>
-      expect(workbookListResult.current[0].isSuccess).toBe(true),
-    );
+
+    await waitFor(() => {
+      workbookListResult.current.forEach((value) => {
+        expect(value.isSuccess).toBeTruthy();
+      });
+    });
 
     await waitFor(async () => {
       const day1LearnButton = screen.getByText("Day 1 학습하기");
