@@ -16,11 +16,13 @@ export const useLogout = () => {
   const { mutate: handleLogout } = useMutation({
     ...logOutMutaionOption(),
     onSuccess: (response: ApiResponse<any>) => {
+        console.log(response.data.message);
+        
         if (response.data.message === "성공") {
             // 쿠키 삭제 및 로그인 페이지로 이동
             deleteCookie("accessToken");
             deleteCookie("refreshToken");
-            router.push('/');
+            location.reload();
         }
     },
     onError: (error: any) => {
