@@ -1,21 +1,26 @@
 import { CategoryClientInfo } from "@common/types/category";
+import { ENTIRE_CATEGORY } from "@main/constants";
 import { WorkbookCardModel } from "@main/models/WorkbookCardModel";
 import { getSubscriptionWorkbooksQueryOptions } from "@main/remotes/getSubscriptionWorkbooksQueryOptions";
 import { getWorkbooksWithCategoryQueryOptions } from "@main/remotes/getWorkbooksWithCategoryQueryOptions";
+import useIsLogin from "@shared/hooks/useIsLogin";
 import { useQueries } from "@tanstack/react-query";
 import WorkbookCard from "../WorkbookCard";
 import WorkbookCardListSkeleton from "../WorkbookCardListSkeleton";
-import { ENTIRE_CATEGORY } from "@main/constants";
 
 export default function WorkbookCardList({
   code,
 }: Partial<CategoryClientInfo>) {
+  const isLogin = useIsLogin();
   const workbookCardList = useQueries({
     queries: [
       getWorkbooksWithCategoryQueryOptions({
         code: code !== undefined ? code : ENTIRE_CATEGORY,
       }),
-      getSubscriptionWorkbooksQueryOptions(),
+      {
+        ...getSubscriptionWorkbooksQueryOptions(),
+        enabled: isLogin,
+      },
     ],
     combine: (result) => {
       const [workbookServerList, workbookSubscriptionInfoList] = result;
@@ -35,10 +40,9 @@ export default function WorkbookCardList({
 
   return (
     <section className="mr-[18px] flex gap-[8px] overflow-x-auto">
-      {workbookCardList &&
-        workbookCardList.map((data, idx) => (
-          <WorkbookCard key={`work-book-card-${idx}`} {...data} />
-        ))}
+      {workbookCardList.map((data, idx) => (
+        <WorkbookCard key={`work-book-card-${idx}`} {...data} />
+      ))}
     </section>
   );
 }
