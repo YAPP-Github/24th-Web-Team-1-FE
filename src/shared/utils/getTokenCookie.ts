@@ -1,10 +1,11 @@
+import { COOKIES } from "@shared/constants/token";
 import { getCookie } from "cookies-next";
 
 export const getTokenCookie = () => {
-    const accessTokenFromCookie = getCookie("accessToken")
-    if (accessTokenFromCookie) {
-        return accessTokenFromCookie
-    }
+  const accessTokenFromCookie = getCookie(COOKIES.ACCESS_TOKEN);
+  if (accessTokenFromCookie) {
+    return accessTokenFromCookie;
+  }
 
-    return undefined
-}
+  return undefined;
+};

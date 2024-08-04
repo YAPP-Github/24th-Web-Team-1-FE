@@ -1,3 +1,4 @@
+import { COOKIES } from "@shared/constants/token";
 import { getTokenCookie } from "@shared/utils/getTokenCookie";
 import { setCookie } from "cookies-next";
 
@@ -52,7 +53,7 @@ const processApiResponse = async <T extends object>(
 const refreshAccessToken = async (): Promise<string> => {
   const refreshToken = document.cookie
     .split("; ")
-    .find((row) => row.startsWith("refreshToken="))
+    .find((row) => row.startsWith(`${COOKIES.REFRESH_TOKEN}=`))
     ?.split("=")[1];
 
   if (!refreshToken) {
@@ -76,12 +77,12 @@ const refreshAccessToken = async (): Promise<string> => {
 
   const data = await response.json();
 
-  setCookie("accessToken", data.accessToken, {
+  setCookie(COOKIES.ACCESS_TOKEN, data.accessToken, {
     maxAge: 24 * 60 * 60, // 30 days
     path: "/",
   });
 
-  setCookie("refreshToken", data.refreshToken, {
+  setCookie(COOKIES.REFRESH_TOKEN, data.refreshToken, {
     maxAge: 30 * 24 * 60 * 60, // 30 days
     path: "/",
   });
