@@ -1,10 +1,11 @@
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import queryClient from "@api/queryClient";
 
 import useIsLogin from "@shared/hooks/useIsLogin";
 
 import { WORKBOOK_BTNS } from "@workbook/constants/buttons";
+import { getWorkbookId } from "@workbook/utils";
 
 import { QUERY_KEY } from "@main/remotes";
 
@@ -16,12 +17,15 @@ export default function WorkbookButton() {
   const { postSubscribeWorkbook } = useSusbscribeWorkbook();
   const router = useRouter();
 
-  const parms = useSearchParams();
-  const workbookId = parms.get("workbookId") as string;
+  const pathname = usePathname();
+  const workbookId = getWorkbookId(pathname);
+
+  console.log('workbookId    ', workbookId);
+  
 
   const handleLoginClick = () => {
     postSubscribeWorkbook({
-      workbookId: workbookId,
+      workbookId: workbookId.toString(),
       handleSucess: () => {
         queryClient.refetchQueries({
           queryKey: [QUERY_KEY.GET_SUBSCRIBE_WORKBOOKS],
