@@ -8,7 +8,7 @@ export const logOut = () => {
     return fewFetch().delete(API_ROUTE.LOGOUT())
 }
 
-export const logOutOptions = (): UseMutationOptions<
+export const logOutMutaionOption = (): UseMutationOptions<
     ApiResponse<any>,
     Error
 > => {
