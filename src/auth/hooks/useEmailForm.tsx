@@ -35,9 +35,9 @@ export const useEmailForm = () => {
     try {
       memberSave(values, {
         onSuccess: (response: ApiResponse<memberSaveResponse>) => {
-          console.log('res', response);
+          console.log('res', response.data?.data);
 
-          if (response.data?.data?.sendAuth) {
+          if (response.data?.data?.isSendAuth) {
             // redirect to validation page
             router.push(`/auth/validation?email=${values.email}`)
           } else {

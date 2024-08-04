@@ -91,8 +91,8 @@ describe("이메일 폼 컴포넌트", () => {
   it("성공적인 제출 후 검증 페이지로 이동해야 한다", async () => {
     const email = "test@example.com"
     mockOnSubmit.mockImplementationOnce((values) => {
-      const response = { data: { data: { sendAuth: true } } };
-      response.data?.data?.sendAuth &&
+      const response = { data: { data: { isSendAuth: true } } };
+      response.data?.data?.isSendAuth &&
         mockPush(`/auth/validation?email=${email}`);
     });
 

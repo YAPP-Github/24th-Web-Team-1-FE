@@ -1,19 +1,21 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
+
+import { useEffect } from "react";
 
 import { useQuery } from "@tanstack/react-query";
 
+import { EVENT_NAME } from "@shared/constants/mixpanel";
+import { Mixpanel } from "@shared/utils/mixpanel";
+
+import WorkbookButton from "@workbook/components/WorkbookButton";
+import WorkbookSkeleton from "@workbook/components/WorkbookSkeleton";
+import WriterInfo from "@workbook/components/WriterInfo";
 import { getWorkbookQueryOptions } from "@workbook/remotes/getWorkbookQueryOptions";
 import { getWorkbookId } from "@workbook/utils";
 
-import WorkbookSkeleton from "@workbook/components/WorkbookSkeleton";
-import WriterInfo from "@workbook/components/WriterInfo";
-import dynamic from "next/dynamic";
-
-import { EVENT_NAME } from "@shared/constants/mixpanel";
-import { Mixpanel } from "@shared/utils/mixpanel";
-import { useEffect } from "react";
 
 const TitleSection = dynamic(() => import("@shared/components/TitleSection"), {
   loading: () => <WorkbookSkeleton.TitleSkeleton />,
@@ -92,7 +94,7 @@ export default function WorkbookPage() {
 
               <OverviewSection overview={workbookInfo.description} />
               <CurriculumSection curriculumItems={workbookInfo.articles} />
-              {/* <SubscribeBottomBar /> */}
+              <WorkbookButton />
             </>
           )}
         </article>
