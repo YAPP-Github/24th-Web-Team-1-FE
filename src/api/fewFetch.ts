@@ -93,9 +93,6 @@ const fetInterceptor: Interceptor = {
   onRequest: (config) => {
     const accessToken = getTokenCookie();
 
-    console.log('access Token ', accessToken);
-    
-
     if (accessToken) {
       config.headers = {
         ...config.headers,
