@@ -1,9 +1,10 @@
-import { UNAUTH_LINK } from "@main/constants/dropdownMenu";
+import { AUTH_LINK, UNAUTH_LINK } from "@main/constants/dropdownMenu";
+import useIsLogin from "@shared/hooks/useIsLogin";
 import { cn } from "@shared/utils/cn";
 
 export function DropDownMenuItemList() {
-  // TODO : 로그인 여부따라서 메뉴 제어 필요
-  const MENU_ITEM_LIST = UNAUTH_LINK;
+  const isLogin = useIsLogin();
+  const MENU_ITEM_LIST = isLogin ? AUTH_LINK : UNAUTH_LINK;
   const lastIdx = MENU_ITEM_LIST.length - 1;
   return (
     <ul className="absolute left-0 top-[66px] z-20 h-screen w-full bg-white">
