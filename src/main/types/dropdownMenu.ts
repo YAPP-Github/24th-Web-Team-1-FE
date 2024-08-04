@@ -1,4 +1,10 @@
 export interface DropdownMenuItem {
   title: string;
-  component: ({ title }: { title: string }) => JSX.Element;
+  component: ({
+    title,
+    email,
+  }: {
+    title: string;
+    email?: string;
+  }) => JSX.Element;
 }
