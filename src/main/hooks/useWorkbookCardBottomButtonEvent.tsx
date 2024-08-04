@@ -3,6 +3,7 @@ import queryClient from "@api/queryClient";
 import useSusbscribeWorkbook from "@common/hooks/useSusbscribeWorkbook";
 import { QUERY_KEY } from "@main/remotes";
 import { WorkbookClientInfo } from "@main/types/workbook";
+import useIsLogin from "@shared/hooks/useIsLogin";
 import { onClickLinkCopy } from "@shared/utils/onClickLinkCopy";
 import { useRouter } from "next/navigation";
 
@@ -14,6 +15,7 @@ export default function useWorkbookCardBottomButtonEvent({
   let handleButtonClick;
   const { push } = useRouter();
   const { postSubscribeWorkbook } = useSusbscribeWorkbook();
+  const isLogin = useIsLogin();
 
   const clickShareButton = () => {
     onClickLinkCopy({
@@ -22,17 +24,21 @@ export default function useWorkbookCardBottomButtonEvent({
   };
 
   const clickSubscribeButton = () => {
-    postSubscribeWorkbook({
-      workbookId: workbookId.toString(),
-      handleSucess: () => {
-        queryClient.refetchQueries({
-          queryKey: [QUERY_KEY.GET_SUBSCRIBE_WORKBOOKS],
-        });
-        queryClient.refetchQueries({
-          queryKey: [QUERY_KEY.GET_WORKBOOKS_WITH_CATEGORY],
-        });
-      },
-    });
+    if (isLogin)
+      postSubscribeWorkbook({
+        workbookId: workbookId.toString(),
+        handleSucess: () => {
+          queryClient.refetchQueries({
+            queryKey: [QUERY_KEY.GET_SUBSCRIBE_WORKBOOKS],
+          });
+          queryClient.refetchQueries({
+            queryKey: [QUERY_KEY.GET_WORKBOOKS_WITH_CATEGORY],
+          });
+        },
+      });
+    else {
+      push("/auth");
+    }
   };
 
   const clickLearnButton = () => {
