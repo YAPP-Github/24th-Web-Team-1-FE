@@ -19,7 +19,7 @@ export default function WorkbookCardList({
       }),
       {
         ...getSubscriptionWorkbooksQueryOptions(),
-        enabled: isLogin,
+        enabled: isLogin === true,
       },
     ],
     combine: (result) => {
