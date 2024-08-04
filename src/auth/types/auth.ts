@@ -3,7 +3,7 @@ export type memberSaveBody = {
 }
 
 export type memberSaveResponse = {
-    sendAuth: boolean
+    isSendAuth: boolean
 }
 
 export type tokenResponse = {

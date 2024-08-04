@@ -1,6 +1,6 @@
 {
   "data": {
-    "sendAuth": true
+    "isSendAuth": true
   },
   "message": "성공"
 }
