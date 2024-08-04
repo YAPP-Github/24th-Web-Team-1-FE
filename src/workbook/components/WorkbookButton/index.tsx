@@ -20,9 +20,6 @@ export default function WorkbookButton() {
   const pathname = usePathname();
   const workbookId = getWorkbookId(pathname);
 
-  console.log('workbookId    ', workbookId);
-  
-
   const handleLoginClick = () => {
     postSubscribeWorkbook({
       workbookId: workbookId.toString(),
