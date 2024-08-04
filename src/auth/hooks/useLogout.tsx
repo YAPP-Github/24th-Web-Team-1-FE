@@ -20,7 +20,7 @@ export const useLogout = () => {
             // 쿠키 삭제 및 로그인 페이지로 이동
             deleteCookie("accessToken");
             deleteCookie("refreshToken");
-            router.push('/auth');
+            router.push('/');
         }
     },
     onError: (error: any) => {

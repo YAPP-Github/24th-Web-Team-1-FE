@@ -57,7 +57,7 @@ describe("LogoutLink 컴포넌트 테스트", () => {
     await waitFor(() => {
       expect(document.cookie).not.toContain("accessToken=accessToken");
       expect(document.cookie).not.toContain("refreshToken=refreshToken");
-      expect(mockPush).toHaveBeenCalledWith("/auth");
+      expect(mockPush).toHaveBeenCalledWith("/");
     });
   });
 });
