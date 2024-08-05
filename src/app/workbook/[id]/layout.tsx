@@ -7,7 +7,6 @@ import queryClient from "@api/queryClient";
 import { getWorkbookQueryOptions } from "@workbook/remotes/getWorkbookQueryOptions";
 import TopBar from "@shared/components/TopBar";
 
-
 export async function generateMetadata({
   params,
 }: {
@@ -34,10 +33,12 @@ interface WorkbookLayoutProps {
 export default function WorkbookLayout({ children }: WorkbookLayoutProps) {
   return (
     <section className="flex h-auto w-full flex-col justify-between">
-      <div className="mx-[20px] mb-[10px] flex flex-col">
+      <div className="mb-[10px] flex flex-col">
+        <div className="mx-[20px]">
           <TopBar />
-          {children}
         </div>
+        {children}
+      </div>
     </section>
-  )
+  );
 }
