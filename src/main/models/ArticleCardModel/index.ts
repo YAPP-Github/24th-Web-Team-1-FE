@@ -26,6 +26,7 @@ export default class ArticleCardModel {
           writerInfo: {
             name: writer.name,
             url: writer.url,
+            imageUrl: writer.imageUrl,
           },
           thumbnail: mainImageUrl,
           title,

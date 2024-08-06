@@ -11,6 +11,7 @@ export interface ArticleClientInfo {
   writerInfo: {
     name: string;
     url: string;
+    imageUrl: string;
   };
   thumbnail: string;
   title: string;

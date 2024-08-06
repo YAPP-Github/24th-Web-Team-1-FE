@@ -21,7 +21,7 @@ const WriterProfile = ({
     <Image
       width={30}
       height={30}
-      src={writerInfo.url}
+      src={writerInfo.imageUrl}
       alt="profile-image"
       className="h-[30px] w-[30px] rounded-full"
     />
