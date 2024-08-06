@@ -8,6 +8,7 @@ const nextConfig = {
       "github.com",
       "oopy.lazyrockets.com",
       "eehhqckznniu25210545.cdn.ntruss.com",
+      "d3ex4vlh373syu.cloudfront.net",
       "storage.mrblog.net",
       "d3ex4vlh373syu.cloudfront.net",
       "www.fig1.kr",
@@ -15,6 +16,7 @@ const nextConfig = {
       "maily.so",
       "pension.inmostadvisor.com",
       "localhost",
+
     ],
   },
   webpack: (config, context) => {

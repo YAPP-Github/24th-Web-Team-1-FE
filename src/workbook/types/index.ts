@@ -26,6 +26,6 @@ export interface WorkbookInfo {
   articles: Article[];
 }
 
-export type MetadataProps = {
+export type WorkbookPageProps = {
   params: { id: string };
 };
