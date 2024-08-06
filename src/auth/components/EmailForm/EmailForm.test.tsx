@@ -1,76 +1,128 @@
-import { useForm } from 'react-hook-form';
+import { useForm } from "react-hook-form";
 
-import { describe, expect, it, vi } from 'vitest';
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-import { EMAIL_CONTROL } from '@subscription/constants/subscribe';
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
-import EmailForm from '.';
-import { LOGIN_OR_SIGNUP, LOGIN_STATUS } from '@auth/constants/auth';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { EMAIL_CONTROL } from "@subscription/constants/subscribe";
 
-// Mock the useSubscribeForm hook
+import EmailForm from ".";
+import "@testing-library/jest-dom";
+import { LOGIN_OR_SIGNUP } from "@auth/constants/auth";
+import { render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+
 const mockOnSubmit = vi.fn();
 
-vi.mock('@auth/hooks/useEmailForm', () => ({
-    useEmailForm: () => {
-    const form = useForm({
-      resolver: async (data) => {
-        const errors: { email?: { type: string; message: string } } = {};
-        if (data.email && !data.email.includes('@')) {
-          errors.email = {
-            type: 'manual',
-            message: EMAIL_CONTROL.INVALID_EMAIL,
-          };
-        }
-        return {
-          values: Object.keys(errors).length ? {} : data,
-          errors: errors,
-        };
-      },
-    });
-    return { form, onSubmit: mockOnSubmit };
-  },
-}));
-
-// Mock useToast hook
-const mockToast = vi.fn();
-
-vi.mock('@shared/components/ui/use-toast', () => ({
-  useToast: () => ({
-    toast: mockToast,
-    dismiss: vi.fn(),
-    toasts: []
+vi.mock("@auth/hooks/useEmailForm", () => ({
+  useEmailForm: () => ({
+    form: useForm(),
+    onSubmit: mockOnSubmit,
   }),
 }));
 
+const mockPush = vi.fn();
 
-describe('이메일 인풋 UI 테스트', () => {
-  it('유효하지 않은 이메일을 사용했을 때 에러 띄우기', async () => {
-    render(<EmailForm />);
+vi.mock("next/navigation", () => ({
+  useRouter: () => ({
+    push: mockPush,
+  }),
+}));
 
-    const input = screen.getByPlaceholderText(EMAIL_CONTROL.EMAIL_PLACEHOLDER) as HTMLInputElement;
-    const submitButton = screen.getByText(LOGIN_OR_SIGNUP);
+const mockToast = {
+  toast: vi.fn(),
+};
 
-    fireEvent.change(input, { target: { value: 'invalid-email' } });
-    fireEvent.click(submitButton);
+vi.mock("@shared/components/ui/use-toast", () => ({
+  useToast: () => mockToast,
+}));
 
-    await waitFor(() => {
-      expect(screen.queryByText(EMAIL_CONTROL.INVALID_EMAIL)).toBeDefined() 
-    })
+describe("이메일 폼 컴포넌트", () => {
+  const queryClient = new QueryClient();
+
+  const renderWithClient = () => {
+    return render(
+      <QueryClientProvider client={queryClient}>
+        <EmailForm />
+      </QueryClientProvider>,
+    );
+  };
+
+  beforeEach(() => {
+    renderWithClient();
+  })
+
+  it("폼을 렌더링해야 한다", () => {
+    expect(
+      screen.getByPlaceholderText(EMAIL_CONTROL.EMAIL_PLACEHOLDER),
+    ).toBeInTheDocument();
+    expect(screen.getByText(LOGIN_OR_SIGNUP)).toBeInTheDocument();
   });
 
-  it('유효한 이메일을 입력했을 때 toast 메시지를 표시', async () => {
-  
-    render(<EmailForm />);
+  it("올바르지 않은 이메일 형식에 에러 메시지를 보여줘야 한다", async () => {
+    const user = userEvent.setup();
 
-    const input = screen.getByPlaceholderText(EMAIL_CONTROL.EMAIL_PLACEHOLDER) as HTMLInputElement;
+
     const submitButton = screen.getByText(LOGIN_OR_SIGNUP);
 
-    fireEvent.change(input, { target: { value: 'test@example.com' } });
-    fireEvent.click(submitButton);
+    const emailInput = screen.getByPlaceholderText(
+      EMAIL_CONTROL.EMAIL_PLACEHOLDER,
+    );
+    await user.type(emailInput, "invalid-email");
+    await user.click(submitButton);
 
     await waitFor(() => {
-      expect(screen.queryByText(LOGIN_STATUS.COMPLETED)).toBeDefined()
-    })
+      expect(screen.findByText(EMAIL_CONTROL.INVALID_EMAIL)).toBeTruthy();
+    });
+  });
+
+  it("폼 제출 시 onSubmit을 호출해야 한다", async () => {
+    const user = userEvent.setup();
+
+
+    const submitButton = screen.getByText(LOGIN_OR_SIGNUP);
+    await user.click(submitButton);
+
+    await waitFor(() => {
+      expect(mockOnSubmit).toHaveBeenCalled();
+    });
+  });
+
+  it("성공적인 제출 후 검증 페이지로 이동해야 한다", async () => {
+    const email = "test@example.com"
+    mockOnSubmit.mockImplementationOnce((values) => {
+      const response = { data: { data: { isSendAuth: true } } };
+      response.data?.data?.isSendAuth &&
+        mockPush(`/auth/validation?email=${email}`);
+    });
+
+    const user = userEvent.setup();
+
+    const submitButton = screen.getByText(LOGIN_OR_SIGNUP);
+
+    await user.click(submitButton);
+
+    await waitFor(() => {
+      expect(mockOnSubmit).toHaveBeenCalled();
+      expect(mockPush).toHaveBeenCalledWith(`/auth/validation?email=${email}`);
+      
+    });
+  });
+
+  it("제출 실패 시 토스트 메시지를 보여줘야 한다", async () => {
+    mockOnSubmit.mockImplementationOnce(() => {
+      mockToast.toast({ title: "Fail message" });
+    });
+
+    const user = userEvent.setup();
+
+    const submitButton = screen.getByText(LOGIN_OR_SIGNUP);
+
+    await user.click(submitButton);
+
+    await waitFor(() => {
+      expect(mockOnSubmit).toHaveBeenCalled();
+      expect(mockToast.toast).toHaveBeenCalledWith({ title: "Fail message" });
+    });
   });
 });

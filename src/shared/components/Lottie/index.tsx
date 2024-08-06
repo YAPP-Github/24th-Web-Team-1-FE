@@ -17,6 +17,7 @@ export default function LottieClient({ animationData }: LottieClientProps) {
         position: "absolute",
         top: 0,
         left: 0,
+        zIndex: -1,
       }}
     />
   );

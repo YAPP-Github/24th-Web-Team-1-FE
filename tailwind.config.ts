@@ -64,6 +64,7 @@ const config = {
           gray2: "#A5A5A5",
           gray3: "#E6E6E6",
           gray4: "#3D3D3E",
+          gray5: "#858585",
         },
       },
       borderRadius: {
