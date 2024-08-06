@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     siteName: "FEW",
     locale: "ko_KR",
     type: "website",
-    url: "https://www.fewletter.com/",
+    url: "https://www.fewletter.com",
     images: {
       url: "/fewlogo.svg",
     },
