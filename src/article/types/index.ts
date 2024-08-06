@@ -11,3 +11,8 @@ export type ArticleDetail = {
 export type ArticleWithWorkbookDetail = {
   day: string;
 } & ArticleDetail;
+
+export interface ArticlePageProps {
+  params: { articleId: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+}
