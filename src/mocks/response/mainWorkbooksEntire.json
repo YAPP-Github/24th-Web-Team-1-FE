@@ -1,0 +1,39 @@
+{
+  "data": {
+    "workbooks": [
+      {
+        "id": 1,
+        "mainImageUrl": "https://storage.mrblog.net/files/dosi_draw/a3NgiDGW2H3NhsYp1Qp3RuWNzUx9sg8L2yyooYqF.jpg",
+        "title": "몰티즈는 참지않긔",
+        "description": "몰티즈는 참지않긔 몰티즈는 참지않긔 몰티즈는 참지않긔 몰티즈는 참지않긔 몰티즈는 참지않긔 몰티즈는 참지않긔 몰티즈는 참지않긔 몰티즈는 참지않긔",
+        "category": "경제",
+        "createdAt": "2024-07-25 14:32:35",
+        "writers": [
+          {
+            "id": 1,
+            "name": "name1",
+            "url": "https://example.com"
+          }
+        ],
+        "subscriberCount": 1
+      },
+      {
+        "id": 2,
+        "mainImageUrl": "https://storage.mrblog.net/files/dosi_draw/a3NgiDGW2H3NhsYp1Qp3RuWNzUx9sg8L2yyooYqF.jpg",
+        "title": "몰티즈는 참지않긔",
+        "description": "몰티즈는 참지않긔 몰티즈는 참지않긔 몰티즈는 참지않긔 몰티즈는 참지않긔 몰티즈는 참지않긔 몰티즈는 참지않긔 몰티즈는 참지않긔 몰티즈는 참지않긔",
+        "category": "경제",
+        "createdAt": "2024-07-25 14:32:35",
+        "writers": [
+          {
+            "id": 2,
+            "name": "name2",
+            "url": "https://example.com"
+          }
+        ],
+        "subscriberCount": 2
+      }
+    ]
+  },
+  "message": "성공"
+}

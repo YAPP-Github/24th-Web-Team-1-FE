@@ -10,9 +10,9 @@ import useWorkbookId from "@shared/hooks/useWorkbookId";
 import { SUBSCRIBE_USER_ACTIONS } from "@subscription/constants/subscribe";
 import { subscribeWorkbookOptions } from "@subscription/remotes/postSubscriptionQueryOptions";
 
-import { emailSubscribeSchema } from '@common/schemas/emailSchema';
-import { EmailSubscribeFormData } from '@common/types/emailSubscribeData';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { emailSubscribeSchema } from "@common/schemas/emailSchema";
+import { EmailSubscribeFormData } from "@common/types/emailSubscribeData";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export const useSubscribeForm = () => {
   const { toast } = useToast();
@@ -27,31 +27,30 @@ export const useSubscribeForm = () => {
     mode: "onSubmit",
   });
 
-  const { mutate: subscribeWorkbook } = useMutation(
-    subscribeWorkbookOptions({
-      workbookId: workbookId,
-    }),
-  );
+  const { mutate: subscribeWorkbook } = useMutation(subscribeWorkbookOptions());
 
   const onSubmit = (values: EmailSubscribeFormData) => {
     try {
-      subscribeWorkbook(values, {
-        onSuccess: () => {
-          form.reset();
-          toast({
-            title: SUBSCRIBE_USER_ACTIONS.SUBSCRIBE_SUCCESS,
-          });
+      subscribeWorkbook(
+        { workbookId },
+        {
+          onSuccess: () => {
+            form.reset();
+            toast({
+              title: SUBSCRIBE_USER_ACTIONS.SUBSCRIBE_SUCCESS,
+            });
+          },
+          onError: (error) => {
+            let errorMessage = SUBSCRIBE_USER_ACTIONS.SUBSCRIBE_FAIL;
+            if (error && error.data && error.data.message) {
+              errorMessage = error.data.message || errorMessage;
+            }
+            toast({
+              title: errorMessage,
+            });
+          },
         },
-        onError: (error) => {
-          let errorMessage = SUBSCRIBE_USER_ACTIONS.SUBSCRIBE_FAIL;
-          if (error && error.data && error.data.message) {
-            errorMessage = error.data.message || errorMessage;
-          }
-          toast({
-            title: errorMessage,
-          });
-        },
-      });
+      );
     } catch (error) {
       console.error("catch error", error);
 

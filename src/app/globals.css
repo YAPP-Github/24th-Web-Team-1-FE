@@ -102,6 +102,9 @@
     @apply font-pretendard text-[15px]/[24.75px] font-normal;
   }
 
+  .body3-bold {
+    @apply font-pretendard text-[14px]/[23.1px] font-bold;
+  }
   .body3-medium {
     @apply font-pretendard text-[14px]/[21px] font-medium;
   }
@@ -119,7 +122,10 @@
     @apply font-pretendard text-[16px]/[25.44px] font-medium;
   }
   .sub3-semibold {
-    @apply font-pretendard text-[12px] font-semibold
+    @apply font-pretendard text-[12px] font-semibold;
+  }
+  .sub3-medium {
+    @apply font-pretendard text-[12px]/[18px] font-medium;
   }
 
   .scrollbar-hide {

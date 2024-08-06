@@ -1,8 +1,7 @@
 import { Button } from "@shared/components/ui/button";
 import { Input } from "@shared/components/ui/input";
-import { useToast } from "@shared/components/ui/use-toast";
-import { COPY_CLIP_URL } from "@shared/constants/linkShareContent";
 import { cn } from "@shared/utils/cn";
+import { onClickLinkCopy } from "@shared/utils/onClickLinkCopy";
 import LinkShareIcon from "public/assets/icon/link.svg";
 import React, { HTMLAttributes } from "react";
 
@@ -13,16 +12,6 @@ const LinkShareContent = React.forwardRef<
   HTMLDivElement,
   LinkShareContentProps
 >(({ href, ...props }, ref) => {
-  const { toast } = useToast();
-
-  const onClickLinkCopy = async () => {
-    try {
-      await navigator.clipboard.writeText(href);
-      toast({ title: COPY_CLIP_URL });
-    } catch (err) {
-      console.error(err);
-    }
-  };
   return (
     <section className="relative" ref={ref} {...props}>
       <Input
@@ -37,7 +26,7 @@ const LinkShareContent = React.forwardRef<
           "flex items-center bg-text-black p-[12px] focus:!border-none focus:!ring-transparent",
         )}
         type="button"
-        onClick={onClickLinkCopy}
+        onClick={() => onClickLinkCopy({ href })}
       >
         <LinkShareIcon fill="#ffffff" width={22} height={18} />
       </Button>

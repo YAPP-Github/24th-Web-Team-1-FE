@@ -3,9 +3,15 @@ import type { Metadata } from "next";
 
 import { createMetadata } from "@shared/utils/metadata";
 
+
 import { HydrationBoundary } from "@tanstack/react-query";
 import { prefetchWorkbookQuery } from "@workbook/remotes/prefetchWorkbookQuery";
 import { WorkbookPageProps } from "@workbook/types";
+
+
+import { getWorkbookQueryOptions } from "@workbook/remotes/getWorkbookQueryOptions";
+import TopBar from "@shared/components/TopBar";
+
 
 export async function generateMetadata({
   params,
@@ -24,6 +30,7 @@ interface WorkbookLayoutProps {
   children: React.ReactNode;
 }
 
+
 export default async function WorkbookLayout({
   params,
   children,
@@ -31,7 +38,13 @@ export default async function WorkbookLayout({
   const { state } = await prefetchWorkbookQuery({ params });
   return (
     <HydrationBoundary state={state}>
-      <section className="w-full">{children}</section>;
+    <section className="flex h-auto w-full flex-col justify-between">
+      <div className="mb-[10px] flex flex-col">
+        <div className="mx-[20px]">
+          <TopBar />
+        </div>
+        {children}
+      </div>
+    </section>
     </HydrationBoundary>
-  );
 }
