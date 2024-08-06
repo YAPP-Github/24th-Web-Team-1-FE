@@ -80,7 +80,7 @@ export default function WorkbookPage() {
 
   return (
     <>
-      <main className="flex h-[100vh] w-full flex-col items-center overflow-x-hidden">
+      <main className="flex w-full flex-col items-center overflow-x-hidden">
         <article className="flex h-full w-full max-w-screen-sm flex-col space-y-[24px] overflow-y-scroll">
           {workbookInfo && (
             <>
