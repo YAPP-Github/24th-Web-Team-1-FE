@@ -3,20 +3,15 @@ import type { Metadata } from "next";
 
 import { createMetadata } from "@shared/utils/metadata";
 
-import queryClient from "@api/queryClient";
-import { getWorkbookQueryOptions } from "@workbook/remotes/getWorkbookQueryOptions";
+import { HydrationBoundary } from "@tanstack/react-query";
+import { prefetchWorkbookQuery } from "@workbook/remotes/prefetchWorkbookQuery";
+import { WorkbookPageProps } from "@workbook/types";
 
 export async function generateMetadata({
   params,
-}: {
-  params: { id: string };
-}): Promise<Metadata> {
-  const workbookId = params.id;
-
-  const { data: workbookInfo } = await queryClient.fetchQuery({
-    ...getWorkbookQueryOptions(workbookId),
-  });
-  const { title, description, mainImageUrl } = workbookInfo.data;
+}: WorkbookPageProps): Promise<Metadata> {
+  const { data: workbookInfo } = await prefetchWorkbookQuery({ params });
+  const { title, description, mainImageUrl } = workbookInfo;
 
   return createMetadata({
     title: title,
@@ -29,6 +24,14 @@ interface WorkbookLayoutProps {
   children: React.ReactNode;
 }
 
-export default function WorkbookLayout({ children }: WorkbookLayoutProps) {
-  return <section className="w-full">{children}</section>;
+export default async function WorkbookLayout({
+  params,
+  children,
+}: WorkbookPageProps & WorkbookLayoutProps) {
+  const { state } = await prefetchWorkbookQuery({ params });
+  return (
+    <HydrationBoundary state={state}>
+      <section className="w-full">{children}</section>;
+    </HydrationBoundary>
+  );
 }
