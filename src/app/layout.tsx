@@ -26,7 +26,9 @@ export const metadata: Metadata = {
     type: "website",
     url: "https://develop.24th-web-team-1-fe.pages.dev",
     images: {
-      url: "/og.svg",
+      url: "https://d3ex4vlh373syu.cloudfront.net/images/2024-08-07/lB4x0nt2isUPSmSr.svg",
+      width: 709,
+      height: 469,
     },
   },
   icons: {
