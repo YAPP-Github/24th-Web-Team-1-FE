@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     type: "website",
     url: "https://develop.24th-web-team-1-fe.pages.dev",
     images: {
-      url: "/fewlogo.svg",
+      url: "/og.svg",
     },
   },
   icons: {
