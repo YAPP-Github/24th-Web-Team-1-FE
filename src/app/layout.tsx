@@ -16,10 +16,10 @@ import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "FEW - Just a few minute",
+  title: "Few - Just a few minutes!",
   description: "퀴즈로 뉴스레터 끝까지 읽기",
   openGraph: {
-    title: "FEW - Just a few minute",
+    title: "Few - Just a few minutes!",
     description: "퀴즈로 뉴스레터 끝까지 읽기",
     siteName: "FEW",
     locale: "ko_KR",
