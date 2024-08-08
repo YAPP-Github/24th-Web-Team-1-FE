@@ -20,7 +20,6 @@ const actions = {
   people: {
     set: ({ peoples }: { peoples: Dict }) => {
       if (typeof window === "undefined") return;
-      console.log("mixpanel", peoples);
       mixpanel.people.set(peoples);
     },
   },
