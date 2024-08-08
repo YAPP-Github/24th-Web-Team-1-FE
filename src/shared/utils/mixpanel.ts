@@ -11,7 +11,7 @@ const actions = {
 
   identify: ({ id }: { id: string }) => {
     if (typeof window === "undefined") return;
-    if (isDebug) mixpanel.identify(id);
+    mixpanel.identify(id);
   },
   track: ({ name, property }: { name: string; property?: Dict }) => {
     mixpanel.track(name, property);
@@ -19,6 +19,7 @@ const actions = {
   people: {
     set: ({ peoples }: { peoples: Dict }) => {
       if (typeof window === "undefined") return;
+      console.log("mixpanel", peoples);
       mixpanel.people.set(peoples);
     },
   },
