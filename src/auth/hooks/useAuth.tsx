@@ -33,7 +33,7 @@ export const useAuth = (auth_token: string) => {
               path: "/",
             });
 
-            Mixpanel.people.set({ peoples: { email: memberEmail } });
+            Mixpanel.people.set({ peoples: { $email: memberEmail } });
           }
         },
         onError: (error) => {
