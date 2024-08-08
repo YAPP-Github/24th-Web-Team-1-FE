@@ -19,7 +19,7 @@ const actions = {
   people: {
     set: ({ peoples }: { peoples: Dict }) => {
       if (typeof window === "undefined") return;
-      if (!isDebug) mixpanel.people.set(peoples);
+      mixpanel.people.set(peoples);
     },
   },
   clear: () => mixpanel.people.clear_charges(),
