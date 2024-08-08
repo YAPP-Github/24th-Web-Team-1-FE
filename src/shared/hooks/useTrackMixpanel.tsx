@@ -16,6 +16,7 @@ export default function useTrackMixpanel({
 }: TrackMixpanelProps) {
   useEffect(
     function trackMixpanel() {
+      Mixpanel.identify({ id: "hee" });
       Mixpanel.people.set({ peoples: { $email: "happgee" } });
       if (property)
         Mixpanel.track({
