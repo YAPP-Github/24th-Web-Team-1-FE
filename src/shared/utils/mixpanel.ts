@@ -13,6 +13,7 @@ const actions = {
     if (typeof window === "undefined") return;
     mixpanel.identify(id);
   },
+  reset: () => mixpanel.reset(),
   track: ({ name, property }: { name: string; property?: Dict }) => {
     mixpanel.track(name, property);
   },
@@ -23,7 +24,6 @@ const actions = {
       mixpanel.people.set(peoples);
     },
   },
-  clear: () => mixpanel.people.clear_charges(),
 };
 
 export const Mixpanel = actions;
