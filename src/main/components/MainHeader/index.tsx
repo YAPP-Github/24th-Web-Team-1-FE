@@ -1,15 +1,20 @@
 "use client";
-import { cn } from "@shared/utils/cn";
-import FewLogo from "public/assets/icon/fewlogo.svg";
-
 import { useState } from "react";
+
+import { EVENT_NAME } from "@shared/constants/mixpanel";
+import useTrackMixpanel from "@shared/hooks/useTrackMixpanel";
+import { cn } from "@shared/utils/cn";
+
 import DropDownMenuWrapper from "../DropdownMenuWrapper";
+import FewLogo from "public/assets/icon/fewlogo.svg";
 export default function MainHeader() {
+  useTrackMixpanel({ eventKey: EVENT_NAME.MAIN_APPEAR });
   const [toggleMenu, setToggleMenu] = useState(false);
 
   const handleToggleMenu = () => {
     setToggleMenu((prev) => !prev);
   };
+
   return (
     <header
       className={cn(
