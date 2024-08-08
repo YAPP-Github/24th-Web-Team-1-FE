@@ -32,6 +32,7 @@ export const useAuth = (auth_token: string) => {
               maxAge: 30 * 24 * 60 * 60, // 30 days
               path: "/",
             });
+
             Mixpanel.identify({ id: memberEmail });
             Mixpanel.people.set({ peoples: { $email: memberEmail } });
           }
