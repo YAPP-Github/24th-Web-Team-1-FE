@@ -7,9 +7,12 @@ import { setCookie } from "cookies-next";
 
 import { ApiResponse } from "@api/fewFetch";
 
+import { COOKIES } from "@shared/constants/token";
+import { Mixpanel } from "@shared/utils/mixpanel";
+import { tokenParse } from "@shared/utils/tokenParse";
+
 import { postTokenQueryOptions } from "@auth/remotes/postTokenQueryOption";
 import { tokenResponse } from "@auth/types/auth";
-import { COOKIES } from "@shared/constants/token";
 
 export const useAuth = (auth_token: string) => {
   const { mutate: postToken } = useMutation({
@@ -19,7 +22,7 @@ export const useAuth = (auth_token: string) => {
         onSuccess: (response: ApiResponse<tokenResponse>) => {
           if (response?.data?.data) {
             const { accessToken, refreshToken } = response.data.data;
-
+            const { memberEmail } = tokenParse(accessToken);
             setCookie(COOKIES.ACCESS_TOKEN, accessToken, {
               maxAge: 24 * 60 * 60, // 30 days
               path: "/",
@@ -29,6 +32,8 @@ export const useAuth = (auth_token: string) => {
               maxAge: 30 * 24 * 60 * 60, // 30 days
               path: "/",
             });
+
+            Mixpanel.people.set({ peoples: { email: memberEmail } });
           }
         },
         onError: (error) => {
