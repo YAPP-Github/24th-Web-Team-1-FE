@@ -98,8 +98,8 @@ describe("메인 워크북 카드 모델 테스트", () => {
       data: mockWorkbookSubscriptionInfoList,
     });
 
-    expect(serverSet).toHaveProperty("1");
-    expect(subscriptionSet).toHaveProperty("1");
+    expect(serverSet).toHaveProperty("card_1");
+    expect(subscriptionSet).toHaveProperty("card_1");
   });
 
   it("데이터 합치고 버튼 타이틀 확인하기", () => {
