@@ -4,7 +4,7 @@ import { ArticlesInfiniteQueryParams } from "@main/types/article";
 export const API_ROUTE = {
   CATEGORY: "/api/v1/workbooks/categories",
   WORKBOOKS_WITH_CATEGORY: ({ code }: { code: CategoryClientInfo["code"] }) =>
-    `/api/v1/workbooks?category=${code}`,
+    `/api/v1/workbooks?category=${code}&view=mainCard`,
   SUBSCRIBE_WORKBOOKS: `/api/v1/subscriptions/workbooks`,
   ARTICLE_CATEGORY: "/api/v1/articles/categories",
   ARICLES_WITH_CATEGORY: ({
