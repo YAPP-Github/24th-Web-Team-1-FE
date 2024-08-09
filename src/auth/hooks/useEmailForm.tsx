@@ -27,26 +27,34 @@ export const useEmailForm = () => {
     mode: "onSubmit",
   });
 
-  const { mutate: memberSave } = useMutation({
+  const memberSave = useMutation({
     ...memberSaveOptions()
   });
 
+  const goToPendingPage = (values: EmailSubscribeFormData) => {
+    router.push(`/auth/validation?email=${values.email}`)
+
+    onSubmit(values)
+  }
+
   const onSubmit = (values: EmailSubscribeFormData) => {
     try {
-      memberSave(values, {
+      memberSave.mutate(values, {
         onSuccess: (response: ApiResponse<memberSaveResponse>) => {
           console.log('res', response.data?.data);
 
           if (response.data?.data?.isSendAuth) {
             // redirect to validation page
-            router.push(`/auth/validation?email=${values.email}`)
+            // router.push(`/auth/validation?email=${values.email}`)
           } else {
+            router.push(`/auth`)
             toast({
               title: SIGNUP_PROGRESS.EMAIL_SEND_FAIL,
             });
           }
         },
         onError: () => {  
+          router.push(`/auth`)
           toast({
             title: SIGNUP_PROGRESS.EMAIL_SEND_FAIL,
           });
@@ -54,15 +62,17 @@ export const useEmailForm = () => {
       });
     } catch (error) {
       console.error("catch error", error);
-
+      router.push(`/auth`)
       toast({
-        title: LOGIN_STATUS.FAILED,
+        title: SIGNUP_PROGRESS.EMAIL_SEND_FAIL,
       });
     }
   };
 
   return {
     form,
+    goToPendingPage,
     onSubmit,
+    isPending: memberSave.isPending
   };
 };
