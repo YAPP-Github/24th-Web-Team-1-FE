@@ -81,6 +81,7 @@ export class WorkbookCardModel {
         currentDay,
         totalDay,
         articleInfo,
+        totalSubscriber,
       }) => {
         const cardType = this.getWorkbookCardType({ status, currentDay });
         const changeToClientData: WorkbookClientInfo = {
@@ -95,6 +96,7 @@ export class WorkbookCardModel {
             totalDay,
           }),
           personCourse: this.getPersonCourse({
+            totalSubscriber,
             subscriberCount,
             status,
           }),
@@ -172,15 +174,17 @@ export class WorkbookCardModel {
   }
 
   getPersonCourse({
+    totalSubscriber,
     subscriberCount,
     status,
   }: {
+    totalSubscriber: WorkbookSubscriptionInfo["totalSubscriber"] | undefined;
     subscriberCount: WorkbookServerInfo["subscriberCount"];
     status: WorkbookSubscriptionInfo["status"] | undefined;
   }): WorkbookClientInfo["personCourse"] {
     if (status) {
       if (status === "ACTIVE") return `${subscriberCount}명 학습중`;
-      if (status === "DONE") return `총 ${subscriberCount}명`;
+      if (status === "DONE") return `총 ${totalSubscriber}명`;
     }
     return `${subscriberCount}명 학습중`;
   }
