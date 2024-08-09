@@ -56,7 +56,7 @@ export class WorkbookCardModel {
       }
 
       return Object.entries(workbookCombineSet).map(([key, value]) => ({
-        id: Number(key),
+        id: Number(key.replace("card_", "")),
         ...value,
       })) as WorkbookCombineInfo[];
     }
@@ -217,7 +217,7 @@ export class WorkbookCardModel {
   }) {
     return data.reduce<WorkbookCombineInfoSet>((acc, item) => {
       const { id, ...rest } = item;
-      acc[id] = {
+      acc[`card_${id}`] = {
         ...rest,
       };
       return acc;
@@ -232,7 +232,7 @@ export class WorkbookCardModel {
 type WorkbookCombineInfo = WorkbookServerInfo &
   Partial<WorkbookSubscriptionInfo>;
 type WorkbookCombineInfoSet = {
-  [key: number]:
+  [key: string]:
     | Omit<WorkbookServerInfo, "id">
     | Omit<Partial<WorkbookSubscriptionInfo>, "id">;
 };
