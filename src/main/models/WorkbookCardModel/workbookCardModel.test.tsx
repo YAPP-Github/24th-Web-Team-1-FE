@@ -173,12 +173,14 @@ describe("메인 워크북 카드 모델 테스트", () => {
 
   it("학습중 상태에 따른 인원 텍스트 함수 테스트", () => {
     const personCourseActive = model.getPersonCourse({
+      totalSubscriber: 10,
       subscriberCount: 10,
       status: "ACTIVE",
     });
     expect(personCourseActive).toBe("10명 학습중");
 
     const personCourseDone = model.getPersonCourse({
+      totalSubscriber: 20,
       subscriberCount: 20,
       status: "DONE",
     });
