@@ -14,7 +14,7 @@ const WorkbookCardList = dynamic(() => import("../WorkbookCardList"), {
 export default function WorkbookCardsWrapper() {
   const { category, handleCategory } = useCategory();
   return (
-    <MainContentWrapper title="Workboks" className="mb-[73px] mt-[48px]">
+    <MainContentWrapper title="Workbooks" className="mb-[73px] mt-[48px]">
       <CategoryTabs
         type="WORKBOOK"
         handleCategory={handleCategory}
