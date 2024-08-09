@@ -30,4 +30,6 @@ export const SIGNUP_COMPLETED = {
     MAIN_BUTTON: "메인으로 가기"
 }
 
+export const SIGNUP_FAILED = "인증에 실패했어요. 다시 시도해주세요."
+
 export const DESCRIPTION_STYLE = "text-[12px] font-bold"
