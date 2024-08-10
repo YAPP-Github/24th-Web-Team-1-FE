@@ -22,7 +22,7 @@ const MainImage = ({
     src={mainImageUrl}
     alt="main-image"
     loader={ImageLoadr}
-    priority
+    loading="lazy"
     className="h-[172px] w-[269px] rounded-t-lg object-cover"
   />
 );
