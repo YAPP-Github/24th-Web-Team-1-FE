@@ -5,8 +5,12 @@ import { getSubscriptionWorkbooksQueryOptions } from "@main/remotes/getSubscript
 import { getWorkbooksWithCategoryQueryOptions } from "@main/remotes/getWorkbooksWithCategoryQueryOptions";
 import useIsLogin from "@shared/hooks/useIsLogin";
 import { useQueries } from "@tanstack/react-query";
-import WorkbookCard from "../WorkbookCard";
 import WorkbookCardListSkeleton from "../WorkbookCardListSkeleton";
+import dynamic from "next/dynamic";
+
+const WorkbookCard = dynamic(() => import("../WorkbookCard"), {
+  loading: () => <WorkbookCardListSkeleton />,
+});
 
 export default function WorkbookCardList({
   code,
@@ -36,7 +40,7 @@ export default function WorkbookCardList({
     },
   });
 
-  if (!workbookCardList) return <WorkbookCardListSkeleton />;
+  if (!workbookCardList ) return <WorkbookCardListSkeleton />;
 
   return (
     <section className="mr-[18px] flex gap-[8px] overflow-x-auto">
