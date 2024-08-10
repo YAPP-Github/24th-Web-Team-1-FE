@@ -18,7 +18,7 @@ const MainImage = ({
     height={172}
     src={mainImageUrl}
     alt="main-image"
-    priority
+    loading="lazy"
     className="h-[172px] w-[269px] rounded-t-lg object-cover"
   />
 );
