@@ -23,6 +23,8 @@ export const useAuth = (auth_token: string) => {
       { auth_token },
       {
         onSuccess: (response: ApiResponse<tokenResponse>) => {
+          console.log('res   ', response);
+          
           if (response?.data?.data) {
             const { accessToken, refreshToken } = response.data.data;
 

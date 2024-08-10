@@ -1,5 +1,4 @@
 "use client";
-
 import { Button } from "@shared/components/ui/button";
 import {
   Form,
@@ -16,13 +15,16 @@ import {
   SUBSCRIBE_ANNOUCE,
 } from "@subscription/constants/subscribe";
 
-import { LOGIN_OR_SIGNUP } from "@auth/constants/auth";
+import { LOGIN_OR_SIGNUP, SIGNUP_FAILED } from "@auth/constants/auth";
 import { useEmailForm } from "@auth/hooks/useEmailForm";
+import { useLoginFailToast } from "@auth/hooks/useLoginFailToast";
 
 export default function EmailForm() {
   const { form, onSubmit, goToPendingPage } = useEmailForm();
   const { handleSubmit, control, formState } = form;
 
+  useLoginFailToast();
+  
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(goToPendingPage)} className="space-y-8">
