@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 import { ApiResponse, fewFetch } from "@api/fewFetch";
 
-import { AUTH_TOKEN, ISLOGIN } from "@shared/constants/token";
+import { AUTH_TOKEN, COOKIES, ISLOGIN } from "@shared/constants/token";
 
 import { API_ROUTE } from "@auth/remotes/api";
 import { tokenResponse } from "@auth/types/auth";
@@ -16,26 +16,40 @@ type authMiddlewareProps = {
 export const AuthMiddleware = async ({ req, nextUrl }: authMiddlewareProps) => {
   try {
     const { searchParams } = nextUrl;
-    const auth_token = searchParams.get(AUTH_TOKEN)
+    const auth_token = searchParams.get(AUTH_TOKEN);
     if (auth_token) {
-      const response: ApiResponse<tokenResponse> = await fewFetch().post(API_ROUTE.TOKEN(auth_token))
+      const response: ApiResponse<tokenResponse> = await fewFetch().post(
+        API_ROUTE.TOKEN(auth_token),
+      );
 
-      const authData = response.data
+      const authData = response.data;
+
+      console.log(authData);
+      
 
       if (authData?.message === "알 수 없는 오류가 발생했어요.") {
-        nextUrl.pathname = `/auth`
-        nextUrl.searchParams.delete(AUTH_TOKEN)
-        
+        nextUrl.searchParams.delete(AUTH_TOKEN);
         const response = NextResponse.redirect(nextUrl);
-        response.cookies.set(ISLOGIN, 'false');
+
+        // response.cookies.set(COOKIES.ACCESS_TOKEN, "false");
+        response.cookies.set(ISLOGIN, "false");
+
+        return NextResponse.redirect(nextUrl);
+      }
+      if (authData?.data?.accessToken) {
+        nextUrl.searchParams.delete(AUTH_TOKEN);
+        const response = NextResponse.redirect(nextUrl);
+
+        response.cookies.set(COOKIES.ACCESS_TOKEN, authData?.data?.accessToken);
+        response.cookies.set(
+          COOKIES.REFRESH_TOKEN,
+          authData?.data?.refreshToken,
+        );
+
         return response;
-      } else {
-        if (authData?.data?.accessToken) {
-          return NextResponse.redirect(nextUrl);
-        }
       }
     }
   } catch {
-    return undefined
+    return undefined;
   }
 };
