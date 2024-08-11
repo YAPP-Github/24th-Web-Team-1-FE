@@ -15,7 +15,6 @@ export default function TopButton() {
 
   useEffect(function setScrollShowButton() {
     const handleShowButton = () => {
-      console.log(window.screenY);
       if (window.scrollY > 300) {
         setShowButton(true);
       } else {
