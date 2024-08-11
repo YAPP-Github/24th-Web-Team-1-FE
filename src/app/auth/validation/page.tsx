@@ -2,9 +2,12 @@
 import { useSearchParams } from "next/navigation";
 
 import SignupProgress from "@auth/components/SignupProgress";
+import { useEmailForm } from "@auth/hooks/useEmailForm";
 import FewLogo from "public/enterlogo.svg";
+import SignupPending from "@auth/components/SignupPending";
 
 export default function ValidationPage() {
+  const { isPending } = useEmailForm();
   const searchParams = useSearchParams();
 
   const email = searchParams.get("email");
@@ -15,7 +18,7 @@ export default function ValidationPage() {
       <span className="h3-bold mb-[20px] mt-[63px] text-text-gray1">
         {email}
       </span>
-      <SignupProgress />
+      {!isPending ? <SignupProgress /> : <SignupPending />}
     </div>
   );
 }
