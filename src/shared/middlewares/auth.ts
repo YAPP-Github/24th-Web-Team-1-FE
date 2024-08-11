@@ -22,7 +22,7 @@ export const AuthMiddleware = async ({ req, nextUrl }: authMiddlewareProps) => {
 
       const authData = response.data
 
-      if (authData?.message === "알 수 없는 오류가 발생했어요." || !authData?.data?.isLogin) {
+      if (authData?.message === "알 수 없는 오류가 발생했어요.") {
         nextUrl.pathname = `/auth`
         nextUrl.searchParams.delete(AUTH_TOKEN)
         
@@ -30,7 +30,7 @@ export const AuthMiddleware = async ({ req, nextUrl }: authMiddlewareProps) => {
         response.cookies.set(ISLOGIN, 'false');
         return response;
       } else {
-        if (authData?.data?.isLogin) {
+        if (authData?.data?.accessToken) {
           return NextResponse.redirect(nextUrl);
         }
       }
