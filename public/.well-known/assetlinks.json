@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.yapp.few",
+      "sha256_cert_fingerprints": [
+        "BD:B7:F1:2B:8B:64:A8:F1:72:BC:4E:DB:DB:2B:B1:58:80:78:4D:96:F3:EB:44:6E:4D:14:67:71:7E:81:B1:FE"
+      ]
+    }
+  }
+]
