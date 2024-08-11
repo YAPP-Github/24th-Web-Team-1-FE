@@ -42,15 +42,15 @@ export const useAuth = (auth_token: string) => {
               path: "/",
             });
 
+            Mixpanel.identify({ id: memberEmail });
+            Mixpanel.people.set({ peoples: { $email: memberEmail } });
+
           } else {
             router.push('/auth')
             toast({
               title: SIGNUP_FAILED,
             });
 
-
-            Mixpanel.identify({ id: memberEmail });
-            Mixpanel.people.set({ peoples: { $email: memberEmail } });
           }
         },
         onError: (error) => {
