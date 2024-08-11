@@ -3,6 +3,8 @@ import { NextRequest, NextResponse } from "next/server";
 
 import { ApiResponse, fewFetch } from "@api/fewFetch";
 
+import { AUTH_TOKEN, ISLOGIN } from "@shared/constants/token";
+
 import { API_ROUTE } from "@auth/remotes/api";
 import { tokenResponse } from "@auth/types/auth";
 
@@ -14,19 +16,21 @@ type authMiddlewareProps = {
 export const AuthMiddleware = async ({ req, nextUrl }: authMiddlewareProps) => {
   try {
     const { searchParams } = nextUrl;
-    const auth_token = searchParams.get('auth_token')
+    const auth_token = searchParams.get(AUTH_TOKEN)
     if (auth_token) {
       const response: ApiResponse<tokenResponse> = await fewFetch().post(API_ROUTE.TOKEN(auth_token))
 
-      if (response.data?.message === "알 수 없는 오류가 발생했어요." || !response.data?.data?.isLogin) {
+      const authData = response.data
+
+      if (authData?.message === "알 수 없는 오류가 발생했어요." || !authData?.data?.isLogin) {
         nextUrl.pathname = `/auth`
-        nextUrl.searchParams.delete('auth_token')
+        nextUrl.searchParams.delete(AUTH_TOKEN)
         
         const response = NextResponse.redirect(nextUrl);
-        response.cookies.set('isLogin', 'false');
+        response.cookies.set(ISLOGIN, 'false');
         return response;
       } else {
-        if (response.data?.data?.isLogin) {
+        if (authData?.data?.isLogin) {
           return NextResponse.redirect(nextUrl);
         }
       }
