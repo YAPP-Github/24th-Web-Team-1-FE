@@ -15,7 +15,7 @@ export default function ValidationCompletePage() {
   const router = useRouter();
 
   const auth_token = searchParams.get("auth_token");
-  useAuth(auth_token? auth_token : "");
+  // useAuth(auth_token? auth_token : "");
   
   return (
     <div className="flex h-auto flex-col items-center">
