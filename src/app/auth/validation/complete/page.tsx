@@ -6,7 +6,6 @@ import { useEffect } from "react";
 
 import LottieClient from "@shared/components/Lottie";
 import { Button } from "@shared/components/ui/button";
-import { Mixpanel } from "@shared/utils/mixpanel";
 
 import { SIGNUP_COMPLETED } from "@auth/constants/auth";
 import lottieJson from "public/assets/Problem_Complete.json";
@@ -14,14 +13,14 @@ import FewLogo from "public/enterlogo.svg";
 export default function ValidationCompletePage() {
   const searchParams = useSearchParams();
   const router = useRouter();
-
   const memberEmail = searchParams.get("member_email");
   // useAuth(auth_token ? auth_token : "");
 
   useEffect(function setMixpanel() {
     if (memberEmail) {
-      Mixpanel.identify({ id: memberEmail });
-      Mixpanel.people.set({ peoples: { $email: memberEmail } });
+      console.log(memberEmail);
+      // Mixpanel.identify({ id: memberEmail });
+      // Mixpanel.people.set({ peoples: { $email: memberEmail } });
     }
   }, []);
 
