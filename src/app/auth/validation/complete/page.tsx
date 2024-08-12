@@ -2,10 +2,10 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 
-import { useEffect } from "react";
-
 import LottieClient from "@shared/components/Lottie";
 import { Button } from "@shared/components/ui/button";
+import useIsLogin from "@shared/hooks/useIsLogin";
+import { Mixpanel } from "@shared/utils/mixpanel";
 
 import { SIGNUP_COMPLETED } from "@auth/constants/auth";
 import lottieJson from "public/assets/Problem_Complete.json";
@@ -14,16 +14,7 @@ export default function ValidationCompletePage() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const memberEmail = searchParams.get("member_email");
-  // useAuth(auth_token ? auth_token : "");
-
-  useEffect(function setMixpanel() {
-    if (memberEmail) {
-      console.log(memberEmail);
-      // Mixpanel.identify({ id: memberEmail });
-      // Mixpanel.people.set({ peoples: { $email: memberEmail } });
-    }
-  }, []);
-
+  const isLogin = useIsLogin();
   return (
     <div className="flex h-auto flex-col items-center">
       <LottieClient animationData={lottieJson} />
@@ -36,7 +27,14 @@ export default function ValidationCompletePage() {
       </span>
       <Button
         className="h-[56px] w-full cursor-pointer rounded-none bg-main py-6 text-white"
-        onClick={() => router.push("/")}
+        onClick={() => {
+          if (memberEmail && isLogin) {
+            Mixpanel.identify({ id: memberEmail });
+            Mixpanel.people.set({ peoples: { $email: memberEmail } });
+          }
+
+          router.push("/");
+        }}
       >
         {SIGNUP_COMPLETED.MAIN_BUTTON}
       </Button>
