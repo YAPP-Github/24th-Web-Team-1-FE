@@ -25,9 +25,9 @@ export default function ValidationCompletePage() {
 
   useEffect(function setMixpanel() {
     const accessToken = tokenParse(getCookie(COOKIES.ACCESS_TOKEN) as string);
-    const { memberEmail } = accessToken;
 
-    if (memberEmail) {
+    if (accessToken.memberEmail) {
+      const memberEmail = accessToken.memberEmail;
       Mixpanel.identify({ id: memberEmail });
       Mixpanel.people.set({ peoples: { $email: memberEmail } });
     }
