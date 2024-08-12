@@ -2,8 +2,6 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 
-import { useEffect } from "react";
-
 import LottieClient from "@shared/components/Lottie";
 import { Button } from "@shared/components/ui/button";
 import { Mixpanel } from "@shared/utils/mixpanel";
@@ -17,13 +15,11 @@ export default function ValidationCompletePage() {
   const memberEmail = searchParams.get("member_email");
   // useAuth(auth_token ? auth_token : "");
 
-  useEffect(function setMixpanel() {
-    if (memberEmail) {
-      console.log(memberEmail);
-      Mixpanel.identify({ id: memberEmail });
-      // Mixpanel.people.set({ peoples: { $email: memberEmail } });
-    }
-  }, []);
+  // useEffect(function setMixpanel() {
+  //   if (memberEmail) {
+  //     console.log(memberEmail);
+  //   }
+  // }, []);
 
   return (
     <div className="flex h-auto flex-col items-center">
@@ -37,7 +33,13 @@ export default function ValidationCompletePage() {
       </span>
       <Button
         className="h-[56px] w-full cursor-pointer rounded-none bg-main py-6 text-white"
-        onClick={() => router.push("/")}
+        onClick={() => {
+          if (memberEmail) {
+            Mixpanel.identify({ id: memberEmail });
+            Mixpanel.people.set({ peoples: { $email: memberEmail } });
+          }
+          router.push("/");
+        }}
       >
         {SIGNUP_COMPLETED.MAIN_BUTTON}
       </Button>
