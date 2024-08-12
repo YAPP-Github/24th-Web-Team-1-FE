@@ -47,11 +47,11 @@ export default function WorkbookPage() {
   // usePathname 로 workbook id 받기
   const pathname = usePathname();
   const workbookId = getWorkbookId(pathname);
-  useTrackMixpanel({
-    eventKey: EVENT_NAME.WORKBOOK_APPEAR,
-    property: { id: workbookId },
-    dep: pathname,
-  });
+  // useTrackMixpanel({
+  //   eventKey: EVENT_NAME.WORKBOOK_APPEAR,
+  //   property: { id: workbookId },
+  //   dep: pathname,
+  // });
 
   const { data: workbookInfo, isLoading } = useQuery({
     ...getWorkbookQueryOptions(workbookId),
