@@ -9,7 +9,6 @@ import { getCookie } from "cookies-next";
 import LottieClient from "@shared/components/Lottie";
 import { Button } from "@shared/components/ui/button";
 import { COOKIES } from "@shared/constants/token";
-import { Mixpanel } from "@shared/utils/mixpanel";
 import { tokenParse } from "@shared/utils/tokenParse";
 
 import { SIGNUP_COMPLETED } from "@auth/constants/auth";
@@ -22,12 +21,14 @@ export default function ValidationCompletePage() {
 
   const auth_token = searchParams.get("auth_token");
   useAuth(auth_token ? auth_token : "");
+
   useEffect(function setMixpanel() {
     const accessToken = tokenParse(getCookie(COOKIES.ACCESS_TOKEN) as string);
     const { memberEmail } = accessToken;
+    console.log(memberEmail);
 
-    Mixpanel.identify({ id: memberEmail });
-    Mixpanel.people.set({ peoples: { $email: memberEmail } });
+    // Mixpanel.identify({ id: memberEmail });
+    // Mixpanel.people.set({ peoples: { $email: memberEmail } });
   }, []);
 
   return (
