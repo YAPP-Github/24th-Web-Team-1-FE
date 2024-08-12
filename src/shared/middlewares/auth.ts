@@ -4,6 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { ApiResponse, fewFetch } from "@api/fewFetch";
 
 import { AUTH_TOKEN, COOKIES, ISLOGIN } from "@shared/constants/token";
+import { tokenParse } from "@shared/utils/tokenParse";
 
 import { API_ROUTE } from "@auth/remotes/api";
 import { tokenResponse } from "@auth/types/auth";
@@ -24,9 +25,6 @@ export const AuthMiddleware = async ({ req, nextUrl }: authMiddlewareProps) => {
 
       const authData = response.data;
 
-      console.log(authData);
-      
-
       if (authData?.message === "알 수 없는 오류가 발생했어요.") {
         nextUrl.searchParams.delete(AUTH_TOKEN);
         const response = NextResponse.redirect(nextUrl);
@@ -37,7 +35,12 @@ export const AuthMiddleware = async ({ req, nextUrl }: authMiddlewareProps) => {
         return NextResponse.redirect(nextUrl);
       }
       if (authData?.data?.accessToken) {
+        const accessToken = authData.data.accessToken;
+        const memberEmail = tokenParse(accessToken).memberEmail;
+
         nextUrl.searchParams.delete(AUTH_TOKEN);
+        nextUrl.searchParams.set("member_email", memberEmail);
+
         const response = NextResponse.redirect(nextUrl);
 
         response.cookies.set(COOKIES.ACCESS_TOKEN, authData?.data?.accessToken);

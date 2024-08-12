@@ -4,30 +4,22 @@ import { useRouter, useSearchParams } from "next/navigation";
 
 import { useEffect } from "react";
 
-import { getCookie } from "cookies-next";
-
 import LottieClient from "@shared/components/Lottie";
 import { Button } from "@shared/components/ui/button";
-import { COOKIES } from "@shared/constants/token";
 import { Mixpanel } from "@shared/utils/mixpanel";
-import { tokenParse } from "@shared/utils/tokenParse";
 
 import { SIGNUP_COMPLETED } from "@auth/constants/auth";
-import { useAuth } from "@auth/hooks/useAuth";
 import lottieJson from "public/assets/Problem_Complete.json";
 import FewLogo from "public/enterlogo.svg";
 export default function ValidationCompletePage() {
   const searchParams = useSearchParams();
   const router = useRouter();
 
-  const auth_token = searchParams.get("auth_token");
-  useAuth(auth_token ? auth_token : "");
+  const memberEmail = searchParams.get("member_email");
+  // useAuth(auth_token ? auth_token : "");
 
   useEffect(function setMixpanel() {
-    const accessToken = tokenParse(getCookie(COOKIES.ACCESS_TOKEN) as string);
-
-    if (accessToken.memberEmail) {
-      const memberEmail = accessToken.memberEmail;
+    if (memberEmail) {
       Mixpanel.identify({ id: memberEmail });
       Mixpanel.people.set({ peoples: { $email: memberEmail } });
     }
