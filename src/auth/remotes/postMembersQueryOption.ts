@@ -1,28 +1,25 @@
 import { UseMutationOptions } from "@tanstack/react-query";
 
-import { ApiResponse, fewFetch,FewResponse } from "@api/fewFetch";
+import { ApiResponse, fewFetch } from "@api/fewFetch";
 
-import { apiRoutes } from "@shared/constants/apiRoutes";
-
-import { API_ROUTE, QUERY_KEY } from "./api";
 import { memberSaveBody, memberSaveResponse } from "@auth/types/auth";
-
+import { API_ROUTE, QUERY_KEY } from "./api";
 
 export const memberSave = (
-    body: memberSaveBody
+  body: memberSaveBody,
 ): Promise<ApiResponse<memberSaveResponse>> => {
-    return fewFetch().post(API_ROUTE.MEMBERS(), {
-        body: JSON.stringify(body),
-    })
-}
+  return fewFetch().post(API_ROUTE.MEMBERS(), {
+    body: JSON.stringify(body),
+  });
+};
 
 export const memberSaveOptions = (): UseMutationOptions<
-    ApiResponse<memberSaveResponse>,
-    Error,
-    memberSaveBody
+  ApiResponse<memberSaveResponse>,
+  Error,
+  memberSaveBody
 > => {
-    return {
-        mutationKey: [QUERY_KEY.MEMBERS],
-        mutationFn: (body) => memberSave(body),
-    }
-}
+  return {
+    mutationKey: [QUERY_KEY.MEMBERS],
+    mutationFn: (body) => memberSave(body),
+  };
+};
