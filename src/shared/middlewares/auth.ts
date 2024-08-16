@@ -42,8 +42,12 @@ export const AuthMiddleware = async ({ req, nextUrl }: authMiddlewareProps) => {
 
       const response = NextResponse.redirect(nextUrl);
 
-      response.cookies.set(COOKIES.ACCESS_TOKEN, authData?.data?.accessToken);
-      response.cookies.set(COOKIES.REFRESH_TOKEN, authData?.data?.refreshToken);
+      response.cookies.set(COOKIES.ACCESS_TOKEN, authData?.data?.accessToken, {
+        maxAge: 24 * 60 * 60, // 30 days
+      });
+      response.cookies.set(COOKIES.REFRESH_TOKEN, authData?.data?.refreshToken, {
+        maxAge: 24 * 60 * 60, // 30 days
+      });
 
       return response;
     }
