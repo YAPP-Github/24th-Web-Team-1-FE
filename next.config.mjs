@@ -16,8 +16,10 @@ const nextConfig = {
       "maily.so",
       "pension.inmostadvisor.com",
       "localhost",
-
     ],
+    formats: ["image/avif", "image/webp"],
+    imageSizes: [24, 45, 128, 375],
+    deviceSizes: [480, 512, 768, 1280],
   },
   webpack: (config, context) => {
     config.module.rules.push({
