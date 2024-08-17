@@ -17,7 +17,7 @@ const nextConfig = {
       "pension.inmostadvisor.com",
       "localhost",
     ],
-    formats: ["image/avif", "image/webp"],
+    formats: ["image/webp"],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     deviceSizes: [240, 280, 300, 320, 350, 400, 480],
   },
