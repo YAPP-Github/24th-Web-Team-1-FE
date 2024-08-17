@@ -28,8 +28,7 @@ export const AuthMiddleware = async ({ req, nextUrl }: authMiddlewareProps) => {
       if (authData?.message === "알 수 없는 오류가 발생했어요.") {
         nextUrl.searchParams.delete(AUTH_TOKEN);
         const response = NextResponse.redirect(nextUrl);
-
-        // response.cookies.set(COOKIES.ACCESS_TOKEN, "false");
+        
         response.cookies.set(ISLOGIN, "false");
 
         return NextResponse.redirect(nextUrl);
@@ -43,10 +42,19 @@ export const AuthMiddleware = async ({ req, nextUrl }: authMiddlewareProps) => {
 
         const response = NextResponse.redirect(nextUrl);
 
-        response.cookies.set(COOKIES.ACCESS_TOKEN, authData?.data?.accessToken);
+        response.cookies.set(
+          COOKIES.ACCESS_TOKEN,
+          authData?.data?.accessToken,
+          {
+            maxAge: 24 * 60 * 60, // 30 days
+          },
+        );
         response.cookies.set(
           COOKIES.REFRESH_TOKEN,
           authData?.data?.refreshToken,
+          {
+            maxAge: 24 * 60 * 60, // 30 days
+          },
         );
 
         return response;
