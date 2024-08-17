@@ -23,6 +23,7 @@ const MainImage = ({
     src={mainImageUrl}
     alt="main-image"
     loader={ImageLoadr}
+    sizes="269px"
     priority={isPriorityImage}
     className="h-[172px] w-[269px] rounded-t-lg object-cover"
   />
