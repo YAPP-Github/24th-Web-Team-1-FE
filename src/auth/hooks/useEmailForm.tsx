@@ -4,11 +4,13 @@ import { useForm } from "react-hook-form";
 
 import { useMutation } from "@tanstack/react-query";
 
-import { ApiResponse, FewResponse } from "@api/fewFetch";
+import { ApiResponse } from "@api/fewFetch";
 
 import { useToast } from "@shared/components/ui/use-toast";
 
-import { LOGIN_STATUS, SIGNUP_PROGRESS } from "@auth/constants/auth";
+import queryClient from "@api/queryClient";
+import { SIGNUP_PROGRESS } from "@auth/constants/auth";
+import { QUERY_KEY } from "@auth/remotes/api";
 import { memberSaveOptions } from "@auth/remotes/postMembersQueryOption";
 import { memberSaveResponse } from "@auth/types/auth";
 import { emailSubscribeSchema } from "@common/schemas/emailSchema";
@@ -17,7 +19,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 export const useEmailForm = () => {
   const { toast } = useToast();
-  const router = useRouter()
+  const router = useRouter();
 
   const form = useForm<EmailSubscribeFormData>({
     resolver: zodResolver(emailSubscribeSchema),
@@ -27,26 +29,29 @@ export const useEmailForm = () => {
     mode: "onSubmit",
   });
 
-  const { mutate: memberSave } = useMutation({
-    ...memberSaveOptions()
+  const memberSave = useMutation({
+    ...memberSaveOptions(),
   });
 
-  const onSubmit = (values: EmailSubscribeFormData) => {
-    try {
-      memberSave(values, {
-        onSuccess: (response: ApiResponse<memberSaveResponse>) => {
-          console.log('res', response.data?.data);
+  const onSubmitEmail = (values: EmailSubscribeFormData) => {
+    router.push(`/auth/validation?email=${values.email}`);
 
-          if (response.data?.data?.isSendAuth) {
-            // redirect to validation page
-            router.push(`/auth/validation?email=${values.email}`)
-          } else {
+    try {
+      memberSave.mutate(values, {
+        onSuccess: (response: ApiResponse<memberSaveResponse>) => {
+          if (!response.data?.data?.isSendAuth) {
+            router.push(`/auth`);
             toast({
               title: SIGNUP_PROGRESS.EMAIL_SEND_FAIL,
             });
           }
+          queryClient.resetQueries({
+            queryKey: [QUERY_KEY.MEMBERS],
+            exact: true,
+          });
         },
-        onError: () => {  
+        onError: () => {
+          router.push(`/auth`);
           toast({
             title: SIGNUP_PROGRESS.EMAIL_SEND_FAIL,
           });
@@ -54,15 +59,15 @@ export const useEmailForm = () => {
       });
     } catch (error) {
       console.error("catch error", error);
-
+      router.push(`/auth`);
       toast({
-        title: LOGIN_STATUS.FAILED,
+        title: SIGNUP_PROGRESS.EMAIL_SEND_FAIL,
       });
     }
   };
 
   return {
     form,
-    onSubmit,
+    onSubmitEmail,
   };
 };

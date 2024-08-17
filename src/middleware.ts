@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 
 import { COOKIES } from "@shared/constants/token";
 import { articleMiddleware } from "@shared/middlewares/article";
+import { AuthMiddleware } from "@shared/middlewares/auth";
 import { problemMiddleware } from "@shared/middlewares/problem";
 import { unsubscriptionMiddleware } from "@shared/middlewares/subscription";
 import { workbookMiddleware } from "@shared/middlewares/workbook";
@@ -14,10 +15,6 @@ const withAuthList = [];
 const withOutAuth = async (req: NextRequest) => {
   const nextUrl = req.nextUrl.clone();
   const { pathname, searchParams } = nextUrl;
-
-  // if (pathname === "/") {
-  //   return MainMiddleware();
-  // }
 
   if (pathname === "/workbook") {
     return workbookMiddleware({ nextUrl });
@@ -35,9 +32,9 @@ const withOutAuth = async (req: NextRequest) => {
     return problemMiddleware({ req, nextUrl });
   }
 
-  // if (pathname.includes("/auth/validation/complete")) {
-  //   return AuthMiddleware();
-  // }
+  if (pathname.includes("/auth/validation/complete")) {
+    return AuthMiddleware({ req, nextUrl });
+  }
 };
 
 // NOTE : 인증기반 접근할 수 있는 페이지에 대한 middleware

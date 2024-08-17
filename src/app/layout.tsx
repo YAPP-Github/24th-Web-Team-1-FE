@@ -3,16 +3,16 @@ import localFont from "next/font/local";
 
 import { Suspense } from "react";
 
+import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
+import queryClient from "@api/queryClient";
+
+import MixpanelProvider from "@shared/components/MixpanelProvider";
 import QueryClientProviders from "@shared/components/queryClientProvider";
+import { Toaster } from "@shared/components/ui/toaster";
 import { cn } from "@shared/utils/cn";
 
-import queryClient from "@api/queryClient";
-import MSWProviders from "@mocks/MSWProviders";
-import MixpanelProvider from "@shared/components/MixpanelProvider";
-import { Toaster } from "@shared/components/ui/toaster";
-import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -85,14 +85,12 @@ export default function RootLayout({
               "min-h-[100dvh] w-full max-w-[480px] overscroll-y-none",
             )}
           >
-            <MSWProviders>
-              <Suspense>
-                <HydrationBoundary state={dehydrate(queryClient)}>
-                  {children}
-                </HydrationBoundary>
-              </Suspense>
-              <Toaster />
-            </MSWProviders>
+            <Suspense>
+              <HydrationBoundary state={dehydrate(queryClient)}>
+                {children}
+              </HydrationBoundary>
+            </Suspense>
+            <Toaster />
 
             <ReactQueryDevtools />
           </body>

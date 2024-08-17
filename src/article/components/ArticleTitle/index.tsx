@@ -5,16 +5,17 @@ import { useEffect, useRef } from "react";
 
 import { useQueries } from "@tanstack/react-query";
 
+import { setCookie } from "cookies-next";
+
 import TitleSection from "@shared/components/TitleSection";
-
-import { getArticleQueryOptions } from "@article/remotes/getArticleQueryOptions";
-
-import { ARTICLE_INFO_TYPE } from "@article/constants/articleCase";
-import { getArticleWithWorkbookQueryOptions } from "@article/remotes/getArticleWithWorkbookQueryOptions";
-import { ArticleDetail, ArticleWithWorkbookDetail } from "@article/types";
 import { IS_EXIST_PROBLEMS } from "@shared/constants/middlewareConstant";
 import { useProblemIdsViewModel } from "@shared/models/useProblemIdsViewModel";
-import { setCookie } from "cookies-next";
+
+import { ARTICLE_INFO_TYPE } from "@article/constants/articleCase";
+import { getArticleQueryOptions } from "@article/remotes/getArticleQueryOptions";
+import { getArticleWithWorkbookQueryOptions } from "@article/remotes/getArticleWithWorkbookQueryOptions";
+import { ArticleDetail, ArticleWithWorkbookDetail } from "@article/types";
+
 import ArticleSkeleton from "../ArticleSkeleton";
 import WriterInfo from "../WriterInfo";
 

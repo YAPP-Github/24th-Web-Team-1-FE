@@ -1,5 +1,4 @@
 "use client";
-
 import { Button } from "@shared/components/ui/button";
 import {
   Form,
@@ -18,16 +17,19 @@ import {
 
 import { LOGIN_OR_SIGNUP } from "@auth/constants/auth";
 import { useEmailForm } from "@auth/hooks/useEmailForm";
+import { useLoginFailToast } from "@auth/hooks/useLoginFailToast";
 
 export default function EmailForm() {
-  const { form, onSubmit } = useEmailForm();
+  const { form, onSubmitEmail } = useEmailForm();
   const { handleSubmit, control, formState } = form;
+
+  useLoginFailToast();
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form onSubmit={handleSubmit(onSubmitEmail)} className="space-y-8">
         <FormField
-          control={form.control}
+          control={control}
           name="email"
           render={({ field }) => (
             <FormItem>

@@ -1,9 +1,11 @@
 "use client";
 
+import { useParams, useRouter } from "next/navigation";
+
+import { HTMLAttributes } from "react";
+
 import { Button } from "@shared/components/ui/button";
 import { useProblemIdsViewModel } from "@shared/models/useProblemIdsViewModel";
-import { useParams, useRouter } from "next/navigation";
-import { HTMLAttributes } from "react";
 
 interface ArticleBottomButtonProps extends HTMLAttributes<HTMLButtonElement> {}
 export default function ArticleBottomButton({
