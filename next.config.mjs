@@ -18,8 +18,8 @@ const nextConfig = {
       "localhost",
     ],
     formats: ["image/avif", "image/webp"],
-    imageSizes: [24, 45, 128, 375],
-    deviceSizes: [480, 512, 768, 1280],
+    imageSizes: [16, 32, 48],
+    deviceSizes: [280, 320, 480],
   },
   webpack: (config, context) => {
     config.module.rules.push({
