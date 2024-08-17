@@ -20,7 +20,10 @@ const getArticlesWithCategory = ({
 };
 export const getArticlesWithCategoryInfiniteQueryOptions = ({
   code,
-}: Pick<ArticlesInfiniteQueryParams, "code">): UseInfiniteQueryOptions<
+  isWebpBrowser,
+}: Pick<ArticlesInfiniteQueryParams, "code"> & {
+  isWebpBrowser: boolean;
+}): UseInfiniteQueryOptions<
   ApiResponse<AriclesWithCategoryRes<ArticleServerInfo>>,
   unknown,
   AriclesWithCategoryRes<ArticleClientInfo>
@@ -34,6 +37,7 @@ export const getArticlesWithCategoryInfiniteQueryOptions = ({
         const res = data.data.data;
         const articleCardModel = new ArticleCardModel({
           initArticleCardServerList: res.articles,
+          initIsWebpBrowser: isWebpBrowser,
         });
         return {
           ...res,

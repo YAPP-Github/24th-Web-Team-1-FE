@@ -3,19 +3,23 @@ import {
   WorkbookServerInfo,
   WorkbookSubscriptionInfo,
 } from "@main/types/workbook";
+import { ImageModel } from "@shared/models/ImageModel";
 
 export class WorkbookCardModel {
   constructor({
     initWorkbookSeverList,
     initWorkbookSubscriptionInfoList,
+    initIsWebpBrowser,
   }: {
     initWorkbookSeverList: WorkbookServerInfo[];
     initWorkbookSubscriptionInfoList?: WorkbookSubscriptionInfo[];
+    initIsWebpBrowser: boolean;
   }) {
     this.workbookList = initWorkbookSeverList;
     if (initWorkbookSubscriptionInfoList)
       this.workbookSubscriptionInfoList = initWorkbookSubscriptionInfoList;
     this.workbookCombineList = this.getWorkbookServerCombineData();
+    this.isWebpBrowser = initIsWebpBrowser;
   }
   get workbookCombineListData() {
     return this.workbookCombineList;
@@ -90,7 +94,9 @@ export class WorkbookCardModel {
         const changeToClientData: WorkbookClientInfo = {
           id,
           badgeInfo: this.getBadeInfo({ cardType }),
-          mainImageUrl,
+          mainImageUrl: this.isWebpBrowser
+            ? mainImageUrl
+            : ImageModel.changePngImage({ imageSrc: mainImageUrl }),
           isPriorityImage: idx < 2,
           title,
           writers: this.getWriterNameList({ writers }),
@@ -235,6 +241,7 @@ export class WorkbookCardModel {
   private workbookList: WorkbookServerInfo[];
   private workbookSubscriptionInfoList: WorkbookSubscriptionInfo[] | undefined;
   private workbookCombineList: WorkbookCombineInfo[];
+  private isWebpBrowser: boolean;
 }
 
 type WorkbookCombineInfo = WorkbookServerInfo &

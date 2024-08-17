@@ -1,12 +1,16 @@
 import { ArticleClientInfo, ArticleServerInfo } from "@main/types/article";
+import { ImageModel } from "@shared/models/ImageModel";
 
 export default class ArticleCardModel {
   constructor({
     initArticleCardServerList,
+    initIsWebpBrowser,
   }: {
     initArticleCardServerList: ArticleServerInfo[];
+    initIsWebpBrowser: boolean;
   }) {
     this.articleCardServerList = initArticleCardServerList;
+    this.isWebpBrowser = initIsWebpBrowser;
   }
 
   articleCardList(): ArticleClientInfo[] {
@@ -31,7 +35,10 @@ export default class ArticleCardModel {
             url: writer.url,
             imageUrl: writer.imageUrl,
           },
-          thumbnail: mainImageUrl,
+          thumbnail: this.isWebpBrowser
+            ? mainImageUrl
+            : ImageModel.changePngImage({ imageSrc: mainImageUrl }),
+
           isPriorityImage: idx < 2,
           title,
           content: this.getRemoveTagContent({ content }),
@@ -52,4 +59,5 @@ export default class ArticleCardModel {
     return workbooks.length ? workbooks : null;
   }
   private articleCardServerList: ArticleServerInfo[];
+  private isWebpBrowser: boolean;
 }

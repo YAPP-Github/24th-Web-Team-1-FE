@@ -4,13 +4,15 @@ import { WorkbookCardModel } from "@main/models/WorkbookCardModel";
 import { getSubscriptionWorkbooksQueryOptions } from "@main/remotes/getSubscriptionWorkbooksQueryOptions";
 import { getWorkbooksWithCategoryQueryOptions } from "@main/remotes/getWorkbooksWithCategoryQueryOptions";
 import useIsLogin from "@shared/hooks/useIsLogin";
+import useIsWebpBrowser from "@shared/hooks/useIsWebpBrowser";
 import { useQueries } from "@tanstack/react-query";
-import WorkbookCardListSkeleton from "../WorkbookCardListSkeleton";
 import WorkbookCard from "../WorkbookCard";
+import WorkbookCardListSkeleton from "../WorkbookCardListSkeleton";
 
 export default function WorkbookCardList({
   code,
 }: Partial<CategoryClientInfo>) {
+  const { isWebpBrowser } = useIsWebpBrowser();
   const isLogin = useIsLogin();
   const workbookCardList = useQueries({
     queries: [
@@ -28,7 +30,9 @@ export default function WorkbookCardList({
         const workbookCardModel = new WorkbookCardModel({
           initWorkbookSeverList: workbookServerList.data,
           initWorkbookSubscriptionInfoList: workbookSubscriptionInfoList.data,
+          initIsWebpBrowser: isWebpBrowser,
         });
+
         return workbookCardModel.workbookCardList({
           workbookCombineList: workbookCardModel.workbookCombineListData,
         });

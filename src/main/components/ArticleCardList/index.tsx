@@ -1,15 +1,18 @@
 import { CategoryClientInfo } from "@common/types/category";
 import { ENTIRE_CATEGORY } from "@main/constants";
 import { getArticlesWithCategoryInfiniteQueryOptions } from "@main/remotes/getArticlesWithCategoryInfiniteQueryOptions";
+import useIsWebpBrowser from "@shared/hooks/useIsWebpBrowser";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import ArticleCard from "../ArticleCard";
 import ArticleCardListSkeleton from "../ArticleCardListSkeleton";
 export default function ArticleCardList({ code }: Partial<CategoryClientInfo>) {
+  const { isWebpBrowser } = useIsWebpBrowser();
   const { data, fetchNextPage, isLoading } = useInfiniteQuery({
     ...getArticlesWithCategoryInfiniteQueryOptions({
       code: code !== undefined ? code : ENTIRE_CATEGORY,
+      isWebpBrowser,
     }),
   });
   const { ref, inView } = useInView();
