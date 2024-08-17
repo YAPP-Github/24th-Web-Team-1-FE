@@ -1,10 +1,14 @@
 import { ArticleClientInfo } from "@main/types/article";
 import Tag from "@shared/components/Tag";
 import { cn } from "@shared/utils/cn";
-import Image from "next/image";
+import Image, { ImageLoaderProps } from "next/image";
 import Link from "next/link";
 import EyeIcon from "public/assets/icon/eye.svg";
 import { ReactNode } from "react";
+
+const ImageLoadr = ({ src, width, quality }: ImageLoaderProps) => {
+  return `${src}?w=${width}&q=${quality || 75}`;
+};
 
 const RootComponentWrapper = ({ children }: { children: ReactNode }) => (
   <section className="border-b-[0.5px] border-text-gray2 px-[20px] py-[26px]">
@@ -16,11 +20,14 @@ const TopComponentWrapper = ({ children }: { children: ReactNode }) => (
 );
 const WriterProfile = ({
   writerInfo,
-}: Pick<ArticleClientInfo, "writerInfo">) => (
+  isPriorityImage,
+}: Pick<ArticleClientInfo, "writerInfo" | "isPriorityImage">) => (
   <div className="flex items-center gap-[10px]">
     <Image
       width={30}
       height={30}
+      loader={ImageLoadr}
+      priority={isPriorityImage}
       src={writerInfo.imageUrl}
       alt="profile-image"
       className="h-[30px] w-[30px] rounded-full"
@@ -54,11 +61,16 @@ const Description = ({ content }: Pick<ArticleClientInfo, "content">) => (
   </p>
 );
 
-const Thumbnail = ({ thumbnail }: Pick<ArticleClientInfo, "thumbnail">) => (
+const Thumbnail = ({
+  thumbnail,
+  isPriorityImage,
+}: Pick<ArticleClientInfo, "thumbnail" | "isPriorityImage">) => (
   <Image
     width={100}
     height={170}
     src={thumbnail}
+    priority={isPriorityImage}
+    loader={ImageLoadr}
     alt="article-thumbnail"
     className="h-[170px] w-full rounded object-cover"
   />

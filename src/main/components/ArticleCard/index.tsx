@@ -9,6 +9,7 @@ export default function ArticleCard({
   thumbnail,
   viewCount,
   category,
+  isPriorityImage,
   title,
   content,
   withWorkbookList,
@@ -20,14 +21,20 @@ export default function ArticleCard({
   return (
     <section className="border-b-[0.5px] border-text-gray2 px-[20px] py-[26px]">
       <ArticleCardDetail.TopComponentWrapper>
-        <ArticleCardDetail.WriterProfile writerInfo={writerInfo} />
+        <ArticleCardDetail.WriterProfile
+          writerInfo={writerInfo}
+          isPriorityImage={isPriorityImage}
+        />
         <ArticleCardDetail.ViewCount viewCount={viewCount} />
       </ArticleCardDetail.TopComponentWrapper>
       <ArticleCardDetail.CategoryTag category={category} />
       <article onClick={onClickArticlePage}>
         <ArticleCardDetail.Title title={title} />
         <ArticleCardDetail.Description content={content} />
-        <ArticleCardDetail.Thumbnail thumbnail={thumbnail} />
+        <ArticleCardDetail.Thumbnail
+          thumbnail={thumbnail}
+          isPriorityImage={isPriorityImage}
+        />
         <ArticleCardDetail.WithWorkbookList
           withWorkbookList={withWorkbookList}
         />
