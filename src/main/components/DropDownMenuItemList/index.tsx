@@ -1,17 +1,15 @@
 "use client";
 import { getCookie } from "cookies-next";
 
-import { EVENT_NAME } from "@shared/constants/mixpanel";
 import { COOKIES } from "@shared/constants/token";
 import useIsLogin from "@shared/hooks/useIsLogin";
-import useTrackMixpanel from "@shared/hooks/useTrackMixpanel";
 import { cn } from "@shared/utils/cn";
 import { tokenParse } from "@shared/utils/tokenParse";
 
 import { AUTH_LINK, UNAUTH_LINK } from "@main/constants/dropdownMenu";
 
 export function DropDownMenuItemList() {
-  useTrackMixpanel({ eventKey: EVENT_NAME.MYPAGE_APPEAR });
+  // useTrackMixpanel({ eventKey: EVENT_NAME.MYPAGE_APPEAR });
 
   const isLogin = useIsLogin();
   const token =

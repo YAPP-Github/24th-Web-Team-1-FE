@@ -1,14 +1,12 @@
 "use client";
 import { useState } from "react";
 
-import { EVENT_NAME } from "@shared/constants/mixpanel";
-import useTrackMixpanel from "@shared/hooks/useTrackMixpanel";
 import { cn } from "@shared/utils/cn";
 
-import DropDownMenuWrapper from "../DropdownMenuWrapper";
 import FewLogo from "public/assets/icon/fewlogo.svg";
+import DropDownMenuWrapper from "../DropdownMenuWrapper";
 export default function MainHeader() {
-  useTrackMixpanel({ eventKey: EVENT_NAME.MAIN_APPEAR });
+  // useTrackMixpanel({ eventKey: EVENT_NAME.MAIN_APPEAR });
   const [toggleMenu, setToggleMenu] = useState(false);
 
   const handleToggleMenu = () => {

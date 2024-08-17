@@ -5,9 +5,6 @@ import { usePathname } from "next/navigation";
 
 import { useQuery } from "@tanstack/react-query";
 
-import { EVENT_NAME } from "@shared/constants/mixpanel";
-import useTrackMixpanel from "@shared/hooks/useTrackMixpanel";
-
 import WorkbookButton from "@workbook/components/WorkbookButton";
 import WorkbookSkeleton from "@workbook/components/WorkbookSkeleton";
 import WriterInfo from "@workbook/components/WriterInfo";
@@ -47,11 +44,11 @@ export default function WorkbookPage() {
   // usePathname 로 workbook id 받기
   const pathname = usePathname();
   const workbookId = getWorkbookId(pathname);
-  useTrackMixpanel({
-    eventKey: EVENT_NAME.WORKBOOK_APPEAR,
-    property: { id: workbookId },
-    dep: pathname,
-  });
+  // useTrackMixpanel({
+  //   eventKey: EVENT_NAME.WORKBOOK_APPEAR,
+  //   property: { id: workbookId },
+  //   dep: pathname,
+  // });
 
   const { data: workbookInfo, isLoading } = useQuery({
     ...getWorkbookQueryOptions(workbookId),
