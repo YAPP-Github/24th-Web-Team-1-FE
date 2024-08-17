@@ -28,7 +28,6 @@ export const AuthMiddleware = async ({ req, nextUrl }: authMiddlewareProps) => {
       nextUrl.searchParams.delete(AUTH_TOKEN);
       const response = NextResponse.redirect(nextUrl);
 
-      // response.cookies.set(COOKIES.ACCESS_TOKEN, "false");
       response.cookies.set(ISLOGIN, "false");
 
       return NextResponse.redirect(nextUrl);
