@@ -16,8 +16,8 @@ const nextConfig = {
       "maily.so",
       "pension.inmostadvisor.com",
       "localhost",
-
     ],
+    formats: ["image/avif", "image/webp"],
   },
   webpack: (config, context) => {
     config.module.rules.push({
