@@ -15,14 +15,15 @@ const ImageWrapper = ({
 
 const MainImage = ({
   mainImageUrl,
-}: Pick<WorkbookClientInfo, "mainImageUrl">) => (
+  isPriorityImage,
+}: Pick<WorkbookClientInfo, "mainImageUrl" | "isPriorityImage">) => (
   <Image
     width={269}
     height={172}
     src={mainImageUrl}
     alt="main-image"
     loader={ImageLoadr}
-    loading="lazy"
+    priority={isPriorityImage}
     className="h-[172px] w-[269px] rounded-t-lg object-cover"
   />
 );
