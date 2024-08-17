@@ -11,16 +11,19 @@ export default class ArticleCardModel {
 
   articleCardList(): ArticleClientInfo[] {
     return this.articleCardServerList.map(
-      ({
-        id,
-        writer,
-        title,
-        content,
-        category,
-        views,
-        workbooks,
-        mainImageUrl,
-      }) => {
+      (
+        {
+          id,
+          writer,
+          title,
+          content,
+          category,
+          views,
+          workbooks,
+          mainImageUrl,
+        },
+        idx,
+      ) => {
         const changeToClientData: ArticleClientInfo = {
           id,
           writerInfo: {
@@ -29,6 +32,7 @@ export default class ArticleCardModel {
             imageUrl: writer.imageUrl,
           },
           thumbnail: mainImageUrl,
+          isPriorityImage: idx < 2,
           title,
           content: this.getRemoveTagContent({ content }),
           category,

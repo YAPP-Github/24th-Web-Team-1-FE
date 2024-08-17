@@ -14,6 +14,7 @@ export interface ArticleClientInfo {
     imageUrl: string;
   };
   thumbnail: string;
+  isPriorityImage: boolean;
   title: string;
   content: string;
   category: string;
