@@ -7,8 +7,6 @@ import { Button } from "@shared/components/ui/button";
 
 import useIsLogin from "@shared/hooks/useIsLogin";
 
-import { Mixpanel } from "@shared/utils/mixpanel";
-
 import { SIGNUP_COMPLETED } from "@auth/constants/auth";
 import lottieJson from "public/assets/Problem_Complete.json";
 import FewLogo from "public/enterlogo.svg";
@@ -19,14 +17,6 @@ export default function ValidationCompletePage() {
   const memberEmail = searchParams.get("member_email");
 
   const isLogin = useIsLogin();
-
-  // useAuth(auth_token ? auth_token : "");
-
-  // useEffect(function setMixpanel() {
-  //   if (memberEmail) {
-  //     console.log(memberEmail);
-  //   }
-  // }, []);
 
   return (
     <div className="flex h-auto flex-col items-center">
@@ -41,10 +31,10 @@ export default function ValidationCompletePage() {
       <Button
         className="h-[56px] w-full cursor-pointer rounded-none bg-main py-6 text-white"
         onClick={() => {
-          if (memberEmail && isLogin) {
-            Mixpanel.identify({ id: memberEmail });
-            Mixpanel.people.set({ peoples: { $email: memberEmail } });
-          }
+          // if (memberEmail && isLogin) {
+          //   Mixpanel.identify({ id: memberEmail });
+          //   Mixpanel.people.set({ peoples: { $email: memberEmail } });
+          // }
           router.push("/");
         }}
       >
