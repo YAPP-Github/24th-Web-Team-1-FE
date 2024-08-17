@@ -69,25 +69,29 @@ export class WorkbookCardModel {
     workbookCombineList: WorkbookCombineInfo[];
   }): WorkbookClientInfo[] {
     return workbookCombineList.map(
-      ({
-        id,
-        mainImageUrl,
-        title,
-        description,
-        category,
-        writers,
-        subscriberCount,
-        status,
-        currentDay,
-        totalDay,
-        articleInfo,
-        totalSubscriber,
-      }) => {
+      (
+        {
+          id,
+          mainImageUrl,
+          title,
+          description,
+          category,
+          writers,
+          subscriberCount,
+          status,
+          currentDay,
+          totalDay,
+          articleInfo,
+          totalSubscriber,
+        },
+        idx,
+      ) => {
         const cardType = this.getWorkbookCardType({ status, currentDay });
         const changeToClientData: WorkbookClientInfo = {
           id,
           badgeInfo: this.getBadeInfo({ cardType }),
           mainImageUrl,
+          isPriorityImage: idx < 2,
           title,
           writers: this.getWriterNameList({ writers }),
           metaComponent: this.getMetaComponent({

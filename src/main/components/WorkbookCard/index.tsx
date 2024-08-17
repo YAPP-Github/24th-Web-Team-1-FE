@@ -8,6 +8,7 @@ export default function WorkbookCard({
   id,
   badgeInfo,
   mainImageUrl,
+  isPriorityImage,
   metaComponent,
   title,
   writers,
@@ -29,7 +30,10 @@ export default function WorkbookCard({
       onClick={() => push(`/workbook/${id}`)}
     >
       <WorkbookCardDetail.ImageWrapper>
-        <WorkbookCardDetail.MainImage mainImageUrl={mainImageUrl} />
+        <WorkbookCardDetail.MainImage
+          mainImageUrl={mainImageUrl}
+          isPriorityImage={isPriorityImage}
+        />
         {badgeInfo.title && (
           <WorkbookCardDetail.CardBadge badgeInfo={badgeInfo} />
         )}

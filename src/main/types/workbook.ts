@@ -19,6 +19,7 @@ export type WorkbookServerInfo = {
 export interface WorkbookClientInfo {
   id: number;
   mainImageUrl: string;
+  isPriorityImage:boolean;
   metaComponent: React.ReactElement;
   title: string;
   writers: string[];
