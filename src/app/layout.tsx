@@ -4,7 +4,6 @@ import localFont from "next/font/local";
 import { Suspense } from "react";
 
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 import queryClient from "@api/queryClient";
 
@@ -91,8 +90,6 @@ export default function RootLayout({
               </HydrationBoundary>
             </Suspense>
             <Toaster />
-
-            <ReactQueryDevtools />
           </body>
         </html>
       </QueryClientProviders>
