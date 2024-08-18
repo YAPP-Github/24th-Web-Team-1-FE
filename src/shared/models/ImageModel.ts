@@ -25,7 +25,7 @@ export class ImageModel {
   }
 
   static changePngImage({ imageSrc }: { imageSrc: string }) {
-    return imageSrc.replace(/\.webp$/, ".png");
+    return imageSrc.replace(".webp", ".png");
   }
 
   get webpBrowser() {
