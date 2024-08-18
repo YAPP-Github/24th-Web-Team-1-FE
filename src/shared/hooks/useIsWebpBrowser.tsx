@@ -1,7 +1,8 @@
 import { ImageModel } from "@shared/models/ImageModel";
+import { WebpBrowser } from "@shared/types/image";
 import { useEffect, useState } from "react";
 
-export default function useIsWebpBrowser() {
+export default function useIsWebpBrowser(): WebpBrowser {
   const imageModel = new ImageModel();
 
   const [isWebpBrowser, setIsWebpBrowser] = useState(false);

@@ -5,6 +5,7 @@ import {
   ArticleServerInfo,
   ArticlesInfiniteQueryParams,
 } from "@main/types/article";
+import { WebpBrowser } from "@shared/types/image";
 import { UseInfiniteQueryOptions } from "@tanstack/react-query";
 import { API_ROUTE, QUERY_KEY } from ".";
 
@@ -21,9 +22,8 @@ const getArticlesWithCategory = ({
 export const getArticlesWithCategoryInfiniteQueryOptions = ({
   code,
   isWebpBrowser,
-}: Pick<ArticlesInfiniteQueryParams, "code"> & {
-  isWebpBrowser: boolean;
-}): UseInfiniteQueryOptions<
+}: Pick<ArticlesInfiniteQueryParams, "code"> &
+  WebpBrowser): UseInfiniteQueryOptions<
   ApiResponse<AriclesWithCategoryRes<ArticleServerInfo>>,
   unknown,
   AriclesWithCategoryRes<ArticleClientInfo>
@@ -37,7 +37,7 @@ export const getArticlesWithCategoryInfiniteQueryOptions = ({
         const res = data.data.data;
         const articleCardModel = new ArticleCardModel({
           initArticleCardServerList: res.articles,
-          initIsWebpBrowser: isWebpBrowser,
+          initWebpBrowser: { isWebpBrowser },
         });
         return {
           ...res,

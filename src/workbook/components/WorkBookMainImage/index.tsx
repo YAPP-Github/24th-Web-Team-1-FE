@@ -1,9 +1,9 @@
-import { WorkbookInfo } from "@workbook/types";
+import { WorkbookClientInfo } from "@workbook/types";
 import Image from "next/image";
 
 export default function WorkbookMainImage({
   mainImageUrl,
-}: Pick<WorkbookInfo, "mainImageUrl">) {
+}: Pick<WorkbookClientInfo, "mainImageUrl">) {
   return (
     <figure className="flex justify-center">
       <Image

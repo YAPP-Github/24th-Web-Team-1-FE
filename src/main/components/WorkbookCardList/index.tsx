@@ -30,7 +30,7 @@ export default function WorkbookCardList({
         const workbookCardModel = new WorkbookCardModel({
           initWorkbookSeverList: workbookServerList.data,
           initWorkbookSubscriptionInfoList: workbookSubscriptionInfoList.data,
-          initIsWebpBrowser: isWebpBrowser,
+          initWebpBrowser: { isWebpBrowser },
         });
 
         return workbookCardModel.workbookCardList({
