@@ -11,6 +11,8 @@ import WorkbookSkeleton from "@workbook/components/WorkbookSkeleton";
 import WriterInfo from "@workbook/components/WriterInfo";
 import { getWorkbookQueryOptions } from "@workbook/remotes/getWorkbookQueryOptions";
 import { getWorkbookId } from "@workbook/utils";
+import { EVENT_NAME } from "@shared/constants/mixpanel";
+import useTrackMixpanel from "@shared/hooks/useTrackMixpanel";
 
 const TitleSection = dynamic(() => import("@shared/components/TitleSection"), {
   loading: () => <WorkbookSkeleton.TitleSkeleton />,
@@ -38,11 +40,11 @@ export default function WorkbookPage() {
   const { isWebpBrowser } = useIsWebpBrowser();
   const pathname = usePathname();
   const workbookId = getWorkbookId(pathname);
-  // useTrackMixpanel({
-  //   eventKey: EVENT_NAME.WORKBOOK_APPEAR,
-  //   property: { id: workbookId },
-  //   dep: pathname,
-  // });
+  useTrackMixpanel({
+    eventKey: EVENT_NAME.WORKBOOK_APPEAR,
+    property: { id: workbookId },
+    dep: pathname,
+  });
 
   const { data: workbookInfo, isLoading } = useQuery({
     ...getWorkbookQueryOptions({ workbookId, isWebpBrowser }),
