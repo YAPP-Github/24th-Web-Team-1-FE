@@ -1,12 +1,9 @@
 import { WorkbookCardClientInfo } from "@main/types/workbook";
 import { Button } from "@shared/components/ui/button";
 import { cn } from "@shared/utils/cn";
-import Image, { ImageLoaderProps } from "next/image";
+import Image from "next/image";
 import FewLogo from "public/assets/icon/cardFewLogo.svg";
 
-const ImageLoadr = ({ src, width, quality }: ImageLoaderProps) => {
-  return `${src}?w=${width}&q=${quality || 75}`;
-};
 const ImageWrapper = ({
   children,
 }: Readonly<{
@@ -22,8 +19,8 @@ const MainImage = ({
     height={172}
     src={mainImageUrl}
     alt="main-image"
-    loader={ImageLoadr}
-    loading="lazy"
+    sizes="(max-width: 480px) 269px"
+    priority={isPriorityImage}
     className="h-[172px] w-[269px] rounded-t-lg object-cover"
   />
 );
