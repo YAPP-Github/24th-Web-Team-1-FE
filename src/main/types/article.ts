@@ -1,10 +1,10 @@
 import { ArticleDetail } from "@article/types";
 import { CategoryClientInfo } from "@common/types/category";
-import { WorkbookInfo } from "@workbook/types";
+import { WorkbookClientInfo } from "@workbook/types";
 
 interface ArticleWithWorkbookInfo {
-  id: WorkbookInfo["id"];
-  title: WorkbookInfo["title"];
+  id: WorkbookClientInfo["id"];
+  title: WorkbookClientInfo["title"];
 }
 export interface ArticleClientInfo {
   id: number;
@@ -19,7 +19,7 @@ export interface ArticleClientInfo {
   content: string;
   category: string;
   viewCount: number;
-  withWorkbookList: Pick<WorkbookInfo, "id" | "title">[] | null;
+  withWorkbookList: Pick<WorkbookClientInfo, "id" | "title">[] | null;
 }
 
 export type ArticleServerInfo = {

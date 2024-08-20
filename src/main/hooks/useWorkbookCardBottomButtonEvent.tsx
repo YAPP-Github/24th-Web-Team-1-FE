@@ -2,7 +2,7 @@
 import queryClient from "@api/queryClient";
 import useSusbscribeWorkbook from "@common/hooks/useSusbscribeWorkbook";
 import { QUERY_KEY } from "@main/remotes";
-import { WorkbookClientInfo } from "@main/types/workbook";
+import { WorkbookCardClientInfo } from "@main/types/workbook";
 import useIsLogin from "@shared/hooks/useIsLogin";
 import { onClickLinkCopy } from "@shared/utils/onClickLinkCopy";
 import { useRouter } from "next/navigation";
@@ -11,7 +11,7 @@ export default function useWorkbookCardBottomButtonEvent({
   cardType,
   id: workbookId,
   articleId,
-}: Pick<WorkbookClientInfo, "cardType" | "id" | "articleId">) {
+}: Pick<WorkbookCardClientInfo, "cardType" | "id" | "articleId">) {
   let handleButtonClick;
   const { push } = useRouter();
   const { postSubscribeWorkbook } = useSusbscribeWorkbook();

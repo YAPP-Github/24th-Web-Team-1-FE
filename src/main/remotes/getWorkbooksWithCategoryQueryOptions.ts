@@ -1,7 +1,7 @@
 import { ApiResponse, fewFetch } from "@api/fewFetch";
 import { CategoryClientInfo } from "@common/types/category";
 import {
-  WorkbookServerInfo,
+  WorkbookCardServerInfo,
   WorkbookServerInfoListRes,
 } from "@main/types/workbook";
 import { UseQueryOptions } from "@tanstack/react-query";
@@ -11,7 +11,7 @@ const getWorkbooksWithCategory = ({
   code,
 }: {
   code: CategoryClientInfo["code"];
-}): Promise<ApiResponse<WorkbookServerInfoListRes<WorkbookServerInfo>>> => {
+}): Promise<ApiResponse<WorkbookServerInfoListRes<WorkbookCardServerInfo>>> => {
   return fewFetch().get(API_ROUTE.WORKBOOKS_WITH_CATEGORY({ code }));
 };
 
@@ -20,9 +20,9 @@ export const getWorkbooksWithCategoryQueryOptions = ({
 }: {
   code: CategoryClientInfo["code"];
 }): UseQueryOptions<
-  ApiResponse<WorkbookServerInfoListRes<WorkbookServerInfo>>,
+  ApiResponse<WorkbookServerInfoListRes<WorkbookCardServerInfo>>,
   unknown,
-  WorkbookServerInfo[]
+  WorkbookCardServerInfo[]
 > => {
   return {
     queryKey: [QUERY_KEY.GET_WORKBOOKS_WITH_CATEGORY, code],
