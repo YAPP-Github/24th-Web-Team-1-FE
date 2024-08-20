@@ -5,8 +5,8 @@ import { useParams, useRouter } from "next/navigation";
 import { HTMLAttributes } from "react";
 
 import { Button } from "@shared/components/ui/button";
-import { EVENT_NAME } from "@shared/constants/mixpanel";
 import { useProblemIdsViewModel } from "@shared/models/useProblemIdsViewModel";
+import { EVENT_NAME } from "@shared/constants/mixpanel";
 import { Mixpanel } from "@shared/utils/mixpanel";
 
 interface ArticleBottomButtonProps extends HTMLAttributes<HTMLButtonElement> {}

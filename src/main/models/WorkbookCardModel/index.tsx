@@ -1,21 +1,27 @@
 import {
-  WorkbookClientInfo,
-  WorkbookServerInfo,
+  WorkbookCardClientInfo,
+  WorkbookCardServerInfo,
   WorkbookSubscriptionInfo,
 } from "@main/types/workbook";
+import { ImageModel } from "@shared/models/ImageModel";
+import { WebpBrowser } from "@shared/types/image";
+import { WorkbookServerInfo } from "@workbook/types";
 
 export class WorkbookCardModel {
   constructor({
     initWorkbookSeverList,
     initWorkbookSubscriptionInfoList,
+    initWebpBrowser,
   }: {
-    initWorkbookSeverList: WorkbookServerInfo[];
+    initWorkbookSeverList: WorkbookCardServerInfo[];
     initWorkbookSubscriptionInfoList?: WorkbookSubscriptionInfo[];
+    initWebpBrowser: WebpBrowser;
   }) {
     this.workbookList = initWorkbookSeverList;
     if (initWorkbookSubscriptionInfoList)
       this.workbookSubscriptionInfoList = initWorkbookSubscriptionInfoList;
     this.workbookCombineList = this.getWorkbookServerCombineData();
+    this.webpBrowser = initWebpBrowser;
   }
   get workbookCombineListData() {
     return this.workbookCombineList;
@@ -67,7 +73,7 @@ export class WorkbookCardModel {
     workbookCombineList,
   }: {
     workbookCombineList: WorkbookCombineInfo[];
-  }): WorkbookClientInfo[] {
+  }): WorkbookCardClientInfo[] {
     return workbookCombineList.map(
       (
         {
@@ -87,10 +93,12 @@ export class WorkbookCardModel {
         idx,
       ) => {
         const cardType = this.getWorkbookCardType({ status, currentDay });
-        const changeToClientData: WorkbookClientInfo = {
+        const changeToClientData: WorkbookCardClientInfo = {
           id,
           badgeInfo: this.getBadeInfo({ cardType }),
-          mainImageUrl,
+          mainImageUrl: this.webpBrowser.isWebpBrowser
+            ? mainImageUrl
+            : ImageModel.changePngImage({ imageSrc: mainImageUrl }),
           isPriorityImage: idx < 2,
           title,
           writers: this.getWriterNameList({ writers }),
@@ -121,7 +129,7 @@ export class WorkbookCardModel {
   }: {
     status: WorkbookSubscriptionInfo["status"] | undefined;
     currentDay: WorkbookSubscriptionInfo["currentDay"] | undefined;
-  }): WorkbookClientInfo["cardType"] {
+  }): WorkbookCardClientInfo["cardType"] {
     if (status && currentDay) {
       if (status === "ACTIVE") return "LEARN";
       else return "SHARE";
@@ -131,7 +139,10 @@ export class WorkbookCardModel {
 
   getBadeInfo({
     cardType,
-  }: Pick<WorkbookClientInfo, "cardType">): WorkbookClientInfo["badgeInfo"] {
+  }: Pick<
+    WorkbookCardClientInfo,
+    "cardType"
+  >): WorkbookCardClientInfo["badgeInfo"] {
     switch (cardType) {
       case "LEARN":
         return {
@@ -159,7 +170,7 @@ export class WorkbookCardModel {
     category: WorkbookServerInfo["category"];
     totalDay: WorkbookSubscriptionInfo["totalDay"] | undefined;
     currentDay: WorkbookSubscriptionInfo["currentDay"] | undefined;
-  }): WorkbookClientInfo["metaComponent"] {
+  }): WorkbookCardClientInfo["metaComponent"] {
     if (totalDay && currentDay) {
       if (totalDay === currentDay)
         return (
@@ -183,9 +194,9 @@ export class WorkbookCardModel {
     status,
   }: {
     totalSubscriber: WorkbookSubscriptionInfo["totalSubscriber"] | undefined;
-    subscriberCount: WorkbookServerInfo["subscriberCount"];
+    subscriberCount: WorkbookCardServerInfo["subscriberCount"];
     status: WorkbookSubscriptionInfo["status"] | undefined;
-  }): WorkbookClientInfo["personCourse"] {
+  }): WorkbookCardClientInfo["personCourse"] {
     if (status) {
       if (status === "ACTIVE") return `${subscriberCount}명 학습중`;
       if (status === "DONE") return `총 ${totalSubscriber}명`;
@@ -198,8 +209,8 @@ export class WorkbookCardModel {
     currentDay,
   }: {
     currentDay: WorkbookSubscriptionInfo["currentDay"] | undefined;
-    cardType: WorkbookClientInfo["cardType"];
-  }): WorkbookClientInfo["buttonTitle"] {
+    cardType: WorkbookCardClientInfo["cardType"];
+  }): WorkbookCardClientInfo["buttonTitle"] {
     if (currentDay) {
       if (cardType === "LEARN") return `Day ${currentDay} 학습하기`;
     }
@@ -221,7 +232,7 @@ export class WorkbookCardModel {
   transformDataToSet({
     data,
   }: {
-    data: WorkbookServerInfo[] | WorkbookSubscriptionInfo[];
+    data: WorkbookCardServerInfo[] | WorkbookSubscriptionInfo[];
   }) {
     return data.reduce<WorkbookCombineInfoSet>((acc, item) => {
       const { id, ...rest } = item;
@@ -232,15 +243,16 @@ export class WorkbookCardModel {
     }, {});
   }
 
-  private workbookList: WorkbookServerInfo[];
+  private workbookList: WorkbookCardServerInfo[];
   private workbookSubscriptionInfoList: WorkbookSubscriptionInfo[] | undefined;
   private workbookCombineList: WorkbookCombineInfo[];
+  private webpBrowser: WebpBrowser;
 }
 
-type WorkbookCombineInfo = WorkbookServerInfo &
+type WorkbookCombineInfo = WorkbookCardServerInfo &
   Partial<WorkbookSubscriptionInfo>;
 type WorkbookCombineInfoSet = {
   [key: string]:
-    | Omit<WorkbookServerInfo, "id">
+    | Omit<WorkbookCardServerInfo, "id">
     | Omit<Partial<WorkbookSubscriptionInfo>, "id">;
 };

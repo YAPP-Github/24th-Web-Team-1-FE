@@ -1,6 +1,6 @@
 "use client";
 import useWorkbookCardBottomButtonEvent from "@main/hooks/useWorkbookCardBottomButtonEvent";
-import { WorkbookClientInfo } from "@main/types/workbook";
+import { WorkbookCardClientInfo } from "@main/types/workbook";
 import { useRouter } from "next/navigation";
 import WorkbookCardDetail from "../WorkbookCardDetail";
 
@@ -16,7 +16,7 @@ export default function WorkbookCard({
   buttonTitle,
   cardType,
   articleId,
-}: WorkbookClientInfo) {
+}: WorkbookCardClientInfo) {
   const { push } = useRouter();
   const { handleButtonClick } = useWorkbookCardBottomButtonEvent({
     cardType,

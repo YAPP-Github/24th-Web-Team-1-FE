@@ -9,7 +9,6 @@ import { deleteCookie } from "cookies-next";
 import { ApiResponse } from "@api/fewFetch";
 
 import { COOKIES } from "@shared/constants/token";
-import { Mixpanel } from "@shared/utils/mixpanel";
 
 import { logOutMutaionOption } from "@auth/remotes/logoutMembersQueryOption";
 
@@ -23,7 +22,7 @@ export const useLogout = () => {
         // 쿠키 삭제 및 로그인 페이지로 이동
         deleteCookie(COOKIES.REFRESH_TOKEN);
         deleteCookie(COOKIES.ACCESS_TOKEN);
-        Mixpanel.reset();
+        // Mixpanel.reset();
         router.push("/");
         window.location.reload();
       }

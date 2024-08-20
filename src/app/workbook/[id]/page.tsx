@@ -5,14 +5,14 @@ import { usePathname } from "next/navigation";
 
 import { useQuery } from "@tanstack/react-query";
 
-import { EVENT_NAME } from "@shared/constants/mixpanel";
-import useTrackMixpanel from "@shared/hooks/useTrackMixpanel";
-
+import useIsWebpBrowser from "@shared/hooks/useIsWebpBrowser";
 import WorkbookButton from "@workbook/components/WorkbookButton";
 import WorkbookSkeleton from "@workbook/components/WorkbookSkeleton";
 import WriterInfo from "@workbook/components/WriterInfo";
 import { getWorkbookQueryOptions } from "@workbook/remotes/getWorkbookQueryOptions";
 import { getWorkbookId } from "@workbook/utils";
+import { EVENT_NAME } from "@shared/constants/mixpanel";
+import useTrackMixpanel from "@shared/hooks/useTrackMixpanel";
 
 const TitleSection = dynamic(() => import("@shared/components/TitleSection"), {
   loading: () => <WorkbookSkeleton.TitleSkeleton />,
@@ -36,15 +36,8 @@ const WorkbookMainImage = dynamic(
   },
 );
 
-const SubscribeBottomBar = dynamic(
-  () => import("@subscription/components/SubscribeBottomBar"),
-  {
-    loading: () => <></>,
-  },
-);
-
 export default function WorkbookPage() {
-  // usePathname 로 workbook id 받기
+  const { isWebpBrowser } = useIsWebpBrowser();
   const pathname = usePathname();
   const workbookId = getWorkbookId(pathname);
   useTrackMixpanel({
@@ -54,7 +47,7 @@ export default function WorkbookPage() {
   });
 
   const { data: workbookInfo, isLoading } = useQuery({
-    ...getWorkbookQueryOptions(workbookId),
+    ...getWorkbookQueryOptions({ workbookId, isWebpBrowser }),
   });
 
   if (isLoading) {

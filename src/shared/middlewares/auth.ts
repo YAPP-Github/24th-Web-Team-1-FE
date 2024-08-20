@@ -15,52 +15,42 @@ type authMiddlewareProps = {
 };
 
 export const AuthMiddleware = async ({ req, nextUrl }: authMiddlewareProps) => {
-  try {
-    const { searchParams } = nextUrl;
-    const auth_token = searchParams.get(AUTH_TOKEN);
-    if (auth_token) {
-      const response: ApiResponse<tokenResponse> = await fewFetch().post(
-        API_ROUTE.TOKEN(auth_token),
-      );
 
-      const authData = response.data;
+  const { searchParams } = nextUrl;
+  const auth_token = searchParams.get(AUTH_TOKEN);
+  if (auth_token) {
+    const response: ApiResponse<tokenResponse> = await fewFetch().post(
+      API_ROUTE.TOKEN(auth_token),
+    );
 
-      if (authData?.message === "알 수 없는 오류가 발생했어요.") {
-        nextUrl.searchParams.delete(AUTH_TOKEN);
-        const response = NextResponse.redirect(nextUrl);
-        
-        response.cookies.set(ISLOGIN, "false");
+    const authData = response.data;
 
-        return NextResponse.redirect(nextUrl);
-      }
-      if (authData?.data?.accessToken) {
-        const accessToken = authData.data.accessToken;
-        const memberEmail = tokenParse(accessToken).memberEmail;
+    if (authData?.message === "알 수 없는 오류가 발생했어요.") {
+      nextUrl.searchParams.delete(AUTH_TOKEN);
+      const response = NextResponse.redirect(nextUrl);
 
-        nextUrl.searchParams.delete(AUTH_TOKEN);
-        nextUrl.searchParams.set("member_email", memberEmail);
+      response.cookies.set(ISLOGIN, "false");
 
-        const response = NextResponse.redirect(nextUrl);
-
-        response.cookies.set(
-          COOKIES.ACCESS_TOKEN,
-          authData?.data?.accessToken,
-          {
-            maxAge: 24 * 60 * 60, // 30 days
-          },
-        );
-        response.cookies.set(
-          COOKIES.REFRESH_TOKEN,
-          authData?.data?.refreshToken,
-          {
-            maxAge: 24 * 60 * 60, // 30 days
-          },
-        );
-
-        return response;
-      }
+      return NextResponse.redirect(nextUrl);
     }
-  } catch {
-    return undefined;
+    if (authData?.data?.accessToken) {
+      const accessToken = authData.data.accessToken;
+      const memberEmail = tokenParse(accessToken).memberEmail;
+
+      nextUrl.searchParams.delete(AUTH_TOKEN);
+      nextUrl.searchParams.set("member_email", memberEmail);
+
+      const response = NextResponse.redirect(nextUrl);
+
+      response.cookies.set(COOKIES.ACCESS_TOKEN, authData?.data?.accessToken, {
+        maxAge: 24 * 60 * 60, // 30 days
+      });
+      response.cookies.set(COOKIES.REFRESH_TOKEN, authData?.data?.refreshToken, {
+        maxAge: 24 * 60 * 60, // 30 days
+      });
+
+      return response;
+
+    }
   }
 };

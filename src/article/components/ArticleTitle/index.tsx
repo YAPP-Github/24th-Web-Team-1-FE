@@ -9,9 +9,7 @@ import { setCookie } from "cookies-next";
 
 import TitleSection from "@shared/components/TitleSection";
 import { IS_EXIST_PROBLEMS } from "@shared/constants/middlewareConstant";
-import { EVENT_NAME } from "@shared/constants/mixpanel";
 import { useProblemIdsViewModel } from "@shared/models/useProblemIdsViewModel";
-import { Mixpanel } from "@shared/utils/mixpanel";
 
 import { ARTICLE_INFO_TYPE } from "@article/constants/articleCase";
 import { getArticleQueryOptions } from "@article/remotes/getArticleQueryOptions";
@@ -20,6 +18,8 @@ import { ArticleDetail, ArticleWithWorkbookDetail } from "@article/types";
 
 import ArticleSkeleton from "../ArticleSkeleton";
 import WriterInfo from "../WriterInfo";
+import { EVENT_NAME } from "@shared/constants/mixpanel";
+import { Mixpanel } from "@shared/utils/mixpanel";
 
 export default function ArticleTitle() {
   const isFirstRender = useRef(false);

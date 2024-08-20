@@ -14,7 +14,7 @@ export interface Article {
   title: string;
 }
 
-export interface WorkbookInfo {
+export interface WorkbookServerInfo {
   id: number;
   name: number;
   mainImageUrl: string;
@@ -25,6 +25,7 @@ export interface WorkbookInfo {
   writers: Writer[];
   articles: Article[];
 }
+export type WorkbookClientInfo = WorkbookServerInfo;
 
 export type WorkbookPageProps = {
   params: { id: string };

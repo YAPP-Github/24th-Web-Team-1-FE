@@ -1,9 +1,10 @@
-import { WorkbookInfo } from "@workbook/types";
+import { WorkbookServerInfo } from "@workbook/types";
 import { HTMLAttributes } from "react";
 
 type SubscriptionStatus = "ACTIVE" | "DONE";
 
-export interface WorkbookSubscriptionInfo extends Pick<WorkbookInfo, "id"> {
+export interface WorkbookSubscriptionInfo
+  extends Pick<WorkbookServerInfo, "id"> {
   status: SubscriptionStatus;
   totalDay: number;
   currentDay: number;
@@ -12,11 +13,11 @@ export interface WorkbookSubscriptionInfo extends Pick<WorkbookInfo, "id"> {
   articleInfo: string; // JSON문자열
 }
 
-export type WorkbookServerInfo = {
+export type WorkbookCardServerInfo = {
   subscriberCount: number;
-} & Omit<WorkbookInfo, "articles" | "name">;
+} & Omit<WorkbookServerInfo, "articles" | "name">;
 
-export interface WorkbookClientInfo {
+export interface WorkbookCardClientInfo {
   id: number;
   mainImageUrl: string;
   isPriorityImage:boolean;

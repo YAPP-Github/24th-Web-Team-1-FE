@@ -4,17 +4,20 @@ import { useRouter, useSearchParams } from "next/navigation";
 
 import LottieClient from "@shared/components/Lottie";
 import { Button } from "@shared/components/ui/button";
+
 import useIsLogin from "@shared/hooks/useIsLogin";
-import { Mixpanel } from "@shared/utils/mixpanel";
 
 import { SIGNUP_COMPLETED } from "@auth/constants/auth";
 import lottieJson from "public/assets/Problem_Complete.json";
 import FewLogo from "public/enterlogo.svg";
+import { Mixpanel } from "@shared/utils/mixpanel";
 export default function ValidationCompletePage() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const memberEmail = searchParams.get("member_email");
+
   const isLogin = useIsLogin();
+
   return (
     <div className="flex h-auto flex-col items-center">
       <LottieClient animationData={lottieJson} />
