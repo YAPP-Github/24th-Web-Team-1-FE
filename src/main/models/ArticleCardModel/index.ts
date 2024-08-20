@@ -39,7 +39,6 @@ export default class ArticleCardModel {
           thumbnail: this.webpBrowser.isWebpBrowser
             ? mainImageUrl
             : ImageModel.changePngImage({ imageSrc: mainImageUrl }),
-
           isPriorityImage: idx < 2,
           title,
           content: this.getRemoveTagContent({ content }),

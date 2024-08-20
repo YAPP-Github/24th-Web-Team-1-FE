@@ -20,7 +20,7 @@ export type WorkbookCardServerInfo = {
 export interface WorkbookCardClientInfo {
   id: number;
   mainImageUrl: string;
-  isPriorityImage: boolean;
+  isPriorityImage:boolean;
   metaComponent: React.ReactElement;
   title: string;
   writers: string[];
