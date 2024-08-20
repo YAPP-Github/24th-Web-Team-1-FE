@@ -19,7 +19,6 @@ const MainImage = ({
     height={172}
     src={mainImageUrl}
     alt="main-image"
-    sizes="(max-width: 480px) 269px"
     priority={isPriorityImage}
     className="h-[172px] w-[269px] rounded-t-lg object-cover"
   />
