@@ -1,10 +1,8 @@
-import React from "react";
-
-import { WorkbookInfo } from "@workbook/types";
+import { WorkbookClientInfo } from "@workbook/types";
 
 import WriterLink from "../WriterLink";
 
-type WriterInfoProps = Pick<WorkbookInfo, "writers">;
+type WriterInfoProps = Pick<WorkbookClientInfo, "writers">;
 
 export default function WriterInfo({ writers }: WriterInfoProps) {
   return (
@@ -23,4 +21,3 @@ export default function WriterInfo({ writers }: WriterInfoProps) {
     </div>
   );
 }
-
