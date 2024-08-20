@@ -1,12 +1,12 @@
 import {
-  WorkbookServerInfo,
+  WorkbookCardServerInfo,
   WorkbookSubscriptionInfo,
 } from "@main/types/workbook";
 import { beforeEach, describe, expect, it } from "vitest";
 import { WorkbookCardModel } from ".";
 
 // 테스트 데이터
-const mockWorkbookServerList: WorkbookServerInfo[] = [
+const mockWorkbookServerList: WorkbookCardServerInfo[] = [
   {
     id: 1,
     mainImageUrl:
@@ -73,6 +73,7 @@ describe("메인 워크북 카드 모델 테스트", () => {
     model = new WorkbookCardModel({
       initWorkbookSeverList: mockWorkbookServerList,
       initWorkbookSubscriptionInfoList: mockWorkbookSubscriptionInfoList,
+      initWebpBrowser: { isWebpBrowser: true },
     });
   });
 

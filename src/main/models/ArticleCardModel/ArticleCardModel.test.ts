@@ -9,6 +9,8 @@ const mockData: ArticleServerInfo[] = [
       id: 1,
       name: "안나포",
       url: "https://storage.mrblog.net/files/dosi_draw/a3NgiDGW2H3NhsYp1Qp3RuWNzUx9sg8L2yyooYqF.jpg",
+      imageUrl:
+        "https://storage.mrblog.net/files/dosi_draw/a3NgiDGW2H3NhsYp1Qp3RuWNzUx9sg8L2yyooYqF.jpg",
     },
     title: "ETF(상장 지수 펀드)란? 모르면 손해라고?",
     content: "ECONOMY",
@@ -36,6 +38,8 @@ const mockData: ArticleServerInfo[] = [
       id: 1,
       name: "몰티즈",
       url: "https://storage.mrblog.net/files/dosi_draw/a3NgiDGW2H3NhsYp1Qp3RuWNzUx9sg8L2yyooYqF.jpg",
+      imageUrl:
+        "https://storage.mrblog.net/files/dosi_draw/a3NgiDGW2H3NhsYp1Qp3RuWNzUx9sg8L2yyooYqF.jpg",
     },
     mainImageUrl:
       "https://storage.mrblog.net/files/dosi_draw/a3NgiDGW2H3NhsYp1Qp3RuWNzUx9sg8L2yyooYqF.jpg",
@@ -64,6 +68,7 @@ describe("메인 아티클 카드 모델 테스트", () => {
   beforeEach(() => {
     articleCardModel = new ArticleCardModel({
       initArticleCardServerList: mockData,
+      initWebpBrowser: { isWebpBrowser: true },
     });
   });
   it("아티클 클라이언트 카드 데이터 변환 테스트", () => {

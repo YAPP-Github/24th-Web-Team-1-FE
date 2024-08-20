@@ -15,6 +15,7 @@ type authMiddlewareProps = {
 };
 
 export const AuthMiddleware = async ({ req, nextUrl }: authMiddlewareProps) => {
+
   const { searchParams } = nextUrl;
   const auth_token = searchParams.get(AUTH_TOKEN);
   if (auth_token) {
@@ -49,6 +50,7 @@ export const AuthMiddleware = async ({ req, nextUrl }: authMiddlewareProps) => {
       });
 
       return response;
+
     }
   }
 };
