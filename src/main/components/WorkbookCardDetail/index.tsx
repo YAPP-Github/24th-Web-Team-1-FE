@@ -20,7 +20,7 @@ const MainImage = ({
     src={mainImageUrl}
     alt="main-image"
     priority={isPriorityImage}
-    sizes="(max-width: 480px) 90vw, 100vw"
+    sizes="40vw"
     className="h-[172px] w-[269px] rounded-t-lg object-cover"
   />
 );
