@@ -6,7 +6,7 @@ const isDebug = process.env.NODE_ENV === "development";
 const actions = {
   init: () =>
     mixpanel.init(MX_TOKEN as string, {
-      debug: isDebug,
+      debug: true,
     }),
 
   identify: ({ id }: { id: string }) => {
