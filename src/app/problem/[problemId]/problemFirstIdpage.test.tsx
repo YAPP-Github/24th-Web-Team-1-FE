@@ -16,6 +16,7 @@ import { render, renderHook, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import ProblemLayout from "./layout";
 import ProblemPage from "./page";
+import { BACK_TO_ARTICLE_WORDS } from "@problem/constants/backToArticle";
 
 const isExistNextProblem = vi.fn(() => true);
 const nextSetProblemId = vi.fn(() => "2");
@@ -94,6 +95,8 @@ describe("첫 번째 문제풀기 페이지 테스트", () => {
     await waitFor(() => {
       expect(result.current.isSuccess).toBe(true);
     });
+
+    expect(screen.getByText(BACK_TO_ARTICLE_WORDS.BEFORE)).toBeInTheDocument();
   });
 
   it("정답 선택 이후 정답 제출하기 버튼 클릭 시, 해설 컴포넌트 잘 노출되고, 다음 문제로 넘어가기 확인", async () => {
@@ -117,6 +120,8 @@ describe("첫 번째 문제풀기 페이지 테스트", () => {
 
     expect(problemExplanation.childElementCount).toBe(2);
     const explanationParagraphy = screen.getByRole("paragraph");
+
+    expect(screen.getByText(BACK_TO_ARTICLE_WORDS.AFTER)).toBeInTheDocument();
 
     expect(explanationParagraphy.textContent).toBe(
       "제임스 와트는 증기를 이용하여 공기를 따뜻하게 만드는 라디에이터를 만들었습니다.",
