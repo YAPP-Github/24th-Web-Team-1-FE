@@ -13,10 +13,8 @@ export default function ArticlePageLayout({
   return (
     <main className="flex h-auto w-full">
       <section className="flex h-auto w-full flex-col justify-between">
-        <div className="mx-[20px] mb-[10px] flex flex-col">
-          <TopBar />
-          {children}
-        </div>
+        <TopBar className="px-[20px]" />
+        <div className="mx-[20px] mb-[10px] flex flex-col">{children}</div>
         <ArticleBottomButton title={"문제풀기"} />
       </section>
     </main>
