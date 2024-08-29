@@ -13,11 +13,12 @@ export default function ArticleDropDownWrapper({
   return (
     <>
       {toggleArticle && (
-        <div className="fixed inset-0 z-50 bg-white flex justify-center">
+        <div className="fixed inset-0 z-50 flex justify-center bg-white">
           <div className="relative w-full max-w-[480px] bg-white">
-            <div className="absolute top-0 right-0 p-4">
-              <CancelButton handleToggle={handleToggleArticle} />
-            </div>
+            <CancelButton
+              handleToggle={handleToggleArticle}
+              className="absolute right-0 top-0 p-4"
+            />
             <ArticleDropDown />
           </div>
         </div>
