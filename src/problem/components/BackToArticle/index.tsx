@@ -18,6 +18,7 @@ import {
 } from "@problem/types/problemInfo";
 import { Button } from "@shared/components/ui/button";
 import ArticleDropDownWrapper from "../ArticleDropDownWrapper";
+import { AnswerStatusModel } from "@problem/models/AnswerStatusModel";
 
 interface BackToArticleProps extends HTMLAttributes<HTMLDivElement> {}
 
@@ -41,18 +42,18 @@ export default function BackToArticle({ className }: BackToArticleProps) {
     },
   });
 
-  const problemAnswerInfo = problemAnswersInfo[0];
+  const answerStatus = new AnswerStatusModel({
+    problemAnswerInfo: problemAnswersInfo[0],
+  });
 
-  const backToArticleWords = problemAnswerInfo
-    ? BACK_TO_ARTICLE_WORDS.AFTER
-    : BACK_TO_ARTICLE_WORDS.BEFORE;
+  const backToArticleWords = answerStatus.problemSolvedStatus
 
   return (
     <div
       className={cn(
         "flex flex-row space-x-[3px] relative",
         className,
-        !problemAnswerInfo && "mt-[91px]",
+        !answerStatus.isProblemAnswerInfo && "mt-[91px]",
       )}
     >
       <ArticleDropDownWrapper
