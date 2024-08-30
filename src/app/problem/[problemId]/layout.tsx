@@ -1,4 +1,5 @@
 import AnswerSubmitButton from "@problem/components/AnswerSubmitButton";
+import BackToArticle from "@problem/components/BackToArticle";
 import ProblemCompleteDialog from "@problem/components/ProblemCompleteDialog";
 import ProblemTopbar from "@problem/components/ProblemTopbar";
 import { ProblemProvider } from "@problem/context/problemContext";
@@ -16,7 +17,10 @@ export default function ProblemLayout({ children }: ProblemLayoutProps) {
             <ProblemTopbar />
             {children}
           </div>
-          <AnswerSubmitButton />
+          <div className="flex flex-col gap-y-[24px]">
+            <BackToArticle />
+            <AnswerSubmitButton />
+          </div>
           <ProblemCompleteDialog />
         </section>
       </ProblemProvider>
