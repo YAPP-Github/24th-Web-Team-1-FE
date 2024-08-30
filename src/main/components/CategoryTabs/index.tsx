@@ -50,7 +50,7 @@ export default function CategoryTabs({
       name:
         type === "ARTICLE"
           ? EVENT_NAME.MAIN_ARTICLECATEGORY_TAPPED
-          : EVENT_NAME.MAIN_WORKBOOK_SHORTCUT_TAPPED,
+          : EVENT_NAME.MAIN_WORKBOOKCATEGORY_TAPPED,
       property: { category: name },
     });
   };
