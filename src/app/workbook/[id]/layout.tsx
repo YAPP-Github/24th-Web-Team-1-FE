@@ -35,9 +35,7 @@ export default async function WorkbookLayout({
     <HydrationBoundary state={state}>
       <section className="flex h-auto w-full flex-col justify-between">
         <div className="mb-[10px] flex flex-col">
-          <div className="mx-[20px]">
-            <TopBar />
-          </div>
+          <TopBar className="px-[20px]" />
           {children}
         </div>
       </section>

@@ -12,5 +12,5 @@ export default function ProblemTopbar() {
     back();
   };
 
-  return <TopBar onClick={handleBackClick} />;
+  return <TopBar onClick={handleBackClick} className="z-[50]" />;
 }

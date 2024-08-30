@@ -37,6 +37,10 @@ export const useProblemIdsViewModel = () => {
     return `${process.env.NEXT_PUBLIC_FEW_WEB}/article/${articleId}`;
   };
 
+  const getArticleId = () => {
+    return articleId
+  }
+
   return {
     setProblemIds,
     clearProblem,
@@ -48,5 +52,6 @@ export const useProblemIdsViewModel = () => {
     nextSetProblemId,
     isExistNextProblem,
     getArticlePathText,
+    getArticleId
   };
 };
