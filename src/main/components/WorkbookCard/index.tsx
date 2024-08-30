@@ -3,6 +3,8 @@ import useWorkbookCardBottomButtonEvent from "@main/hooks/useWorkbookCardBottomB
 import { WorkbookCardClientInfo } from "@main/types/workbook";
 import { useRouter } from "next/navigation";
 import WorkbookCardDetail from "../WorkbookCardDetail";
+import { Mixpanel } from "@shared/utils/mixpanel";
+import { EVENT_NAME } from "@shared/constants/mixpanel";
 
 export default function WorkbookCard({
   id,
@@ -24,10 +26,17 @@ export default function WorkbookCard({
     articleId,
   });
 
+  const onClickWorkbookCard = () => {
+    push(`/workbook/${id}`);
+    Mixpanel.track({
+      name: EVENT_NAME.MAIN_WORKBOOK_TAPPED,
+      property: { id },
+    });
+  };
   return (
     <div
       className="flex h-[390px] min-w-[269px] flex-col"
-      onClick={() => push(`/workbook/${id}`)}
+      onClick={onClickWorkbookCard}
     >
       <WorkbookCardDetail.ImageWrapper>
         <WorkbookCardDetail.MainImage
