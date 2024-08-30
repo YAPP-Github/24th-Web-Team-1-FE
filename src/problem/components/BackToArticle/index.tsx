@@ -52,13 +52,12 @@ export default function BackToArticle({ className }: BackToArticleProps) {
   const handleToggleArticle = () => {
     setToggleArticle((prev) => !prev);
     if (!toggleArticle) {
+      const isChoiceAnswer = Boolean(choiceAnswer);
       const type =
         (!answerStatus.isProblemAnswerInfo &&
-          !Boolean(choiceAnswer) &&
+          !isChoiceAnswer &&
           "notStarted") ||
-        (!answerStatus.isProblemAnswerInfo &&
-          Boolean(choiceAnswer) &&
-          "solving") ||
+        (!answerStatus.isProblemAnswerInfo && isChoiceAnswer && "solving") ||
         "solved";
       Mixpanel.track({
         name: EVENT_NAME.PROBLEM_GOARTICLE_TAPPED,
