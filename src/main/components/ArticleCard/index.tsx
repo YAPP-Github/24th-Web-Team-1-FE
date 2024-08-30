@@ -2,6 +2,8 @@
 import { ArticleClientInfo } from "@main/types/article";
 import { useRouter } from "next/navigation";
 import ArticleCardDetail from "../ArticleCardDetail";
+import { Mixpanel } from "@shared/utils/mixpanel";
+import { EVENT_NAME } from "@shared/constants/mixpanel";
 
 export default function ArticleCard({
   id,
@@ -17,6 +19,10 @@ export default function ArticleCard({
   const { push } = useRouter();
   const onClickArticlePage = () => {
     push(`/article/${id}`);
+    Mixpanel.track({
+      name: EVENT_NAME.MAIN_ARTICLE_TAPPED,
+      property: { id },
+    });
   };
   return (
     <section className="border-b-[0.5px] border-text-gray2 px-[20px] py-[26px]">
