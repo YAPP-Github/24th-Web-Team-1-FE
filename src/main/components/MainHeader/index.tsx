@@ -7,12 +7,16 @@ import FewLogo from "public/assets/icon/fewlogo.svg";
 import DropDownMenuWrapper from "../DropdownMenuWrapper";
 import { EVENT_NAME } from "@shared/constants/mixpanel";
 import useTrackMixpanel from "@shared/hooks/useTrackMixpanel";
+import { Mixpanel } from "@shared/utils/mixpanel";
 export default function MainHeader() {
   useTrackMixpanel({ eventKey: EVENT_NAME.MAIN_APPEAR });
   const [toggleMenu, setToggleMenu] = useState(false);
 
   const handleToggleMenu = () => {
     setToggleMenu((prev) => !prev);
+    Mixpanel.track({
+      name: EVENT_NAME.MAIN_MYPAGE_TAPPED,
+    });
   };
 
   return (
