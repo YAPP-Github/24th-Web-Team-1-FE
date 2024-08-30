@@ -7,6 +7,8 @@ import { cn } from "@shared/utils/cn";
 import { useQuery } from "@tanstack/react-query";
 import { HTMLAttributes, useEffect } from "react";
 import CategoryTabSkeleton from "../CategoryTabSkeleton";
+import { Mixpanel } from "@shared/utils/mixpanel";
+import { EVENT_NAME } from "@shared/constants/mixpanel";
 interface CategoryTabsProps extends HTMLAttributes<HTMLDivElement> {
   type: "WORKBOOK" | "ARTICLE";
   category: CategoryClientInfo | undefined;
@@ -42,6 +44,16 @@ export default function CategoryTabs({
   const isLoading =
     type === "WORKBOOK" ? isWorkbookCategoryLoading : isArticleCategoryLoading;
 
+  const onClickCategory = ({ code, name }: CategoryClientInfo) => {
+    handleCategory({ code, name });
+    Mixpanel.track({
+      name:
+        type === "ARTICLE"
+          ? EVENT_NAME.MAIN_ARTICLECATEGORY_TAPPED
+          : EVENT_NAME.MAIN_WORKBOOK_SHORTCUT_TAPPED,
+      property: { category: name },
+    });
+  };
   if (isLoading || !categoryList)
     return <CategoryTabSkeleton className={className} />;
 
@@ -62,7 +74,7 @@ export default function CategoryTabs({
                 "min-w-[48px]",
               )}
               name={name}
-              onClick={() => handleCategory({ code, name })}
+              onClick={() => onClickCategory({ code, name })}
             >
               <span className="flex w-full items-center justify-center">
                 {name}
