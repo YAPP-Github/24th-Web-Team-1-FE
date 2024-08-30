@@ -30,6 +30,7 @@ import {
 import userEvent from "@testing-library/user-event";
 import ProblemLayout from "./layout";
 import ProblemPage from "./page";
+import { BACK_TO_ARTICLE_WORDS } from "@problem/constants/backToArticle";
 
 const isExistNextProblem = vi.fn(() => false);
 const clearProblem = vi.fn();
@@ -119,6 +120,8 @@ describe("마지막 문제 풀이 페이지 테스트", () => {
     await waitFor(() => {
       expect(result.current.isSuccess).toBe(true);
     });
+
+    expect(screen.getByText(BACK_TO_ARTICLE_WORDS.BEFORE)).toBeInTheDocument();
   });
   it("정답 선택 이후 정답 제출하기 버튼 클릭 시, 해설 컴포넌트 잘 노출되고, 로띠 재생이후 메인으로 넘어가기", async () => {
     const { result } = renderHook(
@@ -146,6 +149,9 @@ describe("마지막 문제 풀이 페이지 테스트", () => {
     expect(explanationParagraphy.textContent).toBe(
       "온돌은 바닥 아래에 연기가 지나가는 길이 있는 반면, 하이포코스트는 바닥 아래가 거의 다 뚫려있는 형태입니다.",
     );
+
+    expect(screen.getByText(BACK_TO_ARTICLE_WORDS.AFTER)).toBeInTheDocument();
+    
     act(() => {
       vi.advanceTimersByTime(5000);
     });

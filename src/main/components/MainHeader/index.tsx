@@ -18,7 +18,7 @@ export default function MainHeader() {
   return (
     <header
       className={cn(
-        "relative flex h-[66px] w-full items-center justify-between",
+        "relative flex h-[66px] w-full items-center justify-between sticky top-0 z-[9999]",
         toggleMenu ? "bg-white" : "bg-main",
       )}
     >
