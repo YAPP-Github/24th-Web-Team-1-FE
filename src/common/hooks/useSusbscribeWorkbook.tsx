@@ -1,10 +1,12 @@
 import { toast } from "@shared/components/ui/use-toast";
 import { SUBSCRIBE_USER_ACTIONS } from "@subscription/constants/subscribe";
-import { subscribeWorkbookOptions } from "@subscription/remotes/postSubscriptionQueryOptions";
+import { subscribeWorkbookQueryOptions } from "@subscription/remotes/postSubscriptionQueryOptions";
 import { useMutation } from "@tanstack/react-query";
 
 export default function useSusbscribeWorkbook() {
-  const { mutate: subscribeWorkbook } = useMutation(subscribeWorkbookOptions());
+  const { mutate: subscribeWorkbook } = useMutation(
+    subscribeWorkbookQueryOptions(),
+  );
   const postSubscribeWorkbook = ({
     workbookId,
     handleSucess,
