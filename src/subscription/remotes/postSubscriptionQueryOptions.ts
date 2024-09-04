@@ -1,11 +1,12 @@
 import { UseMutationOptions } from "@tanstack/react-query";
 
+import { ApiResponse, FewError, fewFetch } from "@api/fewFetch";
+
 import {
   MessageOnlyResponse,
   SubscribeParams,
 } from "@subscription/types/subscription";
 
-import { ApiResponse, FewError, fewFetch } from "@api/fewFetch";
 import { API_ROUTE, QUERY_KEY } from "./api";
 
 export const subscribeWorkbook = ({
@@ -16,7 +17,7 @@ export const subscribeWorkbook = ({
   return fewFetch().post(API_ROUTE.SUBSCRIBE(workbookId));
 };
 
-export const subscribeWorkbookOptions = (): UseMutationOptions<
+export const subscribeWorkbookQueryOptions = (): UseMutationOptions<
   ApiResponse<MessageOnlyResponse>,
   ApiResponse<FewError>,
   Pick<SubscribeParams, "workbookId">
