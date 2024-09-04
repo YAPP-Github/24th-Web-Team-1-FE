@@ -1,5 +1,6 @@
-import { CategoryClientInfo } from "@common/types/category";
 import { ArticlesInfiniteQueryParams } from "@main/types/article";
+
+import { CategoryClientInfo } from "@common/types/category";
 
 export const API_ROUTE = {
   CATEGORY: "/api/v1/workbooks/categories",
@@ -12,6 +13,8 @@ export const API_ROUTE = {
     prevArticleId,
   }: ArticlesInfiniteQueryParams) =>
     `/api/v1/articles?prevArticleId=${prevArticleId}&categoryCd=${code}`,
+  WORKBOOK_EMAIL_TIME: "/api/v1/subscriptions/time",
+  WORKBOOK_EMAIL_DAY: "/api/v1/subscriptions/date",
 };
 
 export const QUERY_KEY = {
@@ -20,4 +23,6 @@ export const QUERY_KEY = {
   GET_WORKBOOKS_WITH_CATEGORY: "get-workbooks-with-category",
   GET_ARTICLES_WITH_CATEGORY: "get-articles-with-category",
   GET_SUBSCRIBE_WORKBOOKS: "get-subscribe-workbooks",
+  PUT_WORKBOOK_EMAIL_TIME: "put-workbook-email-time",
+  PUT_WORKBOOK_EMAIL_DAY: "put-workbook-email-day",
 };
