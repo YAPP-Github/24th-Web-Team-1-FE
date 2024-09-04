@@ -69,7 +69,39 @@ export const workbooksSubscriptionHandler = http.get(
     return HttpResponse.json(response[apiRoutes.workbooksSubscription]);
   },
 );
+export const workbookSubscriptionHandler = http.post(
+  apiRoutes.workbookSubscription,
+  async () => {
+    return HttpResponse.json(response[apiRoutes.workbookSubscription]);
+  },
+);
+export const workbookUnsubscriptionHandler = http.post(
+  apiRoutes.workbookUnsubscription,
+  async () => {
+    return HttpResponse.json(response[apiRoutes.workbookUnsubscription]);
+  },
+);
 
+export const workbookEmailTimeHandler = http.put(
+  apiRoutes.workbookEmailTime,
+  async ({ request }) => {
+    const body = request.body;
+    if (body) {
+      return HttpResponse.json(response[apiRoutes.workbookEmailTime]);
+    }
+  },
+);
+
+export const workbookEmailDayHandler = http.put(
+  apiRoutes.workbookEmailDay,
+  async ({ request }) => {
+    const body = request.body;
+    console.log(body);
+    if (body) {
+      return HttpResponse.json(response[apiRoutes.workbookEmailDay]);
+    }
+  },
+);
 export const articleHandler = http.get(
   apiRoutes.article,
   async ({ params }) => {
@@ -151,9 +183,12 @@ export const articleCategoryHandler = http.get(
   },
 );
 
-export const logoutHandler = http.delete(apiRoutes.logout, async ({ request }) => {
-  return HttpResponse.json(response[apiRoutes.logout]);
-});
+export const logoutHandler = http.delete(
+  apiRoutes.logout,
+  async ({ request }) => {
+    return HttpResponse.json(response[apiRoutes.logout]);
+  },
+);
 
 export const handlers = [
   categoryHandler,
@@ -169,4 +204,8 @@ export const handlers = [
   membersAuthHandler,
   tokenHandler,
   logoutHandler,
+  workbookSubscriptionHandler,
+  workbookUnsubscriptionHandler,
+  workbookEmailTimeHandler,
+  workbookEmailDayHandler,
 ];
