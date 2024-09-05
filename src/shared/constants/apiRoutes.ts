@@ -13,4 +13,8 @@ export const apiRoutes = {
   token: `${process.env.NEXT_PUBLIC_FEW_WEB}/api/v1/members/token`,
   articleCategory: `${process.env.NEXT_PUBLIC_FEW_WEB}/api/v1/articles/categories`,
   logout: `${process.env.NEXT_PUBLIC_FEW_WEB}/api/v1/members`,
+  workbookUnsubscription: `${process.env.NEXT_PUBLIC_FEW_WEB}/api/v1/workbooks/:workbookId/unsubs`,
+  workbookSubscription: `${process.env.NEXT_PUBLIC_FEW_WEB}/api/v1/workbooks/:workbookId/subs`,
+  workbookEmailTime: `${process.env.NEXT_PUBLIC_FEW_WEB}/api/v1/subscriptions/time`,
+  workbookEmailDay: `${process.env.NEXT_PUBLIC_FEW_WEB}/api/v1/subscriptions/date`,
 };

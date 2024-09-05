@@ -1,5 +1,6 @@
-import { cn } from "@shared/utils/cn";
 import { HTMLAttributes } from "react";
+
+import { cn } from "@shared/utils/cn";
 
 interface MainContentWrapperProps extends HTMLAttributes<HTMLDivElement> {}
 export default function MainContentWrapper({
