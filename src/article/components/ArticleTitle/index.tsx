@@ -18,6 +18,8 @@ import { ArticleDetail, ArticleWithWorkbookDetail } from "@article/types";
 
 import ArticleSkeleton from "../ArticleSkeleton";
 import WriterInfo from "../WriterInfo";
+import { EVENT_NAME } from "@shared/constants/mixpanel";
+import { Mixpanel } from "@shared/utils/mixpanel";
 
 export default function ArticleTitle() {
   const isFirstRender = useRef(false);
@@ -64,18 +66,18 @@ export default function ArticleTitle() {
     [articleInfo],
   );
 
-  // useEffect(
-  //   function trackMixpanel() {
-  //     if (!isFirstRender.current) {
-  //       isFirstRender.current = true;
-  //       Mixpanel.track({
-  //         name: EVENT_NAME.ARTICLE_APPREAR,
-  //         property: { id: articleId },
-  //       });
-  //     }
-  //   },
-  //   [articleInfo],
-  // );
+  useEffect(
+    function trackMixpanel() {
+      if (!isFirstRender.current) {
+        isFirstRender.current = true;
+        Mixpanel.track({
+          name: EVENT_NAME.ARTICLE_APPREAR,
+          property: { id: articleId },
+        });
+      }
+    },
+    [articleInfo],
+  );
 
   if (isLoading || isError || !articleInfo)
     return <ArticleSkeleton.TitleSkeleton />;

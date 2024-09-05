@@ -7,9 +7,11 @@ import { cn } from "@shared/utils/cn";
 import { tokenParse } from "@shared/utils/tokenParse";
 
 import { AUTH_LINK, UNAUTH_LINK } from "@main/constants/dropdownMenu";
+import { EVENT_NAME } from "@shared/constants/mixpanel";
+import useTrackMixpanel from "@shared/hooks/useTrackMixpanel";
 
 export function DropDownMenuItemList() {
-  // useTrackMixpanel({ eventKey: EVENT_NAME.MYPAGE_APPEAR });
+  useTrackMixpanel({ eventKey: EVENT_NAME.MYPAGE_APPEAR });
 
   const isLogin = useIsLogin();
   const token =
