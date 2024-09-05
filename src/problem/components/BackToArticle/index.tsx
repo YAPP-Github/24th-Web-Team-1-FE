@@ -1,7 +1,7 @@
 "use client";
 import { useParams } from "next/navigation";
 
-import { HTMLAttributes, useState } from "react";
+import { HTMLAttributes, useContext, useState } from "react";
 
 import { useMutationState } from "@tanstack/react-query";
 
@@ -16,18 +16,19 @@ import {
   ProblemAnswerBody,
   ProblemAnswerMuationState,
 } from "@problem/types/problemInfo";
-import { Button } from "@shared/components/ui/button";
 import ArticleDropDownWrapper from "../ArticleDropDownWrapper";
 import { AnswerStatusModel } from "@problem/models/AnswerStatusModel";
+import QuizContext from "@problem/context/problemContext";
+import { Mixpanel } from "@shared/utils/mixpanel";
+import { EVENT_NAME } from "@shared/constants/mixpanel";
 
 interface BackToArticleProps extends HTMLAttributes<HTMLDivElement> {}
 
 export default function BackToArticle({ className }: BackToArticleProps) {
   const [toggleArticle, setToggleArticle] = useState(false);
-
-  const handleToggleArticle = () => {
-    setToggleArticle((prev) => !prev);
-  };
+  const {
+    states: { choiceAnswer },
+  } = useContext(QuizContext);
 
   const { problemId } = useParams<{ problemId: string }>();
   const problemAnswersInfo = useMutationState<ProblemAnswerMuationState>({
@@ -46,12 +47,29 @@ export default function BackToArticle({ className }: BackToArticleProps) {
     problemAnswerInfo: problemAnswersInfo[0],
   });
 
-  const backToArticleWords = answerStatus.problemSolvedStatus
+  const backToArticleWords = answerStatus.problemSolvedStatus;
 
+  const handleToggleArticle = () => {
+    setToggleArticle((prev) => !prev);
+    if (!toggleArticle) {
+      const isChoiceAnswer = Boolean(choiceAnswer);
+      const type =
+        (!answerStatus.isProblemAnswerInfo &&
+          !isChoiceAnswer &&
+          "notStarted") ||
+        (!answerStatus.isProblemAnswerInfo && isChoiceAnswer && "solving") ||
+        "solved";
+      Mixpanel.track({
+        name: EVENT_NAME.PROBLEM_GOARTICLE_TAPPED,
+        property: { type },
+      });
+    }
+  };
+  console.log(answerStatus.isProblemAnswerInfo, choiceAnswer);
   return (
     <div
       className={cn(
-        "flex flex-row space-x-[3px] relative",
+        "relative flex flex-row space-x-[3px]",
         className,
         !answerStatus.isProblemAnswerInfo && "mt-[91px]",
       )}

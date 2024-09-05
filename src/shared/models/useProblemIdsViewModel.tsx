@@ -52,6 +52,7 @@ export const useProblemIdsViewModel = () => {
     nextSetProblemId,
     isExistNextProblem,
     getArticlePathText,
-    getArticleId
+    getArticleId,
+    articleId
   };
 };

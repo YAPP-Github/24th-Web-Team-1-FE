@@ -3,7 +3,6 @@ import {
   WorkbookCardServerInfo,
   WorkbookSubscriptionInfo,
 } from "@main/types/workbook";
-import { ImageModel } from "@shared/models/ImageModel";
 import { WebpBrowser } from "@shared/types/image";
 import { WorkbookServerInfo } from "@workbook/types";
 
@@ -96,9 +95,7 @@ export class WorkbookCardModel {
         const changeToClientData: WorkbookCardClientInfo = {
           id,
           badgeInfo: this.getBadeInfo({ cardType }),
-          mainImageUrl: this.webpBrowser.isWebpBrowser
-            ? mainImageUrl
-            : ImageModel.changePngImage({ imageSrc: mainImageUrl }),
+          mainImageUrl: mainImageUrl,
           isPriorityImage: idx < 2,
           title,
           writers: this.getWriterNameList({ writers }),

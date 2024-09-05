@@ -19,6 +19,9 @@ import {
   ProblemAnswerMuationState,
 } from "@problem/types/problemInfo";
 import ChoiceFillCircleSvg from "../ChoiceFillCircleSvg";
+import { useProblemIdsViewModel } from "@shared/models/useProblemIdsViewModel";
+import { Mixpanel } from "@shared/utils/mixpanel";
+import { EVENT_NAME } from "@shared/constants/mixpanel";
 
 interface AnswerChoiceButtonProps extends AnswerChoiceClientInfo {}
 
@@ -46,7 +49,7 @@ export default function AnswerChoiceButton({
       };
     },
   });
-
+  const { articleId } = useProblemIdsViewModel();
 
   const answerChoiceModel = new AnswerChoiceModel({
     problemAnswerInfo: problemAnswersInfo[0],
@@ -54,8 +57,11 @@ export default function AnswerChoiceButton({
     renderNumber: number,
   });
 
-
   const onClickAnswerChoice = () => {
+    Mixpanel.track({
+      name: EVENT_NAME.PROBLEM_CHOICE_TAPPED,
+      property: { id: articleId, index: number },
+    });
     if (!answerChoiceModel.isProblemAnswerInfo) updateChoiceAnswer(number);
   };
 
@@ -82,7 +88,6 @@ export default function AnswerChoiceButton({
       <ChoiceFillCircleSvg
         isChoice={answerChoiceModel.isChoiceFillCircle}
         fill={answerChoiceModel.getChoiceFillColor}
-
       />
     </Button>
   );

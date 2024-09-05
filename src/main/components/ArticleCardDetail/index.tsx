@@ -1,14 +1,10 @@
 import { ArticleClientInfo } from "@main/types/article";
 import Tag from "@shared/components/Tag";
 import { cn } from "@shared/utils/cn";
-import Image, { ImageLoaderProps } from "next/image";
+import Image from "next/image";
 import Link from "next/link";
 import EyeIcon from "public/assets/icon/eye.svg";
 import { ReactNode } from "react";
-
-const ImageLoadr = ({ src, width, quality }: ImageLoaderProps) => {
-  return `${src}?w=${width}&q=${quality || 75}`;
-};
 
 const RootComponentWrapper = ({ children }: { children: ReactNode }) => (
   <section className="border-b-[0.5px] border-text-gray2 px-[20px] py-[26px]">
@@ -26,8 +22,8 @@ const WriterProfile = ({
     <Image
       width={30}
       height={30}
-      loader={ImageLoadr}
       src={writerInfo.imageUrl}
+      sizes="5vw"
       alt="profile-image"
       className="h-[30px] w-[30px] rounded-full"
     />
@@ -68,7 +64,8 @@ const Thumbnail = ({
     width={100}
     height={170}
     src={thumbnail}
-    loader={ImageLoadr}
+    priority={isPriorityImage}
+    sizes="80vw"
     alt="article-thumbnail"
     className="h-[170px] w-full rounded object-cover"
   />

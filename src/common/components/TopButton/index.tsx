@@ -30,7 +30,7 @@ export default function TopButton() {
 
   return (
     showButton && (
-      <div className="z-1 sticky bottom-[10px] left-[90%] w-fit">
+      <div className="z-1 sticky bottom-[20px] left-[85%] w-fit">
         <Button
           id="top"
           onClick={scrollToTop}
