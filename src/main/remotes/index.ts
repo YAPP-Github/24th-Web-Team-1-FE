@@ -14,7 +14,7 @@ export const API_ROUTE = {
   }: ArticlesInfiniteQueryParams) =>
     `/api/v1/articles?prevArticleId=${prevArticleId}&categoryCd=${code}`,
   WORKBOOK_EMAIL_TIME: "/api/v1/subscriptions/time",
-  WORKBOOK_EMAIL_DAY: "/api/v1/subscriptions/date",
+  WORKBOOK_EMAIL_DAY: "/api/v1/subscriptions/day",
 };
 
 export const QUERY_KEY = {
@@ -23,6 +23,6 @@ export const QUERY_KEY = {
   GET_WORKBOOKS_WITH_CATEGORY: "get-workbooks-with-category",
   GET_ARTICLES_WITH_CATEGORY: "get-articles-with-category",
   GET_SUBSCRIBE_WORKBOOKS: "get-subscribe-workbooks",
-  PUT_WORKBOOK_EMAIL_TIME: "put-workbook-email-time",
-  PUT_WORKBOOK_EMAIL_DAY: "put-workbook-email-day",
+  PATCH_WORKBOOK_EMAIL_TIME: "patch-workbook-email-time",
+  PATCH_WORKBOOK_EMAIL_DAY: "patch-workbook-email-day",
 };
