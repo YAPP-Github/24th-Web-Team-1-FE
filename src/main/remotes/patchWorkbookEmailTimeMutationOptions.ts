@@ -6,17 +6,17 @@ import { MessageOnlyResponse } from "@subscription/types/subscription";
 
 import { API_ROUTE, QUERY_KEY } from ".";
 
-const putWorkbookEmailTime = ({
+const patchWorkbookEmailTime = ({
   time,
 }: {
   time: string;
 }): Promise<ApiResponse<MessageOnlyResponse>> => {
-  return fewFetch().put(API_ROUTE.WORKBOOK_EMAIL_TIME, {
+  return fewFetch().patch(API_ROUTE.WORKBOOK_EMAIL_TIME, {
     body: JSON.stringify({ time }),
   });
 };
 
-export const putWorkbookEmailTimeMutationOptions = (): UseMutationOptions<
+export const patchWorkbookEmailTimeMutationOptions = (): UseMutationOptions<
   ApiResponse<MessageOnlyResponse>,
   Error,
   {
@@ -24,7 +24,7 @@ export const putWorkbookEmailTimeMutationOptions = (): UseMutationOptions<
   }
 > => {
   return {
-    mutationKey: [QUERY_KEY.PUT_WORKBOOK_EMAIL_TIME],
-    mutationFn: ({ time }) => putWorkbookEmailTime({ time }),
+    mutationKey: [QUERY_KEY.PATCH_WORKBOOK_EMAIL_TIME],
+    mutationFn: ({ time }) => patchWorkbookEmailTime({ time }),
   };
 };

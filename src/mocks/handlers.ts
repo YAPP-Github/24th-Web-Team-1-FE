@@ -1,7 +1,6 @@
 import { http, HttpResponse } from "msw";
 
 import { apiRoutes } from "@shared/constants/apiRoutes";
-import { _3_SECOND, delay } from "@shared/utils/delay";
 
 import response from "./response";
 
@@ -58,7 +57,7 @@ export const workbookHandler = http.get(
     }
 
     // 딜레이 적용
-    await delay(_3_SECOND);
+    // await delay(_3_SECOND);
 
     return HttpResponse.json(response[apiRoutes.workbook]);
   },
@@ -82,7 +81,7 @@ export const workbookUnsubscriptionHandler = http.post(
   },
 );
 
-export const workbookEmailTimeHandler = http.put(
+export const workbookEmailTimeHandler = http.patch(
   apiRoutes.workbookEmailTime,
   async ({ request }) => {
     const body = request.body;
@@ -92,7 +91,7 @@ export const workbookEmailTimeHandler = http.put(
   },
 );
 
-export const workbookEmailDayHandler = http.put(
+export const workbookEmailDayHandler = http.patch(
   apiRoutes.workbookEmailDay,
   async ({ request }) => {
     const body = request.body;

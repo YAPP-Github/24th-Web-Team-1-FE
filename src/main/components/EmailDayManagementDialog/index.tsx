@@ -18,7 +18,7 @@ import { cn } from "@shared/utils/cn";
 
 import { SUBSCRIPTION_EMAIL_CLIENT_INFO } from "@main/constants/emailInfo";
 import { SubscriptionManagementModel } from "@main/models/SubscriptionManagementModel";
-import { putWorkbookEmailDayMutationOptions } from "@main/remotes/putWorkbookEmailDayMutationOptions";
+import { patchWorkbookEmailDayMutationOptions } from "@main/remotes/patchWorkbookEmailDayMutationOptions";
 import { SubscriptionEmailClientInfo } from "@main/types/emailInfo";
 
 export default function EmailDayManagementDialog({
@@ -27,12 +27,12 @@ export default function EmailDayManagementDialog({
   const [currentDay, setCurrentDay] = useState(day);
   useModalWidthControl();
 
-  const { mutate: putWorkbookEmailDay } = useMutation({
-    ...putWorkbookEmailDayMutationOptions(),
+  const { mutate: patchWorkbookEmailDay } = useMutation({
+    ...patchWorkbookEmailDayMutationOptions(),
   });
 
   const onClickUpdateWorkbookEmailDay = () => {
-    putWorkbookEmailDay({
+    patchWorkbookEmailDay({
       date: SubscriptionManagementModel.getDayPostInfo({ day: currentDay }),
     });
   };

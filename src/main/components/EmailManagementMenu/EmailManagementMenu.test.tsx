@@ -1,13 +1,17 @@
-import QueryClientProviders from "@shared/components/queryClientProvider";
-import { render, renderHook, screen, waitFor } from "@testing-library/react";
-import { beforeEach, describe, expect, it } from "vitest";
-import SubscriptionEmailManagement from ".";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { getSubscriptionWorkbooksQueryOptions } from "@main/remotes/getSubscriptionWorkbooksQueryOptions";
+
+import { beforeEach, describe, expect, it } from "vitest";
+
+import QueryClientProviders from "@shared/components/queryClientProvider";
 import { createQueryProviderWrapper } from "@shared/constants/createQueryProvider";
+
+import { getSubscriptionWorkbooksQueryOptions } from "@main/remotes/getSubscriptionWorkbooksQueryOptions";
+import { patchWorkbookEmailDayMutationOptions } from "@main/remotes/patchWorkbookEmailDayMutationOptions";
+import { patchWorkbookEmailTimeMutationOptions } from "@main/remotes/patchWorkbookEmailTimeMutationOptions";
+
+import SubscriptionEmailManagement from ".";
+import { render, renderHook, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { putWorkbookEmailTimeMutationOptions } from "@main/remotes/putWorkbookEmailTimeMutationOptions";
-import { putWorkbookEmailDayMutationOptions } from "@main/remotes/putWorkbookEmailDayMutationOptions";
 
 describe("이메일 관련 구독 관리 컴포넌트 테스트", () => {
   const renderWithClient = () => {
@@ -35,7 +39,7 @@ describe("이메일 관련 구독 관리 컴포넌트 테스트", () => {
     const { result } = renderHook(
       () =>
         useMutation({
-          ...putWorkbookEmailTimeMutationOptions(),
+          ...patchWorkbookEmailTimeMutationOptions(),
         }),
       { wrapper: createQueryProviderWrapper() },
     );
@@ -66,7 +70,7 @@ describe("이메일 관련 구독 관리 컴포넌트 테스트", () => {
     const { result } = renderHook(
       () =>
         useMutation({
-          ...putWorkbookEmailDayMutationOptions(),
+          ...patchWorkbookEmailDayMutationOptions(),
         }),
       { wrapper: createQueryProviderWrapper() },
     );

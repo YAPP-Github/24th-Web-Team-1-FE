@@ -6,7 +6,7 @@ import { MessageOnlyResponse } from "@subscription/types/subscription";
 
 import { API_ROUTE, QUERY_KEY } from ".";
 
-const putWorkbookEmailDay = ({
+const patchWorkbookEmailDay = ({
   date,
 }: {
   date: string;
@@ -16,7 +16,7 @@ const putWorkbookEmailDay = ({
   });
 };
 
-export const putWorkbookEmailDayMutationOptions = (): UseMutationOptions<
+export const patchWorkbookEmailDayMutationOptions = (): UseMutationOptions<
   ApiResponse<MessageOnlyResponse>,
   Error,
   {
@@ -24,7 +24,7 @@ export const putWorkbookEmailDayMutationOptions = (): UseMutationOptions<
   }
 > => {
   return {
-    mutationKey: [QUERY_KEY.PUT_WORKBOOK_EMAIL_TIME],
-    mutationFn: ({ date }) => putWorkbookEmailDay({ date }),
+    mutationKey: [QUERY_KEY.PATCH_WORKBOOK_EMAIL_DAY],
+    mutationFn: ({ date }) => patchWorkbookEmailDay({ date }),
   };
 };

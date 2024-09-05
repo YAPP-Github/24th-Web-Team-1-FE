@@ -19,7 +19,7 @@ import { cn } from "@shared/utils/cn";
 
 import { SUBSCRIPTION_EMAIL_CLIENT_INFO } from "@main/constants/emailInfo";
 import { SubscriptionManagementModel } from "@main/models/SubscriptionManagementModel";
-import { putWorkbookEmailTimeMutationOptions } from "@main/remotes/putWorkbookEmailTimeMutationOptions";
+import { patchWorkbookEmailTimeMutationOptions } from "@main/remotes/patchWorkbookEmailTimeMutationOptions";
 import { SubscriptionEmailClientInfo } from "@main/types/emailInfo";
 
 export default function EmailTimeManagementDialog({
@@ -29,7 +29,7 @@ export default function EmailTimeManagementDialog({
   useModalWidthControl();
 
   const { mutate: putWorkbookEmailTime } = useMutation({
-    ...putWorkbookEmailTimeMutationOptions(),
+    ...patchWorkbookEmailTimeMutationOptions(),
   });
 
   const onClickUpdateWorkbookEmailTime = () => {

@@ -1,6 +1,8 @@
 import { beforeEach, describe, expect, it } from "vitest";
-import { SubscriptionManagementModel } from ".";
+
 import { WorkbookSubscriptionInfo } from "@main/types/workbook";
+
+import { SubscriptionManagementModel } from ".";
 
 const mockData: WorkbookSubscriptionInfo[] = [
   {

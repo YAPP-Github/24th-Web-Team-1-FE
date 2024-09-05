@@ -59,6 +59,7 @@ export default function SubscriptionManagementItem({
         workbookTitle={workbookTitle}
       />
       <Switch
+        data-testid={`switch-${workbookId}`}
         className={cn(
           "data-[state=checked]:bg-main data-[state=unchecked]:bg-text-gray2",
           "h-[32px] w-[52px]",
