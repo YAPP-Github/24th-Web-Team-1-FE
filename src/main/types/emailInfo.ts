@@ -9,5 +9,5 @@ export interface SubscriptionEmailClientInfo {
 }
 export interface SubscriptionEmailServerInfo {
   time: (typeof SUBSCRIPTION_EMAIL_SERVER_INFO.TIME)[keyof typeof SUBSCRIPTION_EMAIL_SERVER_INFO.TIME];
-  date: string;
+  dateTimeCode: string;
 }

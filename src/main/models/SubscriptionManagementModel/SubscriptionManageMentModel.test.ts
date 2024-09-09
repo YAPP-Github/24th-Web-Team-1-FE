@@ -13,7 +13,7 @@ const mockData: WorkbookSubscriptionInfo[] = [
     rank: 0,
     totalSubscriber: 100,
     articleInfo: "{}",
-    subscription: { date: "1111111", time: "09:00" },
+    subscription: { dateTimeCode: "1111111", time: "09:00" },
   },
   {
     id: 2,
@@ -23,7 +23,7 @@ const mockData: WorkbookSubscriptionInfo[] = [
     rank: 0,
     totalSubscriber: 1,
     articleInfo: "{}",
-    subscription: { date: "1111111", time: "09:00" },
+    subscription: { dateTimeCode: "1111111", time: "09:00" },
   },
   {
     id: 3,
@@ -33,7 +33,7 @@ const mockData: WorkbookSubscriptionInfo[] = [
     rank: 0,
     totalSubscriber: 2,
     articleInfo: "{}",
-    subscription: { date: "0011111", time: "09:00" },
+    subscription: { dateTimeCode: "0011111", time: "09:00" },
   },
 ];
 
