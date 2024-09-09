@@ -11,7 +11,7 @@ const patchWorkbookEmailDay = ({
 }: {
   date: string;
 }): Promise<ApiResponse<MessageOnlyResponse>> => {
-  return fewFetch().put(API_ROUTE.WORKBOOK_EMAIL_DAY, {
+  return fewFetch().patch(API_ROUTE.WORKBOOK_EMAIL_DAY, {
     body: JSON.stringify({ date }),
   });
 };
