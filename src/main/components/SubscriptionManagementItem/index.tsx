@@ -19,6 +19,7 @@ interface SubscriptionManagementItemProps
   className: HTMLDivElement["className"];
 }
 export default function SubscriptionManagementItem({
+  workbookTitle,
   workbookId,
   isSubscription,
   dayInfo,
@@ -27,15 +28,6 @@ export default function SubscriptionManagementItem({
   const [isToggleSubscription, setIsToggleSubscription] =
     useState(isSubscription);
 
-  const { data: workbookTitle } = useQuery({
-    ...getWorkbookQueryOptions({
-      workbookId,
-      isWebpBrowser: true,
-    }),
-    select: ({ data }) => {
-      return data.data.title;
-    },
-  });
   const { mutate: unsubscriptionWorkbook } = useMutation({
     ...postUnsubscriptionWorkbookMutationOptions(),
   });
