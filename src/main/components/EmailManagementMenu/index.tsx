@@ -10,7 +10,7 @@ import EmailTimeManagementDialog from "../EmailTimeManagementDialog";
 
 export default function SubscriptionEmailManagement() {
   const { data } = useQuery({
-    ...getSubscriptionWorkbooksQueryOptions(),
+    ...getSubscriptionWorkbooksQueryOptions({ pageType: "myPage" }),
     select: ({ data }) => {
       const subscriptionManagementModel = new SubscriptionManagementModel({
         initSubscriptionManagementServerList: data.data.workbooks,

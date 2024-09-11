@@ -85,7 +85,7 @@ describe("메인페이지 내 카테고리별 워크북 카드 리스트 테스�
               code: ENTIRE_CATEGORY,
             }),
             {
-              ...getSubscriptionWorkbooksQueryOptions(),
+              ...getSubscriptionWorkbooksQueryOptions({ pageType: undefined }),
               enabled: true,
             },
           ],

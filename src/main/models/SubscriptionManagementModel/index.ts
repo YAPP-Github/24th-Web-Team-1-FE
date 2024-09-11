@@ -6,8 +6,10 @@ import {
   SubscriptionEmailClientInfo,
   SubscriptionEmailServerInfo,
 } from "@main/types/emailInfo";
-import { SubscriptionManagementClientInfo , WorkbookSubscriptionInfo } from "@main/types/workbook";
-
+import {
+  SubscriptionManagementClientInfo,
+  WorkbookSubscriptionInfo,
+} from "@main/types/workbook";
 
 export class SubscriptionManagementModel {
   constructor({
@@ -21,6 +23,9 @@ export class SubscriptionManagementModel {
 
   get SubscriptionMangementClientList(): SubscriptionManagementClientInfo[] {
     return this.subscriptionManagementServerList.map((subscriptionInfo) => ({
+      workbookTitle: this.getWorkbookTitle({
+        workbookInfo: subscriptionInfo.workbookInfo,
+      }),
       workbookId: subscriptionInfo.id.toString(),
       isSubscription: true,
       dayInfo: {
@@ -33,9 +38,10 @@ export class SubscriptionManagementModel {
   get SubscriptionEmailManagementClientInfo(): SubscriptionEmailClientInfo {
     const subscriptionServerInfo =
       this.subscriptionManagementServerList[0].subscription;
-
     return {
-      day: this.getDayClientInfo({ date: subscriptionServerInfo.date }),
+      day: this.getDayClientInfo({
+        dateTimeCode: subscriptionServerInfo.dateTimeCode,
+      }),
       time: this.getTimeClientInfo({ time: subscriptionServerInfo.time }),
     };
   }
@@ -54,12 +60,12 @@ export class SubscriptionManagementModel {
   }
 
   private getDayClientInfo({
-    date,
+    dateTimeCode,
   }: Pick<
     SubscriptionEmailServerInfo,
-    "date"
+    "dateTimeCode"
   >): SubscriptionEmailClientInfo["day"] {
-    switch (date) {
+    switch (dateTimeCode) {
       case SUBSCRIPTION_EMAIL_SERVER_INFO.DAY["EVERY_DAYS"]:
         return SUBSCRIPTION_DAYS["EVERY_DAYS"];
 
@@ -86,6 +92,16 @@ export class SubscriptionManagementModel {
       case SUBSCRIPTION_EMAIL_SERVER_INFO.TIME["10"]:
         return "10";
     }
+  }
+
+  private getWorkbookTitle({
+    workbookInfo,
+  }: Pick<WorkbookSubscriptionInfo, "workbookInfo">) {
+    if (workbookInfo) {
+      const title = JSON.parse(workbookInfo)?.title as string;
+      return title;
+    }
+    return "";
   }
 
   private subscriptionManagementServerList: WorkbookSubscriptionInfo[];
