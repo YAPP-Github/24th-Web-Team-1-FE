@@ -15,9 +15,11 @@ export interface WorkbookSubscriptionInfo
   totalSubscriber: number;
   articleInfo: string; // JSON문자열
   subscription: SubscriptionEmailServerInfo;
+  workbookInfo?: string; // JSON 문자열
 }
 
 export type SubscriptionManagementClientInfo = {
+  workbookTitle: string;
   workbookId: string;
   isSubscription: boolean;
   dayInfo: {

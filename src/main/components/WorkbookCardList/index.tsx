@@ -20,7 +20,7 @@ export default function WorkbookCardList({
         code: code !== undefined ? code : ENTIRE_CATEGORY,
       }),
       {
-        ...getSubscriptionWorkbooksQueryOptions(),
+        ...getSubscriptionWorkbooksQueryOptions({ pageType: undefined }),
         enabled: isLogin === true,
       },
     ],

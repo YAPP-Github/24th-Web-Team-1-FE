@@ -1,12 +1,14 @@
 import { ArticlesInfiniteQueryParams } from "@main/types/article";
 
 import { CategoryClientInfo } from "@common/types/category";
+import { PageType } from "@shared/types/view";
 
 export const API_ROUTE = {
   CATEGORY: "/api/v1/workbooks/categories",
   WORKBOOKS_WITH_CATEGORY: ({ code }: { code: CategoryClientInfo["code"] }) =>
     `/api/v1/workbooks?category=${code}&view=mainCard`,
-  SUBSCRIBE_WORKBOOKS: `/api/v1/subscriptions/workbooks`,
+  SUBSCRIBE_WORKBOOKS: ({ pageType }: { pageType?: PageType }) =>
+    `/api/v1/subscriptions/workbooks${pageType ? `?view=${pageType}` : ""}`,
   ARTICLE_CATEGORY: "/api/v1/articles/categories",
   ARICLES_WITH_CATEGORY: ({
     code,

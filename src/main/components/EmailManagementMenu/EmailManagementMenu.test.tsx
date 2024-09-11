@@ -27,7 +27,7 @@ describe("이메일 관련 구독 관리 컴포넌트 테스트", () => {
     const { result } = renderHook(
       () =>
         useQuery({
-          ...getSubscriptionWorkbooksQueryOptions(),
+          ...getSubscriptionWorkbooksQueryOptions({ pageType: "myPage" }),
         }),
       { wrapper: createQueryProviderWrapper() },
     );
