@@ -33,7 +33,7 @@ export const AUTH_LINK: DropdownMenuItem[] = [
   {
     title: "FEW와 협업하려면",
     component: ({ title }: { title: string }) => (
-      <Link href="https://tally.so/r/nP0OMQ" target="_blank">
+      <Link href="https://few.framer.website" target="_blank">
         {title}
       </Link>
     ),
