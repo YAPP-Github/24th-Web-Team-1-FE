@@ -18,7 +18,7 @@ export function DropDownMenuItemList() {
   const MENU_ITEM_LIST = isLogin ? AUTH_LINK : UNAUTH_LINK;
   const lastIdx = MENU_ITEM_LIST.length - 1;
   return (
-    <ul className="fixed left-0 top-[66px] z-10 h-screen w-full overflow-y-auto bg-white">
+    <ul className="fixed left-0 top-[66px] z-10 h-[calc(100vh-66px)] w-full overflow-y-auto bg-white">
       {MENU_ITEM_LIST.map(({ title, component }, idx) => (
         <li
           key={`link-to-${idx}`}
