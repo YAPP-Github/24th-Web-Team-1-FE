@@ -29,21 +29,23 @@ export default function TopButton() {
   }, []);
 
   return (
-    showButton && (
-      <div className="z-1 sticky bottom-[20px] left-[85%] w-fit">
-        <Button
-          id="top"
-          onClick={scrollToTop}
-          type="button"
-          className={cn(
-            "h-[36px] w-[36px] p-0",
-            "rounded-full border-[0.5px] border-text-gray2 bg-white",
-            "hover:bg-white",
-          )}
-        >
-          <UpIcon width={22} height={26} />
-        </Button>
-      </div>
-    )
+    <>
+      {showButton && (
+        <div className="fixed bottom-[10px] left-[80%] z-10 w-fit">
+          <Button
+            id="top"
+            onClick={scrollToTop}
+            type="button"
+            className={cn(
+              "h-[36px] w-[36px] p-0",
+              "rounded-full border-[0.5px] border-text-gray2 bg-white",
+              "hover:bg-white",
+            )}
+          >
+            <UpIcon width={22} height={26} />
+          </Button>
+        </div>
+      )}
+    </>
   );
 }

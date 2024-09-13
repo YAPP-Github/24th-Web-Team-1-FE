@@ -8,7 +8,7 @@ import { useToast } from "@shared/components/ui/use-toast";
 import useWorkbookId from "@shared/hooks/useWorkbookId";
 
 import { SUBSCRIBE_USER_ACTIONS } from "@subscription/constants/subscribe";
-import { subscribeWorkbookOptions } from "@subscription/remotes/postSubscriptionQueryOptions";
+import { subscribeWorkbookQueryOptions } from "@subscription/remotes/postSubscriptionQueryOptions";
 
 import { emailSubscribeSchema } from "@common/schemas/emailSchema";
 import { EmailSubscribeFormData } from "@common/types/emailSubscribeData";
@@ -27,7 +27,9 @@ export const useSubscribeForm = () => {
     mode: "onSubmit",
   });
 
-  const { mutate: subscribeWorkbook } = useMutation(subscribeWorkbookOptions());
+  const { mutate: subscribeWorkbook } = useMutation(
+    subscribeWorkbookQueryOptions(),
+  );
 
   const onSubmit = (values: EmailSubscribeFormData) => {
     try {

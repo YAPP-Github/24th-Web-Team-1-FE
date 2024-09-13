@@ -11,6 +11,7 @@ import { SIGNUP_COMPLETED } from "@auth/constants/auth";
 import lottieJson from "public/assets/Problem_Complete.json";
 import FewLogo from "public/enterlogo.svg";
 import { Mixpanel } from "@shared/utils/mixpanel";
+
 export default function ValidationCompletePage() {
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -35,7 +36,6 @@ export default function ValidationCompletePage() {
             Mixpanel.identify({ id: memberEmail });
             Mixpanel.people.set({ peoples: { $email: memberEmail } });
           }
-
           router.push("/");
         }}
       >

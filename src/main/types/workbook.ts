@@ -1,5 +1,8 @@
-import { WorkbookServerInfo } from "@workbook/types";
 import { HTMLAttributes } from "react";
+
+import { WorkbookServerInfo } from "@workbook/types";
+
+import { SubscriptionEmailServerInfo } from "./emailInfo";
 
 type SubscriptionStatus = "ACTIVE" | "DONE";
 
@@ -11,8 +14,19 @@ export interface WorkbookSubscriptionInfo
   rank: number;
   totalSubscriber: number;
   articleInfo: string; // JSON문자열
+  subscription: SubscriptionEmailServerInfo;
+  workbookInfo?: string; // JSON 문자열
 }
 
+export type SubscriptionManagementClientInfo = {
+  workbookTitle: string;
+  workbookId: string;
+  isSubscription: boolean;
+  dayInfo: {
+    totalDay: WorkbookSubscriptionInfo["totalDay"];
+    currentDay: WorkbookSubscriptionInfo["currentDay"];
+  };
+};
 export type WorkbookCardServerInfo = {
   subscriberCount: number;
 } & Omit<WorkbookServerInfo, "articles" | "name">;
@@ -20,7 +34,7 @@ export type WorkbookCardServerInfo = {
 export interface WorkbookCardClientInfo {
   id: number;
   mainImageUrl: string;
-  isPriorityImage:boolean;
+  isPriorityImage: boolean;
   metaComponent: React.ReactElement;
   title: string;
   writers: string[];

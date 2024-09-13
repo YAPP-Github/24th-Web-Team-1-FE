@@ -19,15 +19,16 @@ export function DropDownMenuItemList() {
 
   const MENU_ITEM_LIST = isLogin ? AUTH_LINK : UNAUTH_LINK;
   const lastIdx = MENU_ITEM_LIST.length - 1;
-
   return (
-    <ul className="absolute left-0 top-[66px] z-20 h-screen w-full bg-white">
+    <ul className="fixed left-0 top-[66px] z-10 h-screen w-full overflow-y-auto bg-white">
       {MENU_ITEM_LIST.map(({ title, component }, idx) => (
         <li
           key={`link-to-${idx}`}
           className={cn(
             "flex flex-col justify-center",
             "sub2-bold min-h-[66px] w-full px-[20px] py-[10px]",
+            title === "구독 토글 리스트" && "p-0",
+            title === "구독 관리 제목" && "p-0",
             lastIdx !== idx && "border-b-[0.5px] border-text-gray3",
           )}
         >

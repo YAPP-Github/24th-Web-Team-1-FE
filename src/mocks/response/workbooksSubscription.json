@@ -8,7 +8,8 @@
         "currentDay": 1,
         "rank": 0,
         "totalSubscriber": 100,
-        "articleInfo": "{}"
+        "articleInfo": "{}",
+        "subscription": { "date": "1111111", "time": "09:00" }
       },
       {
         "id": 2,
@@ -17,7 +18,8 @@
         "currentDay": 2,
         "rank": 0,
         "totalSubscriber": 1,
-        "articleInfo": "{}"
+        "articleInfo": "{}",
+        "subscription": { "date": "1111111", "time": "09:00" }
       },
       {
         "id": 3,
@@ -26,7 +28,8 @@
         "currentDay": 3,
         "rank": 0,
         "totalSubscriber": 2,
-        "articleInfo": "{}"
+        "articleInfo": "{}",
+        "subscription": { "date": "0011111", "time": "09:00" }
       }
     ]
   },
