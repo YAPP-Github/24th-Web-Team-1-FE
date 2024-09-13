@@ -26,6 +26,7 @@ export const prefetchArticleQuery = async ({
   } else {
     const { data } = await queryClient.fetchQuery({
       ...getArticleQueryOptions({ articleId }),
+      gcTime: 300,
     });
     articleInfo = data;
   }
