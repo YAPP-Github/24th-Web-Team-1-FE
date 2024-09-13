@@ -11,18 +11,12 @@ export default function MainHeader() {
 
   const handleToggleMenu = () => {
     setToggleMenu((prev) => !prev);
-
-    if (!toggleMenu) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
   };
 
   return (
     <header
       className={cn(
-        "fixed top-0 z-[49] flex h-[66px] w-full items-center justify-between",
+        "fixed top-0 z-[49] flex h-[66px] w-full max-w-[480px] items-center justify-between",
         toggleMenu ? "bg-white" : "bg-main",
       )}
     >
