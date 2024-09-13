@@ -12,7 +12,7 @@ import SubscriptionManagementItem from "../SubscriptionManagementItem";
 
 export default function SubscriptionManagementList() {
   const { data } = useQuery({
-    ...getSubscriptionWorkbooksQueryOptions(),
+    ...getSubscriptionWorkbooksQueryOptions({ pageType: "myPage" }),
     select: ({ data }) => {
       const subscriptionManagementModel = new SubscriptionManagementModel({
         initSubscriptionManagementServerList: data.data.workbooks,
