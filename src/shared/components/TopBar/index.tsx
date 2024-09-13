@@ -22,10 +22,9 @@ export default function TopBar({ onClick, className }: TopBarProps) {
         "relative sticky top-0 flex h-[66px] items-center bg-white",
         className,
       )}
-      onClick={onClickBackIcon}
       data-testid="back-icon"
     >
-      <IcBack />
+      <IcBack onClick={onClickBackIcon} />
     </div>
   );
 }
