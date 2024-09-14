@@ -31,7 +31,6 @@ export default function ArticleFloatingButton() {
       const viewportHeight = window.innerHeight;
       const documentHeight = document.documentElement.scrollHeight;
 
-      // Hide button only if the user reaches the bottom of the page
       if (scrollY + viewportHeight >= documentHeight - 1) {
         setShowButton(false);
       } else {
@@ -51,7 +50,7 @@ export default function ArticleFloatingButton() {
         <div className="fixed bottom-[48px] left-[60%] z-10 w-fit">
           <Button
             className={cn(
-              "h-[55px] px-5 py-3.5 bg-[#264932] rounded-[99px] shadow flex justify-center items-center gap-2"
+              "h-[55px] px-5 py-3.5 bg-main rounded-[99px] shadow flex justify-center items-center gap-2"
             )}
             onClick={onClickGoProblem}
           >

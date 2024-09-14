@@ -78,12 +78,12 @@ const refreshAccessToken = async (): Promise<string> => {
   const data = await response.json();
 
   setCookie(COOKIES.ACCESS_TOKEN, data.accessToken, {
-    maxAge: 24 * 60 * 60, // 30 days
+    maxAge: 60 * 24 * 60 * 60, 
     path: "/",
   });
 
   setCookie(COOKIES.REFRESH_TOKEN, data.refreshToken, {
-    maxAge: 30 * 24 * 60 * 60, // 30 days
+    maxAge: 60 * 24 * 60 * 60, 
     path: "/",
   });
 
