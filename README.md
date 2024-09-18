@@ -23,3 +23,58 @@
 
 <h4> 📌 구독 관리 기능 </h4>
 <p> 마이페이지에서는 원하는 시간과 요일을 골라 구독을 관리할 수 있어요</p>
+
+
+
+<h2> 💖 팀원 </h2>
+
+<table align="center">
+    <tr align="center">
+        <td style="min-width: 150px;">
+            <a href="https://github.com/Happhee">
+              <img src="https://user-images.githubusercontent.com/79238676/178311426-77d9dadf-e52d-4ca8-b9ec-9368faef7685.png" width="200" height="200" style="object-fit: cover;">
+              <br />
+              <b>Happhee</b>
+            </a>
+        </td>
+        <td style="min-width: 150px;" background-color="white">
+            <a href="https://github.com/soomin9106">
+              <img src="https://avatars.githubusercontent.com/u/79344555?v=4" width="200" height="200">
+              <br />
+              <b>soomin9106</b>
+            </a> 
+        </td>
+    </tr>
+    <tr align="center">
+        <td>
+            💛 서히 💛 <br/>
+            아티클 및 퀴즈 , 구독 관리 , 메인 페이지
+      </td>
+        <td>
+            💜 숨니 💜 <br/>
+            이메일 인증/인가 관리, 구독 관리 , 워크북 관리
+        </td>
+    </tr>
+</table>
+
+
+<h2> ⚒️  기술 스택 </h2>
+
+<img src="https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=nextdotjs&logoColor=white"/>  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=TypeScript&logoColor=white"/> 
+
+<img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=white"/> <img src="https://img.shields.io/badge/ReactHookForm-EC5990?style=flat-square&logo=ReactHookForm&logoColor=white"/> <img src="https://img.shields.io/badge/ReactQuery-FF4154?style=flat-square&logo=ReactQuery&logoColor=white"/>
+
+<img src="https://img.shields.io/badge/Zod-3E67B1?style=flat-square&logo=Zod&logoColor=white"/> <img src="https://img.shields.io/badge/zustand-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)"/>
+
+
+<img src="https://img.shields.io/badge/shadcn/ui-000000?style=flat-square&logo=shadcn/ui&logoColor=white"/> <img src="https://img.shields.io/badge/TailwindCss-06B6D4?style=flat-square&logo=TailwindCss&logoColor=white"/> <img alt="ESLint" src="https://img.shields.io/badge/-ESLint-4B32C3?style=flat-square&logo=eslint&logoColor=white" /> <img alt="Prettier" src="https://img.shields.io/badge/-Prettier-F7B93E?style=flat-square&logo=prettier&logoColor=white" />
+
+
+<img alt="Mixpanel" src="https://img.shields.io/badge/Mixpanel-7856FF?style=flat-square&logo=Mixpanel&logoColor=white" /> <img src="https://img.shields.io/badge/pnpm-F69220?style=flat-square&logo=pnpm&logoColor=white"/> 
+
+
+
+
+
+
+
