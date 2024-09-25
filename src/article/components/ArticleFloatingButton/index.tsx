@@ -25,7 +25,7 @@ export default function ArticleFloatingButton() {
     // });
   };
 
-  useEffect(() => {
+  useEffect(function handleButton () {
     const handleShowButton = () => {
       const scrollY = window.scrollY;
       const viewportHeight = window.innerHeight;
