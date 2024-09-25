@@ -1,3 +1,4 @@
+import ArticleFloatingButton from "@article/components/ArticleFloatingButton";
 import ArticleTitle from "@article/components/ArticleTitle";
 import EmailContentTemplate from "@article/components/EmailContentTemplate";
 import { prefetchArticleQuery } from "@article/remotes/prefetchArticleQuery";
@@ -33,6 +34,7 @@ export default async function ArticlePage({
         <ArticleTitle />
         <EmailContentTemplate />
       </div>
+      <ArticleFloatingButton />
     </HydrationBoundary>
   );
 }
