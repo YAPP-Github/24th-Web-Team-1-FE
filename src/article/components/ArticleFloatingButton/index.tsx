@@ -53,6 +53,7 @@ export default function ArticleFloatingButton() {
               "h-[55px] px-5 py-3.5 bg-main rounded-[99px] shadow flex justify-center items-center gap-2"
             )}
             onClick={onClickGoProblem}
+            type="button"
           >
             <ProblemIcon />
             <span className="text-base font-bold text-white">퀴즈 풀기</span>
