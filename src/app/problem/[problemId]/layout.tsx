@@ -10,7 +10,7 @@ interface ProblemLayoutProps {
 }
 export default function ProblemLayout({ children }: ProblemLayoutProps) {
   return (
-    <div className="flex h-full w-full">
+    <div className="flex h-full w-screen">
       <ProblemProvider>
         <section className="relative mx-[20px] mb-[10px] flex h-auto w-full max-w-[480px] flex-col justify-between">
           <div className="mb-[20px] flex flex-col">

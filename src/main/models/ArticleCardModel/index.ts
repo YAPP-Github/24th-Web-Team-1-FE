@@ -1,5 +1,4 @@
 import { ArticleClientInfo, ArticleServerInfo } from "@main/types/article";
-import { ImageModel } from "@shared/models/ImageModel";
 import { WebpBrowser } from "@shared/types/image";
 
 export default class ArticleCardModel {
@@ -36,9 +35,7 @@ export default class ArticleCardModel {
             url: writer.url,
             imageUrl: writer.imageUrl,
           },
-          thumbnail: this.webpBrowser.isWebpBrowser
-            ? mainImageUrl
-            : ImageModel.changePngImage({ imageSrc: mainImageUrl }),
+          thumbnail: mainImageUrl,
           isPriorityImage: idx < 2,
           title,
           content: this.getRemoveTagContent({ content }),

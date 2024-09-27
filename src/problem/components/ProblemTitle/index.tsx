@@ -6,12 +6,13 @@ import { useMutationState, useQuery } from "@tanstack/react-query";
 
 import { ApiResponse } from "@api/fewFetch";
 
-
 import { PROBLEM_TITLE_INFO } from "@problem/constants/problemInfo";
 import { QUERY_KEY } from "@problem/remotes/api";
 import { getProblemQueryOptions } from "@problem/remotes/getProblemQueryOptions";
 import { AnswerCheckInfo } from "@problem/types/problemInfo";
 import ProblemSkeleton from "../ProblemSkeleton";
+import { EVENT_NAME } from "@shared/constants/mixpanel";
+import useTrackMixpanel from "@shared/hooks/useTrackMixpanel";
 
 export default function ProblemTitle() {
   const { problemId } = useParams<{ problemId: string }>();
@@ -28,11 +29,11 @@ export default function ProblemTitle() {
     },
     select: (mutation) => mutation.state.data as ApiResponse<AnswerCheckInfo>,
   });
-  // useTrackMixpanel({
-  //   eventKey: EVENT_NAME.PROBLEM_APPEAR,
-  //   property: { id: problemId },
-  //   dep: problemId,
-  // });
+  useTrackMixpanel({
+    eventKey: EVENT_NAME.PROBLEM_APPEAR,
+    property: { id: problemId },
+    dep: problemId,
+  });
   if (isLoading || isError || !problemInfo)
     return <ProblemSkeleton.TitleSkeleton />;
 

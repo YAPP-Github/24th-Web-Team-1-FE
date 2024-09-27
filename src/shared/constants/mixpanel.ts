@@ -5,4 +5,12 @@ export const EVENT_NAME = {
   ARTICLE_PROBLEMBUTTON_TAPPED: "article_problemButton_tapped",
   MAIN_APPEAR: "main_appear",
   MYPAGE_APPEAR: "mypage_appear",
+  MAIN_ARTICLE_TAPPED: "main_article_tapped",
+  MAIN_WORKBOOKCATEGORY_TAPPED: "main_workbookCategory_tapped",
+  MAIN_ARTICLECATEGORY_TAPPED: "mypmain_articleCategory_tapped",
+  MAIN_WORKBOOK_TAPPED: "main_workbook_tapped",
+  MAIN_WORKBOOK_SHORTCUT_TAPPED: "main_workbookShortcut_tapped",
+  MAIN_MYPAGE_TAPPED: "main_mypage_tapped",
+  PROBLEM_CHOICE_TAPPED: "problem_choice_tapped",
+  PROBLEM_GOARTICLE_TAPPED: "problem_goArticle_tapped",
 };
