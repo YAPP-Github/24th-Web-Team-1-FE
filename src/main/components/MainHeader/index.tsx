@@ -27,6 +27,7 @@ export default function MainHeader() {
     Mixpanel.track({
       name: EVENT_NAME.MAIN_MYPAGE_TAPPED,
     });
+
   };
 
   return (
