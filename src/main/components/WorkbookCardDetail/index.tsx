@@ -50,7 +50,7 @@ const WorkbookDetailInfoWrapper = ({
       "flex flex-col",
       "rounded-b-lg bg-black",
       "px-[21px] pb-[25px] pt-[23px]",
-      "h-[210px]"
+      "h-[230px]",
     )}
   >
     {children}
