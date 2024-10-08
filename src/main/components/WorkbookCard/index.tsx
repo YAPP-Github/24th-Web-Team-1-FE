@@ -35,7 +35,7 @@ export default function WorkbookCard({
   };
   return (
     <div
-      className="flex h-[390px] min-w-[269px] flex-col"
+      className="flex h-[420px] min-w-[269px] flex-col"
       onClick={onClickWorkbookCard}
     >
       <WorkbookCardDetail.ImageWrapper>
