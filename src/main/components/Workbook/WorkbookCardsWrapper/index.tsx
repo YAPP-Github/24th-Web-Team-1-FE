@@ -1,11 +1,11 @@
 "use client";
 import useCategory from "@main/hooks/useCategory";
 import dynamic from "next/dynamic";
-import CategoryTabSkeleton from "../CategoryTabSkeleton";
-import MainContentWrapper from "../MainContentWrapper";
+import CategoryTabSkeleton from "../../CategoryTabSkeleton";
+import MainContentWrapper from "../../MainContentWrapper";
 import WorkbookCardListSkeleton from "../WorkbookCardListSkeleton";
 
-const CategoryTabs = dynamic(() => import("../CategoryTabs"), {
+const CategoryTabs = dynamic(() => import("../../CategoryTabs"), {
   loading: () => <CategoryTabSkeleton />,
 });
 const WorkbookCardList = dynamic(() => import("../WorkbookCardList"), {

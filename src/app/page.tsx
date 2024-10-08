@@ -2,7 +2,7 @@ import { Separator } from "@shared/components/ui/separator";
 
 import ArticleCardsWrapper from "@main/components/ArticleCardsWrapper";
 import MainHeader from "@main/components/MainHeader";
-import WorkbookCardsWrapper from "@main/components/WorkbookCardsWrapper";
+import WorkbookCardsWrapper from "@main/components/Workbook/WorkbookCardsWrapper";
 
 import TopButton from "@common/components/TopButton";
 
