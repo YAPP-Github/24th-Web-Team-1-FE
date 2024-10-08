@@ -1,8 +1,9 @@
 import type { Preview } from "@storybook/react";
-import "../src/app/globals.css";
-import withAppRouterContext from "./withAppRouterContext";
-import { worker } from "../src/mocks/worker";
 import { initialize, mswLoader } from "msw-storybook-addon";
+import "../src/app/globals.css";
+import { worker } from "../src/mocks/worker";
+import { handlers } from "./../src/mocks/handlers";
+import withAppRouterContext from "./withAppRouterContext";
 
 initialize({
   onUnhandledRequest: "bypass",
@@ -17,6 +18,11 @@ const preview: Preview = {
       matchers: {
         color: /(background|color)$/i,
         date: /Date$/i,
+      },
+    },
+    msw: {
+      handlers: {
+        ...handlers,
       },
     },
   },

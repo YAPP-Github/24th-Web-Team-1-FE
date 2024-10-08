@@ -3,7 +3,7 @@ import path from "path";
 const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 
 const config: StorybookConfig = {
-  stories: ["../src/**/**/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
+  stories: ["../src/**/*.stories.@(js|jsx|mjs|ts|tsx)", "../src/**/*.mdx"],
   addons: [
     "@storybook/addon-onboarding",
     "@storybook/addon-links",
