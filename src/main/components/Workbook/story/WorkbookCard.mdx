@@ -1,0 +1,32 @@
+import { Meta, Preview, Story } from "@storybook/addon-docs";
+import { Default, Learning, Complete } from "./WorkbookCard.stories.tsx";
+import WorkbookCard from "../WorkbookCard";
+import { Default as WorkbookCardListDefalut } from "./WorkbookCardList.stories.tsx";
+
+<Meta title="메인 페이지/워크북 카드 설명서" component={WorkbookCard} />
+
+### 사용자 상태 별 워크북 카드 스토리 보여주기
+
+<div style={{display:'flex', gap:'12px'}}>
+
+<div style={{display:'flex', flexDirection:'column'}}>
+- 로그인 X or 로그인 + 학습 X 상태
+
+<Story of={Default} />
+</div>
+<div style={{display:'flex', flexDirection:'column'}}>
+- 로그인 + 학습중 상태
+
+<Story of={Learning} />
+</div>
+<div style={{display:'flex', flexDirection:'column'}}>
+- 로그인 + 학습 완료 상태
+<Story of={Complete} />
+
+</div>
+
+</div>
+
+### 모킹에 따른 워크북 카드 리스트 보여주기
+
+<Story of={WorkbookCardListDefalut} />
