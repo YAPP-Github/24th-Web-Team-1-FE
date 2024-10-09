@@ -6,7 +6,7 @@ import { SubscriptionEmailServerInfo } from "./emailInfo";
 
 type SubscriptionStatus = "ACTIVE" | "DONE";
 
-export interface WorkbookSubscriptionInfo
+export interface WorkbookSubscriptionServerInfo
   extends Pick<WorkbookServerInfo, "id"> {
   status: SubscriptionStatus;
   totalDay: number;
@@ -23,8 +23,8 @@ export type SubscriptionManagementClientInfo = {
   workbookId: string;
   isSubscription: boolean;
   dayInfo: {
-    totalDay: WorkbookSubscriptionInfo["totalDay"];
-    currentDay: WorkbookSubscriptionInfo["currentDay"];
+    totalDay: WorkbookSubscriptionServerInfo["totalDay"];
+    currentDay: WorkbookSubscriptionServerInfo["currentDay"];
   };
 };
 export type WorkbookCardServerInfo = {

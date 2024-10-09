@@ -1,6 +1,6 @@
 import {
   WorkbookCardServerInfo,
-  WorkbookSubscriptionInfo,
+  WorkbookSubscriptionServerInfo,
 } from "@main/types/workbook";
 import { beforeEach, describe, expect, it } from "vitest";
 import { WorkbookCardModel } from ".";
@@ -45,7 +45,7 @@ const mockWorkbookServerList: WorkbookCardServerInfo[] = [
     subscriberCount: 2,
   },
 ];
-const mockWorkbookSubscriptionInfoList: WorkbookSubscriptionInfo[] = [
+const mockWorkbookSubscriptionInfoList: WorkbookSubscriptionServerInfo[] = [
   {
     id: 1,
     status: "ACTIVE",
@@ -54,6 +54,8 @@ const mockWorkbookSubscriptionInfoList: WorkbookSubscriptionInfo[] = [
     rank: 0,
     totalSubscriber: 100,
     articleInfo: "{}",
+    workbookInfo: "",
+    subscription: { time: "06:00", dateTimeCode: "" },
   },
   {
     id: 2,
@@ -63,6 +65,8 @@ const mockWorkbookSubscriptionInfoList: WorkbookSubscriptionInfo[] = [
     rank: 22,
     totalSubscriber: 100,
     articleInfo: "{}",
+    workbookInfo: "",
+    subscription: { time: "06:00", dateTimeCode: "" },
   },
 ];
 
@@ -73,7 +77,6 @@ describe("메인 워크북 카드 모델 테스트", () => {
     model = new WorkbookCardModel({
       initWorkbookSeverList: mockWorkbookServerList,
       initWorkbookSubscriptionInfoList: mockWorkbookSubscriptionInfoList,
-      initWebpBrowser: { isWebpBrowser: true },
     });
   });
 

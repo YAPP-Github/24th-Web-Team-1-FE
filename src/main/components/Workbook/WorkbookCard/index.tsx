@@ -1,10 +1,10 @@
 "use client";
 import useWorkbookCardBottomButtonEvent from "@main/hooks/useWorkbookCardBottomButtonEvent";
 import { WorkbookCardClientInfo } from "@main/types/workbook";
+import { EVENT_NAME } from "@shared/constants/mixpanel";
+import { Mixpanel } from "@shared/utils/mixpanel";
 import { useRouter } from "next/navigation";
 import WorkbookCardDetail from "../WorkbookCardDetail";
-import { Mixpanel } from "@shared/utils/mixpanel";
-import { EVENT_NAME } from "@shared/constants/mixpanel";
 
 export default function WorkbookCard({
   id,
@@ -35,7 +35,7 @@ export default function WorkbookCard({
   };
   return (
     <div
-      className="flex h-[390px] min-w-[269px] flex-col"
+      className="flex h-[420px] min-w-[269px] flex-col"
       onClick={onClickWorkbookCard}
     >
       <WorkbookCardDetail.ImageWrapper>

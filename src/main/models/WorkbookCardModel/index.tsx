@@ -1,39 +1,36 @@
 import {
   WorkbookCardClientInfo,
   WorkbookCardServerInfo,
-  WorkbookSubscriptionInfo,
+  WorkbookSubscriptionServerInfo,
 } from "@main/types/workbook";
-import { WebpBrowser } from "@shared/types/image";
 import { WorkbookServerInfo } from "@workbook/types";
 
 export class WorkbookCardModel {
   constructor({
     initWorkbookSeverList,
     initWorkbookSubscriptionInfoList,
-    initWebpBrowser,
   }: {
     initWorkbookSeverList: WorkbookCardServerInfo[];
-    initWorkbookSubscriptionInfoList?: WorkbookSubscriptionInfo[];
-    initWebpBrowser: WebpBrowser;
+    initWorkbookSubscriptionInfoList?: WorkbookSubscriptionServerInfo[];
   }) {
     this.workbookList = initWorkbookSeverList;
     if (initWorkbookSubscriptionInfoList)
-      this.workbookSubscriptionInfoList = initWorkbookSubscriptionInfoList;
+      this.workbookSubscriptionServerInfoList =
+        initWorkbookSubscriptionInfoList;
     this.workbookCombineList = this.getWorkbookServerCombineData();
-    this.webpBrowser = initWebpBrowser;
   }
   get workbookCombineListData() {
     return this.workbookCombineList;
   }
   getWorkbookServerCombineData(): WorkbookCombineInfo[] {
-    if (this.workbookSubscriptionInfoList) {
+    if (this.workbookSubscriptionServerInfoList) {
       const workbookCombineSet: WorkbookCombineInfoSet = {};
 
       const workbookSetList = this.transformDataToSet({
         data: this.workbookList,
       });
       const workbookSetSubscriptionInfoList = this.transformDataToSet({
-        data: this.workbookSubscriptionInfoList,
+        data: this.workbookSubscriptionServerInfoList,
       });
 
       for (const workbookKey in workbookSetList) {
@@ -79,7 +76,6 @@ export class WorkbookCardModel {
           id,
           mainImageUrl,
           title,
-          description,
           category,
           writers,
           subscriberCount,
@@ -124,8 +120,8 @@ export class WorkbookCardModel {
     status,
     currentDay,
   }: {
-    status: WorkbookSubscriptionInfo["status"] | undefined;
-    currentDay: WorkbookSubscriptionInfo["currentDay"] | undefined;
+    status: WorkbookSubscriptionServerInfo["status"] | undefined;
+    currentDay: WorkbookSubscriptionServerInfo["currentDay"] | undefined;
   }): WorkbookCardClientInfo["cardType"] {
     if (status && currentDay) {
       if (status === "ACTIVE") return "LEARN";
@@ -165,8 +161,8 @@ export class WorkbookCardModel {
     currentDay,
   }: {
     category: WorkbookServerInfo["category"];
-    totalDay: WorkbookSubscriptionInfo["totalDay"] | undefined;
-    currentDay: WorkbookSubscriptionInfo["currentDay"] | undefined;
+    totalDay: WorkbookSubscriptionServerInfo["totalDay"] | undefined;
+    currentDay: WorkbookSubscriptionServerInfo["currentDay"] | undefined;
   }): WorkbookCardClientInfo["metaComponent"] {
     if (totalDay && currentDay) {
       if (totalDay === currentDay)
@@ -190,9 +186,11 @@ export class WorkbookCardModel {
     subscriberCount,
     status,
   }: {
-    totalSubscriber: WorkbookSubscriptionInfo["totalSubscriber"] | undefined;
+    totalSubscriber:
+      | WorkbookSubscriptionServerInfo["totalSubscriber"]
+      | undefined;
     subscriberCount: WorkbookCardServerInfo["subscriberCount"];
-    status: WorkbookSubscriptionInfo["status"] | undefined;
+    status: WorkbookSubscriptionServerInfo["status"] | undefined;
   }): WorkbookCardClientInfo["personCourse"] {
     if (status) {
       if (status === "ACTIVE") return `${subscriberCount}명 학습중`;
@@ -205,7 +203,7 @@ export class WorkbookCardModel {
     cardType,
     currentDay,
   }: {
-    currentDay: WorkbookSubscriptionInfo["currentDay"] | undefined;
+    currentDay: WorkbookSubscriptionServerInfo["currentDay"] | undefined;
     cardType: WorkbookCardClientInfo["cardType"];
   }): WorkbookCardClientInfo["buttonTitle"] {
     if (currentDay) {
@@ -229,7 +227,7 @@ export class WorkbookCardModel {
   transformDataToSet({
     data,
   }: {
-    data: WorkbookCardServerInfo[] | WorkbookSubscriptionInfo[];
+    data: WorkbookCardServerInfo[] | WorkbookSubscriptionServerInfo[];
   }) {
     return data.reduce<WorkbookCombineInfoSet>((acc, item) => {
       const { id, ...rest } = item;
@@ -241,15 +239,16 @@ export class WorkbookCardModel {
   }
 
   private workbookList: WorkbookCardServerInfo[];
-  private workbookSubscriptionInfoList: WorkbookSubscriptionInfo[] | undefined;
+  private workbookSubscriptionServerInfoList:
+    | WorkbookSubscriptionServerInfo[]
+    | undefined;
   private workbookCombineList: WorkbookCombineInfo[];
-  private webpBrowser: WebpBrowser;
 }
 
 type WorkbookCombineInfo = WorkbookCardServerInfo &
-  Partial<WorkbookSubscriptionInfo>;
+  Partial<WorkbookSubscriptionServerInfo>;
 type WorkbookCombineInfoSet = {
   [key: string]:
     | Omit<WorkbookCardServerInfo, "id">
-    | Omit<Partial<WorkbookSubscriptionInfo>, "id">;
+    | Omit<Partial<WorkbookSubscriptionServerInfo>, "id">;
 };
