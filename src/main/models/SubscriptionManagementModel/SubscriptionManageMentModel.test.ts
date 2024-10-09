@@ -1,10 +1,10 @@
 import { beforeEach, describe, expect, it } from "vitest";
 
-import { WorkbookSubscriptionInfo } from "@main/types/workbook";
+import { WorkbookSubscriptionServerInfo } from "@main/types/workbook";
 
 import { SubscriptionManagementModel } from ".";
 
-const mockData: WorkbookSubscriptionInfo[] = [
+const mockData: WorkbookSubscriptionServerInfo[] = [
   {
     id: 1,
     status: "ACTIVE",

@@ -8,14 +8,14 @@ import {
 } from "@main/types/emailInfo";
 import {
   SubscriptionManagementClientInfo,
-  WorkbookSubscriptionInfo,
+  WorkbookSubscriptionServerInfo,
 } from "@main/types/workbook";
 
 export class SubscriptionManagementModel {
   constructor({
     initSubscriptionManagementServerList,
   }: {
-    initSubscriptionManagementServerList: WorkbookSubscriptionInfo[];
+    initSubscriptionManagementServerList: WorkbookSubscriptionServerInfo[];
   }) {
     this.subscriptionManagementServerList =
       initSubscriptionManagementServerList;
@@ -96,7 +96,7 @@ export class SubscriptionManagementModel {
 
   private getWorkbookTitle({
     workbookInfo,
-  }: Pick<WorkbookSubscriptionInfo, "workbookInfo">) {
+  }: Pick<WorkbookSubscriptionServerInfo, "workbookInfo">) {
     if (workbookInfo) {
       const title = JSON.parse(workbookInfo)?.title as string;
       return title;
@@ -104,5 +104,5 @@ export class SubscriptionManagementModel {
     return "";
   }
 
-  private subscriptionManagementServerList: WorkbookSubscriptionInfo[];
+  private subscriptionManagementServerList: WorkbookSubscriptionServerInfo[];
 }
