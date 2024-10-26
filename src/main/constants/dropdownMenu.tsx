@@ -8,6 +8,7 @@ import { DropdownMenuItem } from "@main/types/dropdownMenu";
 
 import LogoutLink from "@auth/components/LogoutLink";
 import FewLogo from "public/assets/icon/fewlogo.svg";
+import SolveProblems from "@main/components/SolveProblems";
 
 export const AUTH_LINK: DropdownMenuItem[] = [
   {
@@ -25,6 +26,10 @@ export const AUTH_LINK: DropdownMenuItem[] = [
         </div>
       </div>
     ),
+  },
+  {
+    title: "",
+    component: () => <SolveProblems />
   },
   {
     title: "회원탈퇴",
